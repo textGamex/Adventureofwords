@@ -48,7 +48,7 @@ public class BattleSystem
                     System.out.println("你造成了" + enemy.subtractHP(ATK, role.getFixArmorPen(), role.getPerArmorPen()) + "的伤害");
                     System.out.println(enemy.getName() + "还剩" + enemy.getHP());
                     break;
-                case 2: continue;
+                case 2: ;
             }
             if (enemy.getHP() <= 0 || role.getHP() <= 0)
             {

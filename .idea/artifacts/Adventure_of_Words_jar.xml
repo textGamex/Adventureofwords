@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="Adventure of Words:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Adventure_of_Words_jar</output-path>
-    <root id="archive" name="Adventure of Words.jar">
+    <root id="archive" name="Adventure of Words_jar.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       </element>
