@@ -31,4 +31,14 @@ public class EnemyAttribute extends BasicUnitAttribute
     {
         return coin;
     }
+
+    @Override
+    public String toString()
+    {
+        return  super.toString()
+                + "[所值分数:" + value +
+                ", 所值经验:" + xp +
+                ", 所值硬币:" + coin +
+                ']';
+    }
 }

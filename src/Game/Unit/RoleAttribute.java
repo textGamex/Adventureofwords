@@ -39,4 +39,14 @@ public class RoleAttribute extends BasicUnitAttribute
     {
         return totalGameScore;
     }
+
+    @Override
+    public String toString()
+    {
+        return  super.toString() +
+                "[角色等级:" + grade +
+                ", 持有货币:" + money +
+                ", 游戏得分:" + totalGameScore +
+                ']';
+    }
 }
