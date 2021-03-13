@@ -19,6 +19,7 @@ public class UserMessage
     private int sumVictory;
     //游玩总时间 TODO:未实现
 //    private int
+
     public int getSumKill()
     {
         return sumKill;
@@ -38,5 +39,15 @@ public class UserMessage
     public int getSumVictory()
     {
         return sumVictory;
+    }
+    public String toString()
+    {
+        return getClass().getName() +
+                "[玩家击杀数: " + sumKill +
+                ", 总场数:" + sumRound +
+                ", 普通攻击次数:" + sumAttack +
+                ", 总伤害:" + sumHarm +
+                ", 胜利场数:" + sumVictory +
+                "]";
     }
 }
