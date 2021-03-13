@@ -4,7 +4,7 @@ package Game.Tools;
  * @version 0.2
  * @author Millennium
  */
-public class GameTool
+public final class GameTool
 {
     public static void main(String[] args)
     {

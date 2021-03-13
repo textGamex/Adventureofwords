@@ -5,7 +5,7 @@ import Game.Unit.RoleAttribute;
 /**
  *开始类
  *@author Millennium
- *@version 1.0
+ *@version 0.11
  *@Date 2021/3/13 0:28
 */
 public class AdventureOfWordsMain

@@ -1,10 +1,10 @@
 package Game.Unit;
 /**
  * 基本单位属性
- * @version 0.13
+ * @version 0.15
  * @author Millennium
  */
-public class BasicUnitAttribute
+public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttribute>
 {
     public static void main(String[] args)
     {
@@ -154,15 +154,25 @@ public class BasicUnitAttribute
     {
         return getClass().getName()
                 + "[id:" +id
-                + ",name:" + name
-                + ",最大生命值:" + MAXHP
-                + ",物理攻击:" + ATK
-                + ",暴击率:" + CRIT * 100 + "%"
-                + ",暴击效果:" + critsEffect * 100 + "%"
-                + ",固定护甲穿透:" + fixArmorPen
-                + ",百分比护甲穿透:" + perArmorPen
-                + ",护甲值:" + armor
-                + ",物理抗性:" + physicalResistanc
+                + ", name:" + name
+                + ", 最大生命值:" + MAXHP
+                + ", 物理攻击:" + ATK
+                + ", 暴击率:" + CRIT * 100 + "%"
+                + ", 暴击效果:" + critsEffect * 100 + "%"
+                + ", 固定护甲穿透:" + fixArmorPen
+                + ", 百分比护甲穿透:" + perArmorPen
+                + ", 护甲值:" + armor
+                + ", 物理抗性:" + physicalResistanc
                 + "]";
+    }
+    /*克隆实现*/
+    public BasicUnitAttribute clone() throws CloneNotSupportedException
+    {
+        return (BasicUnitAttribute) super.clone();
+    }
+    /*sort接口实现*/
+    public int compareTo(BasicUnitAttribute other)
+    {
+        return Integer.compare(id, other.getId());
     }
 }
