@@ -14,7 +14,8 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     }
     private final int id;
     private final String name;
-    private int MAXHP; //*最大生命值
+    /**最大生命值*/
+    private int MAXHP;
     /**生命值*/
     private int HP;
     /**物理攻击*/
