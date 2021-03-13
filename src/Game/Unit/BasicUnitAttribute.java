@@ -41,11 +41,12 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     /**单位等级*/
     private int grade;
 
-    public BasicUnitAttribute(String name, int MAXHP, int ATK, float CRIT, float critsEffect,
+    public BasicUnitAttribute(String name,int grade, int MAXHP, int ATK, float CRIT, float critsEffect,
                               int fixArmorPen, float perArmorPen, int armor, float physicalResistanc,
                               int lifeRegeneration, int id)//*构造测试单位
     {
         this.name = name;
+        this.grade = grade;
         this.MAXHP = MAXHP;
         this.HP = MAXHP;
         this.ATK = ATK;

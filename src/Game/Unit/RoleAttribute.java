@@ -31,7 +31,7 @@ public class RoleAttribute extends BasicUnitAttribute
 
     public RoleAttribute() //*默认数值
     {
-        super();
+        super("玩家");
         money = 100;
         totalGameScore = 0;
         EXP = 0;

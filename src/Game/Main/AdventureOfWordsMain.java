@@ -17,6 +17,6 @@ public class AdventureOfWordsMain
         var role = new RoleAttribute();
         System.out.println("123");
         var enemy = new RoleAttribute();
-        BattleSystem.Main(role, enemy);
+//        BattleSystem.Main(role, enemy);
     }
 }
