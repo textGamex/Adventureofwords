@@ -1,4 +1,7 @@
 package Game.Tools;
+
+import java.util.Random;
+
 /**
  * 辅助类
  * @version 0.2
@@ -25,5 +28,15 @@ public final class GameTool
     public static boolean randomRun (float runSize)
     {
         return runSize > Math.random();
+    }
+    /**
+     *
+     *@author Millennium
+     *@Date 2021/3/13 11:45
+    */
+    public static int FloatingNumber(int number, int floatingRange)
+    {
+        var rand = new Random();
+        int radnomNumber = rand.nextInt(floatingRange + 1);
     }
 }

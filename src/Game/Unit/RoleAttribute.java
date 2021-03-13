@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
  */
 public class RoleAttribute extends BasicUnitAttribute
 {
-    /**角色等级*/
-    private int grade;
     /**持有货币*/
     private int money;
     /**拥有经验*/
@@ -34,7 +32,6 @@ public class RoleAttribute extends BasicUnitAttribute
     public RoleAttribute() //*默认数值
     {
         super();
-        grade = 1;
         money = 100;
         totalGameScore = 0;
         EXP = 0;
@@ -44,47 +41,54 @@ public class RoleAttribute extends BasicUnitAttribute
     public RoleAttribute(String name) //*构造玩家角色
     {
         super(name);
-        grade = 1;
         money = 100;
         totalGameScore = 0;
         EXP = 0;
         upgradeNeedXP = 20;
         CreatingDateTime = LocalDateTime.now();
     }
-    public int getGrade()
-    {
-        return grade;
-    }
-    public int getMoney()
+
+    public final int getMoney()
     {
         return money;
     }
-    public int getTotalGameScore()
+    public final int getTotalGameScore()
     {
         return totalGameScore;
     }
-    public LocalDateTime getCreatingDateTime()
+    public final LocalDateTime getCreatingDateTime()
     {
         return CreatingDateTime;
     }
-    public int getEXP()
+    public final int getEXP()
     {
         return EXP;
     }
-    public int getUpgradeNeedXP()
+    public final int getUpgradeNeedXP()
     {
         return upgradeNeedXP;
     }
-    public void setUpgradeNeedXP(int addUpgradeXP)
+    public final void setUpgradeNeedXP(int addUpgradeXP)
     {
         upgradeNeedXP += addUpgradeXP;
+    }
+    public final void setEXP(int gainEXP)
+    {
+        EXP += gainEXP;
+    }
+    public final void setMoney(int addMoney)
+    {
+        money += addMoney;
+    }
+    public final void setTotalGameScore(int addGameScore)
+    {
+        totalGameScore += addGameScore;
     }
     @Override
     public String toString()
     {
         return  super.toString() +
-                "[角色等级:" + grade +
-                ", 持有货币:" + money +
+                "[持有货币:" + money +
                 ", 游戏得分:" + totalGameScore +
                 ", 角色拥有经验:" + EXP +
                 ", 升到下一级所需经验:" + upgradeNeedXP +

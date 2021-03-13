@@ -26,8 +26,8 @@ public class BattleSystem
                 System.out.println("Game Over!");
                 break;
             }
-            ATK = (int) (GameTool.randomRun(enemy.getCRIT()) ? enemy.getATK() * enemy.getcritsEffect() : enemy.getATK());
-            System.out.println("你造成了" + role.subtractHP(ATK, enemy.getfixArmorPen(), enemy.getperArmorPen()) + "的伤害");
+            ATK = (int) (GameTool.randomRun(enemy.getCRIT()) ? enemy.getATK() * enemy.getCritsEffect() : enemy.getATK());
+            System.out.println("你造成了" + role.subtractHP(ATK, enemy.getFixArmorPen(), enemy.getPerArmorPen()) + "的伤害");
             System.out.println("他还剩" + role.getHP());
         }
     }

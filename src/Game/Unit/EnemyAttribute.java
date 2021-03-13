@@ -7,11 +7,11 @@ package Game.Unit;
 public class EnemyAttribute extends BasicUnitAttribute
 {
     /**所值分数 */
-    private int value;
+    private final int value;
     /**所值经验 */
-    private int xp;
+    private final int xp;
     /**所值硬币 */
-    private int coin;
+    private final int coin;
     public EnemyAttribute() //*默认数值
     {
         super();
@@ -19,15 +19,15 @@ public class EnemyAttribute extends BasicUnitAttribute
         xp = 10;
         coin = 10;
     }
-    public int getValue()
+    public final int getValue()
     {
         return value;
     }
-    public int getxp()
+    public final int getXp()
     {
         return xp;
     }
-    public int getCoin()
+    public final int getCoin()
     {
         return coin;
     }

@@ -29,16 +29,21 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     /**百分比护甲穿透*/
     private float perArmorPen;
 
-    //@    防御类    */
+    /*    防御类    */
     /**护甲值*/
     private int armor;
     /**物理抗性 */
     private float physicalResistanc;
     /**闪避*/
     //private float evade;
+    /**每回合生命回复*/
+    private int lifeRegeneration;
+    /**单位等级*/
+    private int grade;
 
     public BasicUnitAttribute(String name, int MAXHP, int ATK, float CRIT, float critsEffect,
-                              int fixArmorPen, float perArmorPen, int armor, float physicalResistanc)//*构造测试单位
+                              int fixArmorPen, float perArmorPen, int armor, float physicalResistanc,
+                              int lifeRegeneration, int id)//*构造测试单位
     {
         this.name = name;
         this.MAXHP = MAXHP;
@@ -50,13 +55,15 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
         this.perArmorPen = perArmorPen;
         this.armor = armor;
         this.physicalResistanc = physicalResistanc;
-        id = 60001;
+        this.lifeRegeneration = lifeRegeneration;
+        this.id = id;
     }
     public BasicUnitAttribute()//*构造测试单位
     {
         name = "测试单位";
         MAXHP = 100;
         HP = MAXHP;
+        grade = 1;
         ATK = 20;
         CRIT = 0.1f;//*10%暴击率
         critsEffect = 2.0f;
@@ -64,6 +71,7 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
         perArmorPen = 0.0f;
         armor = 10;
         physicalResistanc = 0.0f;
+        lifeRegeneration = 0;
         id = 60001;
     }
     public BasicUnitAttribute(String name)//*构造有名字单位
@@ -71,6 +79,7 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
         this.name = name;
         MAXHP = 100;
         HP = MAXHP;
+        grade = 1;
         ATK = 20;
         CRIT = 0.1f;//*10%暴击率
         critsEffect = 2.0f;
@@ -78,51 +87,60 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
         perArmorPen = 0.0f;
         armor = 10;
         physicalResistanc = 0.0f;
+        lifeRegeneration = 0;
         id = 60001;
     }
-    public String getName()
+    public final String getName()
     {
         return name;
     }
-    public int getMAXHP()
+    public final int getMaxXP()
     {
         return MAXHP;
     }
-    public int getHP()
+    public final int getHP()
     {
         return HP;
     }
-    public int getATK()
+    public final int getATK()
     {
         return ATK;
     }
-    public int getfixArmorPen()
+    public final int getFixArmorPen()
     {
         return fixArmorPen;
     }
-    public float getperArmorPen()
+    public final float getPerArmorPen()
     {
         return perArmorPen;
     }
-    public int getarmor()
+    public final int getArmor()
     {
         return armor;
     }
-    public float getCRIT()
+    public final float getCRIT()
     {
         return CRIT;
     }
-    public float getcritsEffect()
+    public final float getCritsEffect()
     {
         return critsEffect;
     }
-    public float getPhysicalResistanc()
+    public final float getPhysicalResistanc()
     {
         return physicalResistanc;
     }
-    public int getId()
+    public final int getId()
     {
         return id;
+    }
+    public final int getLifeRegeneration()
+    {
+        return lifeRegeneration;
+    }
+    public final int getGrade()
+    {
+        return grade;
     }
     public int directHP(int reducedHP)//*无视物抗直接扣血并返回扣除的HP */
     {
@@ -157,6 +175,7 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
                 + "[id:" +id
                 + ", name:" + name
                 + ", 最大生命值:" + MAXHP
+                + ", 等级:" + grade
                 + ", 物理攻击:" + ATK
                 + ", 暴击率:" + CRIT * 100 + "%"
                 + ", 暴击效果:" + critsEffect * 100 + "%"
@@ -164,6 +183,7 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
                 + ", 百分比护甲穿透:" + perArmorPen
                 + ", 护甲值:" + armor
                 + ", 物理抗性:" + physicalResistanc
+                + ", 每回合生命回复:" +lifeRegeneration
                 + "]";
     }
     /*克隆实现*/
