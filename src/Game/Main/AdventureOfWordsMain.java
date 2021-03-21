@@ -13,7 +13,11 @@ public class AdventureOfWordsMain
     public static void main(String[] args)
     {
         if (args.length != 0 && args[0].equals("-version"))
-            System.out.println("版本号: 0.1");
+        {
+            System.out.println("版本号: 0.1Beta");
+            System.exit(0);
+        }
+
         var role = new RoleAttribute();
         System.out.println("123");
         var enemy = new RoleAttribute();

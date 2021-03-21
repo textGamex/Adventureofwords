@@ -13,6 +13,8 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
         System.out.println(f.toString());
     }
     private final int id;
+    private static int nextTextId = 0;//测试单位id TODO:未完成
+    private static int nextSpecialId = 0;//特殊单位id
     private final String name;
     /**最大生命值*/
     private int MAXHP;
@@ -131,7 +133,7 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     {
         return physicalResistanc;
     }
-    public final int getId()
+    public int getId()
     {
         return id;
     }

@@ -10,8 +10,11 @@ import java.time.LocalDateTime;
  */
 public class RoleAttribute extends BasicUnitAttribute
 {
+    private final int id;
+    /**玩家的id*/
+    static int nextId = 0;
     /**持有货币*/
-    private int money;
+    private int cash;
     /**拥有经验*/
     private int EXP;
     /**升到下一级所需经验*/
@@ -28,11 +31,15 @@ public class RoleAttribute extends BasicUnitAttribute
           System.out.println(time);
           System.out.println(date);
     }
-
+    //初始化玩家id
+    {
+        nextId++;
+        id = nextId;
+    }
     public RoleAttribute() //*默认数值
     {
         super("玩家");
-        money = 100;
+        cash = 100;
         totalGameScore = 0;
         EXP = 0;
         upgradeNeedXP = 20;
@@ -41,16 +48,16 @@ public class RoleAttribute extends BasicUnitAttribute
     public RoleAttribute(String name) //*构造玩家角色
     {
         super(name);
-        money = 100;
+        cash = 100;
         totalGameScore = 0;
         EXP = 0;
         upgradeNeedXP = 20;
         CreatingDateTime = LocalDateTime.now();
     }
 
-    public final int getMoney()
+    public final int getCash()
     {
-        return money;
+        return cash;
     }
     public final int getTotalGameScore()
     {
@@ -68,27 +75,31 @@ public class RoleAttribute extends BasicUnitAttribute
     {
         return upgradeNeedXP;
     }
-    public final void setUpgradeNeedXP(int addUpgradeXP)
+    public final void addUpgradeNeedXP(int addUpgradeXP)
     {
         upgradeNeedXP += addUpgradeXP;
     }
-    public final void setEXP(int gainEXP)
+    public final void addEXP(int gainEXP)
     {
         EXP += gainEXP;
     }
-    public final void setMoney(int addMoney)
+    public final void addCash(int addCash)
     {
-        money += addMoney;
+        cash += addCash;
     }
-    public final void setTotalGameScore(int addGameScore)
+    public final void addTotalGameScore(int addGameScore)
     {
         totalGameScore += addGameScore;
+    }
+    public final int getId()
+    {
+        return id;
     }
     @Override
     public String toString()
     {
         return  super.toString() +
-                "[持有货币:" + money +
+                "[持有货币:" + cash +
                 ", 游戏得分:" + totalGameScore +
                 ", 角色拥有经验:" + EXP +
                 ", 升到下一级所需经验:" + upgradeNeedXP +
