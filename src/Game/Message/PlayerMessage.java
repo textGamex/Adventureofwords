@@ -1,9 +1,7 @@
 package Game.Message;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
@@ -13,7 +11,6 @@ import java.util.Scanner;
  *@version 0.1
  *@Date 2021/3/13 22:42
 */
-
 public final class PlayerMessage
 {
     public static void main(String[] args)
@@ -44,12 +41,7 @@ public final class PlayerMessage
 //    private int
     public PlayerMessage()
     {
-        id = 0;
-        totalKill = 0;
-        totalRound = 0;
-        totalAttack = 0;
-        totalHarm = 0;
-        totalVictory = 0;
+        this(0);
     }
     public PlayerMessage(int id)
     {

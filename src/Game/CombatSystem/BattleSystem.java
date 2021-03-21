@@ -29,9 +29,9 @@ public class BattleSystem
 //        Console in = System.console();
         var in = new Scanner(System.in);
         System.out.println("你的属性如下:");
-        System.out.println("" + role.toString());
+        System.out.println(role.toString());
         System.out.println(enemy.getName() + "的属性如下:");
-        System.out.println("" + enemy.toString());
+        System.out.println(enemy.toString());
 
         System.out.println("战斗开始!!!");
         while (true)
