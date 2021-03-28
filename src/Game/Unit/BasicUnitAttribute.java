@@ -1,4 +1,10 @@
 package Game.Unit;
+
+import Game.CombatSystem.BuffType;
+import Game.Message.BuffMessage;
+
+import java.util.EnumMap;
+
 /**
  * 基本单位属性
  * @version 0.15
@@ -9,6 +15,8 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     public static void main(String[] args)
     {
         var f = new BasicUnitAttribute();
+        f.addBuff(BuffType.BLEED, new BuffMessage(1,1,true));
+        System.out.println(f.hasBuff(BuffType.POISON));
         System.out.println(f.hashCode());
         System.out.println(f.toString());
     }
@@ -30,8 +38,11 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     private int fixArmorPen;
     /**百分比护甲穿透*/
     private float perArmorPen;
+    /**buff*/
+    private EnumMap<BuffType, BuffMessage> hasBuff;
 
     /*    防御类    */
+
     /**护甲值*/
     private int armor;
     /**物理抗性 */
@@ -42,6 +53,7 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     private int lifeRegeneration;
     /**单位等级*/
     private int grade;
+
 
     public BasicUnitAttribute(String name,int grade, int MAXHP, int ATK, float CRIT, float critsEffect,
                               int fixArmorPen, float perArmorPen, int armor, float physicalResistanc,
@@ -60,22 +72,11 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
         this.physicalResistanc = physicalResistanc;
         this.lifeRegeneration = lifeRegeneration;
         this.id = id;
+        hasBuff = new EnumMap<BuffType, BuffMessage>(BuffType.class);
     }
     public BasicUnitAttribute()//*构造测试单位
     {
-        name = "测试单位";
-        MAXHP = 100;
-        HP = MAXHP;
-        grade = 1;
-        ATK = 20;
-        CRIT = 0.1f;//*10%暴击率
-        critsEffect = 2.0f;
-        fixArmorPen = 5;
-        perArmorPen = 0.0f;
-        armor = 10;
-        physicalResistanc = 0.0f;
-        lifeRegeneration = 0;
-        id = 60001;
+        this("测试单位");
     }
     public BasicUnitAttribute(String name)//*构造有名字单位
     {
@@ -92,6 +93,7 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
         physicalResistanc = 0.0f;
         lifeRegeneration = 0;
         id = 60001;
+        hasBuff = new EnumMap<BuffType, BuffMessage>(BuffType.class);
     }
     public final String getName()
     {
@@ -199,4 +201,15 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     {
         return Integer.compare(id, other.getId());
     }
+
+    /**Buff*/
+    public void addBuff(BuffType aBuffType, BuffMessage aBuffMessage)
+    {
+        hasBuff.put(aBuffType, aBuffMessage);
+    }
+    public boolean hasBuff(BuffType aBuffType)
+    {
+        return hasBuff.containsKey(aBuffType);
+    }
+
 }

@@ -12,7 +12,7 @@ public class AdventureOfWordsMain
 {
     public static void main(String[] args)
     {
-        if (args.length != 0 && args[0].equals("-version"))
+        if (args.length != 0 && args[0].equalsIgnoreCase("-version"))
         {
             System.out.println("版本号: 0.1Beta");
             System.exit(0);
