@@ -1,9 +1,9 @@
 package javaLogic.Account;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
+import static javaLogic.Message.PrivateData.*;
 
 public class AccountMessage
 {
@@ -34,9 +34,9 @@ public class AccountMessage
         var file = path.toFile();
 
         /*账号不存在且是内部人员*/
-        if (!file.exists() && (account.equals("program-0") || account.equals("designer-0")))
+        if (!file.exists() && (account.equals(ACCOUNT1) || account.equals(ACCOUNT2)))
             return Identity.NEWGM;
-        else if (file.exists() && (account.equals("program-0") || account.equals("designer-0")))
+        else if (file.exists() && (account.equals(ACCOUNT1) || account.equals(ACCOUNT2)))
             return Identity.GM;
         else if (!file.exists())//账号不存在而且是玩家
             return Identity.NEWPLAYER;
