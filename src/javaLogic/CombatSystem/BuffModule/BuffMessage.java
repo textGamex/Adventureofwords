@@ -1,4 +1,4 @@
-package Game.CombatSystem.BuffModule;
+package javaLogic.CombatSystem.BuffModule;
 
 public class BuffMessage
 {

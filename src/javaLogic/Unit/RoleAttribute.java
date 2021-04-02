@@ -1,4 +1,4 @@
-package Game.Unit;
+package javaLogic.Unit;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

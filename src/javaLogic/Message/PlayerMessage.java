@@ -1,4 +1,4 @@
-package Game.Message;
+package javaLogic.Message;
 
 import java.io.IOException;
 import java.io.PrintWriter;

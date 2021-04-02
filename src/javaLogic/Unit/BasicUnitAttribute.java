@@ -1,9 +1,4 @@
-package Game.Unit;
-
-import Game.CombatSystem.BuffModule.BuffType;
-import Game.CombatSystem.BuffModule.BuffMessage;
-
-import java.util.EnumMap;
+package javaLogic.Unit;
 
 /**
  * 基本单位属性

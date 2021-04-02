@@ -1,4 +1,4 @@
-package Game.Unit;
+package javaLogic.Unit;
 /**
  * 敌对单位属性
  * @version 0.11

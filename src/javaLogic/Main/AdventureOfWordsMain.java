@@ -1,7 +1,7 @@
-package Game.Main;
+package javaLogic.Main;
 
-import Game.CombatSystem.BattleSystem;
-import Game.Unit.RoleAttribute;
+import javaLogic.Unit.RoleAttribute;
+
 /**
  *开始类
  *@author Millennium

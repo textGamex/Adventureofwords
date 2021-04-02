@@ -1,7 +1,7 @@
-package Game.Unit;
+package javaLogic.Unit;
 
-import Game.CombatSystem.BuffModule.BuffMessage;
-import Game.CombatSystem.BuffModule.BuffType;
+import javaLogic.CombatSystem.BuffModule.BuffMessage;
+import javaLogic.CombatSystem.BuffModule.BuffType;
 
 import java.util.EnumMap;
 

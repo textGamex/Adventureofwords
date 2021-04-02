@@ -1,12 +1,12 @@
-package Game.CombatSystem;
+package javaLogic.CombatSystem;
 
-import static Game.Tools.GameTool.*;
+import javaLogic.Tools.GameTool;
+import javaLogic.Unit.EnemyAttribute;
+import javaLogic.Unit.EnemyUnit;
+import javaLogic.Unit.RoleAttribute;
 
-import Game.Tools.GameTool;
-import Game.Unit.EnemyAttribute;
-import Game.Unit.EnemyUnit;
-import Game.Unit.RoleAttribute;
-
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 /**
@@ -18,15 +18,19 @@ public class BattleSystem
 {
     public static void main(String[] args)
     {
-        var role = new RoleAttribute();
-        var enemy = EnemyUnit.getEnemyUnit("哥布林");
-        BattleSystem.Main(role, enemy);
+        Locale aLocale = new Locale("zh","CN");
+//        ResourceBundle bundle=ResourceBundle.getBundle("BattleMessage", aLocale);
+
+//        var str = bundle.getString("mes");
+//        System.out.println(bundle.getString("a"));
+//        var role = new RoleAttribute();
+//        var enemy = EnemyUnit.getEnemyUnit("哥布林");
+//        BattleSystem.Main(role, enemy);
     }
     public static void Main(RoleAttribute role, EnemyAttribute enemy)
     {
         int ATK = 0;
         byte userDecision = 0;
-//        Console in = System.console();
         var in = new Scanner(System.in);
         System.out.println("你的属性如下:");
         System.out.println(role.toString());
@@ -38,12 +42,11 @@ public class BattleSystem
         {
             System.out.println("[系统]轮到你行动了");
             System.out.println("1.攻击 2.跳过");
-//            char[]user = in.readPassword("1.攻击 2.跳过")
             userDecision = (byte)in.nextInt();
             switch (userDecision)
             {
                 case 1:
-                    ATK = (int) (randomRun(role.getCRIT()) ? role.getATK() * role.getCritsEffect() : role.getATK());
+                    ATK = (int) (GameTool.randomRun(role.getCRIT()) ? role.getATK() * role.getCritsEffect() : role.getATK());
                     ATK = GameTool.floatingNumber(ATK, 3, "+");
                     System.out.println("你造成了" + enemy.subtractHP(ATK, role.getFixArmorPen(), role.getPerArmorPen()) + "的伤害");
                     System.out.println(enemy.getName() + "还剩" + enemy.getHP());
@@ -55,7 +58,7 @@ public class BattleSystem
                 System.out.println("Game Over!");
                 break;
             }
-            ATK = (int) (randomRun(enemy.getCRIT()) ? enemy.getATK() * enemy.getCritsEffect() : enemy.getATK());
+            ATK = (int) (GameTool.randomRun(enemy.getCRIT()) ? enemy.getATK() * enemy.getCritsEffect() : enemy.getATK());
             ATK = GameTool.floatingNumber(ATK, 3);
             System.out.println(enemy.getName() + "对你造成了" + role.subtractHP(ATK, enemy.getFixArmorPen(), enemy.getPerArmorPen()) + "的伤害");
             System.out.println(role.getName() + "还剩" + role.getHP());

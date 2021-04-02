@@ -1,4 +1,4 @@
-package Game.Unit;
+package javaLogic.Unit;
 
 public class EnemyUnit extends EnemyAttribute
 {
