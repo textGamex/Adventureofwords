@@ -1,6 +1,6 @@
 package javaLogic.Unit;
 
-public class EnemyUnit extends EnemyAttribute
+public final class EnemyUnit extends EnemyAttribute
 {
 
    public static EnemyAttribute getEnemyUnit(String EnemyUnitType) throws IllegalArgumentException

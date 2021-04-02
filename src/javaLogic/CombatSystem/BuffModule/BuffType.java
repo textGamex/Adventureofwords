@@ -5,5 +5,7 @@ public enum BuffType
     /**流血*/
     BLEED,
     /**中毒*/
-    POISON;
+    POISON,
+    /**虚弱*/
+    DEBILITY;
 }

@@ -8,7 +8,7 @@ import javaLogic.Unit.RoleAttribute;
  *@version 0.11
  *@Date 2021/3/13 0:28
 */
-public class AdventureOfWordsMain
+public final class AdventureOfWordsMain
 {
     public static void main(String[] args)
     {

@@ -19,18 +19,17 @@ public class BattleSystem
     public static void main(String[] args)
     {
         Locale aLocale = new Locale("zh","CN");
-//        ResourceBundle bundle=ResourceBundle.getBundle("BattleMessage", aLocale);
+        ResourceBundle bundle = ResourceBundle.getBundle("BattleSystemMessage", aLocale);
 
-//        var str = bundle.getString("mes");
-//        System.out.println(bundle.getString("a"));
-//        var role = new RoleAttribute();
-//        var enemy = EnemyUnit.getEnemyUnit("哥布林");
-//        BattleSystem.Main(role, enemy);
+        var role = new RoleAttribute();
+        var enemy = EnemyUnit.getEnemyUnit("哥布林");
+        BattleSystem.Main(role, enemy, aLocale);
     }
-    public static void Main(RoleAttribute role, EnemyAttribute enemy)
+    public static void Main(RoleAttribute role, EnemyAttribute enemy, Locale locale)
     {
         int ATK = 0;
-        byte userDecision = 0;
+        ResourceBundle bundle = ResourceBundle.getBundle("BattleSystemMessage", locale);
+
         var in = new Scanner(System.in);
         System.out.println("你的属性如下:");
         System.out.println(role.toString());
@@ -38,10 +37,12 @@ public class BattleSystem
         System.out.println(enemy.toString());
 
         System.out.println("战斗开始!!!");
+
         while (true)
         {
             System.out.println("[系统]轮到你行动了");
             System.out.println("1.攻击 2.跳过");
+            byte userDecision = 0;
             userDecision = (byte)in.nextInt();
             switch (userDecision)
             {

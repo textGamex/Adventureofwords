@@ -1,6 +1,6 @@
 package javaLogic.CombatSystem.BuffModule;
 
-public class BuffMessage
+public final class BuffMessage
 {
     /**持续回合*/
     private int time;
