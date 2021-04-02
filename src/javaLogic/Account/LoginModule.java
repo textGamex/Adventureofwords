@@ -29,5 +29,8 @@ public class LoginModule
         else
             Logger.getGlobal().info("文件存在");
     }
-
+//    public int ()
+//    {
+//
+//    }
 }
