@@ -172,7 +172,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
     public String toString()
     {
         return getClass().getName()
-                + "[id:" +id
+                + "[id:" + id
                 + ", name:" + name
                 + ", 最大生命值:" + MAXHP
                 + ", 等级:" + grade

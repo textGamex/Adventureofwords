@@ -39,4 +39,23 @@ public class BuffMessage
     {
         return Passive;
     }
+    public void setTime(int time)
+    {
+        this.time = time;
+    }
+    public void setLayers(int layers)
+    {
+        this.layers = layers;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "BuffMessage[" +
+                "持续回合:" + time +
+                ", 效果层数:" + layers +
+                ", Debuff:" + Debuff +
+                ", 特性:" + Passive +
+                ']';
+    }
 }

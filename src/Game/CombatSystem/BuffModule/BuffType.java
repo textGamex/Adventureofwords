@@ -6,5 +6,4 @@ public enum BuffType
     BLEED,
     /**中毒*/
     POISON;
-    
 }
