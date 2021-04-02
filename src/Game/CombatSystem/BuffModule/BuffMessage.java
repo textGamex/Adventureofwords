@@ -1,4 +1,4 @@
-package Game.Message;
+package Game.CombatSystem.BuffModule;
 
 public class BuffMessage
 {

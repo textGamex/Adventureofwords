@@ -1,4 +1,4 @@
-package Game.CombatSystem;
+package Game.CombatSystem.BuffModule;
 
 public enum BuffType
 {
@@ -6,4 +6,5 @@ public enum BuffType
     BLEED,
     /**中毒*/
     POISON;
+    
 }

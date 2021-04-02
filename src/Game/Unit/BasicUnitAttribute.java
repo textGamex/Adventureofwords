@@ -1,7 +1,7 @@
 package Game.Unit;
 
-import Game.CombatSystem.BuffType;
-import Game.Message.BuffMessage;
+import Game.CombatSystem.BuffModule.BuffType;
+import Game.CombatSystem.BuffModule.BuffMessage;
 
 import java.util.EnumMap;
 
@@ -10,13 +10,11 @@ import java.util.EnumMap;
  * @version 0.15
  * @author Millennium
  */
-public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttribute>
+public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Comparable<BasicUnitAttribute>
 {
     public static void main(String[] args)
     {
         var f = new BasicUnitAttribute();
-        f.buffAdd(BuffType.BLEED, new BuffMessage(1,1,true));
-        System.out.println(f.buffHas(BuffType.POISON));
         System.out.println(f.hashCode());
         System.out.println(f.toString());
     }
@@ -38,8 +36,6 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     private int fixArmorPen;
     /**百分比护甲穿透*/
     private float perArmorPen;
-    /**buff*/
-    private EnumMap<BuffType, BuffMessage> hasBuff;
 
     /*    防御类    */
 
@@ -72,7 +68,6 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
         this.physicalResistanc = physicalResistanc;
         this.lifeRegeneration = lifeRegeneration;
         this.id = id;
-        hasBuff = new EnumMap<BuffType, BuffMessage>(BuffType.class);
     }
     public BasicUnitAttribute()//*构造测试单位
     {
@@ -93,7 +88,7 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
         physicalResistanc = 0.0f;
         lifeRegeneration = 0;
         id = 60001;
-        hasBuff = new EnumMap<BuffType, BuffMessage>(BuffType.class);
+
     }
     public final String getName()
     {
@@ -200,23 +195,5 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     public int compareTo(BasicUnitAttribute other)
     {
         return Integer.compare(id, other.getId());
-    }
-
-    /**Buff*/
-    public void buffAdd(BuffType aBuffType, BuffMessage aBuffMessage)
-    {
-        hasBuff.put(aBuffType, aBuffMessage);
-    }
-    public boolean buffHas(BuffType aBuffType)
-    {
-        return hasBuff.containsKey(aBuffType);
-    }
-    public boolean buffIsEmpty()
-    {
-        return hasBuff.isEmpty();
-    }
-    public int buffSize()
-    {
-        return hasBuff.size();
     }
 }
