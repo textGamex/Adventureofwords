@@ -15,8 +15,8 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     public static void main(String[] args)
     {
         var f = new BasicUnitAttribute();
-        f.addBuff(BuffType.BLEED, new BuffMessage(1,1,true));
-        System.out.println(f.hasBuff(BuffType.POISON));
+        f.buffAdd(BuffType.BLEED, new BuffMessage(1,1,true));
+        System.out.println(f.buffHas(BuffType.POISON));
         System.out.println(f.hashCode());
         System.out.println(f.toString());
     }
@@ -203,13 +203,20 @@ public class BasicUnitAttribute implements Cloneable, Comparable<BasicUnitAttrib
     }
 
     /**Buff*/
-    public void addBuff(BuffType aBuffType, BuffMessage aBuffMessage)
+    public void buffAdd(BuffType aBuffType, BuffMessage aBuffMessage)
     {
         hasBuff.put(aBuffType, aBuffMessage);
     }
-    public boolean hasBuff(BuffType aBuffType)
+    public boolean buffHas(BuffType aBuffType)
     {
         return hasBuff.containsKey(aBuffType);
     }
-
+    public boolean buffIsEmpty()
+    {
+        return hasBuff.isEmpty();
+    }
+    public int buffSize()
+    {
+        return hasBuff.size();
+    }
 }
