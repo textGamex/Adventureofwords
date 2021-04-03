@@ -1,5 +1,6 @@
 package javaLogic.Message;
 
+import javaLogic.Account.AccountMessage;
 import javaLogic.Account.Identity;
 
 import java.io.IOException;
@@ -54,7 +55,7 @@ public final class PlayerStatistics
         totalHarm = 0;
         totalVictory = 0;
     }
-    public PlayerStatistics(Identity id, int totalKill, int totalRound, int totalAttack, int totalHarm, int totalVictory)
+    public PlayerStatistics(int totalKill, int totalRound, int totalAttack, int totalHarm, int totalVictory)
     {
 //        this.id = id;
         this.totalKill = totalKill;
@@ -121,34 +122,39 @@ public final class PlayerStatistics
     {
         totalRound += addNumber;
     }
-//    public String toString()
-//    {
-//        return getClass().getName() +
-//                "[Id:" + id +
-//                ", 玩家击杀数: " + totalKill +
-//                ", 总场数:" + totalRound +
-//                ", 普通攻击次数:" + totalAttack +
-//                ", 总伤害:" + totalHarm +
-//                ", 胜利场数:" + totalVictory +
-//                "]";
-//    }
-    /**保存统计信息*/
-//    public void saveGmStatistics(PrintWriter out)
-//    {
-//        out.println(id + "|" + totalKill + "|" + totalRound + "|" + totalAttack
-//        + "|" + totalHarm + "|" + totalVictory);
-//    }
-//    public static PlayerStatistics loadGmStatistics(Scanner in)
-//    {
-//        String line = in.nextLine();
-//        String[] tokens = line.split("\\|");
-//        int id = Integer.parseInt(tokens[0]);
-//        int totalKill = Integer.parseInt(tokens[1]);
-//        int totalRound = Integer.parseInt(tokens[2]);
-//        int totalAttack = Integer.parseInt(tokens[3]);
-//        int totalHarm = Integer.parseInt(tokens[4]);
-//        int totalVictory = Integer.parseInt(tokens[5]);
-//
-//        return new PlayerStatistics(id, totalKill, totalRound, totalAttack, totalHarm, totalVictory);
-//    }
+    public String toString()
+    {
+        return getClass().getName() +
+                "[玩家总击杀数:" + totalKill +
+                ", 总场数:" + totalRound +
+                ", 普通攻击次数:" + totalAttack +
+                ", 总伤害:" + totalHarm +
+                ", 胜利场数:" + totalVictory +
+                "]";
+    }
+    /**根据账号类型选择不同的保存方式来保存统计信息*/
+    public void saveStatistics(AccountMessage account, PrintWriter out)
+    {
+        if (account.getId() == Identity.GM || account.getId() == Identity.NEWGM)
+        {
+            out.println(totalKill + "|" + totalRound + "|" + totalAttack
+                    + "|" + totalHarm + "|" + totalVictory);
+        }
+        else {
+//                var
+        }
+    }
+    public static PlayerStatistics loadGmStatistics(Scanner in)
+    {
+        String line = in.nextLine();
+        String[] tokens = line.split("\\|");
+        int id = Integer.parseInt(tokens[0]);
+        int totalKill = Integer.parseInt(tokens[1]);
+        int totalRound = Integer.parseInt(tokens[2]);
+        int totalAttack = Integer.parseInt(tokens[3]);
+        int totalHarm = Integer.parseInt(tokens[4]);
+        int totalVictory = Integer.parseInt(tokens[5]);
+
+        return new PlayerStatistics(totalKill, totalRound, totalAttack, totalHarm, totalVictory);
+    }
 }

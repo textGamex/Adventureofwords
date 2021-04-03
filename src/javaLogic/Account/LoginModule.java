@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
 
-public class LoginModule
+public final class LoginModule
 {
     public static void main(String[] args)
     {

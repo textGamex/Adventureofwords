@@ -1,8 +1,9 @@
-package javaLogic.Main;
+package javaLogic.main;
 
 import javaLogic.CombatSystem.BattleSystem;
 import javaLogic.Unit.EnemyUnit;
 import javaLogic.Unit.RoleAttribute;
+import ui.LoginUi;
 
 /**
  *开始类
@@ -20,6 +21,7 @@ public final class AdventureOfWordsMain
             System.exit(0);
         }
 
+        var account = LoginUi.loginMain();
         var role = new RoleAttribute();
         var enemy = EnemyUnit.getEnemyUnit("哥布林");
         
