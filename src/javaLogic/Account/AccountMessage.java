@@ -2,6 +2,7 @@ package javaLogic.Account;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,18 +21,26 @@ public final class AccountMessage
     public AccountMessage(String account)
     {
         this.account = account;
-        playerDataPath = gameDataPath.resolve(account);//保存账号目录
+        playerPath = gameDataPath.resolve(account);//保存账号目录
         id = Authentication();
     }
     private static final Path gameDataPath = Paths.get(System.getProperty("user.home"), "AppData", "Local", "Adventure of words");
     private Identity id = Identity.NONE;
     /**保存玩家的各种数据的目录*/
-    private Path playerDataPath;
+    private Path playerPath;
     private String account = "";
 
-    public Path getPlayerDataPath()
+    public Path getPlayerPath()
     {
-        return playerDataPath;
+        return playerPath;
+    }
+    public Path getPlayerDataResolvePath(String fileName)
+    {
+       return playerPath.resolve("Data").resolve(fileName);
+    }
+    public File getPlayerDataResolveFile(String fileName)
+    {
+       return playerPath.resolve("Data").resolve(fileName).toFile();
     }
     public Identity getId()
     {
@@ -49,9 +58,9 @@ public final class AccountMessage
     {
         this.id = id;
     }
-    public void setPlayerDataPath(Path playerDataPath)
+    public void setPlayerPath(Path playerPath)
     {
-        this.playerDataPath = playerDataPath;
+        this.playerPath = playerPath;
     }
 
     public static AccountMessage readAccount(@NotNull Scanner in)//从指定地方读取账户
@@ -60,7 +69,7 @@ public final class AccountMessage
     }
     private Identity Authentication()//身份验证模块
     {
-        var folder = playerDataPath.toFile();//构造账号路径
+        var folder = playerPath.toFile();//构造账号路径
         Logger.getGlobal().info(folder.toString());
 
         /*账号不存在且是内部人员*/
@@ -84,13 +93,14 @@ public final class AccountMessage
             return Identity.PLAYER;
         }
     }
-    public static void createAccountDataFolder(String account)//创建相关账户的文件夹
+    public void createAccountDataFolder()//创建相关账户的文件夹
     {
         var file = gameDataPath.resolve(account).toFile();
         if (!file.exists()) {
             Logger.getGlobal().info(file + " 文件夹不存在");
             try {
-                Files.createDirectories(gameDataPath);
+                Files.createDirectories(playerPath.resolve("Data"));
+//                Files.createDirectories(playerDataPath.resolve("Log"));
                 Logger.getGlobal().info(file + " 文件夹创建成功");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -98,5 +108,15 @@ public final class AccountMessage
             }
         } else
             Logger.getGlobal().info(file + " 文件夹存在");
+    }
+
+    @Override
+    public String toString() {
+        return "AccountMessage[" +
+                "身份:" + id +
+                ", 游戏数据保存目录:" + gameDataPath +
+                ", playerPath:" + playerPath +
+                ", 账号:" + account +
+                ']';
     }
 }

@@ -3,7 +3,9 @@ package javaLogic.Message;
 import javaLogic.Account.AccountMessage;
 import javaLogic.Account.Identity;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -18,15 +20,13 @@ public final class PlayerStatistics
 {
     public static void main(String[] args)
     {
-        try (var out = new PrintWriter("Message.txt", StandardCharsets.UTF_8);)
-        {
-//            var a = new PlayerStatistics(1);
-//            a.saveGmStatistics(out);
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
+        var data = new PlayerStatistics(0,0,0,0,0);
+        var a = new AccountMessage("1");
+        var b = new AccountMessage(PrivateData.ACCOUNT1);
+        a.createAccountDataFolder();
+        b.createAccountDataFolder();
+        data.saveStatistics(a);
+        data.saveStatistics(b);
     }
     //玩家ID
 //    private final Identity id;
@@ -122,6 +122,7 @@ public final class PlayerStatistics
     {
         totalRound += addNumber;
     }
+    @Override
     public String toString()
     {
         return getClass().getName() +
@@ -133,27 +134,40 @@ public final class PlayerStatistics
                 "]";
     }
     /**根据账号类型选择不同的保存方式来保存统计信息*/
-    public void saveStatistics(AccountMessage account, PrintWriter out)
+    public void saveStatistics(AccountMessage account)
     {
         if (account.getId() == Identity.GM || account.getId() == Identity.NEWGM)
         {
-            out.println(totalKill + "|" + totalRound + "|" + totalAttack
-                    + "|" + totalHarm + "|" + totalVictory);
+            try (var out = new PrintWriter(account.getPlayerDataResolveFile("PlayerStatistics.txt"), StandardCharsets.UTF_8))
+            {
+                out.println(totalKill + "|" + totalRound + "|" + totalAttack
+                        + "|" + totalHarm + "|" + totalVictory);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
         }
         else {
-//                var
+            try (var out = new ObjectOutputStream(new FileOutputStream(account.getPlayerDataResolveFile("PlayerStatistics.dat"))))
+            {
+                out.writeObject(this);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
     public static PlayerStatistics loadGmStatistics(Scanner in)
     {
         String line = in.nextLine();
         String[] tokens = line.split("\\|");
-        int id = Integer.parseInt(tokens[0]);
-        int totalKill = Integer.parseInt(tokens[1]);
-        int totalRound = Integer.parseInt(tokens[2]);
-        int totalAttack = Integer.parseInt(tokens[3]);
-        int totalHarm = Integer.parseInt(tokens[4]);
-        int totalVictory = Integer.parseInt(tokens[5]);
+        int totalKill = Integer.parseInt(tokens[0]);
+        int totalRound = Integer.parseInt(tokens[1]);
+        int totalAttack = Integer.parseInt(tokens[2]);
+        int totalHarm = Integer.parseInt(tokens[3]);
+        int totalVictory = Integer.parseInt(tokens[4]);
 
         return new PlayerStatistics(totalKill, totalRound, totalAttack, totalHarm, totalVictory);
     }

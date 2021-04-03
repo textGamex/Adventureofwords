@@ -22,6 +22,7 @@ public final class AdventureOfWordsMain
         }
 
         var account = LoginUi.loginMain();
+
         var role = new RoleAttribute();
         var enemy = EnemyUnit.getEnemyUnit("哥布林");
         
