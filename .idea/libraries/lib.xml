@@ -2,9 +2,6 @@
   <library name="lib">
     <CLASSES />
     <JAVADOC />
-    <NATIVE>
-      <root url="file://$PROJECT_DIR$/DLL" />
-    </NATIVE>
     <SOURCES />
   </library>
 </component>

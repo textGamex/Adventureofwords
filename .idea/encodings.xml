@@ -2,8 +2,11 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/src/BattleSystemMessage_zh_CN.properties" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/C/Cls-dll.c" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/C/javaLogic_Tools_GameTool.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/C/Cls-dll.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/C/javaLogic_Tools_GameTool.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/C/payment/Alipay.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/C/payment/WeChat.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/C/ui/LoginUi.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/javaLogic/Account/AccountMessage.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/javaLogic/Account/Identity.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/javaLogic/Account/LoginModule.java" charset="GBK" />
@@ -17,6 +20,6 @@
     <file url="file://$PROJECT_DIR$/src/javaLogic/Unit/EnemyUnit.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/javaLogic/Unit/RoleAttribute.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/javaLogic/main/AdventureOfWordsMain.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/ui/LoginUi.java" charset="GBK" />
+    <file url="PROJECT" charset="GBK" />
   </component>
 </project>
