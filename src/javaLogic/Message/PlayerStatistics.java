@@ -19,8 +19,8 @@ public final class PlayerStatistics
     {
         try (var out = new PrintWriter("Message.txt", StandardCharsets.UTF_8);)
         {
-            var a = new PlayerStatistics(1);
-            a.saveGmStatistics(out);
+//            var a = new PlayerStatistics(1);
+//            a.saveGmStatistics(out);
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -28,7 +28,7 @@ public final class PlayerStatistics
 
     }
     //玩家ID
-    private final Identity id;
+//    private final Identity id;
     //玩家击杀数
     private int totalKill;
     //总场数
@@ -41,13 +41,13 @@ public final class PlayerStatistics
     private int totalVictory;
     //游玩总时间 TODO:未实现
 //    private int
-    public PlayerStatistics()
-    {
-        this();
-    }
+//    public PlayerStatistics()
+//    {
+//        this();
+//    }
     public PlayerStatistics(Identity id)
     {
-        this.id = id;
+//        this.id = id;
         totalKill = 0;
         totalRound = 0;
         totalAttack = 0;
@@ -56,7 +56,7 @@ public final class PlayerStatistics
     }
     public PlayerStatistics(Identity id, int totalKill, int totalRound, int totalAttack, int totalHarm, int totalVictory)
     {
-        this.id = id;
+//        this.id = id;
         this.totalKill = totalKill;
         this.totalRound = totalRound;
         this.totalAttack = totalAttack;
@@ -83,10 +83,10 @@ public final class PlayerStatistics
     {
         return totalVictory;
     }
-    public Identity getId()
-    {
-        return id;
-    }
+//    public Identity getId()
+//    {
+//        return id;
+//    }
 
     public void setTotalKill(int totalKill)
     {
@@ -121,34 +121,34 @@ public final class PlayerStatistics
     {
         totalRound += addNumber;
     }
-    public String toString()
-    {
-        return getClass().getName() +
-                "[Id:" + id +
-                ", 玩家击杀数: " + totalKill +
-                ", 总场数:" + totalRound +
-                ", 普通攻击次数:" + totalAttack +
-                ", 总伤害:" + totalHarm +
-                ", 胜利场数:" + totalVictory +
-                "]";
-    }
+//    public String toString()
+//    {
+//        return getClass().getName() +
+//                "[Id:" + id +
+//                ", 玩家击杀数: " + totalKill +
+//                ", 总场数:" + totalRound +
+//                ", 普通攻击次数:" + totalAttack +
+//                ", 总伤害:" + totalHarm +
+//                ", 胜利场数:" + totalVictory +
+//                "]";
+//    }
     /**保存统计信息*/
-    public void saveGmStatistics(PrintWriter out)
-    {
-        out.println(id + "|" + totalKill + "|" + totalRound + "|" + totalAttack
-        + "|" + totalHarm + "|" + totalVictory);
-    }
-    public static PlayerStatistics loadGmStatistics(Scanner in)
-    {
-        String line = in.nextLine();
-        String[] tokens = line.split("\\|");
-        int id = Integer.parseInt(tokens[0]);
-        int totalKill = Integer.parseInt(tokens[1]);
-        int totalRound = Integer.parseInt(tokens[2]);
-        int totalAttack = Integer.parseInt(tokens[3]);
-        int totalHarm = Integer.parseInt(tokens[4]);
-        int totalVictory = Integer.parseInt(tokens[5]);
-
-        return new PlayerStatistics(id, totalKill, totalRound, totalAttack, totalHarm, totalVictory);
-    }
+//    public void saveGmStatistics(PrintWriter out)
+//    {
+//        out.println(id + "|" + totalKill + "|" + totalRound + "|" + totalAttack
+//        + "|" + totalHarm + "|" + totalVictory);
+//    }
+//    public static PlayerStatistics loadGmStatistics(Scanner in)
+//    {
+//        String line = in.nextLine();
+//        String[] tokens = line.split("\\|");
+//        int id = Integer.parseInt(tokens[0]);
+//        int totalKill = Integer.parseInt(tokens[1]);
+//        int totalRound = Integer.parseInt(tokens[2]);
+//        int totalAttack = Integer.parseInt(tokens[3]);
+//        int totalHarm = Integer.parseInt(tokens[4]);
+//        int totalVictory = Integer.parseInt(tokens[5]);
+//
+//        return new PlayerStatistics(id, totalKill, totalRound, totalAttack, totalHarm, totalVictory);
+//    }
 }

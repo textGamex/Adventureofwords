@@ -23,12 +23,12 @@ public class BattleSystem
 
         var role = new RoleAttribute();
         var enemy = EnemyUnit.getEnemyUnit("哥布林");
-        BattleSystem.Main(role, enemy, aLocale);
+        BattleSystem.Main(role, enemy);
     }
-    public static void Main(RoleAttribute role, EnemyAttribute enemy, Locale locale)
+    public static void Main(RoleAttribute role, EnemyAttribute enemy)
     {
         int ATK = 0;
-        ResourceBundle bundle = ResourceBundle.getBundle("BattleSystemMessage", locale);
+//        ResourceBundle bundle = ResourceBundle.getBundle("BattleSystemMessage", locale);
 
         var in = new Scanner(System.in);
         System.out.println("你的属性如下:");

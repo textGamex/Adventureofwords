@@ -9,5 +9,7 @@ public enum Identity
     /**玩家*/
     PLAYER,
     /**内部人员*/
-    GM;
+    GM,
+    /**无*/
+    NONE;
 }

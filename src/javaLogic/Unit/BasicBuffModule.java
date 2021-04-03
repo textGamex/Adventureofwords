@@ -4,7 +4,12 @@ import javaLogic.CombatSystem.BuffModule.BuffMessage;
 import javaLogic.CombatSystem.BuffModule.BuffType;
 
 import java.util.EnumMap;
-
+/**
+ *单位buff模块
+ *@author Millennium
+ *@version 1.1.1
+ *@Date 2021/4/3
+*/
 public class BasicBuffModule
 {
     public static void main(String[] args)
@@ -48,8 +53,10 @@ public class BasicBuffModule
         var oldTime = buff.getTime();
         if (oldTime <= reduceTime)
             hasBuff.remove(Type);
-        buff.setTime(oldTime - reduceTime);
-        hasBuff.put(Type, buff);
+        else {
+            buff.setTime(oldTime - reduceTime);
+            hasBuff.put(Type, buff);
+        }
     }
 
     @Override

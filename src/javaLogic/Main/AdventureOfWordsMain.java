@@ -1,11 +1,13 @@
 package javaLogic.Main;
 
+import javaLogic.CombatSystem.BattleSystem;
+import javaLogic.Unit.EnemyUnit;
 import javaLogic.Unit.RoleAttribute;
 
 /**
  *开始类
  *@author Millennium
- *@version 0.11
+ *@version 0.13
  *@Date 2021/3/13 0:28
 */
 public final class AdventureOfWordsMain
@@ -19,8 +21,8 @@ public final class AdventureOfWordsMain
         }
 
         var role = new RoleAttribute();
-        System.out.println("123");
-        var enemy = new RoleAttribute();
-//        BattleSystem.Main(role, enemy);
+        var enemy = EnemyUnit.getEnemyUnit("哥布林");
+        
+        BattleSystem.Main(role, enemy);
     }
 }
