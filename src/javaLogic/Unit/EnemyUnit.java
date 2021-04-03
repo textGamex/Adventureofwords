@@ -6,10 +6,10 @@ public final class EnemyUnit extends EnemyAttribute
    public static EnemyAttribute getEnemyUnit(String EnemyUnitType) throws IllegalArgumentException
     {
         return switch (EnemyUnitType) {
-            case "å“¥å¸ƒæž—" -> new EnemyAttribute(EnemyUnitType, 1, 50, 12,
+            case "¸ç²¼ÁÖ" -> new EnemyAttribute(EnemyUnitType, 1, 50, 12,
                     0.1f, 1.5f, 2, 0,
                     3, 0.0f, 0, 10001, 5, 5, 3);
-            default -> throw new IllegalArgumentException("å¼‚å¸¸å‚æ•°: " + EnemyUnitType);
+            default -> throw new IllegalArgumentException("Òì³£²ÎÊý: " + EnemyUnitType);
         };
     }
 

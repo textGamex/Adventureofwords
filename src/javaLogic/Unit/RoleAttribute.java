@@ -4,24 +4,24 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * ç©å®¶è§’è‰²å±æ€§
+ * Íæ¼Ò½ÇÉ«ÊôĞÔ
  * @version 0.13
  * @author Millennium
  */
 public class RoleAttribute extends BasicUnitAttribute
 {
     private final int id;
-    /**ç©å®¶çš„id*/
+    /**Íæ¼ÒµÄid*/
     static int nextId = 0;
-    /**æŒæœ‰è´§å¸*/
+    /**³ÖÓĞ»õ±Ò*/
     private int cash;
-    /**æ‹¥æœ‰ç»éªŒ*/
+    /**ÓµÓĞ¾­Ñé*/
     private int EXP;
-    /**å‡åˆ°ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒ*/
+    /**Éıµ½ÏÂÒ»¼¶ËùĞè¾­Ñé*/
     private int upgradeNeedXP;
-    /**æ¸¸æˆå¾—åˆ†*/
+    /**ÓÎÏ·µÃ·Ö*/
     private int totalGameScore;
-    /**è§’è‰²åˆ›å»ºæ—¥æœŸ*/
+    /**½ÇÉ«´´½¨ÈÕÆÚ*/
     private final LocalDateTime CreatingDateTime;
 
     public static void main(String[] args)
@@ -31,21 +31,21 @@ public class RoleAttribute extends BasicUnitAttribute
           System.out.println(time);
           System.out.println(date);
     }
-    //åˆå§‹åŒ–ç©å®¶id
+    //³õÊ¼»¯Íæ¼Òid
     {
         nextId++;
         id = nextId;
     }
-    public RoleAttribute() //*é»˜è®¤æ•°å€¼
+    public RoleAttribute() //*Ä¬ÈÏÊıÖµ
     {
-        super("ç©å®¶");
+        super("Íæ¼Ò");
         cash = 100;
         totalGameScore = 0;
         EXP = 0;
         upgradeNeedXP = 20;
         CreatingDateTime = LocalDateTime.now();
     }
-    public RoleAttribute(String name) //*æ„é€ ç©å®¶è§’è‰²
+    public RoleAttribute(String name) //*¹¹ÔìÍæ¼Ò½ÇÉ«
     {
         super(name);
         cash = 100;
@@ -99,11 +99,11 @@ public class RoleAttribute extends BasicUnitAttribute
     public String toString()
     {
         return  super.toString() +
-                "[æŒæœ‰è´§å¸:" + cash +
-                ", æ¸¸æˆå¾—åˆ†:" + totalGameScore +
-                ", è§’è‰²æ‹¥æœ‰ç»éªŒ:" + EXP +
-                ", å‡åˆ°ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒ:" + upgradeNeedXP +
-                ", åˆ›å»ºæ—¥æœŸ:" + CreatingDateTime +
+                "[³ÖÓĞ»õ±Ò:" + cash +
+                ", ÓÎÏ·µÃ·Ö:" + totalGameScore +
+                ", ½ÇÉ«ÓµÓĞ¾­Ñé:" + EXP +
+                ", Éıµ½ÏÂÒ»¼¶ËùĞè¾­Ñé:" + upgradeNeedXP +
+                ", ´´½¨ÈÕÆÚ:" + CreatingDateTime +
                 ']';
     }
 }

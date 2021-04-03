@@ -6,7 +6,7 @@ import javaLogic.Unit.RoleAttribute;
 import ui.LoginUi;
 
 /**
- *å¼€å§‹ç±»
+ *¿ªÊ¼Àà
  *@author Millennium
  *@version 0.13
  *@Date 2021/3/13 0:28
@@ -17,14 +17,14 @@ public final class AdventureOfWordsMain
     {
         if (args.length != 0 && args[0].equalsIgnoreCase("-version"))
         {
-            System.out.println("ç‰ˆæœ¬å·: 0.1Beta");
+            System.out.println("°æ±¾ºÅ: 0.1Beta");
             System.exit(0);
         }
 
         var account = LoginUi.loginMain();
 
         var role = new RoleAttribute();
-        var enemy = EnemyUnit.getEnemyUnit("å“¥å¸ƒæ—");
+        var enemy = EnemyUnit.getEnemyUnit("¸ç²¼ÁÖ");
         
         BattleSystem.Main(role, enemy);
     }

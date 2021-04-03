@@ -14,20 +14,20 @@ public final class LoginModule
         var file = playerDataPath.toFile();
         if (!file.exists())
         {
-            Logger.getGlobal().info("æ–‡ä»¶ä¸å­˜åœ¨");
+            Logger.getGlobal().info("ÎÄ¼ş²»´æÔÚ");
             try
             {
                 Files.createDirectories(playerDataPath);
-                Logger.getGlobal().info("æ–‡ä»¶åˆ›å»ºæˆåŠŸ");
+                Logger.getGlobal().info("ÎÄ¼ş´´½¨³É¹¦");
             }
             catch (IOException e)
             {
                 e.printStackTrace();
-                Logger.getGlobal().severe("æ–‡ä»¶åˆ›å»ºå¤±è´¥");
+                Logger.getGlobal().severe("ÎÄ¼ş´´½¨Ê§°Ü");
             }
         }
         else
-            Logger.getGlobal().info("æ–‡ä»¶å­˜åœ¨");
+            Logger.getGlobal().info("ÎÄ¼ş´æÔÚ");
     }
 //    public int ()
 //    {

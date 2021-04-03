@@ -1,18 +1,18 @@
 package javaLogic.Unit;
 /**
- * æ•Œå¯¹å•ä½å±æ€§
+ * µĞ¶Ôµ¥Î»ÊôĞÔ
  * @version 0.11
  * @author Millennium
  */
 public class EnemyAttribute extends BasicUnitAttribute
 {
-    /**æ‰€å€¼åˆ†æ•° */
+    /**ËùÖµ·ÖÊı */
     private final int value;
-    /**æ‰€å€¼ç»éªŒ */
+    /**ËùÖµ¾­Ñé */
     private final int xp;
-    /**æ‰€å€¼ç¡¬å¸ */
+    /**ËùÖµÓ²±Ò */
     private final int coin;
-    public EnemyAttribute() //*é»˜è®¤æ•°å€¼
+    public EnemyAttribute() //*Ä¬ÈÏÊıÖµ
     {
         super();
         value = 10;
@@ -21,7 +21,7 @@ public class EnemyAttribute extends BasicUnitAttribute
     }
     public EnemyAttribute(String name,int grade, int MAXHP, int ATK, float CRIT, float critsEffect,
                           int fixArmorPen, float perArmorPen, int armor, float physicalResistanc,
-                          int lifeRegeneration, int id, int value, int xp, int coin)//*æ„é€ æµ‹è¯•å•ä½
+                          int lifeRegeneration, int id, int value, int xp, int coin)//*¹¹Ôì²âÊÔµ¥Î»
     {
         super(name, grade, MAXHP, ATK, CRIT, critsEffect, fixArmorPen, perArmorPen, armor, physicalResistanc
         , lifeRegeneration, id);
@@ -46,9 +46,9 @@ public class EnemyAttribute extends BasicUnitAttribute
     public String toString()
     {
         return  super.toString()
-                + "[æ‰€å€¼åˆ†æ•°:" + value +
-                ", æ‰€å€¼ç»éªŒ:" + xp +
-                ", æ‰€å€¼ç¡¬å¸:" + coin +
+                + "[ËùÖµ·ÖÊı:" + value +
+                ", ËùÖµ¾­Ñé:" + xp +
+                ", ËùÖµÓ²±Ò:" + coin +
                 ']';
     }
 }

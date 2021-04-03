@@ -11,9 +11,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
- *ç»Ÿè®¡ç©å®¶ä¿¡æ¯
+ *Í³¼ÆÍæ¼ÒĞÅÏ¢
  *@author Millennium
- *@version 1.1.1
+ *@version 1.2.0
  *@Date 2021/3/13 22:42
 */
 public final class PlayerStatistics
@@ -28,19 +28,19 @@ public final class PlayerStatistics
         data.saveStatistics(a);
         data.saveStatistics(b);
     }
-    //ç©å®¶ID
+    //Íæ¼ÒID
 //    private final Identity id;
-    //ç©å®¶å‡»æ€æ•°
+    //Íæ¼Ò»÷É±Êı
     private int totalKill;
-    //æ€»åœºæ•°
+    //×Ü³¡Êı
     private int totalRound;
-    //æ™®é€šæ”»å‡»æ¬¡æ•°
+    //ÆÕÍ¨¹¥»÷´ÎÊı
     private int totalAttack;
-    //æ€»ä¼¤å®³
+    //×ÜÉËº¦
     private int totalHarm;
-    //èƒœåˆ©åœºæ•°
+    //Ê¤Àû³¡Êı
     private int totalVictory;
-    //æ¸¸ç©æ€»æ—¶é—´ TODO:æœªå®ç°
+    //ÓÎÍæ×ÜÊ±¼ä TODO:Î´ÊµÏÖ
 //    private int
 //    public PlayerStatistics()
 //    {
@@ -126,14 +126,14 @@ public final class PlayerStatistics
     public String toString()
     {
         return getClass().getName() +
-                "[ç©å®¶æ€»å‡»æ€æ•°:" + totalKill +
-                ", æ€»åœºæ•°:" + totalRound +
-                ", æ™®é€šæ”»å‡»æ¬¡æ•°:" + totalAttack +
-                ", æ€»ä¼¤å®³:" + totalHarm +
-                ", èƒœåˆ©åœºæ•°:" + totalVictory +
+                "[Íæ¼Ò×Ü»÷É±Êı:" + totalKill +
+                ", ×Ü³¡Êı:" + totalRound +
+                ", ÆÕÍ¨¹¥»÷´ÎÊı:" + totalAttack +
+                ", ×ÜÉËº¦:" + totalHarm +
+                ", Ê¤Àû³¡Êı:" + totalVictory +
                 "]";
     }
-    /**æ ¹æ®è´¦å·ç±»å‹é€‰æ‹©ä¸åŒçš„ä¿å­˜æ–¹å¼æ¥ä¿å­˜ç»Ÿè®¡ä¿¡æ¯*/
+    /**¸ù¾İÕËºÅÀàĞÍÑ¡Ôñ²»Í¬µÄ±£´æ·½Ê½À´±£´æÍ³¼ÆĞÅÏ¢*/
     public void saveStatistics(AccountMessage account)
     {
         if (account.getId() == Identity.GM || account.getId() == Identity.NEWGM)

@@ -21,12 +21,12 @@ public final class AccountMessage
     public AccountMessage(String account)
     {
         this.account = account;
-        playerPath = gameDataPath.resolve(account);//ä¿å­˜è´¦å·ç›®å½•
+        playerPath = gameDataPath.resolve(account);//±£´æÕËºÅÄ¿Â¼
         id = Authentication();
     }
     private static final Path gameDataPath = Paths.get(System.getProperty("user.home"), "AppData", "Local", "Adventure of words");
     private Identity id = Identity.NONE;
-    /**ä¿å­˜ç©å®¶çš„å„ç§æ•°æ®çš„ç›®å½•*/
+    /**±£´æÍæ¼ÒµÄ¸÷ÖÖÊı¾İµÄÄ¿Â¼*/
     private Path playerPath;
     private String account = "";
 
@@ -63,60 +63,60 @@ public final class AccountMessage
         this.playerPath = playerPath;
     }
 
-    public static AccountMessage readAccount(@NotNull Scanner in)//ä»æŒ‡å®šåœ°æ–¹è¯»å–è´¦æˆ·
+    public static AccountMessage readAccount(@NotNull Scanner in)//´ÓÖ¸¶¨µØ·½¶ÁÈ¡ÕË»§
     {
         return new AccountMessage(in.nextLine());
     }
-    private Identity Authentication()//èº«ä»½éªŒè¯æ¨¡å—
+    private Identity Authentication()//Éí·İÑéÖ¤Ä£¿é
     {
-        var folder = playerPath.toFile();//æ„é€ è´¦å·è·¯å¾„
+        var folder = playerPath.toFile();//¹¹ÔìÕËºÅÂ·¾¶
         Logger.getGlobal().info(folder.toString());
 
-        /*è´¦å·ä¸å­˜åœ¨ä¸”æ˜¯å†…éƒ¨äººå‘˜*/
+        /*ÕËºÅ²»´æÔÚÇÒÊÇÄÚ²¿ÈËÔ±*/
         if (!folder.exists() && (account.equals(ACCOUNT1) || account.equals(ACCOUNT2)))
         {
-            Logger.getGlobal().info(account + "æ˜¯æ–°çš„å†…éƒ¨äººå‘˜è´¦å·");
+            Logger.getGlobal().info(account + "ÊÇĞÂµÄÄÚ²¿ÈËÔ±ÕËºÅ");
             return Identity.NEWGM;
         }
         else if (folder.exists() && (account.equals(ACCOUNT1) || account.equals(ACCOUNT2)))
         {
-            Logger.getGlobal().info(account + "æ˜¯å†…éƒ¨äººå‘˜è´¦å·");
+            Logger.getGlobal().info(account + "ÊÇÄÚ²¿ÈËÔ±ÕËºÅ");
             return Identity.GM;
         }
-        else if (!folder.exists())//è´¦å·ä¸å­˜åœ¨è€Œä¸”æ˜¯ç©å®¶
+        else if (!folder.exists())//ÕËºÅ²»´æÔÚ¶øÇÒÊÇÍæ¼Ò
         {
-            Logger.getGlobal().info(account + "æ˜¯æ–°çš„ç©å®¶è´¦å·");
+            Logger.getGlobal().info(account + "ÊÇĞÂµÄÍæ¼ÒÕËºÅ");
             return Identity.NEWPLAYER;
         }
         else {
-            Logger.getGlobal().info(account + "æ˜¯ç©å®¶è´¦å·");
+            Logger.getGlobal().info(account + "ÊÇÍæ¼ÒÕËºÅ");
             return Identity.PLAYER;
         }
     }
-    public void createAccountDataFolder()//åˆ›å»ºç›¸å…³è´¦æˆ·çš„æ–‡ä»¶å¤¹
+    public void createAccountDataFolder()//´´½¨Ïà¹ØÕË»§µÄÎÄ¼ş¼Ğ
     {
         var file = gameDataPath.resolve(account).toFile();
         if (!file.exists()) {
-            Logger.getGlobal().info(file + " æ–‡ä»¶å¤¹ä¸å­˜åœ¨");
+            Logger.getGlobal().info(file + " ÎÄ¼ş¼Ğ²»´æÔÚ");
             try {
                 Files.createDirectories(playerPath.resolve("Data"));
 //                Files.createDirectories(playerDataPath.resolve("Log"));
-                Logger.getGlobal().info(file + " æ–‡ä»¶å¤¹åˆ›å»ºæˆåŠŸ");
+                Logger.getGlobal().info(file + " ÎÄ¼ş¼Ğ´´½¨³É¹¦");
             } catch (IOException e) {
                 e.printStackTrace();
-                Logger.getGlobal().severe(file + " æ–‡ä»¶å¤¹åˆ›å»ºå¤±è´¥");
+                Logger.getGlobal().severe(file + " ÎÄ¼ş¼Ğ´´½¨Ê§°Ü");
             }
         } else
-            Logger.getGlobal().info(file + " æ–‡ä»¶å¤¹å­˜åœ¨");
+            Logger.getGlobal().info(file + " ÎÄ¼ş¼Ğ´æÔÚ");
     }
 
     @Override
     public String toString() {
         return "AccountMessage[" +
-                "èº«ä»½:" + id +
-                ", æ¸¸æˆæ•°æ®ä¿å­˜ç›®å½•:" + gameDataPath +
+                "Éí·İ:" + id +
+                ", ÓÎÏ·Êı¾İ±£´æÄ¿Â¼:" + gameDataPath +
                 ", playerPath:" + playerPath +
-                ", è´¦å·:" + account +
+                ", ÕËºÅ:" + account +
                 ']';
     }
 }

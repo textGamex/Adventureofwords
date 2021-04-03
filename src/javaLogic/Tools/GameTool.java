@@ -3,7 +3,7 @@ package javaLogic.Tools;
 import java.util.Random;
 
 /**
- * è¾…åŠ©ç±»
+ * ¸¨ÖúÀà
  * @version 0.2
  * @author Millennium
  */
@@ -20,11 +20,19 @@ public final class GameTool
 //        }
 //        System.out.println(count);
         int a = floatingNumber(1, 1, "+");
+        System.out.println("asjnffs");
+        GameTool.cls();
+//        GameTool.print();
+        System.out.println("³É¹¦");
+    }
+    static
+    {
+        System.loadLibrary("AdventureWords-DLL");
     }
     /**
-     * æ ¹æ®ä¼ å…¥çš„æ¦‚çŽ‡éšæœºè¿”å›žçœŸæˆ–å‡
-     * runSizeæ˜¯è¿”å›žçœŸçš„æ¦‚çŽ‡
-     * @return trueæˆ–false
+     * ¸ù¾Ý´«ÈëµÄ¸ÅÂÊËæ»ú·µ»ØÕæ»ò¼Ù
+     * runSizeÊÇ·µ»ØÕæµÄ¸ÅÂÊ
+     * @return true»òfalse
      */
     public static boolean randomRun (float runSize)
     {
@@ -35,36 +43,37 @@ public final class GameTool
      *@author Millennium
      *@Date 2021/3/13 11:45
     */
-    public static int floatingNumber(int number, int floatingRange)//æŒ‰æ•´æ•°æµ®åŠ¨
+    public static int floatingNumber(int number, int floatingRange)//°´ÕûÊý¸¡¶¯
     {
         var rand = new Random();
         int randomNumber = rand.nextInt(floatingRange + 1);
         return randomRun(0.5f) ? number + randomNumber : number - randomNumber;
     }
-    public static int floatingNumber(int number, float floatingPercentage)//æŒ‰ç™¾åˆ†æ¯”æµ®åŠ¨
+    public static int floatingNumber(int number, float floatingPercentage)//°´°Ù·Ö±È¸¡¶¯
     {
         var rand = new Random();
         int randomNumber = rand.nextInt((int) floatingPercentage * number + 1);
         return randomRun(0.5f) ? number + randomNumber : number - randomNumber;
     }
-    public static int floatingNumber(int number, int floatingRange, String sign) throws IllegalArgumentException//æŒ‰æ•´æ•°æµ®åŠ¨
+    public static int floatingNumber(int number, int floatingRange, String sign) throws IllegalArgumentException//°´ÕûÊý¸¡¶¯
     {
         var rand = new Random();
         int randomNumber = rand.nextInt(floatingRange + 1);
         return switch (sign) {
             case "+" -> number + randomNumber;
             case "-" -> number - randomNumber;
-            default -> throw new IllegalArgumentException("å¼‚å¸¸å‚æ•°: " + sign);
+            default -> throw new IllegalArgumentException("Òì³£²ÎÊý: " + sign);
         };
     }
-    public static int floatingNumber(int number, float floatingPercentage, String sign) throws IllegalArgumentException//æŒ‰ç™¾åˆ†æ¯”æµ®åŠ¨
+    public static int floatingNumber(int number, float floatingPercentage, String sign) throws IllegalArgumentException//°´°Ù·Ö±È¸¡¶¯
     {
         var rand = new Random();
         int randomNumber = rand.nextInt((int) floatingPercentage * number + 1);
         return switch (sign) {
             case "+" -> number + randomNumber;
             case "-" -> number - randomNumber;
-            default -> throw new IllegalArgumentException("å¼‚å¸¸å‚æ•°: " + sign);
+            default -> throw new IllegalArgumentException("Òì³£²ÎÊý: " + sign);
         };
     }
+    public static native void cls();
 }

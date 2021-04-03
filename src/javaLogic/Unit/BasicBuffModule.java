@@ -5,7 +5,7 @@ import javaLogic.CombatSystem.BuffModule.BuffType;
 
 import java.util.EnumMap;
 /**
- *Âçï‰ΩçbuffÊ®°Âùó
+ *µ•Œªbuffƒ£øÈ
  *@author Millennium
  *@version 1.1.1
  *@Date 2021/4/3
@@ -41,13 +41,13 @@ public class BasicBuffModule
     public final void removeBuff(BuffType Type)
     {
         if (!hasBuff.containsKey(Type))
-            throw new NullPointerException("Buff‰∏çÂ≠òÂú®: " + Type);
+            throw new NullPointerException("Buff≤ª¥Ê‘⁄: " + Type);
         hasBuff.remove(Type);
     }
     public final void removeBuff(BuffType Type, int reduceTime)
     {
         if (!hasBuff.containsKey(Type))
-            throw new NullPointerException("Buff‰∏çÂ≠òÂú®: " + Type);
+            throw new NullPointerException("Buff≤ª¥Ê‘⁄: " + Type);
 
         var buff = hasBuff.get(Type);
         var oldTime = buff.getTime();

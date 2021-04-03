@@ -1,7 +1,7 @@
 package javaLogic.Unit;
 
 /**
- * åŸºæœ¬å•ä½å±æ€§
+ * »ù±¾µ¥Î»ÊôĞÔ
  * @version 0.15
  * @author Millennium
  */
@@ -14,41 +14,41 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
         System.out.println(f.toString());
     }
     private final int id;
-    private static int nextTextId = 0;//æµ‹è¯•å•ä½id TODO:æœªå®Œæˆ
-    private static int nextSpecialId = 0;//ç‰¹æ®Šå•ä½id
+    private static int nextTextId = 0;//²âÊÔµ¥Î»id TODO:Î´Íê³É
+    private static int nextSpecialId = 0;//ÌØÊâµ¥Î»id
     private final String name;
-    /**æœ€å¤§ç”Ÿå‘½å€¼*/
+    /**×î´óÉúÃüÖµ*/
     private int MAXHP;
-    /**ç”Ÿå‘½å€¼*/
+    /**ÉúÃüÖµ*/
     private int HP;
-    /**ç‰©ç†æ”»å‡»*/
+    /**ÎïÀí¹¥»÷*/
     private int ATK;
-    /**æš´å‡»ç‡ */
+    /**±©»÷ÂÊ */
     private float CRIT;
-    /**æš´å‡»æ•ˆæœ*/
+    /**±©»÷Ğ§¹û*/
     private float critsEffect;
-    /**å›ºå®šæŠ¤ç”²ç©¿é€*/
+    /**¹Ì¶¨»¤¼×´©Í¸*/
     private int fixArmorPen;
-    /**ç™¾åˆ†æ¯”æŠ¤ç”²ç©¿é€*/
+    /**°Ù·Ö±È»¤¼×´©Í¸*/
     private float perArmorPen;
 
-    /*    é˜²å¾¡ç±»    */
+    /*    ·ÀÓùÀà    */
 
-    /**æŠ¤ç”²å€¼*/
+    /**»¤¼×Öµ*/
     private int armor;
-    /**ç‰©ç†æŠ—æ€§ */
+    /**ÎïÀí¿¹ĞÔ */
     private float physicalResistanc;
-    /**é—ªé¿*/
+    /**ÉÁ±Ü*/
     //private float evade;
-    /**æ¯å›åˆç”Ÿå‘½å›å¤*/
+    /**Ã¿»ØºÏÉúÃü»Ø¸´*/
     private int lifeRegeneration;
-    /**å•ä½ç­‰çº§*/
+    /**µ¥Î»µÈ¼¶*/
     private int grade;
 
 
     public BasicUnitAttribute(String name,int grade, int MAXHP, int ATK, float CRIT, float critsEffect,
                               int fixArmorPen, float perArmorPen, int armor, float physicalResistanc,
-                              int lifeRegeneration, int id)//*æ„é€ æµ‹è¯•å•ä½
+                              int lifeRegeneration, int id)//*¹¹Ôì²âÊÔµ¥Î»
     {
         this.name = name;
         this.grade = grade;
@@ -64,18 +64,18 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
         this.lifeRegeneration = lifeRegeneration;
         this.id = id;
     }
-    public BasicUnitAttribute()//*æ„é€ æµ‹è¯•å•ä½
+    public BasicUnitAttribute()//*¹¹Ôì²âÊÔµ¥Î»
     {
-        this("æµ‹è¯•å•ä½");
+        this("²âÊÔµ¥Î»");
     }
-    public BasicUnitAttribute(String name)//*æ„é€ æœ‰åå­—å•ä½
+    public BasicUnitAttribute(String name)//*¹¹ÔìÓĞÃû×Öµ¥Î»
     {
         this.name = name;
         MAXHP = 100;
         HP = MAXHP;
         grade = 1;
         ATK = 20;
-        CRIT = 0.1f;//*10%æš´å‡»ç‡
+        CRIT = 0.1f;//*10%±©»÷ÂÊ
         critsEffect = 2.0f;
         fixArmorPen = 5;
         perArmorPen = 0.0f;
@@ -137,15 +137,15 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
     {
         return grade;
     }
-    public int directHP(int reducedHP)//*æ— è§†ç‰©æŠ—ç›´æ¥æ‰£è¡€å¹¶è¿”å›æ‰£é™¤çš„HP */
+    public int directHP(int reducedHP)//*ÎŞÊÓÎï¿¹Ö±½Ó¿ÛÑª²¢·µ»Ø¿Û³ıµÄHP */
     {
         HP -= reducedHP;
         return reducedHP;
     }
 
-    public int subtractHP(int ATK, int fixArmorPen, float perArmorPen)//*è®¡ç®—æŠ¤ç”²å¹¶æ‰£è¡€
+    public int subtractHP(int ATK, int fixArmorPen, float perArmorPen)//*¼ÆËã»¤¼×²¢¿ÛÑª
     {
-        int sumArmorPen = (int) ((this.armor * perArmorPen) + fixArmorPen);//*è®¡ç®—æŠ¤ç”²ç©¿é€æ€»å’Œ
+        int sumArmorPen = (int) ((this.armor * perArmorPen) + fixArmorPen);//*¼ÆËã»¤¼×´©Í¸×ÜºÍ
         if (sumArmorPen >= this.armor)
             return directHP(ATK);
         else if (ATK >(this.armor - sumArmorPen))
@@ -169,24 +169,24 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
         return getClass().getName()
                 + "[id:" + id
                 + ", name:" + name
-                + ", æœ€å¤§ç”Ÿå‘½å€¼:" + MAXHP
-                + ", ç­‰çº§:" + grade
-                + ", ç‰©ç†æ”»å‡»:" + ATK
-                + ", æš´å‡»ç‡:" + CRIT * 100 + "%"
-                + ", æš´å‡»æ•ˆæœ:" + critsEffect * 100 + "%"
-                + ", å›ºå®šæŠ¤ç”²ç©¿é€:" + fixArmorPen
-                + ", ç™¾åˆ†æ¯”æŠ¤ç”²ç©¿é€:" + perArmorPen
-                + ", æŠ¤ç”²å€¼:" + armor
-                + ", ç‰©ç†æŠ—æ€§:" + physicalResistanc
-                + ", æ¯å›åˆç”Ÿå‘½å›å¤:" +lifeRegeneration
+                + ", ×î´óÉúÃüÖµ:" + MAXHP
+                + ", µÈ¼¶:" + grade
+                + ", ÎïÀí¹¥»÷:" + ATK
+                + ", ±©»÷ÂÊ:" + CRIT * 100 + "%"
+                + ", ±©»÷Ğ§¹û:" + critsEffect * 100 + "%"
+                + ", ¹Ì¶¨»¤¼×´©Í¸:" + fixArmorPen
+                + ", °Ù·Ö±È»¤¼×´©Í¸:" + perArmorPen
+                + ", »¤¼×Öµ:" + armor
+                + ", ÎïÀí¿¹ĞÔ:" + physicalResistanc
+                + ", Ã¿»ØºÏÉúÃü»Ø¸´:" +lifeRegeneration
                 + "]";
     }
-    /*å…‹éš†å®ç°*/
+    /*¿ËÂ¡ÊµÏÖ*/
     public BasicUnitAttribute clone() throws CloneNotSupportedException
     {
         return (BasicUnitAttribute) super.clone();
     }
-    /*sortæ¥å£å®ç°*/
+    /*sort½Ó¿ÚÊµÏÖ*/
     public int compareTo(BasicUnitAttribute other)
     {
         return Integer.compare(id, other.getId());

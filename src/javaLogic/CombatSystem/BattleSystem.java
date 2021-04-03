@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 /**
- * æˆ˜æ–—ç³»ç»Ÿ
+ * Õ½¶·ÏµÍ³
  * @version 0.15
  * @author Millennium
  */
@@ -22,7 +22,7 @@ public class BattleSystem
         ResourceBundle bundle = ResourceBundle.getBundle("BattleSystemMessage", aLocale);
 
         var role = new RoleAttribute();
-        var enemy = EnemyUnit.getEnemyUnit("å“¥å¸ƒæ—");
+        var enemy = EnemyUnit.getEnemyUnit("¸ç²¼ÁÖ");
         BattleSystem.Main(role, enemy);
     }
     public static void Main(RoleAttribute role, EnemyAttribute enemy)
@@ -31,17 +31,17 @@ public class BattleSystem
 //        ResourceBundle bundle = ResourceBundle.getBundle("BattleSystemMessage", locale);
 
         var in = new Scanner(System.in);
-        System.out.println("ä½ çš„å±æ€§å¦‚ä¸‹:");
+        System.out.println("ÄãµÄÊôĞÔÈçÏÂ:");
         System.out.println(role.toString());
-        System.out.println(enemy.getName() + "çš„å±æ€§å¦‚ä¸‹:");
+        System.out.println(enemy.getName() + "µÄÊôĞÔÈçÏÂ:");
         System.out.println(enemy.toString());
 
-        System.out.println("æˆ˜æ–—å¼€å§‹!!!");
+        System.out.println("Õ½¶·¿ªÊ¼!!!");
 
         while (true)
         {
-            System.out.println("[ç³»ç»Ÿ]è½®åˆ°ä½ è¡ŒåŠ¨äº†");
-            System.out.println("1.æ”»å‡» 2.è·³è¿‡");
+            System.out.println("[ÏµÍ³]ÂÖµ½ÄãĞĞ¶¯ÁË");
+            System.out.println("1.¹¥»÷ 2.Ìø¹ı");
             byte userDecision = 0;
             userDecision = (byte)in.nextInt();
             switch (userDecision)
@@ -49,8 +49,8 @@ public class BattleSystem
                 case 1:
                     ATK = (int) (GameTool.randomRun(role.getCRIT()) ? role.getATK() * role.getCritsEffect() : role.getATK());
                     ATK = GameTool.floatingNumber(ATK, 3, "+");
-                    System.out.println("ä½ é€ æˆäº†" + enemy.subtractHP(ATK, role.getFixArmorPen(), role.getPerArmorPen()) + "çš„ä¼¤å®³");
-                    System.out.println(enemy.getName() + "è¿˜å‰©" + enemy.getHP());
+                    System.out.println("ÄãÔì³ÉÁË" + enemy.subtractHP(ATK, role.getFixArmorPen(), role.getPerArmorPen()) + "µÄÉËº¦");
+                    System.out.println(enemy.getName() + "»¹Ê£" + enemy.getHP());
                     break;
                 case 2: ;
             }
@@ -61,8 +61,8 @@ public class BattleSystem
             }
             ATK = (int) (GameTool.randomRun(enemy.getCRIT()) ? enemy.getATK() * enemy.getCritsEffect() : enemy.getATK());
             ATK = GameTool.floatingNumber(ATK, 3);
-            System.out.println(enemy.getName() + "å¯¹ä½ é€ æˆäº†" + role.subtractHP(ATK, enemy.getFixArmorPen(), enemy.getPerArmorPen()) + "çš„ä¼¤å®³");
-            System.out.println(role.getName() + "è¿˜å‰©" + role.getHP());
+            System.out.println(enemy.getName() + "¶ÔÄãÔì³ÉÁË" + role.subtractHP(ATK, enemy.getFixArmorPen(), enemy.getPerArmorPen()) + "µÄÉËº¦");
+            System.out.println(role.getName() + "»¹Ê£" + role.getHP());
             if (enemy.getHP() <= 0 || role.getHP() <= 0)
             {
                 System.out.println("Game Over!");
