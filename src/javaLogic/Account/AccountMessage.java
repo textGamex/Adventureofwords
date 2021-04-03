@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javaLogic.Message.PrivateData.*;
 
@@ -15,7 +16,9 @@ public final class AccountMessage
 {
     public static void main(String[] args)
     {
-
+        var log = Logger.getLogger("123");
+        log.setLevel(Level.FINER);
+        log.config("{0}s");
     }
 
     public AccountMessage(String account)
@@ -29,6 +32,7 @@ public final class AccountMessage
     /**保存玩家的各种数据的目录*/
     private Path playerPath;
     private String account = "";
+    private static final Logger log = Logger.getLogger("AdventureOfWords");
 
     public Path getPlayerPath()
     {
@@ -42,7 +46,7 @@ public final class AccountMessage
     {
        return playerPath.resolve("Data").resolve(fileName).toFile();
     }
-    public Identity getId()
+    public final Identity getId()
     {
         return id;
     }
@@ -75,7 +79,7 @@ public final class AccountMessage
         /*账号不存在且是内部人员*/
         if (!folder.exists() && (account.equals(ACCOUNT1) || account.equals(ACCOUNT2)))
         {
-            Logger.getGlobal().info(account + "是新的内部人员账号");
+            log.info(account + "是新的内部人员账号");
             return Identity.NEWGM;
         }
         else if (folder.exists() && (account.equals(ACCOUNT1) || account.equals(ACCOUNT2)))
@@ -96,13 +100,17 @@ public final class AccountMessage
     public void createAccountDataFolder()//创建相关账户的文件夹
     {
         var file = gameDataPath.resolve(account).toFile();
-        if (!file.exists()) {
+        if (!file.exists())
+        {
             Logger.getGlobal().info(file + " 文件夹不存在");
-            try {
+            try
+            {
                 Files.createDirectories(playerPath.resolve("Data"));
-//                Files.createDirectories(playerDataPath.resolve("Log"));
+//                Files.createDirectories(playerDataPath.resolve("Log"));//TODO:log未完成
                 Logger.getGlobal().info(file + " 文件夹创建成功");
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
                 e.printStackTrace();
                 Logger.getGlobal().severe(file + " 文件夹创建失败");
             }
@@ -111,7 +119,8 @@ public final class AccountMessage
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "AccountMessage[" +
                 "身份:" + id +
                 ", 游戏数据保存目录:" + gameDataPath +

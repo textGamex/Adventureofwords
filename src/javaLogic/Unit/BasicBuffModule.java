@@ -7,7 +7,7 @@ import java.util.EnumMap;
 /**
  *µ¥Î»buffÄ£¿é
  *@author Millennium
- *@version 1.1.1
+ *@version 1.2.0
  *@Date 2021/4/3
 */
 public class BasicBuffModule
@@ -57,6 +57,10 @@ public class BasicBuffModule
             buff.setTime(oldTime - reduceTime);
             hasBuff.put(Type, buff);
         }
+    }
+    public final void removeAll()
+    {
+        hasBuff.clear();
     }
 
     @Override

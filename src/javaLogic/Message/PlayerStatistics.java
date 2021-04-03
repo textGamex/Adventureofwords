@@ -3,17 +3,14 @@ package javaLogic.Message;
 import javaLogic.Account.AccountMessage;
 import javaLogic.Account.Identity;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
  *统计玩家信息
  *@author Millennium
- *@version 1.2.0
+ *@version 0.2.1
  *@Date 2021/3/13 22:42
 */
 public final class PlayerStatistics
@@ -84,10 +81,6 @@ public final class PlayerStatistics
     {
         return totalVictory;
     }
-//    public Identity getId()
-//    {
-//        return id;
-//    }
 
     public void setTotalKill(int totalKill)
     {
@@ -134,11 +127,11 @@ public final class PlayerStatistics
                 "]";
     }
     /**根据账号类型选择不同的保存方式来保存统计信息*/
-    public void saveStatistics(AccountMessage account)
+    public void saveStatistics(AccountMessage acc)
     {
-        if (account.getId() == Identity.GM || account.getId() == Identity.NEWGM)
+        if (acc.getId() == Identity.GM || acc.getId() == Identity.NEWGM)
         {
-            try (var out = new PrintWriter(account.getPlayerDataResolveFile("PlayerStatistics.txt"), StandardCharsets.UTF_8))
+            try (var out = new PrintWriter(acc.getPlayerDataResolveFile("PlayerStatistics.txt"), StandardCharsets.UTF_8))
             {
                 out.println(totalKill + "|" + totalRound + "|" + totalAttack
                         + "|" + totalHarm + "|" + totalVictory);
@@ -148,8 +141,9 @@ public final class PlayerStatistics
                 e.printStackTrace();
             }
         }
-        else {
-            try (var out = new ObjectOutputStream(new FileOutputStream(account.getPlayerDataResolveFile("PlayerStatistics.dat"))))
+        else
+        {
+            try (var out = new ObjectOutputStream(new FileOutputStream(acc.getPlayerDataResolveFile("PlayerStatistics.dat"))))
             {
                 out.writeObject(this);
             }
@@ -159,16 +153,44 @@ public final class PlayerStatistics
             }
         }
     }
-    public static PlayerStatistics loadGmStatistics(Scanner in)
+    public static PlayerStatistics loadGmStatistics(AccountMessage acc)
     {
-        String line = in.nextLine();
-        String[] tokens = line.split("\\|");
-        int totalKill = Integer.parseInt(tokens[0]);
-        int totalRound = Integer.parseInt(tokens[1]);
-        int totalAttack = Integer.parseInt(tokens[2]);
-        int totalHarm = Integer.parseInt(tokens[3]);
-        int totalVictory = Integer.parseInt(tokens[4]);
+        //如果不存在,那怎么能读取呢?
+        if (acc.getId() == Identity.NONE || acc.getId() == Identity.NEWGM || acc.getId() == Identity.NEWPLAYER)
+            throw new IllegalArgumentException("Id:" + acc.getId());
 
-        return new PlayerStatistics(totalKill, totalRound, totalAttack, totalHarm, totalVictory);
+        if (acc.getId() == Identity.PLAYER)
+        {
+            try (var in = new ObjectInputStream(new FileInputStream(acc.getPlayerDataResolveFile("PlayerStatistics.dat"))))
+            {
+                return (PlayerStatistics) in.readObject();
+            }
+            catch (IOException | ClassNotFoundException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            String line = "";
+            try (var in = new Scanner(acc.getPlayerDataResolveFile("PlayerStatistics.txt"), StandardCharsets.UTF_8))
+            {
+                line = in.nextLine();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            String[] tokens = line.split("\\|");
+            int totalKill = Integer.parseInt(tokens[0]);
+            int totalRound = Integer.parseInt(tokens[1]);
+            int totalAttack = Integer.parseInt(tokens[2]);
+            int totalHarm = Integer.parseInt(tokens[3]);
+            int totalVictory = Integer.parseInt(tokens[4]);
+
+            return new PlayerStatistics(totalKill, totalRound, totalAttack, totalHarm, totalVictory);
+        }
+        return null;
     }
 }

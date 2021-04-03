@@ -10,8 +10,6 @@ public class LoginUi
     {
         System.out.print("请输入账号: ");
         var account = AccountMessage.readAccount(new Scanner(System.in));
-//        var account = in.nextLine();
-//        var id = AccountModule(account);
         switch (account.getId())
         {
             case NEWGM:
@@ -24,15 +22,12 @@ public class LoginUi
                 System.out.println("登录成功!");
                 System.out.println("欢迎您再次来到文字冒险的世界");
                 break;
-
         }
     }
     public static AccountMessage loginMain()
     {
         System.out.print("请输入账号: ");
         var account = AccountMessage.readAccount(new Scanner(System.in));
-//        var account = in.nextLine();
-//        var id = AccountModule(account);
         switch (account.getId())
         {
             case NEWGM:

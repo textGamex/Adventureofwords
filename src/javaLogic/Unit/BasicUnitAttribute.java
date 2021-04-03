@@ -182,7 +182,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
                 + "]";
     }
     /*克隆实现*/
-    public BasicUnitAttribute clone() throws CloneNotSupportedException
+    public BasicUnitAttribute clone() throws CloneNotSupportedException//TODO:现在有了EnumMap,可能要重写
     {
         return (BasicUnitAttribute) super.clone();
     }
