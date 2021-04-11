@@ -19,16 +19,16 @@ public class EnemyAttribute extends BasicUnitAttribute
         xp = 10;
         coin = 10;
     }
-    public EnemyAttribute(String name,int grade, int MAXHP, int ATK, float CRIT, float critsEffect,
-                          int fixArmorPen, float perArmorPen, int armor, float physicalResistanc,
-                          int lifeRegeneration, int id, int value, int xp, int coin)//*构造测试单位
-    {
-        super(name, grade, MAXHP, ATK, CRIT, critsEffect, fixArmorPen, perArmorPen, armor, physicalResistanc
-        , lifeRegeneration, id);
-        this.value = value;
-        this.xp = xp;
-        this.coin = coin;
-    }
+//    public EnemyAttribute(String name,int grade, int MAXHP, int ATK, float CRIT, float critsEffect,
+//                          int fixArmorPen, float perArmorPen, int armor, float physicalResistanc,
+//                          int lifeRegeneration, int id, int value, int xp, int coin)//*构造测试单位
+//    {
+//        super(name, grade, MAXHP, ATK, CRIT, critsEffect, fixArmorPen, perArmorPen, armor, physicalResistanc
+//        , lifeRegeneration, id);
+//        this.value = value;
+//        this.xp = xp;
+//        this.coin = coin;
+//    }
     public final int getValue()
     {
         return value;

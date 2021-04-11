@@ -1,10 +1,11 @@
 package com.java.Tools;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 辅助类
- * @version 0.2
+ * @version 0.21
  * @author Millennium
  */
 public final class GameTool
@@ -44,20 +45,17 @@ public final class GameTool
     */
     public static int floatingNumber(int number, int floatingRange)//按整数浮动
     {
-        var rand = new Random();
-        int randomNumber = rand.nextInt(floatingRange + 1);
+        int randomNumber = ThreadLocalRandom.current().nextInt(floatingRange + 1);
         return randomRun(0.5f) ? number + randomNumber : number - randomNumber;
     }
     public static int floatingNumber(int number, float floatingPercentage)//按百分比浮动
     {
-        var rand = new Random();
-        int randomNumber = rand.nextInt((int) floatingPercentage * number + 1);
+        int randomNumber = ThreadLocalRandom.current().nextInt((int) floatingPercentage * number + 1);
         return randomRun(0.5f) ? number + randomNumber : number - randomNumber;
     }
     public static int floatingNumber(int number, int floatingRange, String sign) throws IllegalArgumentException//按整数浮动
     {
-        var rand = new Random();
-        int randomNumber = rand.nextInt(floatingRange + 1);
+        int randomNumber = ThreadLocalRandom.current().nextInt(floatingRange + 1);
         return switch (sign) {
             case "+" -> number + randomNumber;
             case "-" -> number - randomNumber;
@@ -66,8 +64,7 @@ public final class GameTool
     }
     public static int floatingNumber(int number, float floatingPercentage, String sign) throws IllegalArgumentException//按百分比浮动
     {
-        var rand = new Random();
-        int randomNumber = rand.nextInt((int) floatingPercentage * number + 1);
+        int randomNumber = ThreadLocalRandom.current().nextInt((int) floatingPercentage * number + 1);
         return switch (sign) {
             case "+" -> number + randomNumber;
             case "-" -> number - randomNumber;

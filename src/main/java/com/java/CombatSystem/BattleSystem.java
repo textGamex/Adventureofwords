@@ -21,9 +21,9 @@ public class BattleSystem
 //        Locale aLocale = new Locale("zh","CN");
 //        ResourceBundle bundle = ResourceBundle.getBundle("BattleSystemMessage", aLocale);
 
-        var role = new RoleAttribute();
-        var enemy = EnemyUnit.getEnemyUnit("哥布林");
-        BattleSystem.Main(role, enemy);
+//        var role = new RoleAttribute();
+//        var enemy = EnemyUnit.getEnemyUnit("哥布林");
+//        BattleSystem.Main(role, enemy);
     }
     public static void Main(RoleAttribute role, EnemyAttribute enemy)
     {

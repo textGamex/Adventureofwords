@@ -32,8 +32,8 @@ public final class AdventureOfWordsMain
         var account = LoginUi.loginMain();
 
         var role = new RoleAttribute();
-        var enemy = EnemyUnit.getEnemyUnit("哥布林");
+//        var enemy = EnemyUnit.getEnemyUnit("哥布林");
         
-        BattleSystem.Main(role, enemy);
+//        BattleSystem.Main(role, enemy);
     }
 }
