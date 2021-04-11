@@ -21,53 +21,53 @@ public class BasicBuffModule
         buff.removeBuff(BuffType.POISON, 2);
         System.out.println(buff.toString());
     }
-    private final EnumMap<BuffType, BuffMessage> hasBuff = new EnumMap<BuffType, BuffMessage>(BuffType.class);
+    private final EnumMap<BuffType, BuffMessage> possessBuffs = new EnumMap<BuffType, BuffMessage>(BuffType.class);
     public final void addBuff(BuffType aBuffType, BuffMessage aBuffMessage)
     {
-        hasBuff.put(aBuffType, aBuffMessage);
+        possessBuffs.put(aBuffType, aBuffMessage);
     }
     public final boolean hasBuff(BuffType aBuffType)
     {
-        return hasBuff.containsKey(aBuffType);
+        return possessBuffs.containsKey(aBuffType);
     }
     public final boolean isEmptyBuff()
     {
-        return hasBuff.isEmpty();
+        return possessBuffs.isEmpty();
     }
     public final int buffSize()
     {
-        return hasBuff.size();
+        return possessBuffs.size();
     }
     public final void removeBuff(BuffType Type)
     {
-        if (!hasBuff.containsKey(Type))
+        if (!possessBuffs.containsKey(Type))
             throw new NullPointerException("Buff不存在: " + Type);
-        hasBuff.remove(Type);
+        possessBuffs.remove(Type);
     }
     public final void removeBuff(BuffType Type, int reduceTime)
     {
-        if (!hasBuff.containsKey(Type))
+        if (!possessBuffs.containsKey(Type))
             throw new NullPointerException("Buff不存在: " + Type);
 
-        var buff = hasBuff.get(Type);
+        var buff = possessBuffs.get(Type);
         var oldTime = buff.getTime();
         if (oldTime <= reduceTime)
-            hasBuff.remove(Type);
+            possessBuffs.remove(Type);
         else {
             buff.setTime(oldTime - reduceTime);
-            hasBuff.put(Type, buff);
+            possessBuffs.put(Type, buff);
         }
     }
     public final void removeAll()
     {
-        hasBuff.clear();
+        possessBuffs.clear();
     }
 
     @Override
     public String toString()
     {
         return "BasicBuffModule[" +
-                "hasBuff:" + hasBuff +
+                "hasBuff:" + possessBuffs +
                 ']';
     }
 }

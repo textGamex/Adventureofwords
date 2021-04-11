@@ -38,36 +38,36 @@ public class BattleSystem
 
         System.out.println("战斗开始!!!");
 
-        while (true)
-        {
-            System.out.println("[系统]轮到你行动了");
-            System.out.println("1.攻击 2.跳过");
-            byte userDecision = 0;
-            userDecision = (byte)in.nextInt();
-            switch (userDecision)
-            {
-                case 1:
-                    ATK = (int) (GameTool.randomRun(role.getCRIT()) ? role.getATK() * role.getCritsEffect() : role.getATK());
-                    ATK = GameTool.floatingNumber(ATK, 3, "+");
-                    System.out.println("你造成了" + enemy.subtractHP(ATK, role.getFixArmorPen(), role.getPerArmorPen()) + "的伤害");
-                    System.out.println(enemy.getName() + "还剩" + enemy.getHP());
-                    break;
-                case 2: ;
-            }
-            if (enemy.getHP() <= 0 || role.getHP() <= 0)
-            {
-                System.out.println("Game Over!");
-                break;
-            }
-            ATK = (int) (GameTool.randomRun(enemy.getCRIT()) ? enemy.getATK() * enemy.getCritsEffect() : enemy.getATK());
-            ATK = GameTool.floatingNumber(ATK, 3);
-            System.out.println(enemy.getName() + "对你造成了" + role.subtractHP(ATK, enemy.getFixArmorPen(), enemy.getPerArmorPen()) + "的伤害");
-            System.out.println(role.getName() + "还剩" + role.getHP());
-            if (enemy.getHP() <= 0 || role.getHP() <= 0)
-            {
-                System.out.println("Game Over!");
-                break;
-            }
-        }
+//        while (true)
+//        {
+//            System.out.println("[系统]轮到你行动了");
+//            System.out.println("1.攻击 2.跳过");
+//            byte userDecision = 0;
+//            userDecision = (byte)in.nextInt();
+//            switch (userDecision)
+//            {
+//                case 1:
+//                    ATK = (int) (GameTool.randomRun(role.getCRIT()) ? role.getATK() * role.getCritsEffect() : role.getATK());
+//                    ATK = GameTool.floatingNumber(ATK, 3, "+");
+//                    System.out.println("你造成了" + enemy.subtractHP(ATK, role.getFixArmorPen(), role.getPerArmorPen()) + "的伤害");
+//                    System.out.println(enemy.getName() + "还剩" + enemy.getHP());
+//                    break;
+//                case 2: ;
+//            }
+//            if (enemy.getHP() <= 0 || role.getHP() <= 0)
+//            {
+//                System.out.println("Game Over!");
+//                break;
+//            }
+//            ATK = (int) (GameTool.randomRun(enemy.getCRIT()) ? enemy.getATK() * enemy.getCritsEffect() : enemy.getATK());
+//            ATK = GameTool.floatingNumber(ATK, 3);
+//            System.out.println(enemy.getName() + "对你造成了" + role.subtractHP(ATK, enemy.getFixArmorPen(), enemy.getPerArmorPen()) + "的伤害");
+//            System.out.println(role.getName() + "还剩" + role.getHP());
+//            if (enemy.getHP() <= 0 || role.getHP() <= 0)
+//            {
+//                System.out.println("Game Over!");
+//                break;
+//            }
+//        }
     }
 }
