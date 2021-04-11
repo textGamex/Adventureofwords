@@ -1,25 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/src/BattleSystemMessage_zh_CN.properties" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/C/Cls-dll.c" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/com/C/javaLogic_Tools_GameTool.h" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/com/C/payment/Alipay.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/com/C/payment/WeChat.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/com/C/ui/LoginUi.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/Account/AccountMessage.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/Account/Identity.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/Account/LoginModule.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/CombatSystem/BattleSystem.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/Message/PlayerStatistics.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/Message/PrivateData.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/Tools/GameTool.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/Unit/BasicBuffModule.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/Unit/BasicUnitAttribute.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/Unit/EnemyAttribute.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/Unit/EnemyUnit.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/Unit/RoleAttribute.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/javaLogic/main/AdventureOfWordsMain.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/BattleSystemMessage_zh_CN.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/C/Cls-dll.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/C/javaLogic_Tools_GameTool.h" charset="GBK" />
     <file url="PROJECT" charset="GBK" />
   </component>
 </project>

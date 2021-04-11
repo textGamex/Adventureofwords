@@ -2,6 +2,9 @@
   <library name="lib">
     <CLASSES />
     <JAVADOC />
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/src/main/java/com/java/Tools" />
+    </NATIVE>
     <SOURCES />
   </library>
 </component>
