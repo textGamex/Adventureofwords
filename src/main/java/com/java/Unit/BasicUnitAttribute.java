@@ -5,7 +5,7 @@ package com.java.Unit;
  * @version 0.30
  * @author Millennium
  */
-public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Comparable<BasicUnitAttribute>
+public class BasicUnitAttribute extends BasicBuffModule implements Comparable<BasicUnitAttribute>
 {
     public static void main(String[] args)
     {
@@ -46,9 +46,9 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
         name = "";
     }
     /**参考<Effective Java第二章>*/
-    public static class Builder
+    public static class Builder<T extends Builder>
     {
-        private String name;
+        private final String name;
 
         private int maxHp                 = 100;
         private int atk                   = 0;
@@ -66,58 +66,54 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
                 throw new NullPointerException();
             this.name = name;
         }
-        public Builder()
-        {
-            /*为了能被继承*/
-        }
-        public Builder maxHp(int maxHp)
+        public T maxHp(int maxHp)
         {
             if (maxHp <= 0)
                 throw new IllegalArgumentException("异常参数: " + maxHp);
             this.maxHp = maxHp;
-            return this;
+            return (T) this;
         }
-        public Builder atk(int atk)
+        public T atk(int atk)
         {
             this.atk = atk;
-            return this;
+            return (T) this;
         }
-        public Builder critRate(double critRate)
+        public T critRate(double critRate)
         {
             this.critRate = critRate;
-            return this;
+            return (T) this;
         }
-        public Builder critsEffect(double critsEffect)
+        public T critsEffect(double critsEffect)
         {
             this.critsEffect = critsEffect;
-            return this;
+            return (T) this;
         }
-        public Builder physicalResistance(double physicalResistance)
+        public T physicalResistance(double physicalResistance)
         {
             this.physicalResistance = physicalResistance;
-            return this;
+            return (T) this;
         }
-        public Builder lifeRegeneration(int lifeRegeneration)
+        public T lifeRegeneration(int lifeRegeneration)
         {
             this.lifeRegeneration = lifeRegeneration;
-            return this;
+            return (T) this;
         }
-        public Builder level(int level)
+        public T level(int level)
         {
             if (level < 0)
                 throw new IllegalArgumentException("异常参数: " + level);
             this.level = level;
-            return this;
+            return (T) this;
         }
-        public Builder evade(double evade)
+        public T evade(double evade)
         {
             this.evade = evade;
-            return this;
+            return (T) this;
         }
-        public Builder mana(int mana)
+        public T mana(int mana)
         {
             this.mana = mana;
-            return this;
+            return (T) this;
         }
         public BasicUnitAttribute build()
         {
@@ -126,7 +122,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
 
     }
 
-    private BasicUnitAttribute(Builder builder)
+    protected BasicUnitAttribute(Builder builder)
     {
         name               = builder.name;
         hp                 = builder.maxHp;
@@ -262,7 +258,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
     @Override
     public int hashCode()
     {
-        return Integer.hashCode(id) * 31;
+        return id * 31;
     }
     @Override
     public String toString()
@@ -280,11 +276,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
                 + ", 每回合生命回复:" +lifeRegeneration
                 + "]";
     }
-    /*克隆实现*/
-    public BasicUnitAttribute clone() throws CloneNotSupportedException//TODO:现在有了EnumMap,可能要重写
-    {
-        return (BasicUnitAttribute) super.clone();
-    }
+
     /*sort接口实现*/
     public int compareTo(BasicUnitAttribute other)
     {

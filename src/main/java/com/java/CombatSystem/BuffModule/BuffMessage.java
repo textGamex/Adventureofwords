@@ -1,5 +1,7 @@
 package com.java.CombatSystem.BuffModule;
 
+import java.util.Objects;
+
 public final class BuffMessage
 {
     /**持续回合*/
@@ -7,16 +9,16 @@ public final class BuffMessage
     /**效果层数*/
     private int layers;
     /**是否是Debuff*/
-    private final boolean Debuff;
+    private final boolean debuff;
     /**是否是被动*/
-    private final boolean Passive;
+    private final boolean passive;
 
-    public BuffMessage(int time, int layers, boolean Debuff, boolean Passive)
+    public BuffMessage(int time, int layers, boolean debuff, boolean passive)
     {
         this.time = time;
         this.layers = layers;
-        this.Debuff = Debuff;
-        this.Passive = Passive;
+        this.debuff = debuff;
+        this.passive = passive;
     }
     public BuffMessage(int time, int layers, boolean isDebuff)
     {
@@ -33,11 +35,11 @@ public final class BuffMessage
     }
     public boolean isDebuff()
     {
-        return Debuff;
+        return debuff;
     }
     public boolean isPassive()
     {
-        return Passive;
+        return passive;
     }
     public void setTime(int time)
     {
@@ -54,8 +56,9 @@ public final class BuffMessage
         return "BuffMessage[" +
                 "持续回合:" + time +
                 ", 效果层数:" + layers +
-                ", Debuff:" + Debuff +
-                ", 特性:" + Passive +
+                ", Debuff:" + debuff +
+                ", 特性:" + passive +
                 ']';
     }
+
 }

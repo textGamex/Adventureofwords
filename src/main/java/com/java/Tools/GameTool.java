@@ -1,7 +1,7 @@
 package com.java.Tools;
 
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+
+import static java.util.concurrent.ThreadLocalRandom.current;
 
 /**
  * 辅助类
@@ -12,14 +12,6 @@ public final class GameTool
 {
     public static void main(String[] args)
     {
-//        final int MAX = 10000000;
-//        int count = 0;
-//        for (int i = 0; i < MAX; i++)
-//        {
-//            if(randomRun(0.5f))
-//                count++;
-//        }
-//        System.out.println(count);
 //        int a = floatingNumber(1, 1, "+");
 //        System.out.println("asjnffs");
 //        GameTool.cls();
@@ -34,37 +26,36 @@ public final class GameTool
      * runSize是返回真的概率
      * @return true或false
      */
-    public static boolean randomRun (float runSize)
+    public static boolean randomRun (double runSize)
     {
         return runSize > Math.random();
     }
     /**
-     *
      *@author Millennium
      *@Date 2021/3/13 11:45
     */
     public static int floatingNumber(int number, int floatingRange)//按整数浮动
     {
-        int randomNumber = ThreadLocalRandom.current().nextInt(floatingRange + 1);
-        return randomRun(0.5f) ? number + randomNumber : number - randomNumber;
+        int randomNumber = current().nextInt(floatingRange + 1);
+        return current().nextBoolean() ? number + randomNumber : number - randomNumber;
     }
-    public static int floatingNumber(int number, float floatingPercentage)//按百分比浮动
+    public static int floatingNumber(int number, double floatingPercentage)//按百分比浮动
     {
-        int randomNumber = ThreadLocalRandom.current().nextInt((int) floatingPercentage * number + 1);
-        return randomRun(0.5f) ? number + randomNumber : number - randomNumber;
+        int randomNumber = current().nextInt((int) floatingPercentage * number + 1);
+        return current().nextBoolean() ? number + randomNumber : number - randomNumber;
     }
-    public static int floatingNumber(int number, int floatingRange, String sign) throws IllegalArgumentException//按整数浮动
+    public static int floatingNumber(int number, int floatingRange, String sign)//按整数浮动
     {
-        int randomNumber = ThreadLocalRandom.current().nextInt(floatingRange + 1);
+        int randomNumber = current().nextInt(floatingRange + 1);
         return switch (sign) {
             case "+" -> number + randomNumber;
             case "-" -> number - randomNumber;
             default -> throw new IllegalArgumentException("异常参数: " + sign);
         };
     }
-    public static int floatingNumber(int number, float floatingPercentage, String sign) throws IllegalArgumentException//按百分比浮动
+    public static int floatingNumber(int number, double floatingPercentage, String sign)//按百分比浮动
     {
-        int randomNumber = ThreadLocalRandom.current().nextInt((int) floatingPercentage * number + 1);
+        int randomNumber = current().nextInt((int) floatingPercentage * number + 1);
         return switch (sign) {
             case "+" -> number + randomNumber;
             case "-" -> number - randomNumber;

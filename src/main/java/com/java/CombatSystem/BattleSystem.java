@@ -1,12 +1,8 @@
 package com.java.CombatSystem;
 
 import com.java.Unit.EnemyAttribute;
-import com.java.Unit.EnemyUnit;
 import com.java.Unit.RoleAttribute;
-import com.java.Tools.GameTool;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 /**
