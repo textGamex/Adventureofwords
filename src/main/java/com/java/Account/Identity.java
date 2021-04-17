@@ -3,13 +3,13 @@ package com.java.Account;
 public enum Identity
 {
     /**新玩家*/
-    NEWPLAYER,
+    NEW_PLAYER,
     /**新内部人员*/
-    NEWGM,
+    NEW_GAME_MANAGER,
     /**玩家*/
     PLAYER,
     /**内部人员*/
-    GM,
+    GAME_MANAGER,
     /**无*/
     NONE;
 }

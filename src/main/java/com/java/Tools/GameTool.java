@@ -20,10 +20,10 @@ public final class GameTool
 //                count++;
 //        }
 //        System.out.println(count);
-        int a = floatingNumber(1, 1, "+");
-        System.out.println("asjnffs");
+//        int a = floatingNumber(1, 1, "+");
+//        System.out.println("asjnffs");
 //        GameTool.cls();
-        System.out.println("成功");
+//        System.out.println("成功");
     }
 //    static
 //    {

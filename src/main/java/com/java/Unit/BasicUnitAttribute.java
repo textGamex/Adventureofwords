@@ -17,7 +17,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
     private static int nextTextId = 50000;//测试单位id TODO:未完成
 
     {
-        id = nextTextId++;
+        id = ++nextTextId;
     }
     private final String name;
     /**最大生命值*/
@@ -51,7 +51,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
 
         private int atk                   = 0;
         private double critRate           = 0.0;
-        private double critsEffect        = 0.0;
+        private double critsEffect        = 2.0;
         private double physicalResistance = 0.0;
         private double evade              = 0.0;
         private int lifeRegeneration      = 0;

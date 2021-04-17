@@ -12,12 +12,12 @@ public class LoginUi
         var account = AccountMessage.readAccount(new Scanner(System.in));
         switch (account.getId())
         {
-            case NEWGM:
-            case NEWPLAYER:
+            case NEW_GAME_MANAGER:
+            case NEW_PLAYER:
                 System.out.println("您好!新玩家");
                 account.createAccountDataFolder();
                 break;
-            case GM:
+            case GAME_MANAGER:
             case PLAYER:
                 System.out.println("登录成功!");
                 System.out.println("欢迎您再次来到文字冒险的世界");
@@ -30,12 +30,12 @@ public class LoginUi
         var account = AccountMessage.readAccount(new Scanner(System.in));
         switch (account.getId())
         {
-            case NEWGM:
-            case NEWPLAYER:
+            case NEW_GAME_MANAGER:
+            case NEW_PLAYER:
                 System.out.println("您好!新玩家");
                 account.createAccountDataFolder();
                 break;
-            case GM:
+            case GAME_MANAGER:
             case PLAYER:
                 System.out.println("登录成功!");
                 System.out.println("欢迎您再次来到文字冒险的世界");

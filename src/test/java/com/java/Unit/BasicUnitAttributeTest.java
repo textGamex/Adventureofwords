@@ -12,13 +12,13 @@ class BasicUnitAttributeTest
     @Test
     void Builder()
     {
-        var unit = new BasicUnitAttribute.Builder("单位", 100).atk(10)
-                .evade(10.0).mana(101).build();
+        var unit = new BasicUnitAttribute.Builder("单位", 100).atk(2)
+                .evade(3.0).mana(101).build();
 
         Assertions.assertEquals("单位", unit.getName());
         Assertions.assertEquals(100, unit.getHp());
-        Assertions.assertEquals(10, unit.getAtk());
-        Assertions.assertEquals(10, unit.getEvade());
+        Assertions.assertEquals(2, unit.getAtk());
+        Assertions.assertEquals(3, unit.getEvade());
         Assertions.assertEquals(101, unit.getMana());
     }
 }

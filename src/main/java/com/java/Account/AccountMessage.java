@@ -80,17 +80,17 @@ public final class AccountMessage
         if (!folder.exists() && (account.equals(PrivateData.ACCOUNT1) || account.equals(PrivateData.ACCOUNT2)))
         {
             log.info(account + "是新的内部人员账号");
-            return Identity.NEWGM;
+            return Identity.NEW_GAME_MANAGER;
         }
         else if (folder.exists() && (account.equals(PrivateData.ACCOUNT1) || account.equals(PrivateData.ACCOUNT2)))
         {
             Logger.getGlobal().info(account + "是内部人员账号");
-            return Identity.GM;
+            return Identity.GAME_MANAGER;
         }
         else if (!folder.exists())//账号不存在而且是玩家
         {
             Logger.getGlobal().info(account + "是新的玩家账号");
-            return Identity.NEWPLAYER;
+            return Identity.NEW_PLAYER;
         }
         else {
             Logger.getGlobal().info(account + "是玩家账号");

@@ -129,7 +129,7 @@ public final class PlayerStatistics
     /**根据账号类型选择不同的保存方式来保存统计信息*/
     public void saveStatistics(AccountMessage acc)
     {
-        if (acc.getId() == Identity.GM || acc.getId() == Identity.NEWGM)
+        if (acc.getId() == Identity.GAME_MANAGER || acc.getId() == Identity.NEW_GAME_MANAGER)
         {
             try (var out = new PrintWriter(acc.getPlayerDataResolveFile("PlayerStatistics.txt"), StandardCharsets.UTF_8))
             {
@@ -156,7 +156,7 @@ public final class PlayerStatistics
     public static PlayerStatistics loadGmStatistics(AccountMessage acc)
     {
         //如果不存在,那怎么能读取呢?
-        if (acc.getId() == Identity.NONE || acc.getId() == Identity.NEWGM || acc.getId() == Identity.NEWPLAYER)
+        if (acc.getId() == Identity.NONE || acc.getId() == Identity.NEW_GAME_MANAGER || acc.getId() == Identity.NEW_PLAYER)
             throw new IllegalArgumentException("Id:" + acc.getId());
 
         if (acc.getId() == Identity.PLAYER)
