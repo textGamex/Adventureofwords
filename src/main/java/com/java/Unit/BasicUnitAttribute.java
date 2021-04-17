@@ -2,16 +2,14 @@ package com.java.Unit;
 
 /**
  * 基本单位属性
- * @version 0.20
+ * @version 0.30
  * @author Millennium
  */
 public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Comparable<BasicUnitAttribute>
 {
     public static void main(String[] args)
     {
-        var f = new BasicUnitAttribute();
-        System.out.println(f.hashCode());
-        System.out.println(f.toString());
+
     }
     private int id = 0;
     private static int nextTextId = 50000;//测试单位id TODO:未完成
@@ -32,7 +30,8 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
     private double critRate;
     /**暴击效果*/
     private double critsEffect;
-    /*    防御类    */
+
+    /**    <防御类>    */
 
     /**物理抗性 */
     private double physicalResistance;
@@ -41,29 +40,38 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
     /**每回合生命回复*/
     private int lifeRegeneration;
     /**单位等级*/
-    private int grade;
-
+    private int level;
+    public BasicUnitAttribute()//TODO:要删除的
+    {
+        name = "";
+    }
     /**参考<Effective Java第二章>*/
     public static class Builder
     {
         private final String name;
-        private final int maxHp;
 
+        private int maxHp                 = 100;
         private int atk                   = 0;
-        private double critRate           = 0.0;
-        private double critsEffect        = 2.0;
-        private double physicalResistance = 0.0;
-        private double evade              = 0.0;
-        private int lifeRegeneration      = 0;
-        private int grade                 = 1;
+        private double critRate           = 0.0;//暴击率
+        private double critsEffect        = 2.0;//暴击效果
+        private double physicalResistance = 0.0;//物理抗性
+        private double evade              = 0.0;//闪避
+        private int lifeRegeneration      = 0;//每回合生命回复
+        private int level                 = 1;
         private int mana                  = 0;
 
-        public Builder(String name, int maxHp)
+        public Builder(String name)
         {
             if (name == null)
                 throw new NullPointerException();
             this.name = name;
+        }
+        public Builder maxHp(int maxHp)
+        {
+            if (maxHp <= 0)
+                throw new IllegalArgumentException("异常参数: " + maxHp);
             this.maxHp = maxHp;
+            return this;
         }
         public Builder atk(int atk)
         {
@@ -90,9 +98,11 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
             this.lifeRegeneration = lifeRegeneration;
             return this;
         }
-        public Builder grade(int grade)
+        public Builder level(int level)
         {
-            this.grade = grade;
+            if (level <= 0)
+                throw new IllegalArgumentException("异常参数: " + level);
+            this.level = level;
             return this;
         }
         public Builder evade(double evade)
@@ -110,41 +120,13 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
             return new BasicUnitAttribute(this);
         }
     }
-    public BasicUnitAttribute(String name, int grade, int maxHp, int atk, double critRate, double critsEffect,
-                              double physicalResistance, int lifeRegeneration)//*构造测试单位
-    {
-        this.name = name;
-        this.grade = grade;
-        this.maxHp = maxHp;
-        this.hp = maxHp;
-        this.atk = atk;
-        this.critRate = critRate;
-        this.critsEffect = critsEffect;
-        this.physicalResistance = physicalResistance;
-        this.lifeRegeneration = lifeRegeneration;
-    }
-    public BasicUnitAttribute()//*构造测试单位
-    {
-        this("测试单位");
-    }
-    public BasicUnitAttribute(String name)//*构造有名字单位
-    {
-        this.name = name;
-        maxHp = 100;
-        hp = maxHp;
-        grade = 1;
-        atk = 20;
-        critRate = 0.1;//*10%暴击率
-        critsEffect = 2.0;
-        physicalResistance = 0.0;
-        lifeRegeneration = 0;
-    }
+
     private BasicUnitAttribute(Builder builder)
     {
-        hp                 = builder.maxHp;
         name               = builder.name;
+        hp                 = builder.maxHp;
         maxHp              = builder.maxHp;
-        grade              = builder.grade;
+        level              = builder.level;
         atk                = builder.atk;
         critRate           = builder.critRate;
         critsEffect        = builder.critsEffect;
@@ -156,10 +138,6 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
     public final String getName()
     {
         return name;
-    }
-    public final int getMaxXP()
-    {
-        return maxHp;
     }
     public final int getHp()
     {
@@ -197,9 +175,9 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
     {
         return lifeRegeneration;
     }
-    public final int getGrade()
+    public final int getLevel()
     {
-        return grade;
+        return level;
     }
 
     public double getEvade()
@@ -250,9 +228,9 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
         this.lifeRegeneration = lifeRegeneration;
     }
 
-    public void setGrade(int grade)
+    public void setLevel(int level)
     {
-        this.grade = grade;
+        this.level = level;
     }
     //    public int directHP(int reducedHP)//*无视物抗直接扣血并返回扣除的HP */
 //    {
@@ -291,7 +269,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
                 + "[id:" + id
                 + ", name:" + name
                 + ", 最大生命值:" + maxHp
-                + ", 等级:" + grade
+                + ", 等级:" + level
                 + ", 物理攻击:" + atk
                 + ", 暴击率:" + critRate * 100 + "%"
                 + ", 暴击效果:" + critsEffect * 100 + "%"

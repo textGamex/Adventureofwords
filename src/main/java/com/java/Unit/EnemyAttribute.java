@@ -7,18 +7,18 @@ package com.java.Unit;
 public class EnemyAttribute extends BasicUnitAttribute
 {
     /**所值分数 */
-    private final int value;
+    private final int value = 0;
     /**所值经验 */
-    private final int xp;
+    private final int xp = 0;
     /**所值硬币 */
-    private final int coin;
-    public EnemyAttribute() //*默认数值
-    {
-        super();
-        value = 10;
-        xp = 10;
-        coin = 10;
-    }
+    private final int coin = 0;
+//    public EnemyAttribute() //*默认数值
+//    {
+//        super();
+//        value = 10;
+//        xp = 10;
+//        coin = 10;
+//    }
 //    public EnemyAttribute(String name,int grade, int MAXHP, int ATK, float CRIT, float critsEffect,
 //                          int fixArmorPen, float perArmorPen, int armor, float physicalResistanc,
 //                          int lifeRegeneration, int id, int value, int xp, int coin)//*构造测试单位

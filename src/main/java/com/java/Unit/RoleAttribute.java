@@ -22,7 +22,7 @@ public class RoleAttribute extends BasicUnitAttribute
     /**游戏得分*/
     private int totalGameScore;
     /**角色创建日期*/
-    private final LocalDateTime CreatingDateTime;
+    private final LocalDateTime CreatingDateTime = null;
 
     public static void main(String[] args)
     {
@@ -36,24 +36,28 @@ public class RoleAttribute extends BasicUnitAttribute
         nextId++;
         id = nextId;
     }
-    public RoleAttribute() //*默认数值
+    public RoleAttribute()
     {
-        super("玩家");
-        cash = 100;
-        totalGameScore = 0;
-        EXP = 0;
-        upgradeNeedXP = 20;
-        CreatingDateTime = LocalDateTime.now();
+
     }
-    public RoleAttribute(String name) //*构造玩家角色
-    {
-        super(name);
-        cash = 100;
-        totalGameScore = 0;
-        EXP = 0;
-        upgradeNeedXP = 20;
-        CreatingDateTime = LocalDateTime.now();
-    }
+//    public RoleAttribute() //*默认数值
+//    {
+//        super("玩家");
+//        cash = 100;
+//        totalGameScore = 0;
+//        EXP = 0;
+//        upgradeNeedXP = 20;
+//        CreatingDateTime = LocalDateTime.now();
+//    }
+//    public RoleAttribute(String name) //*构造玩家角色
+//    {
+//        super(name);
+//        cash = 100;
+//        totalGameScore = 0;
+//        EXP = 0;
+//        upgradeNeedXP = 20;
+//        CreatingDateTime = LocalDateTime.now();
+//    }
 
     public final int getCash()
     {
