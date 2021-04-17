@@ -12,16 +12,8 @@ import java.util.EnumMap;
 */
 public class BasicBuffModule
 {
-    public static void main(String[] args)
-    {
-        var buff = new BasicBuffModule();
-        buff.addBuff(BuffType.POISON, new BuffMessage(10,1,true));
-        System.out.println(buff.hasBuff(BuffType.POISON));
-        System.out.println(buff.toString());
-        buff.removeBuff(BuffType.POISON, 2);
-        System.out.println(buff.toString());
-    }
     private final EnumMap<BuffType, BuffMessage> possessBuffs = new EnumMap<BuffType, BuffMessage>(BuffType.class);
+
     public final void addBuff(BuffType aBuffType, BuffMessage aBuffMessage)
     {
         possessBuffs.put(aBuffType, aBuffMessage);
@@ -30,20 +22,24 @@ public class BasicBuffModule
     {
         return possessBuffs.containsKey(aBuffType);
     }
+
     public final boolean isEmptyBuff()
     {
         return possessBuffs.isEmpty();
     }
+
     public final int buffSize()
     {
         return possessBuffs.size();
     }
+
     public final void removeBuff(BuffType Type)
     {
         if (!possessBuffs.containsKey(Type))
             throw new NullPointerException("Buff²»´æÔÚ: " + Type);
         possessBuffs.remove(Type);
     }
+
     public final void removeBuff(BuffType Type, int reduceTime)
     {
         if (!possessBuffs.containsKey(Type))
@@ -58,6 +54,7 @@ public class BasicBuffModule
             possessBuffs.put(Type, buff);
         }
     }
+
     public final void removeAll()
     {
         possessBuffs.clear();
