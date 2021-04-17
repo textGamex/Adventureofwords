@@ -48,7 +48,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
     /**参考<Effective Java第二章>*/
     public static class Builder
     {
-        private final String name;
+        private String name;
 
         private int maxHp                 = 100;
         private int atk                   = 0;
@@ -65,6 +65,10 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
             if (name == null)
                 throw new NullPointerException();
             this.name = name;
+        }
+        public Builder()
+        {
+            /*为了能被继承*/
         }
         public Builder maxHp(int maxHp)
         {
@@ -100,7 +104,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
         }
         public Builder level(int level)
         {
-            if (level <= 0)
+            if (level < 0)
                 throw new IllegalArgumentException("异常参数: " + level);
             this.level = level;
             return this;
@@ -119,6 +123,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
         {
             return new BasicUnitAttribute(this);
         }
+
     }
 
     private BasicUnitAttribute(Builder builder)
@@ -160,8 +165,6 @@ public class BasicUnitAttribute extends BasicBuffModule implements Cloneable, Co
     {
         return mana;
     }
-
-
 
     public final double getPhysicalResistance()
     {

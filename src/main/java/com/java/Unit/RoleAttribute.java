@@ -10,35 +10,71 @@ import java.time.LocalDateTime;
  */
 public class RoleAttribute extends BasicUnitAttribute
 {
+    public static void main(String[] args)
+    {
+        RoleAttribute role = (RoleAttribute) new Builder().cash(10).atk(1).build();
+    }
     private final int id;
     /**玩家的id*/
     static int nextId = 0;
     /**持有货币*/
     private int cash;
     /**拥有经验*/
-    private int EXP;
+    private int exp;
     /**升到下一级所需经验*/
-    private int upgradeNeedXP;
+    private int upgradeNeedXp;
     /**游戏得分*/
     private int totalGameScore;
     /**角色创建日期*/
     private final LocalDateTime CreatingDateTime = null;
 
-    public static void main(String[] args)
+    public static class Builder extends BasicUnitAttribute.Builder
     {
-        LocalDateTime time = LocalDateTime.now();
-        LocalDate date = LocalDate.now();
-          System.out.println(time);
-          System.out.println(date);
+        private int cash           = 0;
+        private int exp            = 0;
+        private int upgradeNeedXp  = 10;
+        private int totalGameScore = 0;
+
+        public Builder cash(int cash)
+        {
+            this.cash = cash;
+            return this;
+        }
+
+        public Builder exp(int exp)
+        {
+            this.exp = exp;
+            return this;
+        }
+
+        public Builder upgradeNeedXp(int upgradeNeedXp)
+        {
+            this.upgradeNeedXp = upgradeNeedXp;
+            return this;
+        }
+
+        public Builder totalGameScore(int totalGameScore)
+        {
+            this.totalGameScore = totalGameScore;
+            return this;
+        }
+
+//        public RoleAttribute build()
+//        {
+//            super(this);
+//        }
     }
     //初始化玩家id
     {
         nextId++;
         id = nextId;
     }
-    public RoleAttribute()
+    private RoleAttribute(Builder builder)
     {
-
+        cash = builder.cash;
+        exp = builder.exp;
+        upgradeNeedXp = builder.upgradeNeedXp;
+        totalGameScore = builder.totalGameScore;
     }
 //    public RoleAttribute() //*默认数值
 //    {
@@ -71,21 +107,21 @@ public class RoleAttribute extends BasicUnitAttribute
     {
         return CreatingDateTime;
     }
-    public final int getEXP()
+    public final int getExp()
     {
-        return EXP;
+        return exp;
     }
-    public final int getUpgradeNeedXP()
+    public final int getUpgradeNeedXp()
     {
-        return upgradeNeedXP;
+        return upgradeNeedXp;
     }
     public final void addUpgradeNeedXP(int addUpgradeXP)
     {
-        upgradeNeedXP += addUpgradeXP;
+        upgradeNeedXp += addUpgradeXP;
     }
     public final void addEXP(int gainEXP)
     {
-        EXP += gainEXP;
+        exp += gainEXP;
     }
     public final void addCash(int addCash)
     {
@@ -105,8 +141,8 @@ public class RoleAttribute extends BasicUnitAttribute
         return  super.toString() +
                 "[持有货币:" + cash +
                 ", 游戏得分:" + totalGameScore +
-                ", 角色拥有经验:" + EXP +
-                ", 升到下一级所需经验:" + upgradeNeedXP +
+                ", 角色拥有经验:" + exp +
+                ", 升到下一级所需经验:" + upgradeNeedXp +
                 ", 创建日期:" + CreatingDateTime +
                 ']';
     }
