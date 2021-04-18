@@ -41,10 +41,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Comparable<Ba
     private int lifeRegeneration;
     /**单位等级*/
     private int level;
-    public BasicUnitAttribute()//TODO:要删除的
-    {
-        name = "";
-    }
+
     /**参考<Effective Java第二章>*/
     public static class Builder<T extends Builder>
     {
