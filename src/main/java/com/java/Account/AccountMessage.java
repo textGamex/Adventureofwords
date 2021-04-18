@@ -16,7 +16,7 @@ public final class AccountMessage
     {
         this.account = account;
         playerPath = gameDataPath.resolve(account);//保存账号目录
-        id = Authentication();
+        id = authentication();
     }
 
     private static final Path gameDataPath = Paths.get(System.getProperty("user.home"), "AppData",
@@ -67,30 +67,30 @@ public final class AccountMessage
         return new AccountMessage(in.nextLine());
     }
 
-    private Identity Authentication()//身份验证模块
+    private Identity authentication()//身份验证模块
     {
         var folder = playerPath.toFile();//构造账号路径
-        Logger.getGlobal().info(folder.toString());
+        Logger.getGlobal().fine(folder.toString());
 
         /*账号不存在且是内部人员*/
         if (fileNotExist(folder) && (account.equals(PrivateData.ACCOUNT1) || account.equals(PrivateData.ACCOUNT2)))
         {
-            log.info(account + "是新的内部人员账号");
+            log.fine(account + "是新的内部人员账号");
             return Identity.NEW_GAME_MANAGER;
         }
         else if (folder.exists() && (account.equals(PrivateData.ACCOUNT1) || account.equals(PrivateData.ACCOUNT2)))
         {
-            Logger.getGlobal().info(account + "是内部人员账号");
+            Logger.getGlobal().fine(account + "是内部人员账号");
             return Identity.GAME_MANAGER;
         }
         else if (fileNotExist(folder))//账号不存在而且是玩家
         {
-            Logger.getGlobal().info(account + "是新的玩家账号");
+            Logger.getGlobal().fine(account + "是新的玩家账号");
             return Identity.NEW_PLAYER;
         }
         else
         {
-            Logger.getGlobal().info(account + "是玩家账号");
+            Logger.getGlobal().fine(account + "是玩家账号");
             return Identity.PLAYER;
         }
     }
@@ -100,12 +100,12 @@ public final class AccountMessage
         var file = gameDataPath.resolve(account).toFile();
         if (fileNotExist(file))
         {
-            Logger.getGlobal().info(file + " 文件夹不存在");
+            Logger.getGlobal().fine(file + " 文件夹不存在");
             try
             {
                 Files.createDirectories(playerPath.resolve("Data"));
 //                Files.createDirectories(playerDataPath.resolve("Log"));//TODO:log未完成
-                Logger.getGlobal().info(file + " 文件夹创建成功");
+                Logger.getGlobal().fine(file + " 文件夹创建成功");
             }
             catch (IOException e)
             {
@@ -114,7 +114,7 @@ public final class AccountMessage
             }
         }
         else
-            Logger.getGlobal().info(file + " 文件夹存在");
+            Logger.getGlobal().fine(file + " 文件夹存在");
     }
     private boolean fileNotExist(File file)
     {

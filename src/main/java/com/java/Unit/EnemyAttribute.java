@@ -20,7 +20,7 @@ public class EnemyAttribute extends BasicUnitAttribute
         xp = builder.xp;
     }
 
-    public static class Builder extends BasicUnitAttribute.Builder<RoleAttribute.Builder>
+    public static class Builder extends BasicUnitAttribute.Builder<Builder>
     {
         private int value = 0;
         private int xp    = 0;

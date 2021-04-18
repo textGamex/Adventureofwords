@@ -114,7 +114,10 @@ public class RoleAttribute extends BasicUnitAttribute
     {
         return id;
     }
-
+    public static int getNextId()
+    {
+        return nextId;
+    }
     @Override
     public String toString()
     {
