@@ -7,28 +7,52 @@ package com.java.Unit;
 public class EnemyAttribute extends BasicUnitAttribute
 {
     /**所值分数 */
-    private final int value = 0;
+    private int value = 0;
     /**所值经验 */
-    private final int xp = 0;
+    private int xp = 0;
     /**所值硬币 */
-    private final int coin = 0;
-//    public EnemyAttribute() //*默认数值
-//    {
-//        super();
-//        value = 10;
-//        xp = 10;
-//        coin = 10;
-//    }
-//    public EnemyAttribute(String name,int grade, int MAXHP, int ATK, float CRIT, float critsEffect,
-//                          int fixArmorPen, float perArmorPen, int armor, float physicalResistanc,
-//                          int lifeRegeneration, int id, int value, int xp, int coin)//*构造测试单位
-//    {
-//        super(name, grade, MAXHP, ATK, CRIT, critsEffect, fixArmorPen, perArmorPen, armor, physicalResistanc
-//        , lifeRegeneration, id);
-//        this.value = value;
-//        this.xp = xp;
-//        this.coin = coin;
-//    }
+    private int cash = 0;
+    public EnemyAttribute(Builder builder) //*默认数值
+    {
+        super(builder);
+        value = builder.value;
+        cash = builder.cash;
+        xp = builder.xp;
+    }
+
+    public static class Builder extends BasicUnitAttribute.Builder<RoleAttribute.Builder>
+    {
+        private int value = 0;
+        private int xp    = 0;
+        private int cash  = 0;
+
+        public Builder(String name)
+        {
+            super(name);
+        }
+        public Builder value(int value)
+        {
+            this.value = value;
+            return this;
+        }
+
+        public Builder xp(int xp)
+        {
+            this.xp = xp;
+            return this;
+        }
+
+        public Builder cash(int cash)
+        {
+            this.cash = cash;
+            return this;
+        }
+        @Override
+        public EnemyAttribute build()
+        {
+            return new EnemyAttribute(this);
+        }
+    }
     public final int getValue()
     {
         return value;
@@ -37,9 +61,9 @@ public class EnemyAttribute extends BasicUnitAttribute
     {
         return xp;
     }
-    public final int getCoin()
+    public final int getCash()
     {
-        return coin;
+        return cash;
     }
 
     @Override
@@ -48,7 +72,7 @@ public class EnemyAttribute extends BasicUnitAttribute
         return  super.toString()
                 + "[所值分数:" + value +
                 ", 所值经验:" + xp +
-                ", 所值硬币:" + coin +
+                ", 所值硬币:" + cash +
                 ']';
     }
 }

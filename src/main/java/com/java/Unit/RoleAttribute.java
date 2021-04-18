@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
  */
 public class RoleAttribute extends BasicUnitAttribute
 {
-    private final int id;
     /**玩家的id*/
-    static int nextId = 0;
+    private static int nextId = 70000;
+    private final int id = ++nextId;
     /**持有货币*/
     private int cash;
     /**拥有经验*/
@@ -22,11 +22,7 @@ public class RoleAttribute extends BasicUnitAttribute
     private int totalGameScore;
     /**角色创建日期*/
     private final LocalDateTime creatingDateTime = LocalDateTime.now();
-    //初始化玩家id
-    {
-        nextId++;
-        id = nextId;
-    }
+
     protected RoleAttribute(Builder builder)
     {
         super(builder);
@@ -35,6 +31,7 @@ public class RoleAttribute extends BasicUnitAttribute
         upgradeNeedXp = builder.upgradeNeedXp;
         totalGameScore = builder.totalGameScore;
     }
+
     public static class Builder extends BasicUnitAttribute.Builder<Builder>
     {
         private int cash           = 0;
@@ -69,12 +66,12 @@ public class RoleAttribute extends BasicUnitAttribute
             this.totalGameScore = totalGameScore;
             return this;
         }
+        @Override
         public RoleAttribute build()
         {
             return new RoleAttribute(this);
         }
     }
-
 
     public final int getCash()
     {
@@ -112,6 +109,7 @@ public class RoleAttribute extends BasicUnitAttribute
     {
         totalGameScore += addGameScore;
     }
+    @Override
     public final int getId()
     {
         return id;
