@@ -7,24 +7,29 @@ package com.java.Unit;
 public class EnemyAttribute extends BasicUnitAttribute
 {
     /**所值分数 */
-    private int value = 0;
+    private final int value;
     /**所值经验 */
-    private int xp = 0;
+    private final int xp;
     /**所值硬币 */
-    private int cash = 0;
+    private final int cash;
+    /**敌对单位类型*/
+    private final EnemyType type;
+
     public EnemyAttribute(Builder builder) //*默认数值
     {
         super(builder);
         value = builder.value;
         cash = builder.cash;
         xp = builder.xp;
+        type = builder.type;
     }
 
     public static class Builder extends BasicUnitAttribute.Builder<Builder>
     {
-        private int value = 0;
-        private int xp    = 0;
-        private int cash  = 0;
+        private int value      = 0;
+        private int xp         = 0;
+        private int cash       = 0;
+        private EnemyType type = EnemyType.COMMON;
 
         public Builder(String name)
         {
@@ -42,6 +47,11 @@ public class EnemyAttribute extends BasicUnitAttribute
             return this;
         }
 
+        public Builder type(EnemyType type)
+        {
+            this.type = type;
+            return this;
+        }
         public Builder cash(int cash)
         {
             this.cash = cash;
@@ -64,6 +74,10 @@ public class EnemyAttribute extends BasicUnitAttribute
     public final int getCash()
     {
         return cash;
+    }
+    public EnemyType getType()
+    {
+        return type;
     }
 
     @Override

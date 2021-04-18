@@ -1,16 +1,17 @@
 package com.java.CombatSystem.BuffModule;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public final class BuffMessage
+public final class BuffMessage implements Serializable
 {
-    /**æŒç»­å›åˆ*/
+    /**³ÖĞø»ØºÏ*/
     private int time;
-    /**æ•ˆæœå±‚æ•°*/
+    /**Ğ§¹û²ãÊı*/
     private int layers;
-    /**æ˜¯å¦æ˜¯Debuff*/
+    /**ÊÇ·ñÊÇDebuff*/
     private final boolean debuff;
-    /**æ˜¯å¦æ˜¯è¢«åŠ¨*/
+    /**ÊÇ·ñÊÇ±»¶¯*/
     private final boolean passive;
 
     public BuffMessage(int time, int layers, boolean debuff, boolean passive)
@@ -54,11 +55,19 @@ public final class BuffMessage
     public String toString()
     {
         return "BuffMessage[" +
-                "æŒç»­å›åˆ:" + time +
-                ", æ•ˆæœå±‚æ•°:" + layers +
+                "³ÖĞø»ØºÏ:" + time +
+                ", Ğ§¹û²ãÊı:" + layers +
                 ", Debuff:" + debuff +
-                ", ç‰¹æ€§:" + passive +
+                ", ÌØĞÔ:" + passive +
                 ']';
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BuffMessage that = (BuffMessage) o;
+        return time == that.time && layers == that.layers && debuff == that.debuff && passive == that.passive;
+    }
 }

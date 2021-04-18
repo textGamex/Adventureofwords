@@ -15,8 +15,6 @@ l
 <src/main/java/com/java/CombatSystem/BuffModule/BuffType.java,b\b\bbb3fd10e4226e3584eb4eb0623fbda78374760a
 Q
 !src/main/java/com/ui/LoginUi.java,b\b\bba72f9079d33e52156c39b572f607e97d7a8da7
-Z
-*src/main/java/com/java/Unit/EnemyUnit.java,9\9\99ba04e0af33e428118bfabbc0afac8befc16949
 \
 ,src/main/java/BattleSystemMessage.properties,a\1\a1b7b7a8cb0d0c53a7894c8f8f386226bff594c2
 _
@@ -53,3 +51,10 @@ b
 2src/test/java/com/java/Unit/RoleAttributeTest.java,4\f\4f023b009ece80413080bb0cd006f3c9af38d91f
 g
 7src/test/java/com/java/Unit/BasicUnitAttributeTest.java,b\4\b4271ff58ebb02b9786bedb9abfb6d344230ed58
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+c
+3src/test/java/com/java/Unit/EnemyAttributeTest.java,b\4\b47a64f07288f88b3fd454f903481bf0c97acf6e

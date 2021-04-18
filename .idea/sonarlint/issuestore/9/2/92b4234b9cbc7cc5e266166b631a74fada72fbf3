@@ -1,15 +1,17 @@
 
-—
-java:S1186
-"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛÛ¯ø
-W	java:S125ğ"<This block of commented-out lines of code should be removed.(øÒ—±üÿÿÿÿ
-R	java:S125ë"<This block of commented-out lines of code should be removed.(Ú°à¬
-H
-java:S1135"2Complete the task associated to this TODO comment.(œ×›
-J
-java:S3740}"/Provide the parametrized type for this generic.(Éã‘Âùÿÿÿÿ
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(³²ó¹ûÿÿÿÿ8¨Ğæš/
+R	java:S125ï"<This block of commented-out lines of code should be removed.(Ú°à¬
+W	java:S125ô"<This block of commented-out lines of code should be removed.(øÒ—±üÿÿÿÿ
+>
+java:S1170"!Make this final field static too.(¬¹š8­Èğ™/
+k
+java:S1182ª"HUse super.clone() to create and seed the cloned instance to be returned.(ŒÉ¯æşÿÿÿÿ8ğÇš/
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(Å­Ëİúÿÿÿÿ8Ëäïš/
+K
+java:S3740"/Provide the parametrized type for this generic.(Éã‘Âùÿÿÿÿ
+L
+java:S3740"/Provide the parametrized type for this generic.(£òÑ’8§¹âš/
 o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Úœë•
-t
-java:S1171"YMove the contents of this initializer to a standard constructor or to field initializers.(ÒÌâ–øÿÿÿÿ
-M
-java:S1135,"2Complete the task associated to this TODO comment.(ê¢¢Ñúÿÿÿÿ
+U	java:S106"9Replace this use of System.out or System.err by a logger.(Ö“„Õ8¼«úš/
+v
+java:S2975ª"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(ŒÉ¯æşÿÿÿÿ8ÍÚ¸š/

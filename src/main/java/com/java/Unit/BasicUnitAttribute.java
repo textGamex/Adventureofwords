@@ -1,5 +1,10 @@
 package com.java.Unit;
 
+import com.java.CombatSystem.BuffModule.BuffMessage;
+import com.java.CombatSystem.BuffModule.BuffType;
+
+import java.io.*;
+
 /**
  * 基本单位属性
  * @version 0.30
@@ -7,16 +12,18 @@ package com.java.Unit;
  */
 public class BasicUnitAttribute extends BasicBuffModule implements Comparable<BasicUnitAttribute>
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws CloneNotSupportedException
     {
-
+        var s = new BasicUnitAttribute.Builder<Builder>("1").build();
+        s.addBuff(BuffType.POISON, new BuffMessage(1,1,true));
+        System.out.println(s);
+        var ss = (BasicUnitAttribute) s.clone();
+        System.out.println(ss);
+        System.out.println(s.equalsAll(ss));
     }
-    private int id = 0;
-    private static int nextTextId = 50000;//测试单位id TODO:未完成
+    private static int nextTextId = 50000;//测试单位id
+    private final int id = ++nextTextId;
 
-    {
-        id = ++nextTextId;
-    }
     private final String name;
     /**最大生命值*/
     private int maxHp;
@@ -248,10 +255,23 @@ public class BasicUnitAttribute extends BasicBuffModule implements Comparable<Ba
     {
         if (this == otherObject) return true;
         if (otherObject == null) return false;
-        if (!(otherObject instanceof BasicUnitAttribute)) return false;
-        BasicUnitAttribute other = (BasicUnitAttribute) otherObject;
+        if (!(otherObject instanceof BasicUnitAttribute other)) return false;
         return this.id == other.getId();
     }
+
+    public boolean equalsAll(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BasicUnitAttribute that = (BasicUnitAttribute) o;
+
+        return id == that.id && maxHp == that.maxHp && hp == that.hp && mana == that.mana && atk == that.atk
+                && Double.compare(that.critRate, critRate) == 0 && Double.compare(that.critsEffect, critsEffect) == 0
+                && Double.compare(that.physicalResistance, physicalResistance) == 0
+                && Double.compare(that.evade, evade) == 0 && lifeRegeneration == that.lifeRegeneration
+                && level == that.level && name.equals(that.name);
+    }
+
     @Override
     public int hashCode()
     {
@@ -263,15 +283,41 @@ public class BasicUnitAttribute extends BasicBuffModule implements Comparable<Ba
         return super.toString()
                 + "BasicUnitAttribute"
                 + "[id:" + id
-                + ", name:" + name
+                + ", 名称:" + name
                 + ", 最大生命值:" + maxHp
                 + ", 等级:" + level
                 + ", 物理攻击:" + atk
+                + ", 魔法攻击:" + mana
                 + ", 暴击率:" + critRate * 100 + "%"
                 + ", 暴击效果:" + critsEffect * 100 + "%"
                 + ", 物理抗性:" + physicalResistance
                 + ", 每回合生命回复:" +lifeRegeneration
+                + ", 闪避率:" + evade * 100 + "%"
                 + "]";
+    }
+    @Override
+    public Object clone() throws CloneNotSupportedException
+    {
+        try
+        {
+            var bout = new ByteArrayOutputStream();
+            try (var out = new ObjectOutputStream(bout))
+            {
+                out.writeObject(this);
+            }
+
+            try (var bin = new ByteArrayInputStream(bout.toByteArray()))
+            {
+                var in = new ObjectInputStream(bin);
+                return in.readObject();
+            }
+        }
+        catch (IOException | ClassNotFoundException e)
+        {
+            var e2 = new CloneNotSupportedException();
+            e2.initCause(e);
+            throw e2;
+        }
     }
 
     /*sort接口实现*/

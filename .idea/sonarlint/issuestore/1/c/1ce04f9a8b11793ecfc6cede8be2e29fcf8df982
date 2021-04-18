@@ -1,7 +1,7 @@
 
-f	java:S117A"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ãŸêä
+G
+java:S1135"2Complete the task associated to this TODO comment.(ÕäK
 o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Úœë•
-t
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Á¸ÒÍøÿÿÿÿ
-M
-java:S1135"2Complete the task associated to this TODO comment.(Ò· ÷úÿÿÿÿ
+f	java:S117F"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ãŸêä
+J
+java:S1948"-Make "owningBuffs" transient or serializable.(õÒ8ÒÌÜš/

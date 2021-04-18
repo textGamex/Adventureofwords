@@ -1,11 +1,14 @@
 
-N	java:S106"9Replace this use of System.out or System.err by a logger.(ˆ®Ãä
-n	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(µ’¦×
-N	java:S106"9Replace this use of System.out or System.err by a logger.(“ÇÅù
-M	java:S106"9Replace this use of System.out or System.err by a logger.(°Š‚e
-N	java:S106"9Replace this use of System.out or System.err by a logger.(“ùÎ€
-N	java:S106"9Replace this use of System.out or System.err by a logger.(ˆ®Ãä
-n	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(µ’¦×
-N	java:S106#"9Replace this use of System.out or System.err by a logger.(“ÇÅù
-M	java:S106("9Replace this use of System.out or System.err by a logger.(°Š‚e
-N	java:S106)"9Replace this use of System.out or System.err by a logger.(“ùÎ€
+h	java:S128"LEnd this switch case with an unconditional break, return or throw statement.(ºÅÀ8¤“ã™/
+n	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(µ’¦×
+h
+java:S21424"FEither re-interrupt this method or rethrow the "InterruptedException".(ÇâŞáøÿÿÿÿ8áÂÜ™/
+Z	java:S106/"9Replace this use of System.out or System.err by a logger.(ÍªÜõøÿÿÿÿ8áÂÜ™/
+N	java:S106"9Replace this use of System.out or System.err by a logger.(ˆ®Ãä
+Z	java:S106("9Replace this use of System.out or System.err by a logger.(ı‰şøÿÿÿÿ8áÂÜ™/
+M	java:S106"9Replace this use of System.out or System.err by a logger.(°Š‚e
+T	java:S106+"9Replace this use of System.out or System.err by a logger.(°Š‚e8áÂÜ™/
+N	java:S106"9Replace this use of System.out or System.err by a logger.(“ÇÅù
+h	java:S128"LEnd this switch case with an unconditional break, return or throw statement.(¤œÛ8íâ™/
+Z	java:S106."9Replace this use of System.out or System.err by a logger.(Ù‘¯ôÿÿÿÿÿ8áÂÜ™/
+N	java:S106"9Replace this use of System.out or System.err by a logger.(“ùÎ€

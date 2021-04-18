@@ -1,13 +1,15 @@
 package com.java.CombatSystem.BuffModule;
 
-public enum BuffType
+import java.io.Serializable;
+
+public enum BuffType implements Serializable
 {
-    /**æµè¡€*/
-    BLEED("æµè¡€"),
-    /**ä¸­æ¯’*/
-    POISON("ä¸­æ¯’"),
-    /**è™šå¼±*/
-    DEBILITY("è™šå¼±");
+    /**Á÷Ñª*/
+    BLEED("Á÷Ñª"),
+    /**ÖĞ¶¾*/
+    POISON("ÖĞ¶¾"),
+    /**ĞéÈõ*/
+    DEBILITY("ĞéÈõ");
 
     private final String type;
     BuffType(String type)
