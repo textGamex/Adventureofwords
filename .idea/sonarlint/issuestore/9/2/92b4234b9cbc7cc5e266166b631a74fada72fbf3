@@ -1,0 +1,15 @@
+
+—
+java:S1186
+"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛÛ¯ø
+W	java:S125ð"<This block of commented-out lines of code should be removed.(øÒ—±üÿÿÿÿ
+R	java:S125ë"<This block of commented-out lines of code should be removed.(Ú°à¬
+H
+java:S1135"2Complete the task associated to this TODO comment.(œ×›
+J
+java:S3740}"/Provide the parametrized type for this generic.(Éã‘Âùÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Úœë•
+t
+java:S1171"YMove the contents of this initializer to a standard constructor or to field initializers.(ÒÌâ–øÿÿÿÿ
+M
+java:S1135,"2Complete the task associated to this TODO comment.(ê¢¢Ñúÿÿÿÿ

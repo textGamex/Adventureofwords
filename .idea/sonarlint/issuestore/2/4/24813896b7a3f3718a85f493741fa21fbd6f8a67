@@ -1,0 +1,21 @@
+
+M
+java:S2629X"7Use the built-in formatting to construct this argument.(¢ôƒ
+?
+java:S2629I"$Invoke method(s) only conditionally.(Í ‰Úøÿÿÿÿ
+M
+java:S2629]"7Use the built-in formatting to construct this argument.(š¶ë
+h	java:S100F"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÌÔàÆşÿÿÿÿ
+M
+java:S2629l"7Use the built-in formatting to construct this argument.( Şô¯
+R
+java:S2629u"7Use the built-in formatting to construct this argument.(³î¸Ùÿÿÿÿÿ
+R
+java:S2629S"7Use the built-in formatting to construct this argument.(ä›î´ıÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(»–—
+H
+java:S1135k"2Complete the task associated to this TODO comment.(ÍîõŞ
+R
+java:S2629g"7Use the built-in formatting to construct this argument.(å íåÿÿÿÿÿ
+R
+java:S2629N"7Use the built-in formatting to construct this argument.(œˆíßıÿÿÿÿ
