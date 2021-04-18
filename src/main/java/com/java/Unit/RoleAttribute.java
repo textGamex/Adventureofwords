@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 /**
  * Íæ¼Ò½ÇÉ«ÊôÐÔ
- * @version 0.13
+ * @version 0.31
  * @author Millennium
  */
 public class RoleAttribute extends BasicUnitAttribute

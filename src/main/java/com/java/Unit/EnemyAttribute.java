@@ -1,7 +1,7 @@
 package com.java.Unit;
 /**
  * 敌对单位属性
- * @version 0.11
+ * @version 0.32
  * @author Millennium
  */
 public class EnemyAttribute extends BasicUnitAttribute

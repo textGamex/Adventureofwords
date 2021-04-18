@@ -24,7 +24,7 @@ public final class AccountMessage
     private Identity id = Identity.NONE;
     /**保存玩家的各种数据的目录*/
     private Path playerPath;
-    private String account = "";
+    private final String account;
     private static final Logger log = Logger.getLogger("AdventureOfWords");
 
     public Path getPlayerPath()
