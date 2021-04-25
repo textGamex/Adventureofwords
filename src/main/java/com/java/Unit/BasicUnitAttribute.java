@@ -1,29 +1,22 @@
 package com.java.Unit;
 
-import com.java.CombatSystem.BuffModule.BuffMessage;
-import com.java.CombatSystem.BuffModule.BuffType;
-
+import com.java.CombatSystem.BuffModule.BuffModule;
 import java.io.*;
 
 /**
  * 基本单位属性
- * @version 0.30
+ * @version 0.3.3
  * @author Millennium
  */
-public class BasicUnitAttribute extends BasicBuffModule implements Comparable<BasicUnitAttribute>
+public class BasicUnitAttribute implements Comparable<BasicUnitAttribute>, Serializable
 {
-    public static void main(String[] args) throws CloneNotSupportedException
-    {
-        var s = new BasicUnitAttribute.Builder<Builder>("1").build();
-        s.addBuff(BuffType.POISON, new BuffMessage(1,1,true));
-        System.out.println(s);
-        var ss = (BasicUnitAttribute) s.clone();
-        System.out.println(ss);
-        System.out.println(s.equalsAll(ss));
-    }
+    @Serial
+    private static final long serialVersionUID = 7938388190739071271L;
+
     private static int nextTextId = 50000;//测试单位id
     private final int id = ++nextTextId;
 
+    private final BuffModule buff = new BuffModule();
     private final String name;
     /**最大生命值*/
     private int maxHp;
@@ -140,22 +133,31 @@ public class BasicUnitAttribute extends BasicBuffModule implements Comparable<Ba
         evade              = builder.evade;
         mana               = builder.mana;
     }
+    public BuffModule buff()
+    {
+        return buff;
+    }
+
     public final String getName()
     {
         return name;
     }
+
     public final int getHp()
     {
         return hp;
     }
+
     public final int getAtk()
     {
         return atk;
     }
+
     public final double getCritRate()
     {
         return critRate;
     }
+
     public final double getCritsEffect()
     {
         return critsEffect;
@@ -170,6 +172,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Comparable<Ba
     {
         return physicalResistance;
     }
+
     public int getId()
     {
         return id;
@@ -277,11 +280,11 @@ public class BasicUnitAttribute extends BasicBuffModule implements Comparable<Ba
     {
         return id * 31;
     }
+
     @Override
     public String toString()
     {
-        return super.toString()
-                + "BasicUnitAttribute"
+        return "BasicUnitAttribute"
                 + "[id:" + id
                 + ", 名称:" + name
                 + ", 最大生命值:" + maxHp
@@ -295,6 +298,7 @@ public class BasicUnitAttribute extends BasicBuffModule implements Comparable<Ba
                 + ", 闪避率:" + evade * 100 + "%"
                 + "]";
     }
+
     @Override
     public Object clone() throws CloneNotSupportedException
     {

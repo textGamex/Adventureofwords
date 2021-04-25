@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 /**
  * 玩家角色属性
- * @version 0.31
+ * @version 0.3.1
  * @author Millennium
  */
 public class RoleAttribute extends BasicUnitAttribute
@@ -127,6 +127,7 @@ public class RoleAttribute extends BasicUnitAttribute
                 ", 角色拥有经验:" + exp +
                 ", 升到下一级所需经验:" + upgradeNeedXp +
                 ", 创建日期:" + creatingDateTime +
-                ']';
+                ']' +
+                buff().toString();
     }
 }

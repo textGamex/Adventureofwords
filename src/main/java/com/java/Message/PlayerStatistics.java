@@ -5,6 +5,7 @@ import com.java.Account.Identity;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 /**
@@ -15,40 +16,30 @@ import java.util.Scanner;
 */
 public final class PlayerStatistics implements Serializable
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
-        var data = new PlayerStatistics(0,0,0,0,0);
-        var a = new AccountMessage("1");
-//        var b = new AccountMessage(PrivateData.ACCOUNT1);
-        a.createAccountDataFolder();
-//        b.createAccountDataFolder();
-        data.saveStatistics(a);
-//        data.saveStatistics(b);
-        var archive = PlayerStatistics.loadStatistics(a);
+        var a = new Scanner(Path.of("123"));
     }
     @Serial
     private static final long serialVersionUID = 7935923925807359121L;
-    //玩家ID
-//    private final Identity id;
     //玩家击杀数
-    private int totalKill;
+    private long totalKill;
     //总场数
-    private int totalRound;
+    private long totalRound;
     //普通攻击次数
-    private int totalAttack;
+    private long totalAttack;
     //总伤害
-    private int totalHarm;
+    private long totalHarm;
     //胜利场数
-    private int totalVictory;
+    private long totalVictory;
     //游玩总时间 TODO:未实现
-//    private int
+//    private long9
 //    public PlayerStatistics()
 //    {
 //        this();
 //    }
     public PlayerStatistics()
     {
-//        this.id = id;
         totalKill = 0;
         totalRound = 0;
         totalAttack = 0;
@@ -56,66 +47,65 @@ public final class PlayerStatistics implements Serializable
         totalVictory = 0;
     }
 
-    public PlayerStatistics(int totalKill, int totalRound, int totalAttack, int totalHarm, int totalVictory)
+    public PlayerStatistics(long totalKill, long totalRound, long totalAttack, long totalHarm, long totalVictory)
     {
-//        this.id = id;
         this.totalKill = totalKill;
         this.totalRound = totalRound;
         this.totalAttack = totalAttack;
         this.totalHarm = totalHarm;
         this.totalVictory = totalVictory;
     }
-    public int getTotalKill()
+    public long getTotalKill()
     {
         return totalKill;
     }
-    public int getTotalRound()
+    public long getTotalRound()
     {
         return totalRound;
     }
-    public int getTotalAttack()
+    public long getTotalAttack()
     {
         return totalAttack;
     }
-    public int getTotalHarm()
+    public long getTotalHarm()
     {
         return totalHarm;
     }
-    public int getTotalVictory()
+    public long getTotalVictory()
     {
         return totalVictory;
     }
 
-    public void setTotalKill(int totalKill)
+    public void setTotalKill(long totalKill)
     {
         this.totalKill = totalKill;
     }
 
-    public void setTotalRound(int totalRound)
+    public void setTotalRound(long totalRound)
     {
         this.totalRound = totalRound;
     }
 
-    public void setTotalAttack(int totalAttack)
+    public void setTotalAttack(long totalAttack)
     {
         this.totalAttack = totalAttack;
     }
 
-    public void setTotalHarm(int totalHarm)
+    public void setTotalHarm(long totalHarm)
     {
         this.totalHarm = totalHarm;
     }
 
-    public void setTotalVictory(int totalVictory)
+    public void setTotalVictory(long totalVictory)
     {
         this.totalVictory = totalVictory;
     }
 
-    public void addTotalKill(int addNumber)
+    public void addTotalKill(long addNumber)
     {
         totalKill += addNumber;
     }
-    public void addTotalRound(int addNumber)
+    public void addTotalRound(long addNumber)
     {
         totalRound += addNumber;
     }
@@ -172,13 +162,13 @@ public final class PlayerStatistics implements Serializable
         }
     }
 
-    public static PlayerStatistics loadStatistics(AccountMessage account)
+    public static PlayerStatistics loadStatistics(AccountMessage account) throws IOException, ClassNotFoundException
     {
         if (account == null)
             throw new NullPointerException("account为Null");
         //如果不存在,那怎么能读取呢?
-        if (dataNotExist(account))
-            throw new IllegalStateException("Id: " + account.getId());
+        if (fileNotExist(account))
+            throw new IllegalStateException("文件不存在,Id: " + account.getId());
 
         if (account.getId() == Identity.PLAYER)
         {
@@ -188,16 +178,18 @@ public final class PlayerStatistics implements Serializable
             return archive;
         }
         else
+        {
             return loadGameManagerStatistics(account);
+        }
     }
-    private static boolean dataNotExist(AccountMessage acc)
+    private static boolean fileNotExist(AccountMessage acc)
     {
         assert acc != null;
 
         return acc.getId() == Identity.NONE || acc.getId() == Identity.NEW_GAME_MANAGER
                 || acc.getId() == Identity.NEW_PLAYER;
     }
-    private static PlayerStatistics loadPlayerStatistics(AccountMessage acc)
+    private static PlayerStatistics loadPlayerStatistics(AccountMessage acc)throws ClassNotFoundException
     {
         assert acc != null;
 
@@ -207,33 +199,29 @@ public final class PlayerStatistics implements Serializable
         {
             archive = (PlayerStatistics) in.readObject();
         }
-        catch (IOException | ClassNotFoundException e)
+        catch (IOException e)
         {
             e.printStackTrace();
         }
         return archive;
     }
-    private static PlayerStatistics loadGameManagerStatistics(AccountMessage acc)
+    private static PlayerStatistics loadGameManagerStatistics(AccountMessage acc) throws IOException
     {
         assert acc != null;
-
-        String line = "";
+        //TODO:找不到文件时会抛出NoSuchFileException, 但现在不知道是谁会抛出
+        String line;
         try (var in = new Scanner(acc.getPlayerDataResolveFile(
                 "PlayerStatistics.txt"), StandardCharsets.UTF_8))
         {
             line = in.nextLine();
         }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
 
         String[] tokens = line.split("\\|");
-        int totalKill = Integer.parseInt(tokens[0]);
-        int totalRound = Integer.parseInt(tokens[1]);
-        int totalAttack = Integer.parseInt(tokens[2]);
-        int totalHarm = Integer.parseInt(tokens[3]);
-        int totalVictory = Integer.parseInt(tokens[4]);
+        long totalKill = Integer.parseInt(tokens[0]);
+        long totalRound = Integer.parseInt(tokens[1]);
+        long totalAttack = Integer.parseInt(tokens[2]);
+        long totalHarm = Integer.parseInt(tokens[3]);
+        long totalVictory = Integer.parseInt(tokens[4]);
 
         return new PlayerStatistics(totalKill, totalRound, totalAttack, totalHarm, totalVictory);
     }

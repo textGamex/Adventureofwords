@@ -36,17 +36,17 @@ public final class GameTool
     */
     public static int floatingNumber(int number, int floatingRange)//按整数浮动
     {
-        int randomNumber = current().nextInt(floatingRange + 1);
+        var randomNumber = current().nextInt(floatingRange + 1);
         return current().nextBoolean() ? number + randomNumber : number - randomNumber;
     }
     public static int floatingNumber(int number, double floatingPercentage)//按百分比浮动
     {
-        int randomNumber = current().nextInt((int) floatingPercentage * number + 1);
+        var randomNumber = current().nextInt((int) floatingPercentage * number + 1);
         return current().nextBoolean() ? number + randomNumber : number - randomNumber;
     }
     public static int floatingNumber(int number, int floatingRange, String sign)//按整数浮动
     {
-        int randomNumber = current().nextInt(floatingRange + 1);
+        var randomNumber = current().nextInt(floatingRange + 1);
         return switch (sign) {
             case "+" -> number + randomNumber;
             case "-" -> number - randomNumber;
@@ -55,7 +55,7 @@ public final class GameTool
     }
     public static int floatingNumber(int number, double floatingPercentage, String sign)//按百分比浮动
     {
-        int randomNumber = current().nextInt((int) floatingPercentage * number + 1);
+        var randomNumber = current().nextInt((int) floatingPercentage * number + 1);
         return switch (sign) {
             case "+" -> number + randomNumber;
             case "-" -> number - randomNumber;
