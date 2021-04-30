@@ -6,6 +6,7 @@ import com.java.Account.Identity;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -16,13 +17,11 @@ import java.util.Scanner;
 */
 public final class PlayerStatistics implements Serializable
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
-        var a = new Scanner(Path.of("123"));
     }
     @Serial
     private static final long serialVersionUID = 7935923925807359121L;
-    //玩家击杀数
     private long totalKill;
     //总场数
     private long totalRound;
@@ -32,6 +31,9 @@ public final class PlayerStatistics implements Serializable
     private long totalHarm;
     //胜利场数
     private long totalVictory;
+    private long totalXP;
+    private long totalCash;
+    private long totalValue;
     //游玩总时间 TODO:未实现
 //    private long9
 //    public PlayerStatistics()
@@ -59,45 +61,95 @@ public final class PlayerStatistics implements Serializable
     {
         return totalKill;
     }
+
     public long getTotalRound()
     {
         return totalRound;
     }
+
     public long getTotalAttack()
     {
         return totalAttack;
     }
+
     public long getTotalHarm()
     {
         return totalHarm;
     }
+
     public long getTotalVictory()
     {
         return totalVictory;
     }
 
+    public long getTotalXP()
+    {
+        return totalXP;
+    }
+
+    public void setTotalXP(long totalXP)
+    {
+        if (totalXP < 0)
+            throw new IllegalArgumentException("不能为负数:" + totalXP);
+        this.totalXP = totalXP;
+    }
+
+    public long getTotalCash()
+    {
+        return totalCash;
+    }
+
+    public void setTotalCash(long totalCash)
+    {
+        if (totalCash < 0)
+            throw new IllegalArgumentException("不能为负数:" + totalCash);
+        this.totalCash = totalCash;
+    }
+
+    public long getTotalValue()
+    {
+        return totalValue;
+    }
+
+    public void setTotalValue(long totalValue)
+    {
+        if (totalValue < 0)
+            throw new IllegalArgumentException("不能为负数:" + totalValue);
+        this.totalValue = totalValue;
+    }
+
     public void setTotalKill(long totalKill)
     {
+        if (totalKill < 0)
+            throw new IllegalArgumentException("不能为负数:" + totalKill);
         this.totalKill = totalKill;
     }
 
     public void setTotalRound(long totalRound)
     {
+        if (totalRound < 0)
+            throw new IllegalArgumentException("不能为负数:" + totalRound);
         this.totalRound = totalRound;
     }
 
     public void setTotalAttack(long totalAttack)
     {
+        if (totalAttack < 0)
+            throw new IllegalArgumentException("不能为负数:" + totalAttack);
         this.totalAttack = totalAttack;
     }
 
     public void setTotalHarm(long totalHarm)
     {
+        if (totalHarm < 0)
+            throw new IllegalArgumentException("不能为负数:" + totalHarm);
         this.totalHarm = totalHarm;
     }
 
     public void setTotalVictory(long totalVictory)
     {
+        if (totalVictory < 0)
+            throw new IllegalArgumentException("不能为负数:" + totalVictory);
         this.totalVictory = totalVictory;
     }
 
@@ -113,12 +165,15 @@ public final class PlayerStatistics implements Serializable
     @Override
     public String toString()
     {
-        return getClass().getName() +
+        return  "PlayerStatistics" +
                 "[玩家总击杀数:" + totalKill +
                 ", 总场数:" + totalRound +
                 ", 普通攻击次数:" + totalAttack +
                 ", 总伤害:" + totalHarm +
                 ", 胜利场数:" + totalVictory +
+                ", 一共获得的经验:" + totalXP +
+                ", 一共获得的货币:" + totalCash +
+                ", 一共获得的分数:" + totalValue +
                 "]";
     }
 
@@ -162,10 +217,10 @@ public final class PlayerStatistics implements Serializable
         }
     }
 
-    public static PlayerStatistics loadStatistics(AccountMessage account) throws IOException, ClassNotFoundException
+    public static PlayerStatistics loadStatistics(AccountMessage account) throws FileNotFoundException
     {
         if (account == null)
-            throw new NullPointerException("account为Null");
+            throw new NullPointerException();
         //如果不存在,那怎么能读取呢?
         if (fileNotExist(account))
             throw new IllegalStateException("文件不存在,Id: " + account.getId());
@@ -189,7 +244,7 @@ public final class PlayerStatistics implements Serializable
         return acc.getId() == Identity.NONE || acc.getId() == Identity.NEW_GAME_MANAGER
                 || acc.getId() == Identity.NEW_PLAYER;
     }
-    private static PlayerStatistics loadPlayerStatistics(AccountMessage acc)throws ClassNotFoundException
+    private static PlayerStatistics loadPlayerStatistics(AccountMessage acc)
     {
         assert acc != null;
 
@@ -199,23 +254,28 @@ public final class PlayerStatistics implements Serializable
         {
             archive = (PlayerStatistics) in.readObject();
         }
-        catch (IOException e)
+        catch (IOException | ClassNotFoundException e)
         {
             e.printStackTrace();
         }
         return archive;
     }
-    private static PlayerStatistics loadGameManagerStatistics(AccountMessage acc) throws IOException
+    private static PlayerStatistics loadGameManagerStatistics(AccountMessage acc) throws FileNotFoundException
     {
         assert acc != null;
-        //TODO:找不到文件时会抛出NoSuchFileException, 但现在不知道是谁会抛出
+
         String line;
         try (var in = new Scanner(acc.getPlayerDataResolveFile(
                 "PlayerStatistics.txt"), StandardCharsets.UTF_8))
         {
             line = in.nextLine();
         }
-
+        catch (IOException e)
+        {
+            var e2 = new FileNotFoundException();
+            e2.initCause(e);
+            throw e2;
+        }
         String[] tokens = line.split("\\|");
         long totalKill = Integer.parseInt(tokens[0]);
         long totalRound = Integer.parseInt(tokens[1]);

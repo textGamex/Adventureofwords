@@ -26,9 +26,9 @@ public class RoleAttribute extends BasicUnitAttribute
     protected RoleAttribute(Builder builder)
     {
         super(builder);
-        cash = builder.cash;
-        exp = builder.exp;
-        upgradeNeedXp = builder.upgradeNeedXp;
+        cash           = builder.cash;
+        exp            = builder.exp;
+        upgradeNeedXp  = builder.upgradeNeedXp;
         totalGameScore = builder.totalGameScore;
     }
 
