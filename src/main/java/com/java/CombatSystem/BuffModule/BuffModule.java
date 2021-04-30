@@ -11,18 +11,18 @@ public class BuffModule implements Serializable
     }
     private final EnumMap<BuffType, BuffMessage> haveBuffs = new EnumMap<>(BuffType.class);
 
-    public final void add(BuffType aBuffType, BuffMessage aBuffMessage)
+    public final void add(BuffType type, BuffMessage aBuffMessage)
     {
         if (aBuffMessage == null)
             throw new NullPointerException();
 
-        if (haveBuffs.containsKey(aBuffType))
+        if (haveBuffs.containsKey(type))
         {
             if (aBuffMessage.isTimeLess())
-                haveBuffs.put(aBuffType, aBuffMessage);
+                haveBuffs.put(type, aBuffMessage);
             else
             {
-                var existentBuff = haveBuffs.get(aBuffType);
+                var existentBuff = haveBuffs.get(type);
                 var addTimeLimit = aBuffMessage.getTimeLimit();
                 var addLayers = aBuffMessage.getLayers();
 
@@ -30,7 +30,8 @@ public class BuffModule implements Serializable
                 existentBuff.setLayers(existentBuff.getLayers() + (addLayers == 1 ? 1 : addLayers / 2));
             }
         }
-        haveBuffs.put(aBuffType, aBuffMessage);
+        else
+            haveBuffs.put(type, aBuffMessage);
     }
 
     public final BuffMessage getMessage(BuffType type)
