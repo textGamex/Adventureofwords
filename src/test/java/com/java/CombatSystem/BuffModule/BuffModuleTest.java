@@ -1,6 +1,5 @@
 package com.java.CombatSystem.BuffModule;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -75,7 +74,7 @@ class BuffModuleTest
         buffs.remove(BuffType.BLEED, 11);
 
         assertFalse(buffs.have(BuffType.BLEED));//因为移除的回合大于持续回合,所以buff被删除
-        assertEquals(7, buffs.getMessage(BuffType.POISON).getTime());
+        assertEquals(7, buffs.getMessage(BuffType.POISON).getTimeLimit());
     }
 
     @Test

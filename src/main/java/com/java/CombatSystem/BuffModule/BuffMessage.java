@@ -1,34 +1,33 @@
 package com.java.CombatSystem.BuffModule;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public final class BuffMessage implements Serializable
 {
     /**持续回合*/
-    private int time;
+    private int timeLimit;
     /**效果层数*/
     private int layers;
     /**是否是Debuff*/
     private final boolean debuff;
     /**是否是被动*/
-    private final boolean passive;
+    private final boolean timeLess;
 
-    public BuffMessage(int time, int layers, boolean debuff, boolean passive)
+    public BuffMessage(int timeLimit, int layers, boolean debuff, boolean timeLess)
     {
-        this.time = time;
+        this.timeLimit = timeLimit;
         this.layers = layers;
         this.debuff = debuff;
-        this.passive = passive;
+        this.timeLess = timeLess;
     }
-    public BuffMessage(int time, int layers, boolean isDebuff)
+    public BuffMessage(int timeLimit, int layers, boolean isDebuff)
     {
-        this(time, layers, isDebuff, false);
+        this(timeLimit, layers, isDebuff, false);
     }
 
-    public int getTime()
+    public int getTimeLimit()
     {
-        return time;
+        return timeLimit;
     }
     public int getLayers()
     {
@@ -38,13 +37,13 @@ public final class BuffMessage implements Serializable
     {
         return debuff;
     }
-    public boolean isPassive()
+    public boolean isTimeLess()
     {
-        return passive;
+        return timeLess;
     }
-    public void setTime(int time)
+    public void setTimeLimit(int timeLimit)
     {
-        this.time = time;
+        this.timeLimit = timeLimit;
     }
     public void setLayers(int layers)
     {
@@ -55,10 +54,10 @@ public final class BuffMessage implements Serializable
     public String toString()
     {
         return "BuffMessage[" +
-                "持续回合:" + time +
+                "持续回合:" + timeLimit +
                 ", 效果层数:" + layers +
                 ", Debuff:" + debuff +
-                ", 特性:" + passive +
+                ", 特性:" + timeLess +
                 ']';
     }
 
@@ -68,6 +67,6 @@ public final class BuffMessage implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BuffMessage that = (BuffMessage) o;
-        return time == that.time && layers == that.layers && debuff == that.debuff && passive == that.passive;
+        return timeLimit == that.timeLimit && layers == that.layers && debuff == that.debuff && timeLess == that.timeLess;
     }
 }

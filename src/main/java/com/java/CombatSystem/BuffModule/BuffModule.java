@@ -15,7 +15,21 @@ public class BuffModule implements Serializable
     {
         if (aBuffMessage == null)
             throw new NullPointerException();
-        //TODO:如果存在,叠加; 未完成
+
+        if (haveBuffs.containsKey(aBuffType))
+        {
+            if (aBuffMessage.isTimeLess())
+                haveBuffs.put(aBuffType, aBuffMessage);
+            else
+            {
+                var existentBuff = haveBuffs.get(aBuffType);
+                var addTimeLimit = aBuffMessage.getTimeLimit();
+                var addLayers = aBuffMessage.getLayers();
+
+                existentBuff.setTimeLimit(existentBuff.getTimeLimit() + (addTimeLimit == 1 ? 1 : addTimeLimit / 2));
+                existentBuff.setLayers(existentBuff.getLayers() + (addLayers == 1 ? 1 : addLayers / 2));
+            }
+        }
         haveBuffs.put(aBuffType, aBuffMessage);
     }
 
@@ -58,16 +72,13 @@ public class BuffModule implements Serializable
             throw new NullPointerException("Buff不存在: " + type);
 
         var buff = haveBuffs.get(type);
-        var originalTime = buff.getTime();
+        var originalTime = buff.getTimeLimit();
 
         //如果移除的回合大于现有的回合, 则直接移除
         if (originalTime <= reduceTime)
             haveBuffs.remove(type);
         else
-        {
-            buff.setTime(originalTime - reduceTime);
-            haveBuffs.put(type, buff);
-        }
+            buff.setTimeLimit(originalTime - reduceTime);
     }
     private boolean buffNotExist(BuffType type)
     {
