@@ -1,0 +1,16 @@
+
+N	java:S106"9Replace this use of System.out or System.err by a logger.(ˆ®Ãä
+h	java:S128"LEnd this switch case with an unconditional break, return or throw statement.(ºÅÀ8¤“ã™/
+h	java:S128"LEnd this switch case with an unconditional break, return or throw statement.(¤œÛ8íâ™/
+n	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(µ’¦×
+N	java:S106"9Replace this use of System.out or System.err by a logger.(“ÇÅù
+M	java:S106"9Replace this use of System.out or System.err by a logger.(°Š‚e
+N	java:S106"9Replace this use of System.out or System.err by a logger.(“ùÎ€
+Q
+java:S6212&"/Declare this local variable with "var" instead.(ˆù©ëúÿÿÿÿ8¹²Ó¾/
+Z	java:S106("9Replace this use of System.out or System.err by a logger.(ı‰şøÿÿÿÿ8áÂÜ™/
+T	java:S106+"9Replace this use of System.out or System.err by a logger.(°Š‚e8áÂÜ™/
+Z	java:S106."9Replace this use of System.out or System.err by a logger.(Ù‘¯ôÿÿÿÿÿ8áÂÜ™/
+Z	java:S106/"9Replace this use of System.out or System.err by a logger.(ÍªÜõøÿÿÿÿ8áÂÜ™/
+€
+java:S21424"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ÇâŞáøÿÿÿÿ8áÂÜ™/
