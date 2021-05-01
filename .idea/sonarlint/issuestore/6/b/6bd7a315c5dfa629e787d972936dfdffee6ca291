@@ -1,21 +1,0 @@
-
-f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â†¶Ž
-S	java:S106"9Replace this use of System.out or System.err by a logger.(¥¤ˆìøÿÿÿÿ
-S	java:S106"9Replace this use of System.out or System.err by a logger.(¶Ÿöíÿÿÿÿÿ
-Q	java:S125%"<This block of commented-out lines of code should be removed.(¶“Ð­
-Q	java:S125"<This block of commented-out lines of code should be removed.(œŸ“È
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(þÆýÝ
-w
-java:S1845"aRename method "Main" to prevent any misunderstanding/clash with method "main" defined on line 15.(‡ì’¶
-S	java:S106 "9Replace this use of System.out or System.err by a logger.(Ïðà©þÿÿÿÿ
-N	java:S106!"9Replace this use of System.out or System.err by a logger.(°ûò‡
-Q	java:S125"<This block of commented-out lines of code should be removed.(‚Š©ó
-Q	java:S125"<This block of commented-out lines of code should be removed.(»¸ïæ
-S	java:S106#"9Replace this use of System.out or System.err by a logger.(ÕÐñ‚ýÿÿÿÿ
->
-java:S1481"(Remove this unused "ATK" local variable.(Â†¶Ž
-=
-java:S1481"'Remove this unused "in" local variable.( ý£„
-L
-java:S1854"6Remove this useless assignment to local variable "in".( ý£„
-c	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡ì’¶

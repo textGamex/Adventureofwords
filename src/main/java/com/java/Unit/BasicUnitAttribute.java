@@ -1,6 +1,8 @@
 package com.java.Unit;
 
 import com.java.CombatSystem.BuffModule.BuffModule;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.*;
 
 /**
@@ -122,6 +124,8 @@ public class BasicUnitAttribute
 
     protected BasicUnitAttribute(Builder builder)
     {
+        if (builder == null)
+            throw new NullPointerException();
         name               = builder.name;
         hp                 = builder.maxHp;
         maxHp              = builder.maxHp;
@@ -239,10 +243,12 @@ public class BasicUnitAttribute
     {
         this.level = level;
     }
-    //    public int directHP(int reducedHP)//*无视物抗直接扣血并返回扣除的HP */
+
+    /**无视物抗直接扣血并返回扣除的HP */
+    //    public int directHp(int reducedHp)
 //    {
-//        HP -= reducedHP;
-//        return reducedHP;
+//        HP -= reducedHp;
+//        return reducedHp;
 //    }
 
 //    public int subtractHP(int ATK, int fixArmorPen, double perArmorPen)//*计算护甲并扣血
@@ -273,7 +279,7 @@ public class BasicUnitAttribute
                 && Double.compare(that.critRate, critRate) == 0 && Double.compare(that.critsEffect, critsEffect) == 0
                 && Double.compare(that.physicalResistance, physicalResistance) == 0
                 && Double.compare(that.evade, evade) == 0 && lifeRegeneration == that.lifeRegeneration
-                && level == that.level && name.equals(that.name);
+                && level == that.level && name.equals(that.name) && buff.equals(that.buff);
     }
 
     @Override
@@ -328,7 +334,8 @@ public class BasicUnitAttribute
     /*sort接口实现*/
     public int compareTo(BasicUnitAttribute other)
     {
+        if (other == null)
+            throw new NullPointerException();
         return Integer.compare(id, other.getId());
     }
-
 }

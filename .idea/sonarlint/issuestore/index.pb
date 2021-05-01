@@ -13,14 +13,10 @@ _
 /src/main/java/BattleSystemMessage_en.properties,4\0\40d7a5b80d8ba7d597ff0331445df9c51ea0cd03
 X
 (src/main/java/com/ui/payment/WeChat.java,7\d\7d1bd779e72f482ce01ae2d6ec7bfd20d99d8dcf
-e
-5src/main/java/com/java/CombatSystem/BattleSystem.java,6\b\6bd7a315c5dfa629e787d972936dfdffee6ca291
 ^
 .src/test/java/com/java/Tools/GameToolTest.java,7\5\753f99f0d2faa46d859b31b46c4b617e86f448fb
 c
 3src/test/java/com/java/Unit/EnemyAttributeTest.java,b\4\b47a64f07288f88b3fd454f903481bf0c97acf6e
-Q
-!src/main/java/com/ui/LoginUi.java,b\b\bba72f9079d33e52156c39b572f607e97d7a8da7
 L
 .idea/codeStyles/Project.xml,6\e\6ecd6000a7b6f4a2884412ff19f74193ed089648
 :
@@ -32,8 +28,6 @@ _
 /src/test/java/com/java/Tools/UnitToolsTest.java,b\4\b4850c084d6ca9771a3dc6276647264b46c5c5f5
 g
 7src/test/java/com/java/Unit/BasicUnitAttributeTest.java,b\4\b4271ff58ebb02b9786bedb9abfb6d344230ed58
-Z
-*src/main/java/com/java/Tools/GameTool.java,d\7\d723b619db5696332cfb905ffc8028fcb0606557
 [
 +src/main/java/com/java/Tools/UnitTools.java,3\e\3ebfd948d98126bef0469868c2d134bd88104d6e
 e
@@ -50,3 +44,19 @@ _
 /src/main/java/com/java/Message/PrivateData.java,a\6\a61cba812395c0bc594401f601976592c16f0733
 _
 /src/main/java/com/java/Unit/EnemyAttribute.java,f\c\fcb21b03a6183b19615155a82964517e6e36ee60
+Z
+*src/main/java/com/java/Unit/EnemyType.java,1\3\13693083ee903fc52acf67f95b929ed7d6dd40fb
+\
+,src/main/java/com/java/Account/Identity.java,5\4\54bd6778523fd508209eaf72e37219c49d1c7bdd
+o
+?src/main/java/com/java/CombatSystem/BuffModule/BuffMessage.java,d\2\d22ec5e4c3b206b5adf872fc7a251d16f51adea8
+l
+<src/main/java/com/java/CombatSystem/BuffModule/BuffType.java,b\b\bbb3fd10e4226e3584eb4eb0623fbda78374760a
+d
+4src/main/java/com/java/Message/PlayerStatistics.java,d\7\d7b2ad900b6de7b50b6125cfe148f97d2392557b
+b
+2src/test/java/com/java/Unit/RoleAttributeTest.java,4\f\4f023b009ece80413080bb0cd006f3c9af38d91f
+b
+2src/main/java/com/java/Account/AccountMessage.java,2\4\24813896b7a3f3718a85f493741fa21fbd6f8a67
+^
+.src/main/java/com/java/Unit/RoleAttribute.java,c\9\c95e98b3029dec8dae47342a75c8da87cf8c04e7

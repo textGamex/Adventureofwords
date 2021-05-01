@@ -1,0 +1,8 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Úœë•
+—
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛÛ¯ø
+7
+java:S1170"!Make this final field static too.(‡‡«
+\
+java:S3252"EUse static access with "com.alibaba.fastjson.JSON" for "parseObject".(“¤ˆÎ
