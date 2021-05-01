@@ -8,7 +8,8 @@ import java.io.*;
  * @version 0.3.3
  * @author Millennium
  */
-public class BasicUnitAttribute implements Comparable<BasicUnitAttribute>, Serializable
+public class BasicUnitAttribute
+        implements Comparable<BasicUnitAttribute>, Serializable
 {
     @Serial
     private static final long serialVersionUID = 7938388190739071271L;
@@ -329,4 +330,5 @@ public class BasicUnitAttribute implements Comparable<BasicUnitAttribute>, Seria
     {
         return Integer.compare(id, other.getId());
     }
+
 }

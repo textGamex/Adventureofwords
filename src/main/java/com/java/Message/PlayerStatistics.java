@@ -293,14 +293,14 @@ public final class PlayerStatistics implements Serializable
         }
         var json = JSONObject.parseObject(line);
 
-        long totalKill = json.getLong("玩家总击杀数");
-        long totalRound = json.getLong("总场数");
-        long totalAttack = json.getLong("普通攻击次数");
-        long totalHarm = json.getLong("总伤害");
-        long totalVictory = json.getLong("胜利场数");
-        long totalXp = json.getLong("一共获得的经验");
-        long totalCash = json.getLong("一共获得的货币");
-        long totalValue = json.getLong("一共获得的分数");
+        var totalKill = json.getLongValue("玩家总击杀数");
+        var totalRound = json.getLongValue("总场数");
+        var totalAttack = json.getLongValue("普通攻击次数");
+        var totalHarm = json.getLongValue("总伤害");
+        var totalVictory = json.getLongValue("胜利场数");
+        var totalXp = json.getLongValue("一共获得的经验");
+        var totalCash = json.getLongValue("一共获得的货币");
+        var totalValue = json.getLongValue("一共获得的分数");
 
         return new PlayerStatistics(totalKill, totalRound, totalAttack, totalHarm, totalVictory, totalXp, totalCash,
                 totalValue);

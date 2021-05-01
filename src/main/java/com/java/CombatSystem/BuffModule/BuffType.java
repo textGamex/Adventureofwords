@@ -1,5 +1,6 @@
 package com.java.CombatSystem.BuffModule;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public enum BuffType implements Serializable

@@ -1,9 +1,12 @@
 package com.java.CombatSystem.BuffModule;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public final class BuffMessage implements Serializable
 {
+    @Serial
+    private static final long serialVersionUID = 6938381291107023911L;
     /**持续回合*/
     private int timeLimit;
     /**效果层数*/
@@ -29,22 +32,27 @@ public final class BuffMessage implements Serializable
     {
         return timeLimit;
     }
+
     public int getLayers()
     {
         return layers;
     }
+
     public boolean isDebuff()
     {
         return debuff;
     }
+
     public boolean isTimeLess()
     {
         return timeLess;
     }
+
     public void setTimeLimit(int timeLimit)
     {
         this.timeLimit = timeLimit;
     }
+
     public void setLayers(int layers)
     {
         this.layers = layers;

@@ -1,5 +1,6 @@
 package com.java.CombatSystem.BuffModule;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Objects;
@@ -9,6 +10,9 @@ public class BuffModule implements Serializable
     public static void main(String[] args)
     {
     }
+    @Serial
+    private static final long serialVersionUID = 6182039129119023911L;
+
     private final EnumMap<BuffType, BuffMessage> haveBuffs = new EnumMap<>(BuffType.class);
 
     public final void add(BuffType type, BuffMessage aBuffMessage)
