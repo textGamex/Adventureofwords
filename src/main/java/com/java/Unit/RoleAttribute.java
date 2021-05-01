@@ -77,47 +77,58 @@ public class RoleAttribute extends BasicUnitAttribute
     {
         return cash;
     }
+
     public final int getTotalGameScore()
     {
         return totalGameScore;
     }
+
     public final LocalDateTime getCreatingDateTime()
     {
         return creatingDateTime;
     }
+
     public final int getExp()
     {
         return exp;
     }
+
     public final int getUpgradeNeedXp()
     {
         return upgradeNeedXp;
     }
+
     public final void addUpgradeNeedXP(int addUpgradeXP)
     {
         upgradeNeedXp += addUpgradeXP;
     }
+
     public final void addEXP(int gainEXP)
     {
         exp += gainEXP;
     }
+
     public final void addCash(int addCash)
     {
         cash += addCash;
     }
+
     public final void addTotalGameScore(int addGameScore)
     {
         totalGameScore += addGameScore;
     }
+
     @Override
     public final int getId()
     {
         return id;
     }
+
     public static int getNextId()
     {
         return nextId;
     }
+
     @Override
     public String toString()
     {

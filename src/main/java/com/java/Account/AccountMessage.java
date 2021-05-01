@@ -31,22 +31,25 @@ public final class AccountMessage
     {
         return playerPath;
     }
-    public Path getPlayerDataResolvePath(String fileName)
-    {
-       return playerPath.resolve("Data").resolve(fileName);
-    }
+
+    /**
+     * @return XXX/Adventure_of_words/玩家账户名/Data/fileName
+     */
     public File getPlayerDataResolveFile(String fileName)
     {
        return playerPath.resolve("Data").resolve(fileName).toFile();
     }
+
     public final Identity getId()
     {
         return id;
     }
+
     public String getAccount()
     {
         return account;
     }
+
     public Path getGameDataPath()
     {
         return gameDataPath;
@@ -104,7 +107,8 @@ public final class AccountMessage
             try
             {
                 Files.createDirectories(playerPath.resolve("Data"));
-//                Files.createDirectories(playerDataPath.resolve("Log"));//TODO:log未完成
+//                TODO:log未完成
+//                Files.createDirectories(playerDataPath.resolve("Log"));
                 Logger.getGlobal().fine(file + " 文件夹创建成功");
             }
             catch (IOException e)

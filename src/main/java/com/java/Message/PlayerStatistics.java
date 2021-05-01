@@ -1,24 +1,23 @@
 package com.java.Message;
 
+import com.alibaba.fastjson.JSONObject;
 import com.java.Account.AccountMessage;
 import com.java.Account.Identity;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.util.Objects;
 import java.util.Scanner;
-
 /**
  *统计玩家信息
  *@author Millennium
- *@version 0.3.0
+ *@version 0.3.2
  *@Date 2021/3/13 22:42
 */
 public final class PlayerStatistics implements Serializable
 {
     public static void main(String[] args)
     {
+
     }
     @Serial
     private static final long serialVersionUID = 7935923925807359121L;
@@ -31,15 +30,12 @@ public final class PlayerStatistics implements Serializable
     private long totalHarm;
     //胜利场数
     private long totalVictory;
-    private long totalXP;
+    private long totalXp;
     private long totalCash;
     private long totalValue;
     //游玩总时间 TODO:未实现
-//    private long9
-//    public PlayerStatistics()
-//    {
-//        this();
-//    }
+//    private long
+
     public PlayerStatistics()
     {
         totalKill = 0;
@@ -47,16 +43,24 @@ public final class PlayerStatistics implements Serializable
         totalAttack = 0;
         totalHarm = 0;
         totalVictory = 0;
+        totalXp = 0;
+        totalCash = 0;
+        totalValue = 0;
     }
 
-    public PlayerStatistics(long totalKill, long totalRound, long totalAttack, long totalHarm, long totalVictory)
+    public PlayerStatistics(long totalKill, long totalRound, long totalAttack, long totalHarm, long totalVictory,
+                            long totalXp, long totalCash, long totalValue)
     {
         this.totalKill = totalKill;
         this.totalRound = totalRound;
         this.totalAttack = totalAttack;
         this.totalHarm = totalHarm;
         this.totalVictory = totalVictory;
+        this.totalXp = totalXp;
+        this.totalCash = totalCash;
+        this.totalValue = totalValue;
     }
+
     public long getTotalKill()
     {
         return totalKill;
@@ -82,16 +86,16 @@ public final class PlayerStatistics implements Serializable
         return totalVictory;
     }
 
-    public long getTotalXP()
+    public long getTotalXp()
     {
-        return totalXP;
+        return totalXp;
     }
 
-    public void setTotalXP(long totalXP)
+    public void setTotalXp(long totalXp)
     {
-        if (totalXP < 0)
-            throw new IllegalArgumentException("不能为负数:" + totalXP);
-        this.totalXP = totalXP;
+        if (totalXp < 0)
+            throw new IllegalArgumentException("不能为负数:" + totalXp);
+        this.totalXp = totalXp;
     }
 
     public long getTotalCash()
@@ -171,7 +175,7 @@ public final class PlayerStatistics implements Serializable
                 ", 普通攻击次数:" + totalAttack +
                 ", 总伤害:" + totalHarm +
                 ", 胜利场数:" + totalVictory +
-                ", 一共获得的经验:" + totalXP +
+                ", 一共获得的经验:" + totalXp +
                 ", 一共获得的货币:" + totalCash +
                 ", 一共获得的分数:" + totalValue +
                 "]";
@@ -192,11 +196,21 @@ public final class PlayerStatistics implements Serializable
     private void saveGameManagerStatistics(AccountMessage account)
     {
         assert account != null;
+
+        var jsonFile = new JSONObject();
+        jsonFile.put("玩家总击杀数", totalKill);
+        jsonFile.put("总场数", totalRound);
+        jsonFile.put("普通攻击次数", totalAttack);
+        jsonFile.put("总伤害", totalHarm);
+        jsonFile.put("胜利场数", totalVictory);
+        jsonFile.put("一共获得的经验", totalXp);
+        jsonFile.put("一共获得的货币", totalCash);
+        jsonFile.put("一共获得的分数", totalValue);
+
         try (var out = new PrintWriter(
-                account.getPlayerDataResolveFile("PlayerStatistics.txt"), StandardCharsets.UTF_8))
+                account.getPlayerDataResolveFile("PlayerStatistics.json"), StandardCharsets.UTF_8))
         {
-            out.println(totalKill + "|" + totalRound + "|" + totalAttack
-                    + "|" + totalHarm + "|" + totalVictory);
+            out.println(jsonFile.toJSONString());
         }
         catch (IOException e)
         {
@@ -260,13 +274,14 @@ public final class PlayerStatistics implements Serializable
         }
         return archive;
     }
+
     private static PlayerStatistics loadGameManagerStatistics(AccountMessage acc) throws FileNotFoundException
     {
         assert acc != null;
 
         String line;
         try (var in = new Scanner(acc.getPlayerDataResolveFile(
-                "PlayerStatistics.txt"), StandardCharsets.UTF_8))
+                "PlayerStatistics.json"), StandardCharsets.UTF_8))
         {
             line = in.nextLine();
         }
@@ -276,13 +291,18 @@ public final class PlayerStatistics implements Serializable
             e2.initCause(e);
             throw e2;
         }
-        String[] tokens = line.split("\\|");
-        long totalKill = Integer.parseInt(tokens[0]);
-        long totalRound = Integer.parseInt(tokens[1]);
-        long totalAttack = Integer.parseInt(tokens[2]);
-        long totalHarm = Integer.parseInt(tokens[3]);
-        long totalVictory = Integer.parseInt(tokens[4]);
+        var json = JSONObject.parseObject(line);
 
-        return new PlayerStatistics(totalKill, totalRound, totalAttack, totalHarm, totalVictory);
+        long totalKill = json.getLong("玩家总击杀数");
+        long totalRound = json.getLong("总场数");
+        long totalAttack = json.getLong("普通攻击次数");
+        long totalHarm = json.getLong("总伤害");
+        long totalVictory = json.getLong("胜利场数");
+        long totalXp = json.getLong("一共获得的经验");
+        long totalCash = json.getLong("一共获得的货币");
+        long totalValue = json.getLong("一共获得的分数");
+
+        return new PlayerStatistics(totalKill, totalRound, totalAttack, totalHarm, totalVictory, totalXp, totalCash,
+                totalValue);
     }
 }
