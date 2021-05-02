@@ -15,12 +15,6 @@ class BuffModuleTest
         buffs = new BuffModule();
     }
 
-//    @AfterEach
-//    void tearDown()
-//    {
-//
-//    }
-
     @Test
     void add()
     {
@@ -87,15 +81,16 @@ class BuffModuleTest
         assertTrue(buffs.isEmpty());
     }
 
-    @Test
-    void testEquals()
+    void clearDebuff()
     {
-        var buffs = new BuffModule();
-    }
+        buffs.add(BuffType.POISON, new BuffEffect(10,1,true));
+        buffs.add(BuffType.BLEED, new BuffEffect(10,1,true));
+        buffs.add(BuffType.DEBILITY, new BuffEffect(10,1,false));
+        buffs.clearDebuff();
 
-    @Test
-    void testHashCode()
-    {
+        assertFalse(buffs.have(BuffType.POISON));
+        assertFalse(buffs.have(BuffType.BLEED));
+        assertTrue(buffs.have(BuffType.DEBILITY));
     }
 
 }

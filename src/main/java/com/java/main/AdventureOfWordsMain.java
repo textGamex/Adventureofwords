@@ -11,7 +11,6 @@ import java.util.logging.Logger;
  *¿ªÊ¼Àà
  *@author Millennium
  *@version 0.2.0
- *@Date 2021/3/13 0:28
 */
 public final class AdventureOfWordsMain
 {

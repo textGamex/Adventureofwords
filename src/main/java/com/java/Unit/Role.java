@@ -18,7 +18,7 @@ import static java.util.Objects.requireNonNull;
  *     <li>升到下一级所需经验</li>
  *     <li>角色创建日期及时间</li>
  * </em>
- * @version 0.3.1
+ * @version 0.3.2
  * @author 千年
  */
 public class Role extends BasicUnit

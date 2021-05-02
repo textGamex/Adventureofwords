@@ -9,8 +9,8 @@ import static java.util.Objects.requireNonNull;
  *
  * <p>现已实现以下属性</p>
  * <ul>
- *     <li>名称</li>
- *     <li>等级</li>
+ *     <li>单位名称</li>
+ *     <li>单位等级</li>
  *     <li>最大生命值</li>
  *     <li>物理攻击</li>
  *     <li>魔法攻击</li>
@@ -106,6 +106,7 @@ public class BasicUnit
         private int mana                  = 0;
         private double hitRate            = 0.7;
         private double magicResistance    = 0.0;
+
         /**
          * @param name 单位名称
          * @throws NullPointerException 如果{@code name}是null
@@ -195,7 +196,6 @@ public class BasicUnit
         {
             return new BasicUnit(this);
         }
-
     }
 
     /**

@@ -1,13 +1,26 @@
 package com.java.CombatSystem;
 
-import com.java.Message.CombatTip;
 import com.java.Unit.Enemy;
 import com.java.Unit.Role;
 
 /**
- * 战斗系统
- * @version 0.2.1
+ * 战斗系统, 用来处理玩家战斗和战斗相关的数值处理
+ *
+ * <p>已经实现的系数</p>
+ * <em>
+ *     <li>玩家经验奖励系数</li>
+ *     <li>玩家货币奖励系数</li>
+ *     <li>玩家分数奖励系数</li>
+ *     <li>玩家/敌对单位攻击系数</li>
+ *     <li>玩家/敌对单位暴击率</li>
+ *     <li>玩家/敌对单位暴击效果</li>
+ *     <li>玩家/敌对单位承伤系数</li>
+ *     <li>玩家/敌对单位物理抗性系数</li>
+ *     <li>玩家/敌对单位法术抗性系数</li>
+ * </em>
+ * @version 0.2.3
  * @author Millennium
+ * @since 15
  */
 public final class BattleSystem
 {
@@ -20,28 +33,41 @@ public final class BattleSystem
 
     private double roleAttackFactor;
     private double roleCritRateFactor;
-    private double roleCritsEffectFactor ;
-    private double roleDamageCoefficient;//承伤系数
+    private double roleCritsEffectFactor;
+    private double roleDamageFactor;//承伤系数
+    private double rolePhysicalResistanceFactor;
+    private double roleMagicResistanceFactor;
 
     private double enemyAttackFactor;
     private double enemyCritRateFactor;
     private double enemyCritsEffectFactor;
-    private double enemyDamageCoefficient;//承伤系数
+    private double enemyDamageFactor;//承伤系数
+    private double enemyPhysicalResistanceFactor;
+    private double enemyMagicResistanceFactor;
 
+    /**
+     * 用来构建{@code BattleSystem}对象
+     * @version 1.0.2
+     * @since 16
+     */
     public final static class Builder
     {
-        private double expRewardsFactor       = 1.0;
-        private double cashRewardsFactor      = 1.0;
-        private double valueFactor            = 1.0;
-        private double roleAttackFactor       = 1.0;
-        private double roleCritRateFactor     = 1.0;
-        private double roleCritsEffectFactor  = 1.0;
-        private double roleDamageCoefficient  = 1.0;//承伤系数
+        private double expRewardsFactor             = 1.0;
+        private double cashRewardsFactor            = 1.0;
+        private double valueFactor                  = 1.0;
+        private double roleAttackFactor             = 1.0;
+        private double roleCritRateFactor           = 1.0;
+        private double roleCritsEffectFactor        = 1.0;
+        private double roleDamageCoefficient        = 1.0;//承伤系数
+        private double rolePhysicalResistanceFactor = 1.0;
+        private double roleMagicResistanceFactor    = 1.0;
 
-        private double enemyAttackFactor      = 1.0;
-        private double enemyCritRateFactor    = 1.0;
-        private double enemyCritsEffectFactor = 1.0;
-        private double enemyDamageCoefficient = 1.0;//承伤系数
+        private double enemyAttackFactor             = 1.0;
+        private double enemyCritRateFactor           = 1.0;
+        private double enemyCritsEffectFactor        = 1.0;
+        private double enemyDamageCoefficient        = 1.0;//承伤系数
+        private double enemyPhysicalResistanceFactor = 1.0;
+        private double enemyMagicResistanceFactor    = 1.0;
 
         public Builder expRewardsFactor(double expRewardsFactor)
         {
@@ -85,6 +111,18 @@ public final class BattleSystem
             return this;
         }
 
+        public Builder rolePhysicalResistanceFactor(double rolePhysicalResistanceFactor)
+        {
+            this.rolePhysicalResistanceFactor = rolePhysicalResistanceFactor;
+            return this;
+        }
+
+        public Builder enemyPhysicalResistanceFactor(double enemyPhysicalResistanceFactor)
+        {
+            this.enemyPhysicalResistanceFactor = enemyPhysicalResistanceFactor;
+            return this;
+        }
+
         public Builder enemyAttackFactor(double enemyAttackFactor)
         {
             this.enemyAttackFactor = enemyAttackFactor;
@@ -109,6 +147,18 @@ public final class BattleSystem
             return this;
         }
 
+        public Builder roleMagicResistanceFactor(double roleMagicResistanceFactor)
+        {
+            this.roleMagicResistanceFactor = roleMagicResistanceFactor;
+            return this;
+        }
+
+        public Builder enemyMagicResistanceFactor(double enemyMagicResistanceFactor)
+        {
+            this.enemyMagicResistanceFactor = enemyMagicResistanceFactor;
+            return this;
+        }
+
         public BattleSystem build()
         {
             return new BattleSystem(this);
@@ -118,17 +168,21 @@ public final class BattleSystem
     private BattleSystem(Builder builder)
     {
         assert builder != null;
-        expRewardsFactor       = builder.expRewardsFactor;
-        cashRewardsFactor      = builder.cashRewardsFactor;
-        valueFactor            = builder.valueFactor;
-        roleAttackFactor       = builder.roleAttackFactor;
-        roleCritRateFactor     = builder.roleCritRateFactor;
-        roleCritsEffectFactor  = builder.roleCritsEffectFactor;
-        roleDamageCoefficient  = builder.roleDamageCoefficient;
-        enemyAttackFactor      = builder.enemyAttackFactor;
-        enemyCritRateFactor    = builder.enemyCritRateFactor;
-        enemyCritsEffectFactor = builder.enemyCritsEffectFactor;
-        enemyDamageCoefficient = builder.enemyDamageCoefficient;
+        expRewardsFactor              = builder.expRewardsFactor;
+        cashRewardsFactor             = builder.cashRewardsFactor;
+        valueFactor                   = builder.valueFactor;
+        roleAttackFactor              = builder.roleAttackFactor;
+        roleCritRateFactor            = builder.roleCritRateFactor;
+        roleCritsEffectFactor         = builder.roleCritsEffectFactor;
+        roleDamageFactor              = builder.roleDamageCoefficient;
+        rolePhysicalResistanceFactor  = builder.rolePhysicalResistanceFactor;
+        roleMagicResistanceFactor     = builder.roleMagicResistanceFactor;
+        enemyAttackFactor             = builder.enemyAttackFactor;
+        enemyCritRateFactor           = builder.enemyCritRateFactor;
+        enemyCritsEffectFactor        = builder.enemyCritsEffectFactor;
+        enemyDamageFactor             = builder.enemyDamageCoefficient;
+        enemyPhysicalResistanceFactor = builder.enemyPhysicalResistanceFactor;
+        enemyMagicResistanceFactor    = builder.enemyMagicResistanceFactor;
     }
 
     public void fight(Role role, Enemy enemy)
@@ -166,9 +220,9 @@ public final class BattleSystem
         return roleCritsEffectFactor;
     }
 
-    public double getRoleDamageCoefficient()
+    public double getRoleDamageFactor()
     {
-        return roleDamageCoefficient;
+        return roleDamageFactor;
     }
 
     public double getEnemyAttackFactor()
@@ -186,9 +240,29 @@ public final class BattleSystem
         return enemyCritsEffectFactor;
     }
 
-    public double getEnemyDamageCoefficient()
+    public double getEnemyDamageFactor()
     {
-        return enemyDamageCoefficient;
+        return enemyDamageFactor;
+    }
+
+    public double getRolePhysicalResistanceFactor()
+    {
+        return rolePhysicalResistanceFactor;
+    }
+
+    public double getEnemyPhysicalResistanceFactor()
+    {
+        return enemyPhysicalResistanceFactor;
+    }
+
+    public double getRoleMagicResistanceFactor()
+    {
+        return roleMagicResistanceFactor;
+    }
+
+    public double getEnemyMagicResistanceFactor()
+    {
+        return enemyMagicResistanceFactor;
     }
 
     @Override
@@ -201,11 +275,15 @@ public final class BattleSystem
                 ", 玩家物理攻击系数:" + roleAttackFactor +
                 ", 角色暴击率系数:" + roleCritRateFactor +
                 ", 角色暴击效果系数:" + roleCritsEffectFactor +
-                ", 角色所受伤害系数:" + roleDamageCoefficient +
+                ", 角色所受伤害系数:" + roleDamageFactor +
+                ", 玩家物理抗性系数:" + rolePhysicalResistanceFactor +
+                ", 玩家法术抗性系数:" + roleMagicResistanceFactor +
                 ", 敌人物理攻击系数:" + enemyAttackFactor +
                 ", 敌人暴击率系数:" + enemyCritRateFactor +
                 ", 敌人暴击效果系数:" + enemyCritsEffectFactor +
-                ", 敌人所受伤害系数:" + enemyDamageCoefficient +
+                ", 敌人所受伤害系数:" + enemyDamageFactor +
+                ", 敌人物理抗性系数:" + enemyPhysicalResistanceFactor +
+                ", 敌人法术抗性系数:" + enemyMagicResistanceFactor +
                 ']';
     }
 }

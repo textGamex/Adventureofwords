@@ -4,6 +4,9 @@ package com.java.Message;
  * ¹¥»÷ÀàĞÍ
  * @author Millennium
  * @version 1.0.0
+ * @see CombatTip
+ * @see com.java.Message.CombatTip.CombatMessage
+ * @since 15
 */
 public enum AttackType
 {

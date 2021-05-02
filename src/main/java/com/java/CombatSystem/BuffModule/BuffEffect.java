@@ -76,6 +76,11 @@ public final class BuffEffect implements Serializable
         return layers;
     }
 
+    /**
+     * 如果是负面效果, 返回{@code ture}
+     *
+     * @return 如果是负面效果, 返回{@code ture}
+     */
     public boolean isDebuff()
     {
         return debuff;

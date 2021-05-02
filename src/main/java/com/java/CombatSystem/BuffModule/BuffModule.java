@@ -7,13 +7,13 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Buff模块, 用于和{@code BasicUnit}类交互
+ * Buff模块, 用于和{@link com.java.Unit.BasicUnit}类交互
  *
  * <p>用于实现游戏的buff机制</p>
  * @see com.java.Unit.BasicUnit
  * @see BuffEffect
  * @see BuffType
- * @version 1.3.1
+ * @version 1.3.2
  * @since 15
  */
 public class BuffModule implements Serializable
@@ -27,9 +27,12 @@ public class BuffModule implements Serializable
     private final EnumMap<BuffType, BuffEffect> haveBuffs = new EnumMap<>(BuffType.class);
 
     /**
-     * 添加buff, 如果要添加的已存在, 则time和layer除于2然后和已存在的buffEffect的time和layer相加
-     * @param type buff类型
-     * @param buffEffect buff的具体效果
+     * 给单位添加buff
+     *
+     * <p>给单位添加buff, 如果要添加的效果已存在, 则持续回合数和效果层数除于2然后和已存在的{@code buffEffect}的time和layer相加</p>
+     * <p>如果{@link BuffEffect#isTimeLess()}方法的返回值为{@code ture}, 则直接替换</p>
+     * @param type 要添加的buff类型
+     * @param buffEffect 添加的buff的具体效果
      * @since 15
      * @throws NullPointerException 如果{@code buffEffect}或{@code type}为null
      * @see BuffEffect
@@ -60,6 +63,8 @@ public class BuffModule implements Serializable
     }
 
     /**
+     * 获得指定buff的效果信息
+     *
      * @throws NullPointerException 如果{@code type}为null或{@code type}不存在
      * @return 此buff的效果信息
      * @param type buff的类型
@@ -73,7 +78,9 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * @param aBuffType buff类型
+     * 如果buff存在, 返回{@code ture}
+     *
+     * @param aBuffType 要检测的buff类型
      * @throws NullPointerException 如果{@code aBuffType}为null
      * @return 如果存在, 返回 {@code true}, 否则返回{@code false}
      */
@@ -82,13 +89,19 @@ public class BuffModule implements Serializable
         return haveBuffs.containsKey(requireNonNull(aBuffType));
     }
 
+    /**
+     * 检测单位是否携带指定的buff
+     *
+     * @return 如果是空的, 返回{@code ture}
+     */
     public final boolean isEmpty()
     {
         return haveBuffs.isEmpty();
     }
 
     /**
-     * 此方法是对{@link EnumMap#size()}的包装
+     * 返回此单位具有的buff数量
+     *
      * @return 此单位具有的buff数量
      */
     public int size()
@@ -97,7 +110,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 从具有的buff中移除走一个特定的buff
+     * 从具有的buff中移除走一个指定的buff
      *
      * @param type 要移除的buff类型
      * @throws NullPointerException 如果{@code type}为null或者要移除buff不存在
@@ -110,7 +123,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 移除特定buff的持续回合数, 如果移除的大于等于现有的回合数, 则直接移除buff
+     * 移除指定buff的持续回合数, 如果移除的大于等于现有的回合数, 则直接移除buff
      *
      * @param type 要移除的buff类型
      * @param reduceTime 要移除的buff的回合数
@@ -141,12 +154,30 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 此方法是对{@link EnumMap#clear()}方法的包装
-     * @see 15
+     * 清空单位所携带的所有buff效果
+     * @since  15
      */
     public final void clear()
     {
         haveBuffs.clear();
+    }
+
+    /**
+     * 清空单位所携带的所有负面效果
+     *
+     * <p></p>
+     * <font color="#FF0000">注意:</font>
+     * <strong>只有{@link BuffEffect#isDebuff()}方法的返回值为{@code ture}的buff才会被清除</strong>
+     * @since 2021-5-3
+     */
+    public void clearDebuff()
+    {
+        var allBuff = haveBuffs.entrySet();
+        for (var buff : allBuff)
+        {
+            if (buff.getValue().isDebuff())
+                remove(buff.getKey());
+        }
     }
 
     @Override

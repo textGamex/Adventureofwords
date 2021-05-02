@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * {@inheritDoc}
- *
  * <p>且具有一下额外属性</p>
  * <em>
  *     <li>所值经验</li>

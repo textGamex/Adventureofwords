@@ -13,6 +13,7 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * ук╨едё©И
+ *
  * @version 1.2.1
  * @since 15
  * @author г╖дЙ
