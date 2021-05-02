@@ -1,0 +1,14 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(şÆıİ
+[
+java:S1128"9Remove this unused import 'com.java.Unit.EnemyAttribute'.(åª¯äşÿÿÿÿ8êÎÏ¶’/
+U
+java:S1128"8Remove this unused import 'com.java.Unit.RoleAttribute'.(ØÑ§Ş8êÎÏ¶’/
+X
+java:S1128"=Remove this unused import 'com.java.Unit.BasicUnitAttribute'.(õø½ûÿÿÿÿ
+I
+java:S1128".Remove this unused import 'java.util.Scanner'.(ÒÜÅ¸úÿÿÿÿ
+
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛÛ¯ø8Î˜½¶’/
+˜
+java:S1186ˆ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ğ†ä

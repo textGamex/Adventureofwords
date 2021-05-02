@@ -1,0 +1,12 @@
+
+f
+java:S1301"KReplace this "switch" statement by "if" statements to increase readability.(É”Áñşÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(­Öëúøÿÿÿÿ
+U
+java:S1128"8Remove this unused import 'com.java.Unit.RoleAttribute'.(ØÑ§Ş8ÔôÕ·’/
+—
+java:S1186	"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛÛ¯ø
+A
+java:S1172"+Remove this unused method parameter "harm".(ª£ Â
+s	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(É”Áñşÿÿÿÿ
+T	java:S106"9Replace this use of System.out or System.err by a logger.(Øô€{8«çÌ·’/

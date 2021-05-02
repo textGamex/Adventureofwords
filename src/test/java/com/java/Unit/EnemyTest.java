@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EnemyAttributeTest
+class EnemyTest
 {
     @Test
     void Builder()
     {
-       var enemy = new EnemyAttribute.Builder("敌对单位").cash(1).build();
+       var enemy = new Enemy.Builder("敌对单位").cash(1).build();
 
-       assertTrue(enemy instanceof EnemyAttribute);
+       assertTrue(enemy instanceof Enemy);
     }
 }

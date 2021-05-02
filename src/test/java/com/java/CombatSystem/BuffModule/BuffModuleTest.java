@@ -24,9 +24,9 @@ class BuffModuleTest
     @Test
     void add()
     {
-        buffs.add(BuffType.POISON, new BuffMessage(10,1,true));
-        buffs.add(BuffType.BLEED, new BuffMessage(10,1,true));
-        buffs.add(BuffType.DEBILITY, new BuffMessage(10,1,true));
+        buffs.add(BuffType.POISON, new BuffEffect(10,1,true));
+        buffs.add(BuffType.BLEED, new BuffEffect(10,1,true));
+        buffs.add(BuffType.DEBILITY, new BuffEffect(10,1,true));
 
         assertThrows(NullPointerException.class, () -> buffs.add(BuffType.BLEED, null));
         assertTrue(buffs.have(BuffType.POISON));
@@ -48,9 +48,9 @@ class BuffModuleTest
     @Test
     void size()
     {
-        buffs.add(BuffType.POISON, new BuffMessage(10,1,true));
-        buffs.add(BuffType.BLEED, new BuffMessage(10,1,true));
-        buffs.add(BuffType.DEBILITY, new BuffMessage(10,1,true));
+        buffs.add(BuffType.POISON, new BuffEffect(10,1,true));
+        buffs.add(BuffType.BLEED, new BuffEffect(10,1,true));
+        buffs.add(BuffType.DEBILITY, new BuffEffect(10,1,true));
 
         assertEquals(3, buffs.size());
     }
@@ -58,7 +58,7 @@ class BuffModuleTest
     @Test
     void remove()
     {
-        buffs.add(BuffType.POISON, new BuffMessage(10,1,true));
+        buffs.add(BuffType.POISON, new BuffEffect(10,1,true));
         buffs.remove(BuffType.POISON);
 
         assertThrows(NullPointerException.class, () -> buffs.remove(BuffType.DEBILITY));
@@ -68,8 +68,8 @@ class BuffModuleTest
     @Test
     void testRemove()
     {
-        buffs.add(BuffType.POISON, new BuffMessage(10,1,true));
-        buffs.add(BuffType.BLEED, new BuffMessage(10,1,true));
+        buffs.add(BuffType.POISON, new BuffEffect(10,1,true));
+        buffs.add(BuffType.BLEED, new BuffEffect(10,1,true));
         buffs.remove(BuffType.POISON, 3);
         buffs.remove(BuffType.BLEED, 11);
 
@@ -80,8 +80,8 @@ class BuffModuleTest
     @Test
     void clear()
     {
-        buffs.add(BuffType.POISON, new BuffMessage(10,1,true));
-        buffs.add(BuffType.BLEED, new BuffMessage(10,1,true));
+        buffs.add(BuffType.POISON, new BuffEffect(10,1,true));
+        buffs.add(BuffType.BLEED, new BuffEffect(10,1,true));
         buffs.clear();
 
         assertTrue(buffs.isEmpty());

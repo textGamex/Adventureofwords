@@ -7,13 +7,21 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Scanner;
+import static java.util.Objects.requireNonNull;
 
 /**
- * 玩家角色属性
+ * {@inheritDoc}
+ * <p>且具有一下额外属性</p>
+ * <em>
+ *     <li>持有货币</li>
+ *     <li>拥有经验</li>
+ *     <li>升到下一级所需经验</li>
+ *     <li>角色创建日期及时间</li>
+ * </em>
  * @version 0.3.1
- * @author Millennium
+ * @author 千年
  */
-public class RoleAttribute extends BasicUnitAttribute
+public class Role extends BasicUnit
 {
     public static void main(String[] args)
     {
@@ -27,31 +35,34 @@ public class RoleAttribute extends BasicUnitAttribute
     private int exp;
     /**升到下一级所需经验*/
     private int upgradeNeedXp;
-    /**游戏得分*/
-    private int totalGameScore;
     /**角色创建日期*/
     private final LocalDateTime creatingDateTime = LocalDateTime.now();
 
-    protected RoleAttribute(Builder builder)
+    /**
+     * @throws NullPointerException 如果{@code builder}为null
+     */
+    protected Role(Builder builder)
     {
-        super(builder);
+        super(requireNonNull(builder));
         cash           = builder.cash;
         exp            = builder.exp;
         upgradeNeedXp  = builder.upgradeNeedXp;
-        totalGameScore = builder.totalGameScore;
     }
 
-    public static class Builder extends BasicUnitAttribute.Builder<Builder>
+    public static class Builder extends BasicUnit.Builder<Builder>
     {
         private int cash           = 0;
         private int exp            = 0;
         private int upgradeNeedXp  = 10;
-        private int totalGameScore = 0;
 
+        /**
+         * @throws NullPointerException 如果{@code name}为null
+         */
         public Builder(String name)
         {
-            super(name);
+            super(requireNonNull(name));
         }
+
         public Builder cash(int cash)
         {
             this.cash = cash;
@@ -70,26 +81,16 @@ public class RoleAttribute extends BasicUnitAttribute
             return this;
         }
 
-        public Builder totalGameScore(int totalGameScore)
-        {
-            this.totalGameScore = totalGameScore;
-            return this;
-        }
         @Override
-        public RoleAttribute build()
+        public Role build()
         {
-            return new RoleAttribute(this);
+            return new Role(this);
         }
     }
 
     public final int getCash()
     {
         return cash;
-    }
-
-    public final int getTotalGameScore()
-    {
-        return totalGameScore;
     }
 
     public final LocalDateTime getCreatingDateTime()
@@ -124,7 +125,6 @@ public class RoleAttribute extends BasicUnitAttribute
 
     public final void addTotalGameScore(int addGameScore)
     {
-        totalGameScore += addGameScore;
     }
 
     @Override
@@ -143,7 +143,6 @@ public class RoleAttribute extends BasicUnitAttribute
     {
         return  super.toString() +
                 "[持有货币:" + cash +
-                ", 游戏得分:" + totalGameScore +
                 ", 角色拥有经验:" + exp +
                 ", 升到下一级所需经验:" + upgradeNeedXp +
                 ", 创建日期:" + creatingDateTime +
@@ -151,6 +150,12 @@ public class RoleAttribute extends BasicUnitAttribute
                 buff().toString();
     }
 
+    /**
+     * 用于保存角色的属性
+     * @param acc 此角色所对应的玩家的账号
+     * @see AccountMessage
+     * @throws NullPointerException 如果{@code acc}为null
+     */
     public void saveData(AccountMessage acc)
     {
         if (acc == null)
@@ -178,7 +183,6 @@ public class RoleAttribute extends BasicUnitAttribute
         jsonFile.put("每回合生命回复", super.getLifeRegeneration());
         jsonFile.put("闪避率", super.getEvade());
         jsonFile.put("持有货币", cash);
-        jsonFile.put("游戏得分", totalGameScore);
         jsonFile.put("角色拥有经验", exp);
         jsonFile.put("升到下一级所需经验", upgradeNeedXp);
 
@@ -206,7 +210,14 @@ public class RoleAttribute extends BasicUnitAttribute
         }
     }
 
-    public static RoleAttribute loadData(AccountMessage account) throws FileNotFoundException
+    /**
+     *
+     * @param account 要读取的账号
+     * @return 玩家属性信息
+     * @throws FileNotFoundException 如果要读取的文件不存在
+     * @since 15
+     */
+    public static Role loadData(AccountMessage account) throws FileNotFoundException
     {
         if (account == null)
             throw new NullPointerException();
@@ -233,15 +244,15 @@ public class RoleAttribute extends BasicUnitAttribute
         return acc.getId() == Identity.NONE || acc.getId() == Identity.NEW_GAME_MANAGER
                 || acc.getId() == Identity.NEW_PLAYER;
     }
-    private static RoleAttribute loadPlayerData(AccountMessage acc)
+    private static Role loadPlayerData(AccountMessage acc)
     {
         assert acc != null;
 
-        RoleAttribute archive = null;
+        Role archive = null;
         try (var in = new ObjectInputStream(new FileInputStream(
                 acc.getPlayerDataResolveFile("RoleAttribute.dat"))))
         {
-            archive = (RoleAttribute) in.readObject();
+            archive = (Role) in.readObject();
         }
         catch (IOException | ClassNotFoundException e)
         {
@@ -250,7 +261,7 @@ public class RoleAttribute extends BasicUnitAttribute
         return archive;
     }
 
-    private static RoleAttribute loadGameManagerData(AccountMessage acc) throws FileNotFoundException
+    private static Role loadGameManagerData(AccountMessage acc) throws FileNotFoundException
     {
         assert acc != null;
 
@@ -279,12 +290,11 @@ public class RoleAttribute extends BasicUnitAttribute
         var evade = json.getDoubleValue("闪避率");
         var cash = json.getIntValue("持有货币");
         var lifeRegeneration = json.getIntValue("每回合生命回复");
-        var totalGameScore = json.getIntValue("游戏得分");
         var exp = json.getIntValue("角色拥有经验");
         var upgradeNeedXp = json.getIntValue("升到下一级所需经验");
 
         return new Builder(name).level(level).maxHp(hp).mana(mana).atk(atk).cash(cash).critRate(critRate)
                 .physicalResistance(physicalResistance).critsEffect(critsEffect).evade(evade).exp(exp)
-                .lifeRegeneration(lifeRegeneration).totalGameScore(totalGameScore).upgradeNeedXp(upgradeNeedXp).build();
+                .lifeRegeneration(lifeRegeneration).upgradeNeedXp(upgradeNeedXp).build();
     }
 }

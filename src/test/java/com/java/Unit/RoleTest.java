@@ -9,9 +9,9 @@ import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RoleAttributeTest
+class RoleTest
 {
-    private static final RoleAttribute role = new RoleAttribute.Builder("²âÊÔ").maxHp(1).atk(2).level(3).exp(4).mana(5)
+    private static final Role role = new Role.Builder("²âÊÔ").maxHp(1).atk(2).level(3).exp(4).mana(5)
         .lifeRegeneration(6).evade(7.0).critRate(8.0).critsEffect(9.0).cash(10).upgradeNeedXp(11)
         .physicalResistance(12.0).build();
 
@@ -19,7 +19,7 @@ class RoleAttributeTest
     @Test
     void Builder()
     {
-        assertTrue(role instanceof RoleAttribute);
+        assertTrue(role instanceof Role);
 
         assertEquals("²âÊÔ", role.getName());
         assertEquals(1, role.getHp());
@@ -34,6 +34,8 @@ class RoleAttributeTest
         assertEquals(10, role.getCash());
         assertEquals(11, role.getUpgradeNeedXp());
         assertEquals(12.0, role.getPhysicalResistance());
+
+        assertThrows(NullPointerException.class, () -> Role.loadData(null));
     }
 
     @Test
@@ -42,7 +44,7 @@ class RoleAttributeTest
         var account = new AccountMessage(PrivateData.ACCOUNT1);
         role.saveData(account);
 
-        var data = RoleAttribute.loadData(account);
+        var data = Role.loadData(account);
 
         assertEquals("²âÊÔ", data.getName());
         assertEquals(1, data.getHp());
@@ -57,5 +59,7 @@ class RoleAttributeTest
         assertEquals(10, data.getCash());
         assertEquals(11, data.getUpgradeNeedXp());
         assertEquals(12.0, data.getPhysicalResistance());
+
+        assertThrows(NullPointerException.class, () -> role.saveData(null));
     }
 }

@@ -9,13 +9,25 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.logging.Logger;
+import static java.util.Objects.requireNonNull;
 
+/**
+ * 账号模块
+ * @version 1.2.1
+ * @since 15
+ * @author 千年
+ */
 public final class AccountMessage
 {
-    public AccountMessage(String account)
+    /**
+     * @param accountName 账号名, 根据账号名创建同名的存放游戏数据的文件夹
+     * @throws NullPointerException 如果{@code accountName}为null
+     * @since 15
+     */
+    public AccountMessage(String accountName)
     {
-        this.account = account;
-        playerPath = gameDataPath.resolve(account);//保存账号目录
+        this.account = requireNonNull(accountName);
+        playerPath = gameDataPath.resolve(accountName);//保存账号目录
         id = authentication();
     }
 
@@ -34,10 +46,12 @@ public final class AccountMessage
 
     /**
      * @return XXX/Adventure_of_words/玩家账户名/Data/fileName
+     * @param fileName 保存的文件名
+     * @throws NullPointerException 如果{@code fileName}为null
      */
     public File getPlayerDataResolveFile(String fileName)
     {
-       return playerPath.resolve("Data").resolve(fileName).toFile();
+       return playerPath.resolve("Data").resolve(requireNonNull(fileName)).toFile();
     }
 
     public final Identity getId()
@@ -54,20 +68,29 @@ public final class AccountMessage
     {
         return gameDataPath;
     }
+
+    /**
+     * @throws NullPointerException 如果{@code id}为null
+     */
     public void setId(Identity id)
     {
-        this.id = id;
-    }
-    public void setPlayerPath(Path playerPath)
-    {
-        this.playerPath = playerPath;
+        this.id = requireNonNull(id);
     }
 
+    /**
+     * @throws NullPointerException 如果{@code playerPath}为null
+     */
+    public void setPlayerPath(Path playerPath)
+    {
+        this.playerPath = requireNonNull(playerPath);
+    }
+
+    /**
+     * @throws NullPointerException 如果{@code in}为null
+     */
     public static AccountMessage readAccount(Scanner in)//从指定地方读取账户
     {
-        if (in == null)
-            throw new NullPointerException();
-        return new AccountMessage(in.nextLine());
+        return new AccountMessage(requireNonNull(in).nextLine());
     }
 
     private Identity authentication()//身份验证模块
@@ -98,7 +121,11 @@ public final class AccountMessage
         }
     }
 
-    public void createAccountDataFolder()//创建相关账户的文件夹
+    /**
+     * 创建相关账户的文件夹
+     * @since 15
+     */
+    public void createAccountDataFolder()//
     {
         var file = gameDataPath.resolve(account).toFile();
         if (fileNotExist(file))
@@ -120,7 +147,37 @@ public final class AccountMessage
         else
             Logger.getGlobal().fine(file + " 文件夹存在");
     }
-    private boolean fileNotExist(File file)
+
+    /**
+     * 创建相关账户的文件夹
+     * @param message 账号
+     * @since 15
+     * @throws NullPointerException 如果{@code account}为null
+     */
+    public static void createAccountDataFolder(AccountMessage message)//
+    {
+        requireNonNull(message);
+        var file = gameDataPath.resolve(message.account).toFile();
+        if (fileNotExist(file))
+        {
+            Logger.getGlobal().fine(file + " 文件夹不存在");
+            try
+            {
+                Files.createDirectories(message.playerPath.resolve("Data"));
+//                TODO:log未完成
+//                Files.createDirectories(playerDataPath.resolve("Log"));
+                Logger.getGlobal().fine(file + " 文件夹创建成功");
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+                Logger.getGlobal().severe(file + " 文件夹创建失败");
+            }
+        }
+        else
+            Logger.getGlobal().fine(file + " 文件夹存在");
+    }
+    private static boolean fileNotExist(File file)
     {
         assert file != null;
         return !file.exists();

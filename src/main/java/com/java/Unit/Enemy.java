@@ -1,11 +1,28 @@
 package com.java.Unit;
+
+import static java.util.Objects.requireNonNull;
+
 /**
- * 敌对单位属性
+ * {@inheritDoc}
+ *
+ * <p>且具有一下额外属性</p>
+ * <em>
+ *     <li>所值经验</li>
+ *     <li>所值货币</li>
+ *     <li>所值分数</li>
+ *     <li>敌对单位类型</li>
+ * </em>
  * @version 0.3.2
  * @author Millennium
  */
-public class EnemyAttribute extends BasicUnitAttribute
+public class Enemy extends BasicUnit
 {
+    enum EnemyType
+    {
+        COMMON,
+        ELITE,
+        BOSS;
+    };
     /**所值分数 */
     private final int value;
     /**所值经验 */
@@ -15,7 +32,7 @@ public class EnemyAttribute extends BasicUnitAttribute
     /**敌对单位类型*/
     private final EnemyType type;
 
-    public EnemyAttribute(Builder builder) //*默认数值
+    public Enemy(Builder builder)
     {
         super(builder);
         value = builder.value;
@@ -24,17 +41,27 @@ public class EnemyAttribute extends BasicUnitAttribute
         type = builder.type;
     }
 
-    public static class Builder extends BasicUnitAttribute.Builder<Builder>
+    /**
+     * 用于构建{@code Enemy}对象
+     * @see BasicUnit
+     * @since 15
+     */
+    public static class Builder extends BasicUnit.Builder<Builder>
     {
         private int value      = 0;
         private int xp         = 0;
         private int cash       = 0;
         private EnemyType type = EnemyType.COMMON;
 
+        /**
+         * @param name 敌对单位的名称
+         * @throws NullPointerException 如果{@code name}为null
+         */
         public Builder(String name)
         {
-            super(name);
+            super(requireNonNull(name));
         }
+
         public Builder value(int value)
         {
             this.value = value;
@@ -47,34 +74,48 @@ public class EnemyAttribute extends BasicUnitAttribute
             return this;
         }
 
+        /**
+         * 敌对单位的类型, 应为{@link EnemyType}中的一个
+         * @throws NullPointerException 如果{@code type}为null
+         * @see EnemyType
+         */
         public Builder type(EnemyType type)
         {
-            this.type = type;
+            this.type = requireNonNull(type);
             return this;
         }
+
         public Builder cash(int cash)
         {
             this.cash = cash;
             return this;
         }
+
+        /**
+         * @return 一个已经构建好的 {@code Enemy}对象
+         */
         @Override
-        public EnemyAttribute build()
+        public Enemy build()
         {
-            return new EnemyAttribute(this);
+            return new Enemy(this);
         }
     }
+
     public final int getValue()
     {
         return value;
     }
+
     public final int getXp()
     {
         return xp;
     }
+
     public final int getCash()
     {
         return cash;
     }
+
     public EnemyType getType()
     {
         return type;

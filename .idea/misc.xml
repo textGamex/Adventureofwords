@@ -6,6 +6,13 @@
     <option name="priority" value="Medium" />
     <option name="excludeFilter" value="" />
   </component>
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Desktop/文字冒险/Doc" />
+    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="true" />
+    <option name="OPTION_DOCUMENT_TAG_VERSION" value="true" />
+    <option name="OTHER_OPTIONS" value="-charset UTF-8" />
+    <option name="LOCALE" value="zh_CN" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>

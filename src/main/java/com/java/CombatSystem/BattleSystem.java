@@ -1,10 +1,8 @@
 package com.java.CombatSystem;
 
-import com.java.Unit.BasicUnitAttribute;
-import com.java.Unit.EnemyAttribute;
-import com.java.Unit.RoleAttribute;
-
-import java.util.Scanner;
+import com.java.Message.CombatTip;
+import com.java.Unit.Enemy;
+import com.java.Unit.Role;
 
 /**
  * 战斗系统
@@ -30,7 +28,7 @@ public final class BattleSystem
     private double enemyCritsEffectFactor;
     private double enemyDamageCoefficient;//承伤系数
 
-    public static class Builder
+    public final static class Builder
     {
         private double expRewardsFactor       = 1.0;
         private double cashRewardsFactor      = 1.0;
@@ -133,8 +131,9 @@ public final class BattleSystem
         enemyDamageCoefficient = builder.enemyDamageCoefficient;
     }
 
-    public void fight(RoleAttribute role, EnemyAttribute enemy)
+    public void fight(Role role, Enemy enemy)
     {
+
     }
 
     public double getExpRewardsFactor()

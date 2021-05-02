@@ -1,0 +1,14 @@
+
+J
+java:S3740}"/Provide the parametrized type for this generic.(Éã‘Âùÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Úœë•
+`
+java:S1128">Remove this unused import 'org.jetbrains.annotations.NotNull'.(éš®ïøÿÿÿÿ8®€ª¶’/
+7
+java:S1170"!Make this final field static too.(¬¹š
+R	java:S125ù"<This block of commented-out lines of code should be removed.(Ú°à¬
+W	java:S125ş"<This block of commented-out lines of code should be removed.(øÒ—±üÿÿÿÿ
+o
+java:S2975¶"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(ŒÉ¯æşÿÿÿÿ
+d
+java:S1182¶"HUse super.clone() to create and seed the cloned instance to be returned.(ŒÉ¯æşÿÿÿÿ

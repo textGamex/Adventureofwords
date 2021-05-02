@@ -8,10 +8,21 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 /**
- *统计玩家信息
- *@author Millennium
- *@version 0.3.2
- *@Date 2021/3/13 22:42
+ * 用于统计玩家的游戏信息
+ *
+ * <p>现已记录一下信息</p>
+ * <em>
+ *     <li>游戏总场数</li>
+ *     <li>普通攻击次数</li>
+ *     <li>总伤害</li>
+ *     <li>胜利场数</li>
+ *     <li>获得的所有分数</li>
+ *     <li>获得的所有经验</li>
+ *     <li>获得的所有货币</li>
+ * </em>
+ * @author Millennium
+ * @version 0.3.2
+ * @since 15
 */
 public final class PlayerStatistics implements Serializable
 {
@@ -91,6 +102,10 @@ public final class PlayerStatistics implements Serializable
         return totalXp;
     }
 
+    /**
+     * @param totalXp 一共获得的经验
+     * @throws IllegalArgumentException 如果{@code totalXp}小于0
+     */
     public void setTotalXp(long totalXp)
     {
         if (totalXp < 0)
@@ -103,6 +118,10 @@ public final class PlayerStatistics implements Serializable
         return totalCash;
     }
 
+    /**
+     * @param totalCash 一共获得的货币
+     * @throws IllegalArgumentException 如果{@code totalCash}小于0
+     */
     public void setTotalCash(long totalCash)
     {
         if (totalCash < 0)
@@ -115,6 +134,10 @@ public final class PlayerStatistics implements Serializable
         return totalValue;
     }
 
+    /**
+     * @param totalValue 一共获得的分数
+     * @throws IllegalArgumentException 如果{@code totalValue}小于0
+     */
     public void setTotalValue(long totalValue)
     {
         if (totalValue < 0)
@@ -122,6 +145,10 @@ public final class PlayerStatistics implements Serializable
         this.totalValue = totalValue;
     }
 
+    /**
+     * @param totalKill 总击杀
+     * @throws IllegalArgumentException 如果{@code totalKill}小于0
+     */
     public void setTotalKill(long totalKill)
     {
         if (totalKill < 0)
@@ -129,6 +156,10 @@ public final class PlayerStatistics implements Serializable
         this.totalKill = totalKill;
     }
 
+    /**
+     * @param totalRound 游戏总回合数
+     * @throws IllegalArgumentException 如果{@code totalRound}小于0
+     */
     public void setTotalRound(long totalRound)
     {
         if (totalRound < 0)
@@ -136,6 +167,10 @@ public final class PlayerStatistics implements Serializable
         this.totalRound = totalRound;
     }
 
+    /**
+     * @param totalAttack 总击杀
+     * @throws IllegalArgumentException 如果{@code totalAttack}小于0
+     */
     public void setTotalAttack(long totalAttack)
     {
         if (totalAttack < 0)
@@ -143,6 +178,10 @@ public final class PlayerStatistics implements Serializable
         this.totalAttack = totalAttack;
     }
 
+    /**
+     * @param totalHarm 总伤害
+     * @throws IllegalArgumentException 如果{@code totalHarm}小于0
+     */
     public void setTotalHarm(long totalHarm)
     {
         if (totalHarm < 0)
@@ -150,6 +189,10 @@ public final class PlayerStatistics implements Serializable
         this.totalHarm = totalHarm;
     }
 
+    /**
+     * @param totalVictory 总胜场
+     * @throws IllegalArgumentException 如果{@code totalVictory}小于0
+     */
     public void setTotalVictory(long totalVictory)
     {
         if (totalVictory < 0)
@@ -181,7 +224,15 @@ public final class PlayerStatistics implements Serializable
                 "]";
     }
 
-    /**根据账号类型选择不同的保存方式来保存统计信息*/
+    /**
+     * 根据账号类型选择不同的保存方式来保存统计信息
+     *
+     * <p>如果账户类型是玩家,则用序列化方式保存,如果是内部人员,则用json保存</p>
+     * @throws NullPointerException 如果{@code acc}为null
+     * @param acc 账号
+     * @see AccountMessage
+     * @since 16
+     */
     public void saveStatistics(AccountMessage acc)
     {
         if (acc == null)
@@ -231,6 +282,16 @@ public final class PlayerStatistics implements Serializable
         }
     }
 
+    /**
+     *
+     * @param account 账号信息
+     * @return  此账号对应的游戏统计信息
+     * @throws FileNotFoundException 如果读取的文件不存在
+     * @throws NullPointerException 如果{@code account}为null
+     * @throws IllegalStateException 如果{@code account}的id字段为{@code NEW_PLAYER}或{@code NEW_GAME_MANAGER}
+     * @see AccountMessage
+     * @since 15
+     */
     public static PlayerStatistics loadStatistics(AccountMessage account) throws FileNotFoundException
     {
         if (account == null)

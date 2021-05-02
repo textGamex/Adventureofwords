@@ -17,7 +17,7 @@ public final class AdventureOfWordsMain
 {
     public static void main(String[] args)
     {
-        Logger.getGlobal().setLevel(Level.OFF);
+        Logger.getGlobal().setLevel(Level.ALL);
         if (args.length != 0 && args[0].equalsIgnoreCase("-version"))
         {
             System.out.println("°æ±¾ºÅ: 0.1Beta");
