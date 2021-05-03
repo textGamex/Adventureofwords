@@ -28,7 +28,7 @@ import static java.util.Objects.requireNonNull;
  *     <li>每回合法力值恢复, 默认值为0</li>
  * </ul>
  * @version 1.4.0
- * @author Millennium
+ * @author 千年
  * @see BuffModule
  * @see Role
  * @see Enemy

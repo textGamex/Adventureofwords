@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * 用于描述buff的具体效果
  *
- * <p>一个buff具有一下信息</p>
+ * <p>一个buff具有以下信息</p>
  * <em>
  *     <li>持续回合</li>
  *     <li>效果层数</li>
@@ -17,6 +17,7 @@ import java.io.Serializable;
  * @see BuffType
  * @version 1.3.5
  * @since 15
+ * @author 千年
  */
 public final class BuffEffect implements Serializable
 {
@@ -56,6 +57,7 @@ public final class BuffEffect implements Serializable
      * @param timeLimit 效果持续回合
      * @param layers 效果层数
      * @param isDebuff 是debuff
+     * @throws IllegalArgumentException 如果{@code timeLimit}或{@code layers}小于等于0
      */
     public BuffEffect(int timeLimit, int layers, boolean isDebuff)
     {
@@ -67,6 +69,7 @@ public final class BuffEffect implements Serializable
      *
      * @param timeLimit 效果持续回合
      * @param layers 效果层数
+     * @throws IllegalArgumentException 如果{@code timeLimit}或{@code layers}小于等于0
      */
     public BuffEffect(int timeLimit, int layers)
     {

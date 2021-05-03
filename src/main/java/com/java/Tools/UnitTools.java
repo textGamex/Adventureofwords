@@ -2,6 +2,10 @@ package com.java.Tools;
 
 import static java.util.concurrent.ThreadLocalRandom.current;
 
+/**
+ * @version 1.0.1
+ * @author Ç§Äê
+ */
 public final class UnitTools
 {
     private static final String[] extraAttribute =

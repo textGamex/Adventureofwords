@@ -15,6 +15,7 @@ import static java.util.Objects.requireNonNull;
  * @see BuffType
  * @version 1.3.2
  * @since 15
+ * @author Ç§Äê
  */
 public class BuffModule implements Serializable
 {

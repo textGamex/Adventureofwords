@@ -44,6 +44,8 @@ public class Enemy extends BasicUnit
      * 用于构建{@code Enemy}对象
      * @see BasicUnit
      * @since 15
+     * @version 1.1.0
+     * @author 千年
      */
     public static class Builder extends BasicUnit.Builder<Builder>
     {
