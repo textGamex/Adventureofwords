@@ -3,6 +3,7 @@ package com.java.Message;
 import static java.util.Objects.requireNonNull;
 /**
  * 战斗提示信息
+ *
  * @author 千年
  * @version 1.0.2
  * @since 16

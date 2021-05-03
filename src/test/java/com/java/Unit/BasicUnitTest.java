@@ -11,12 +11,12 @@ class BasicUnitTest
     @Test
     void Builder()
     {
-        var unit = new BasicUnit.Builder("单位").atk(2)
+        var unit = new BasicUnit.Builder("单位").physicalAttack(2)
                 .evade(3.0).mana(101).maxHp(5).level(6).critRate(7.0).critsEffect(8.0).lifeRegeneration(9)
                 .physicalResistance(10.0).build();
 
         assertEquals("单位", unit.getName());
-        assertEquals(2, unit.getAtk());
+        assertEquals(2, unit.getPhysicalAttack());
         assertEquals(3.0, unit.getEvade());
         assertEquals(101, unit.getMana());
         assertEquals(5, unit.getHp());

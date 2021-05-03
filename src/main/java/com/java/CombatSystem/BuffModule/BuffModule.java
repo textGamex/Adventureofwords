@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * Buff模块, 用于和{@link com.java.Unit.BasicUnit}类交互
  *
- * <p>用于实现游戏的buff机制</p>
+ * <p>用于实现游戏的buff机制, 具有一般回合制游戏buff相关的大部分功能</p>
  * @see com.java.Unit.BasicUnit
  * @see BuffEffect
  * @see BuffType
@@ -18,19 +18,16 @@ import static java.util.Objects.requireNonNull;
  */
 public class BuffModule implements Serializable
 {
-    public static void main(String[] args)
-    {
-    }
     @Serial
     private static final long serialVersionUID = 6182039129119023911L;
 
     private final EnumMap<BuffType, BuffEffect> haveBuffs = new EnumMap<>(BuffType.class);
 
     /**
-     * 给单位添加buff
+     * 给单位添加{@link BuffType}
      *
      * <p>给单位添加buff, 如果要添加的效果已存在, 则持续回合数和效果层数除于2然后和已存在的{@code buffEffect}的time和layer相加</p>
-     * <p>如果{@link BuffEffect#isTimeLess()}方法的返回值为{@code ture}, 则直接替换</p>
+     * <p>如果{@link BuffEffect#isTimeLess()}方法的返回值为{@code true}, 则直接替换</p>
      * @param type 要添加的buff类型
      * @param buffEffect 添加的buff的具体效果
      * @since 15
@@ -63,11 +60,12 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 获得指定buff的效果信息
+     * 获得指定{@link BuffType}的效果信息
      *
      * @throws NullPointerException 如果{@code type}为null或{@code type}不存在
      * @return 此buff的效果信息
      * @param type buff的类型
+     * @see BuffType
      */
     public final BuffEffect getMessage(BuffType type)
     {
@@ -78,9 +76,9 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 如果buff存在, 返回{@code ture}
+     * 如果{@link BuffType}存在, 返回{@code true}
      *
-     * @param aBuffType 要检测的buff类型
+     * @param aBuffType 检测{@link BuffType}是否存在
      * @throws NullPointerException 如果{@code aBuffType}为null
      * @return 如果存在, 返回 {@code true}, 否则返回{@code false}
      */
@@ -90,9 +88,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 检测单位是否携带指定的buff
-     *
-     * @return 如果是空的, 返回{@code ture}
+     * @return 如果是空的, 返回{@code true}
      */
     public final boolean isEmpty()
     {
@@ -110,10 +106,10 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 从具有的buff中移除走一个指定的buff
+     * 从具有的{@link BuffType}中移除走一个指定的buff
      *
      * @param type 要移除的buff类型
-     * @throws NullPointerException 如果{@code type}为null或者要移除buff不存在
+     * @throws NullPointerException 如果{@code type}为null或者要移除buff的不存在
      */
     public void remove(BuffType type)
     {
@@ -123,16 +119,19 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 移除指定buff的持续回合数, 如果移除的大于等于现有的回合数, 则直接移除buff
+     * 移除指定{@link BuffType}的持续回合数, 如果移除的大于等于现有的回合数, 则直接移除buff
      *
-     * @param type 要移除的buff类型
+     * @param type 要移除的{@link BuffType}
      * @param reduceTime 要移除的buff的回合数
      * @throws NullPointerException 如果{@code type}为null
+     * @throws IllegalArgumentException rg{@code reduceTime}小于等于0
+     * @see BuffType
+     * @see BuffEffect
      */
     public void remove(BuffType type, int reduceTime)
     {
         requireNonNull(type);
-        if (reduceTime < 0)
+        if (reduceTime <= 0)
             throw new IllegalArgumentException("非法参数:" + reduceTime);
 
         if (buffNotExist(type))
@@ -155,7 +154,8 @@ public class BuffModule implements Serializable
 
     /**
      * 清空单位所携带的所有buff效果
-     * @since  15
+     *
+     * @since 15
      */
     public final void clear()
     {
@@ -165,9 +165,10 @@ public class BuffModule implements Serializable
     /**
      * 清空单位所携带的所有负面效果
      *
-     * <p></p>
-     * <font color="#FF0000">注意:</font>
-     * <strong>只有{@link BuffEffect#isDebuff()}方法的返回值为{@code ture}的buff才会被清除</strong>
+     * <p>
+     *     <font color="#FF0000">注意:</font>
+     * <strong>只有{@link BuffEffect#isDebuff()}方法的返回值为{@code true}的buff才会被清除</strong>
+     * </p>
      * @since 2021-5-3
      */
     public void clearDebuff()
@@ -180,6 +181,11 @@ public class BuffModule implements Serializable
         }
     }
 
+    /**
+     *
+     * @param o 要检测是否相等的对象
+     * @return 如果 {@code o}与this相等, 返回{@code true}
+     */
     @Override
     public boolean equals(Object o)
     {
@@ -195,6 +201,9 @@ public class BuffModule implements Serializable
         return Objects.hash(haveBuffs);
     }
 
+    /**
+     * @return 字符串表示的对象
+     */
     @Override
     public String toString()
     {

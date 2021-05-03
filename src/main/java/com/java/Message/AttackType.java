@@ -2,6 +2,7 @@ package com.java.Message;
 
 /**
  * ¹¥»÷ÀàĞÍ
+ *
  * @author Millennium
  * @version 1.0.0
  * @see CombatTip

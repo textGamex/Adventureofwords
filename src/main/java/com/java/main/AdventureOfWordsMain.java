@@ -8,9 +8,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *开始类
+ * 开始类
+ * <p>游戏项目地址:</p>
+ * <a href="https://gitee.com/mengxin_C/adventure-of-words">gitee</a>
+ * <a href="https://github.com/mengxinC/Adventureofwords">github</a>
  *@author Millennium
- *@version 0.2.0
+ *@version 0.2.1
 */
 public final class AdventureOfWordsMain
 {

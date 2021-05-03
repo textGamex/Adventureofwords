@@ -120,6 +120,9 @@ public class Enemy extends BasicUnit
         return type;
     }
 
+    /**
+     * @return 字符串表示的对象
+     */
     @Override
     public String toString()
     {

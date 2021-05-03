@@ -209,6 +209,9 @@ public final class PlayerStatistics implements Serializable
         totalRound += addNumber;
     }
 
+    /**
+     * @return 字符串表示的对象
+     */
     @Override
     public String toString()
     {

@@ -49,6 +49,11 @@ public class Role extends BasicUnit
         upgradeNeedXp  = builder.upgradeNeedXp;
     }
 
+    /**
+     * @author 千年
+     * @version 1.1.2
+     * @see com.java.Unit.BasicUnit.Builder
+     */
     public static class Builder extends BasicUnit.Builder<Builder>
     {
         private int cash           = 0;
@@ -138,6 +143,9 @@ public class Role extends BasicUnit
         return nextId;
     }
 
+    /**
+     * @return 字符串表示的对象
+     */
     @Override
     public String toString()
     {
@@ -152,6 +160,8 @@ public class Role extends BasicUnit
 
     /**
      * 用于保存角色的属性
+     *
+     * <p>如果账号类型是玩家, 则用序列化方式保存, 如果是内部人员, 则用json方式保存</p>
      * @param acc 此角色所对应的玩家的账号
      * @see AccountMessage
      * @throws NullPointerException 如果{@code acc}为null
@@ -176,7 +186,7 @@ public class Role extends BasicUnit
         jsonFile.put("单位等级", super.getLevel());
         jsonFile.put("最大生命值", super.getHp());
         jsonFile.put("魔法值", super.getMana());
-        jsonFile.put("物理攻击", super.getAtk());
+        jsonFile.put("物理攻击", super.getPhysicalAttack());
         jsonFile.put("暴击率", super.getCritRate());
         jsonFile.put("暴击效果", super.getCritsEffect());
         jsonFile.put("物理抗性", super.getPhysicalResistance());
@@ -293,7 +303,7 @@ public class Role extends BasicUnit
         var exp = json.getIntValue("角色拥有经验");
         var upgradeNeedXp = json.getIntValue("升到下一级所需经验");
 
-        return new Builder(name).level(level).maxHp(hp).mana(mana).atk(atk).cash(cash).critRate(critRate)
+        return new Builder(name).level(level).maxHp(hp).mana(mana).physicalAttack(atk).cash(cash).critRate(critRate)
                 .physicalResistance(physicalResistance).critsEffect(critsEffect).evade(evade).exp(exp)
                 .lifeRegeneration(lifeRegeneration).upgradeNeedXp(upgradeNeedXp).build();
     }

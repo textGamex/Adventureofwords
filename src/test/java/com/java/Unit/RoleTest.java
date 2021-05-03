@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RoleTest
 {
-    private static final Role role = new Role.Builder("≤‚ ‘").maxHp(1).atk(2).level(3).exp(4).mana(5)
+    private static final Role role = new Role.Builder("≤‚ ‘").maxHp(1).physicalAttack(2).level(3).exp(4).mana(5)
         .lifeRegeneration(6).evade(7.0).critRate(8.0).critsEffect(9.0).cash(10).upgradeNeedXp(11)
         .physicalResistance(12.0).build();
 
@@ -23,7 +23,7 @@ class RoleTest
 
         assertEquals("≤‚ ‘", role.getName());
         assertEquals(1, role.getHp());
-        assertEquals(2, role.getAtk());
+        assertEquals(2, role.getPhysicalAttack());
         assertEquals(3, role.getLevel());
         assertEquals(4, role.getExp());
         assertEquals(5, role.getMana());
@@ -48,7 +48,7 @@ class RoleTest
 
         assertEquals("≤‚ ‘", data.getName());
         assertEquals(1, data.getHp());
-        assertEquals(2, data.getAtk());
+        assertEquals(2, data.getPhysicalAttack());
         assertEquals(3, data.getLevel());
         assertEquals(4, data.getExp());
         assertEquals(5, data.getMana());

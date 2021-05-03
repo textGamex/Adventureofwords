@@ -6,6 +6,13 @@ import java.io.Serializable;
 /**
  * 用于描述buff的具体效果
  *
+ * <p>一个buff具有一下信息</p>
+ * <em>
+ *     <li>持续回合</li>
+ *     <li>效果层数</li>
+ *     <li>是否是Debuff</li>
+ *     <li>是否是被动</li>
+ * </em>
  * @see BuffModule
  * @see BuffType
  * @version 1.3.5
@@ -77,9 +84,9 @@ public final class BuffEffect implements Serializable
     }
 
     /**
-     * 如果是负面效果, 返回{@code ture}
+     * 如果是负面效果, 返回{@code true}
      *
-     * @return 如果是负面效果, 返回{@code ture}
+     * @return 如果是负面效果, 返回{@code true}
      */
     public boolean isDebuff()
     {
@@ -101,6 +108,9 @@ public final class BuffEffect implements Serializable
         this.layers = layers;
     }
 
+    /**
+     * @return 字符串表示的对象
+     */
     @Override
     public String toString()
     {

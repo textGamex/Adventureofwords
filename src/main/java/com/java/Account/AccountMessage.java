@@ -71,6 +71,9 @@ public final class AccountMessage
     }
 
     /**
+     * 设置账号的身份
+     *
+     * @param id 账号的身份
      * @throws NullPointerException 如果{@code id}为null
      */
     public void setId(Identity id)
@@ -79,6 +82,9 @@ public final class AccountMessage
     }
 
     /**
+     * 设置保存玩家的各种数据的目录
+     *
+     * @param playerPath 设置保存玩家的各种数据的目录
      * @throws NullPointerException 如果{@code playerPath}为null
      */
     public void setPlayerPath(Path playerPath)
@@ -151,6 +157,7 @@ public final class AccountMessage
 
     /**
      * 创建相关账户的文件夹
+     *
      * @param message 账号
      * @since 15
      * @throws NullPointerException 如果{@code account}为null
@@ -184,6 +191,9 @@ public final class AccountMessage
         return !file.exists();
     }
 
+    /**
+     * @return 字符串表示的对象
+     */
     @Override
     public String toString()
     {

@@ -265,6 +265,9 @@ public final class BattleSystem
         return enemyMagicResistanceFactor;
     }
 
+    /**
+     * @return 字符串表示的对象
+     */
     @Override
     public String toString()
     {
