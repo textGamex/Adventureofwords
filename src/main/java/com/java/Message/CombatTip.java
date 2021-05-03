@@ -14,7 +14,7 @@ public final class CombatTip
     {
         combatTip(new CombatMessage("玩家", 7, AttackType.COMMON_ATTACK, "哥布林", 70));
     }
-
+    
     /**
      * 用于输出战场信息
      *

@@ -1,0 +1,87 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+enum BuffType
+{
+    BLEED
+    POISON
+}
+class BuffEffect
+{
+    -int timeLimit
+    -int layers
+    -boolean debuff
+    -boolean timeLess
+    +BuffEffect(int, int, boolean, boolean, boolean)
+}
+class BasicUnit
+{
+    -BuffModule buff
+    -UnitGrowth growth
+    -{static}int id
+    -String name
+    -int maxHp
+    -int hp
+    -int level
+    -int speed
+    -int mana
+    -int physicalAttack
+    -int magicAttack
+    -double critRate
+    -double critsEffect
+    -double physicalResistance
+    -double magicResistance
+    -double hitRate
+    -double evade
+    -int lifeRegeneration
+    -int manaRecovery
+    +BuffModule buff()
+    +UnitGrowth growth()
+}
+note right of BasicUnit::buff
+buff模块
+end note
+
+
+
+class Enemy
+{
+    -int value
+    -int exp
+    -int cash
+}
+
+class Role
+{
+    -int value
+    -int exp
+    -int cash
+    -int upgradeNeedXp
+    -LocalDateTime creatingDateTime
+}
+
+class BuffModule
+{
+    -EnumMap<BuffType, BuffEffect> haveBuffs
+    +void add(BuffType type, BuffEffect buffEffect)
+    +void remove(BuffType type)
+    +void isEmpty()
+    +void clear()
+    +void clearDebuff()
+    +int size()
+    +int hashCode()
+    +boolean have(BuffType type)
+    +boolean equals()
+    -boolean buffNotExist()
+    +String toString()
+    +BuffEffect getMessage(BuffType type)
+}
+BasicUnit <|--- Role
+BasicUnit <|--- Enemy
+BasicUnit *--- BuffModule
+BasicUnit ..> BuffModule
+BuffEffect <.. BuffModule
+BuffEffect ..> BuffType
+
+@enduml

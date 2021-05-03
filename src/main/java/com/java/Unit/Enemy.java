@@ -20,8 +20,8 @@ public class Enemy extends BasicUnit
     {
         COMMON,
         ELITE,
-        BOSS;
-    };
+        BOSS
+    }
     /**所值分数 */
     private final int value;
     /**所值经验 */

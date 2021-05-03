@@ -1,5 +1,8 @@
 package com.java.CombatSystem.BuffModule;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -114,6 +117,7 @@ public final class BuffEffect implements Serializable
     /**
      * @return 字符串表示的对象
      */
+    @NotNull
     @Override
     public String toString()
     {
@@ -126,7 +130,7 @@ public final class BuffEffect implements Serializable
     }
 
     @Override
-    public boolean equals(Object o)
+    public boolean equals(@Nullable Object o)
     {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

@@ -11,5 +11,5 @@ public enum Identity
     /**内部人员*/
     GAME_MANAGER,
     /**无*/
-    NONE;
+    NONE
 }

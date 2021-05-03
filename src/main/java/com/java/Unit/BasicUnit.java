@@ -239,6 +239,10 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     }
 
     /**
+     * 构建{@link BasicUnit}对象
+     * <p>要用如下格式</p>
+     * <pre>var Object = new BasicUnit.Builder("unitName").build();</pre>
+     * <p>而不是</p><pre>var Object = new BasicUnit.Builder();</pre>
      * @throws NullPointerException 如果{@code builder}是null
      * @see Builder
      */

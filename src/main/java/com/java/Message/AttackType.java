@@ -16,7 +16,7 @@ public enum AttackType
 
     private final String typeName;
 
-    private AttackType(String type)
+    AttackType(String type)
     {
         this.typeName = type;
     }
