@@ -1,7 +1,7 @@
 package com.ui;
 
-import com.java.Account.AccountMessage;
-import static com.java.Message.PrivateData.*;
+import com.java.account.AccountMessage;
+import static com.java.message.PrivateData.*;
 import java.util.Scanner;
 
 public class LoginUi

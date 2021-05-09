@@ -1,0 +1,15 @@
+package com.java.tools;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class UnitToolsTest
+{
+    @Test
+    void randomExtraAttribute()
+    {
+        var attribute = new UnitTools();
+        assertThrows(NullPointerException.class, () -> attribute.randomExtraAttribute(null));
+    }
+}
