@@ -3,7 +3,7 @@ package com.java.CombatSystem.BuffModule;
 import java.io.Serializable;
 
 /**
- * 用于辅助实现{@link BuffModule}类的枚举类
+ * 用于辅助实现{@link BuffModule}类的枚举类.
  *
  * <p>现在实现的负面效果</p>
  * <em>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration status="WARN" monitorInterval="5">
+    <!-- 配置日志文件输出目录 ${sys:user.home} -->
+    <!--共有8个级别，按照从低到高为：All < Trace < Debug < Info < Warn < Error < Fatal < OFF.
+        All:最低等级的，用于打开所有日志记录.
+        Trace:是追踪，就是程序推进以下，你就可以写个trace输出，所以trace应该会特别多，不过没关系，我们可以设置最低日志级别不让他输出.
+        Debug:指出细粒度信息事件对调试应用程序是非常有帮助的.
+        Info:消息在粗粒度级别上突出强调应用程序的运行过程.
+        Warn:输出警告及warn以下级别的日志.
+        Error:输出错误信息日志.
+        Fatal:输出每个严重的错误事件将会导致应用程序的退出的日志.
+        OFF:最高等级的，用于关闭所有日志记录-->
+    <Appenders>
+        <!--这个输出控制台的配置 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] [%-5level] %c{36}:%L --- %m%n" />
+            <!-- 控制台只输出level及以上级别的信息(onMatch),其他的直接拒绝(onMismatch) -->
+            <ThresholdFilter level="all" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 输出日志的格式 -->
+            <!--
+                %d{yyyy-MM-dd HH:mm:ss, SSS} : 日志生产时间
+                %p : 日志输出格式
+                %c : logger的名称
+                %m : 日志内容，即 logger.info("message")
+                %n : 换行符
+                %C : Java类名
+                %L : 日志输出所在行数
+                %M : 日志输出所在方法名
+                hostName : 本地机器名
+                hostAddress : 本地ip地址 -->
+        </Console>
+<!--        <File name="file" fileName="${LOG_HOME}/myfile.log">-->
+<!--            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] %l %c{36} - %m%n" />-->
+<!--        </File>-->
+
+<!--        <RandomAccessFile name="accessFile" fileName="${LOG_HOME}/myAcclog.log">-->
+<!--            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] %l %c{36} - %m%n" />-->
+<!--        </RandomAccessFile>-->
+
+<!--        <RollingFile name="rollingFile" fileName="${LOG_HOME}/myrollog.log"-->
+<!--                     filePattern="E:/logs/$${date:yyyy-MM-dd}/myrollog-%d{yyyy-MM-dd-HH-mm}-%i.log">-->
+<!--            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" />-->
+<!--            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] %l %c{36} - %msg%n" />-->
+<!--            <Policies>-->
+<!--                <OnStartupTriggeringPolicy />-->
+<!--                <SizeBasedTriggeringPolicy size="10 MB" />-->
+<!--                <TimeBasedTriggeringPolicy />-->
+<!--            </Policies>-->
+<!--            <DefaultRolloverStrategy max="30" />-->
+<!--        </RollingFile>-->
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</configuration>

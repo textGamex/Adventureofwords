@@ -1,5 +1,8 @@
 package com.java.CombatSystem.BuffModule;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.EnumMap;
@@ -7,25 +10,33 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Buff模块, 用于和{@link com.java.Unit.BasicUnit}类交互
+ * Buff模块, 用于和{@link com.java.Unit.BasicUnit}类交互.
  *
  * <p>用于实现游戏的buff机制, 具有一般回合制游戏buff相关的大部分功能</p>
  * @see com.java.Unit.BasicUnit
  * @see BuffEffect
  * @see BuffType
- * @version 1.3.2
+ * @version 1.3.3
  * @since 15
  * @author 千年
  */
 public class BuffModule implements Serializable
 {
+    public static void main(String[] args)
+    {
+        var buff = new BuffModule();
+        buff.add(BuffType.POISON, new BuffEffect(12,1));
+        buff.remove(BuffType.POISON, 1);
+    }
+    public static final Logger LOGGER = LoggerFactory.getLogger(BuffModule.class);
+
     @Serial
     private static final long serialVersionUID = 6182039129119023911L;
 
     private final EnumMap<BuffType, BuffEffect> haveBuffs = new EnumMap<>(BuffType.class);
 
     /**
-     * 给单位添加{@link BuffType}
+     * 给单位添加{@link BuffType}.
      *
      * <p>给单位添加buff, 如果要添加的效果已存在, 则持续回合数和效果层数除于2然后和已存在的{@code buffEffect}的time和layer相加</p>
      * <p>如果{@link BuffEffect#isTimeLess()}方法的返回值为{@code true}, 则直接替换</p>
@@ -44,8 +55,12 @@ public class BuffModule implements Serializable
 
         if (haveBuffs.containsKey(type))
         {
+            LOGGER.debug("{}({})存在", type, type.getType());
             if (buffEffect.isTimeLess())
+            {
                 haveBuffs.put(type, buffEffect);
+                LOGGER.debug("{}({})是特性", type, type.getType());
+            }
             else
             {
                 var existentBuff = haveBuffs.get(type);
@@ -54,14 +69,18 @@ public class BuffModule implements Serializable
 
                 existentBuff.setTimeLimit(existentBuff.getTimeLimit() + (addTimeLimit == 1 ? 1 : addTimeLimit / 2));
                 existentBuff.setLayers(existentBuff.getLayers() + (addLayers == 1 ? 1 : addLayers / 2));
+                LOGGER.debug("{}({})不是特性", type, type.getType());
             }
         }
         else
+        {
             haveBuffs.put(type, buffEffect);
+            LOGGER.debug("{}({})不存在, 直接添加", type, type.getType());
+        }
     }
 
     /**
-     * 获得指定{@link BuffType}的效果信息
+     * 获得指定{@link BuffType}的效果信息.
      *
      * @throws NullPointerException 如果{@code type}为null或{@code type}不存在
      * @return 此buff的效果信息
@@ -77,7 +96,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 如果{@link BuffType}存在, 返回{@code true}
+     * 如果{@link BuffType}存在, 返回{@code true}.
      *
      * @param aBuffType 检测{@link BuffType}是否存在
      * @throws NullPointerException 如果{@code aBuffType}为null
@@ -97,7 +116,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 返回此单位具有的buff数量
+     * 返回此单位具有的buff数量.
      *
      * @return 此单位具有的buff数量
      */
@@ -107,7 +126,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 从具有的{@link BuffType}中移除走一个指定的buff
+     * 从具有的{@link BuffType}中移除走一个指定的buff.
      *
      * @param type 要移除的buff类型
      * @throws NullPointerException 如果{@code type}为null或者要移除buff的不存在
@@ -120,7 +139,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 移除指定{@link BuffType}的持续回合数, 如果移除的大于等于现有的回合数, 则直接移除buff
+     * 移除指定{@link BuffType}的持续回合数, 如果移除的大于等于现有的回合数, 则直接移除buff.
      *
      * @param type 要移除的{@link BuffType}
      * @param reduceTime 要移除的buff的回合数
@@ -143,9 +162,15 @@ public class BuffModule implements Serializable
 
         //如果移除的回合大于现有的回合, 则直接移除
         if (originalTime <= reduceTime)
+        {
             haveBuffs.remove(type);
+            LOGGER.debug("持续回合:{} 小于等于 移除时间:{}, 直接移除{}", originalTime, reduceTime, type);
+        }
         else
+        {
+            LOGGER.debug("持续回合:{} 大于 移除时间:{}, 回合数相减", originalTime, reduceTime);
             buff.setTimeLimit(originalTime - reduceTime);
+        }
     }
     private boolean buffNotExist(BuffType type)
     {

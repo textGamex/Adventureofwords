@@ -2,7 +2,7 @@ package com.java.Message;
 
 import static java.util.Objects.requireNonNull;
 /**
- * 战斗提示信息
+ * 战斗提示信息.
  *
  * @author 千年
  * @version 1.0.2
@@ -16,7 +16,7 @@ public final class CombatTip
     }
     
     /**
-     * 用于输出战场信息
+     * 用于输出战场信息.
      *
      * @see CombatMessage
      * @throws NullPointerException 如果m{@code message}为null

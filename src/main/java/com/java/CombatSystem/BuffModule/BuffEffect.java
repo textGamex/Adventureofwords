@@ -7,7 +7,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 用于描述buff的具体效果
+ * 用于描述buff的具体效果.
  *
  * <p>一个buff具有以下信息</p>
  * <em>

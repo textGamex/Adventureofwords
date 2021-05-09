@@ -23,9 +23,6 @@ import static java.util.Objects.requireNonNull;
  */
 public class Role extends BasicUnit
 {
-    public static void main(String[] args)
-    {
-    }
     /**Íæ¼ÒµÄid*/
     private static int nextId = 70000;
     private final int id = ++nextId;

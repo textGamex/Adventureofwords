@@ -6,7 +6,7 @@ import java.io.*;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 游戏的单位, 用于实现基本的游戏对战
+ * 游戏的单位, 用于实现基本的游戏对战.
  *
  * <p>现已实现以下属性</p>
  * <ul>
@@ -100,7 +100,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      *     <li>每回合生命回复, 默认值为0</li>
      *     <li>每回合法力值恢复, 默认值为0</li>
      * </ul>
-     * <strong>参考Effective Java(第三版)第二章</strong>
+     * <strong>参考Effective Java(第三版)第二条</strong>
      * <p>采用泛型来使子类能正常工作</p>
      * <strong>注意:此构建器无法直接操作{@link UnitGrowth}对象, 请创建对象后再对{@link UnitGrowth}对象进行操作</strong>
      * @see BasicUnit
@@ -239,10 +239,11 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     }
 
     /**
-     * 构建{@link BasicUnit}对象
+     * 构建{@link BasicUnit}对象.
+     *
      * <p>要用如下格式</p>
-     * <pre>var Object = new BasicUnit.Builder("unitName").build();</pre>
-     * <p>而不是</p><pre>var Object = new BasicUnit.Builder();</pre>
+     * <pre>{@code var Object = new BasicUnit.Builder("unitName").build();}</pre>
+     * <p>而不是</p><pre>{@code var Object = new BasicUnit.Builder();}</pre>
      * @throws NullPointerException 如果{@code builder}是null
      * @see Builder
      */
@@ -550,13 +551,6 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             throw new IllegalArgumentException("异常参数:" + level);
         this.level = level;
     }
-
-//    /**无视物抗直接扣血并返回扣除的HP */
-    //    public int directHp(int reducedHp)
-//    {
-//        HP -= reducedHp;
-//        return reducedHp;
-//    }
 
     /**
      * 用来判断两个对象ID是否相同
