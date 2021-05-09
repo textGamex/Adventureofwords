@@ -179,7 +179,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 清空单位所携带的所有buff效果
+     * 清空单位所携带的所有buff效果.
      *
      * @since 15
      */

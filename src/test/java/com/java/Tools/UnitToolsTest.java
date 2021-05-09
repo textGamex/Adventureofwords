@@ -10,6 +10,7 @@ class UnitToolsTest
     @Test
     void randomExtraAttribute()
     {
-        assertThrows(NullPointerException.class, () -> UnitTools.randomExtraAttribute(null));
+        var attribute = new UnitTools();
+        assertThrows(NullPointerException.class, () -> attribute.randomExtraAttribute(null));
     }
 }
