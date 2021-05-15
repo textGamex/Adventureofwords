@@ -4,8 +4,8 @@
     <file url="file://$PROJECT_DIR$/src/main/java/BattleSystemMessage_zh_CN.properties" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/C/Cls-dll.c" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/C/javaLogic_Tools_GameTool.h" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/java/CombatSystem/BuffModule/BuffEffect.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/java/CombatSystem/BuffModule/BuffType.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/combatSystem/BuffModule/BuffEffect.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/combatSystem/BuffModule/BuffType.java" charset="GBK" />
     <file url="PROJECT" charset="GBK" />
   </component>
 </project>

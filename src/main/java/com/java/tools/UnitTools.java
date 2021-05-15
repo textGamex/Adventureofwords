@@ -13,6 +13,10 @@ import static java.util.concurrent.ThreadLocalRandom.current;
  */
 public final class UnitTools
 {
+    public static void main(String[] args)
+    {
+
+    }
     private final List<String> extraAttributes = new ArrayList<>(16);
     private boolean repeatAllowed = false;
 
@@ -23,6 +27,8 @@ public final class UnitTools
     }
 
     /**
+     * 从前缀池中随机选择一个前缀添加在{@code name}末尾并返回.
+     *
      * @throws NullPointerException 如果{@code name}为null
      * @param name 要加前缀的单位名称
      * @return 一个添加了随机前缀的单位名称
@@ -36,9 +42,10 @@ public final class UnitTools
     }
 
     /**
-     * 返回此列表中的元素数。 如果此列表包含多个Integer.MAX_VALUE元素，则返回Integer.MAX_VALUE.
+     * 返回此前缀池的前缀数, 如果此前缀池包含多个Integer.MAX_VALUE元素，则返回Integer.MAX_VALUE.
      *
-     * @return 返回此列表中的元素数
+     * <p>返回此前缀池的前缀数, 如果此前缀池包含多个Integer.MAX_VALUE元素，则返回Integer.MAX_VALUE.</p>
+     * @return 返回此前缀池的前缀数
      */
     public int size()
     {
@@ -56,13 +63,30 @@ public final class UnitTools
     }
 
     /**
-     * 往属性前缀池中添加新的属性前缀.
+     * 往前缀池中添加新的前缀.
      *
-     * @param extraAttribute 要添加的新属性前缀
+     * @param extraAttribute 要添加的新前缀
      * @throws NullPointerException 如果{@code extraAttribute}为null
      */
     public void add(String extraAttribute)
     {
         extraAttributes.add(requireNonNull(extraAttribute));
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String[] toArrays()
+    {
+        return (String[]) extraAttributes.toArray();
+    }
+
+    /**
+     * 从此前缀池中删除所有前缀.
+     */
+    public void clear()
+    {
+        extraAttributes.clear();
     }
 }

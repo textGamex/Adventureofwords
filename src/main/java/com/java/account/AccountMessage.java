@@ -95,6 +95,8 @@ public final class AccountMessage
     }
 
     /**
+     * 从指定位置读取账户.
+     *
      * @throws NullPointerException 如果{@code in}为null
      */
     public static AccountMessage readAccount(Scanner in)//从指定地方读取账户
@@ -164,7 +166,7 @@ public final class AccountMessage
             catch (IOException e)
             {
                 e.printStackTrace();
-                LOGGER.warn("{}文件夹创建失败", file);
+                LOGGER.error("{}文件夹创建失败", file);
             }
         }
         else

@@ -5,8 +5,10 @@ import static java.util.concurrent.ThreadLocalRandom.current;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 用于辅助的工具类
- * @version 1.2.1
+ * 用于辅助的工具类.
+ *
+ * <p>此类无法实例化</p>
+ * @version 1.2.2
  * @author 千年
  * @since 15
  */
@@ -16,15 +18,19 @@ public final class GameTool
     {
     }
 
+    private GameTool()
+    {
+        throw new AssertionError();
+    }
 //    static
 //    {
 //        System.loadLibrary("AdventureWords-DLL");TODO:重新编译一下,头文件现在路径不对了
 //    }
 
     /**
-     * 根据传入的概率随机返回真或假
+     * 根据传入的概率随机返回{@code false}或{@code true}.
      *
-     * @param probability 返回真的概率
+     * @param probability 返回{@code true}的概率
      * @return {@code true}或{@code false}
      */
     public static boolean randomRun (double probability)
@@ -37,7 +43,7 @@ public final class GameTool
     }
 
     /**
-     * 随机对数字加或减一个范围内的数
+     * 随机对数字加或减一个范围内的数.
      *
      * @param number 要进行加工的整数
      * @param floatingIntRange 浮动的整数范围(非负数)
@@ -54,7 +60,7 @@ public final class GameTool
     }
 
     /**
-     * 随机对数字加或减一个范围内的数
+     * 随机对数字加或减一个范围内的数.
      *
      * @param number 要进行加工的整数
      * @param floatingIntRange 浮动的整数范围(非负数)
@@ -78,7 +84,7 @@ public final class GameTool
     }
 
     /**
-     * 随机对数字加或减一个范围内的数
+     * 随机对数字加或减一个范围内的数.
      *
      * @param number 要进行加工的整数
      * @param floatingPercentage 浮动的百分比范围
@@ -95,7 +101,7 @@ public final class GameTool
     }
 
     /**
-     * 随机对数字加或减一个范围内的数
+     * 随机对数字加或减一个范围内的数.
      *
      * @param number 要进行加工的整数
      * @param floatingPercentage 浮动的百分比范围

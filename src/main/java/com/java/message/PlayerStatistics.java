@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+import static java.util.Objects.requireNonNull;
 /**
  * 用于统计玩家的游戏信息.
  *
@@ -21,7 +22,6 @@ import java.util.Scanner;
  * <li>获得的所有分数</li>
  * <li>获得的所有经验</li>
  * <li>获得的所有货币</li>
- *
  * @author Millennium
  * @version 0.3.2
  * @since 15
@@ -31,7 +31,6 @@ public final class PlayerStatistics implements Serializable
     public static void main(String[] args)
     {
     }
-
     public static final Logger LOGGER = LoggerFactory.getLogger(PlayerStatistics.class);
     @Serial
     private static final long serialVersionUID = 7935923925807359121L;
@@ -304,8 +303,7 @@ public final class PlayerStatistics implements Serializable
      */
     public static PlayerStatistics loadStatistics(AccountMessage account) throws FileNotFoundException
     {
-        if (account == null)
-            throw new NullPointerException();
+        requireNonNull(account);
         //如果不存在,那怎么能读取呢?
         if (fileNotExist(account))
             throw new IllegalStateException("文件不存在,Id: " + account.getId());
