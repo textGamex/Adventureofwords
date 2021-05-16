@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
-import java.util.logging.Logger;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -107,7 +106,7 @@ public final class AccountMessage
     private Identity authentication()//身份验证模块
     {
         var folder = playerPath.toFile();//构造账号路径
-        Logger.getGlobal().fine(folder.toString());
+        LOGGER.debug(folder.toString());
 
         /*账号不存在且是内部人员*/
         final var isGameManager = accountName.equals(PrivateData.ACCOUNT1) || accountName.equals(PrivateData.ACCOUNT2);
@@ -188,7 +187,7 @@ public final class AccountMessage
                 "身份:" + id +
                 ", 游戏数据保存目录:" + gameDataPath +
                 ", playerPath:" + playerPath +
-                ", 账号:" + accountName +
+                ", 账号名:" + accountName +
                 ']';
     }
 }

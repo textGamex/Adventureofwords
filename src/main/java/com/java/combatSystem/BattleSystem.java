@@ -4,7 +4,7 @@ import com.java.unit.Enemy;
 import com.java.unit.Role;
 
 /**
- * 战斗系统, 用来处理玩家战斗和战斗相关的数值处理
+ * 战斗系统, 用来处理玩家战斗和战斗相关的数值处理.
  *
  * <p>已经实现的系数</p>
  * <em>

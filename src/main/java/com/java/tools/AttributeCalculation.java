@@ -15,7 +15,6 @@ public final class AttributeCalculation
         System.out.println(victimEffectiveHp(100, 1.9, 0.98));
     }
 
-
     /**
      * 计算攻击者的攻击未命中的几率.
      *
