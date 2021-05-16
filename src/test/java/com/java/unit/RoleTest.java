@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RoleTest
 {
     private static final Role role = new Role.Builder("≤‚ ‘").maxHp(1).physicalAttack(2).level(3).exp(4).mana(5)
-        .lifeRegeneration(6).evade(7.0).critRate(8.0).critsEffect(9.0).cash(10).upgradeNeedXp(11)
+        .lifeRegeneration(6).evade(7).crit(8).critsEffect(9.0).cash(10).upgradeNeedXp(11)
         .physicalResistance(12.0).build();
 
     @DisplayName("Builderƒ£ Ω≤‚ ‘")
@@ -28,8 +28,8 @@ class RoleTest
         assertEquals(4, role.getExp());
         assertEquals(5, role.getMana());
         assertEquals(6, role.getLifeRegeneration());
-        assertEquals(7.0, role.getEvade());
-        assertEquals(8.0, role.getCritRate());
+        assertEquals(7, role.getEvade());
+        assertEquals(8, role.getCrit());
         assertEquals(9.0, role.getCritsEffect());
         assertEquals(10, role.getCash());
         assertEquals(11, role.getUpgradeNeedXp());
@@ -54,7 +54,7 @@ class RoleTest
         assertEquals(5, data.getMana());
         assertEquals(6, data.getLifeRegeneration());
         assertEquals(7.0, data.getEvade());
-        assertEquals(8.0, data.getCritRate());
+        assertEquals(8, data.getCrit());
         assertEquals(9.0, data.getCritsEffect());
         assertEquals(10, data.getCash());
         assertEquals(11, data.getUpgradeNeedXp());

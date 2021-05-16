@@ -182,13 +182,17 @@ public class Role extends BasicUnit
         jsonFile.put("名称", super.getName());
         jsonFile.put("单位等级", super.getLevel());
         jsonFile.put("最大生命值", super.getHp());
+        jsonFile.put("速度", super.getSpeed());
         jsonFile.put("魔法值", super.getMana());
         jsonFile.put("物理攻击", super.getPhysicalAttack());
-        jsonFile.put("暴击率", super.getCritRate());
+        jsonFile.put("暴击", super.getCrit());
+        jsonFile.put("暴击抗性", super.getCritResistance());
         jsonFile.put("暴击效果", super.getCritsEffect());
         jsonFile.put("物理抗性", super.getPhysicalResistance());
+        jsonFile.put("护甲", super.getArmor());
         jsonFile.put("每回合生命回复", super.getLifeRegeneration());
-        jsonFile.put("闪避率", super.getEvade());
+        jsonFile.put("命中", super.getHit());
+        jsonFile.put("闪避", super.getEvade());
         jsonFile.put("持有货币", cash);
         jsonFile.put("角色拥有经验", exp);
         jsonFile.put("升到下一级所需经验", upgradeNeedXp);
@@ -289,19 +293,24 @@ public class Role extends BasicUnit
         var name = json.getString("名称");
         var level = json.getIntValue("单位等级");
         var hp = json.getIntValue("最大生命值");
+        var speed = json.getIntValue("速度");
         var mana = json.getIntValue("魔法值");
         var atk = json.getIntValue("物理攻击");
-        var critRate = json.getDoubleValue("暴击率");
+        var crit = json.getIntValue("暴击");
+        var critResistance = json.getIntValue("暴击抗性");
         var critsEffect = json.getDoubleValue("暴击效果");
         var physicalResistance = json.getDoubleValue("物理抗性");
-        var evade = json.getDoubleValue("闪避率");
+        var armor = json.getIntValue("护甲");
+        var hit = json.getIntValue("命中");
+        var evade = json.getIntValue("闪避");
         var cash = json.getIntValue("持有货币");
         var lifeRegeneration = json.getIntValue("每回合生命回复");
         var exp = json.getIntValue("角色拥有经验");
         var upgradeNeedXp = json.getIntValue("升到下一级所需经验");
 
-        return new Builder(name).level(level).maxHp(hp).mana(mana).physicalAttack(atk).cash(cash).critRate(critRate)
-                .physicalResistance(physicalResistance).critsEffect(critsEffect).evade(evade).exp(exp)
-                .lifeRegeneration(lifeRegeneration).upgradeNeedXp(upgradeNeedXp).build();
+        return new Builder(name).level(level).maxHp(hp).mana(mana).physicalAttack(atk).cash(cash).crit(crit).speed(speed)
+                .physicalResistance(physicalResistance).critsEffect(critsEffect).hit(hit).evade(evade).exp(exp)
+                .lifeRegeneration(lifeRegeneration).upgradeNeedXp(upgradeNeedXp).critResistance(critResistance)
+                .armor(armor).build();
     }
 }

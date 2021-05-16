@@ -18,11 +18,13 @@ import static java.util.Objects.requireNonNull;
  *     <li>物理攻击, 默认值为0</li>
  *     <li>魔法攻击, 默认值为0</li>
  *     <li>魔法值, 默认值为0</li>
- *     <li>暴击率, 默认值为0</li>
+ *     <li>暴击, 默认值为0</li>
+ *     <li>暴击抗性, 默认值为0</li>
  *     <li>暴击效果, 默认值为2.0</li>
- *     <li>命中率, 默认值为0.75</li>
- *     <li>闪避率, 默认值为0.05</li>
+ *     <li>命中, 默认值为50</li>
+ *     <li>闪避, 默认值为5</li>
  *     <li>物理抗性, 默认值为0</li>
+ *     <li>护甲, 默认值为0</li>
  *     <li>魔法抗性, 默认值为0</li>
  *     <li>每回合生命回复, 默认值为0</li>
  *     <li>每回合法力值恢复, 默认值为0</li>
@@ -32,7 +34,6 @@ import static java.util.Objects.requireNonNull;
  * @see BuffModule
  * @see Role
  * @see Enemy
- *
  */
 public class BasicUnit implements Comparable<BasicUnit>, Serializable
 {
@@ -57,21 +58,24 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     private int physicalAttack;
     /**法术伤害*/
     private int magicAttack;
-    /**暴击率 */
-    private double critRate;
+    /**暴击 */
+    private int crit;
+    /**暴击抗性 */
+    private int critResistance;
     /**暴击效果*/
     private double critsEffect;
 
-    /*    <防御类>    */
+    /*     防御类    */
 
     /**物理抗性*/
     private double physicalResistance;
+    private int armor;
     /**魔法抗性*/
     private double magicResistance;
-    /**命中率*/
-    private double hitRate;
+    /**命中*/
+    private int hit;
     /**闪避*/
-    private double evade;
+    private int evade;
     /**每回合生命回复*/
     private int lifeRegeneration;
     /**每回合法力值恢复*/
@@ -83,23 +87,25 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      * 构建{@link BasicUnit}对象
      *
      * <p>现已实现以下属性</p>
-     * <ul>
-     *     <li>单位名称, 无默认值</li>
-     *     <li>单位等级, 默认值为1</li>
-     *     <li>最大生命值, 默认值为100</li>
-     *     <li>速度, 默认值为50</li>
-     *     <li>物理攻击, 默认值为0</li>
-     *     <li>魔法攻击, 默认值为0</li>
-     *     <li>魔法值, 默认值为0</li>
-     *     <li>暴击率, 默认值为0</li>
-     *     <li>暴击效果, 默认值为2.0</li>
-     *     <li>命中率, 默认值为0.75</li>
-     *     <li>闪避率, 默认值为0.05</li>
-     *     <li>物理抗性, 默认值为0</li>
-     *     <li>魔法抗性, 默认值为0</li>
-     *     <li>每回合生命回复, 默认值为0</li>
-     *     <li>每回合法力值恢复, 默认值为0</li>
-     * </ul>
+     *
+     * <li>单位名称, 无默认值</li>
+     * <li>单位等级, 默认值为1</li>
+     * <li>最大生命值, 默认值为100</li>
+     * <li>速度, 默认值为50</li>
+     * <li>物理攻击, 默认值为0</li>
+     * <li>魔法攻击, 默认值为0</li>
+     * <li>魔法值, 默认值为0</li>
+     * <li>暴击, 默认值为0</li>
+     * <li>暴击抗性, 默认值为0</li>
+     * <li>暴击效果, 默认值为2.0</li>
+     * <li>命中, 默认值为50</li>
+     * <li>闪避, 默认值为5</li>
+     * <li>物理抗性, 默认值为0</li>
+     * <li>护甲, 默认值为0</li>
+     * <li>魔法抗性, 默认值为0</li>
+     * <li>每回合生命回复, 默认值为0</li>
+     * <li>每回合法力值恢复, 默认值为0</li>
+     *
      * <strong>参考Effective Java(第三版)第二条</strong>
      * <p>采用泛型来使子类能正常工作</p>
      * <strong>注意:此构建器无法直接操作{@link UnitGrowth}对象, 请创建对象后再对{@link UnitGrowth}对象进行操作</strong>
@@ -110,23 +116,25 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      * @author 千年
      * @version 1.4.1
      */
-    public static class Builder<T extends Builder>
+    public static class Builder<T extends Builder<T>>
     {
         private final String name;
 
         private int maxHp                 = 100;
         private int physicalAttack        = 0;
+        private int armor                 = 0;
         private int magicAttack           = 0;
-        private double critRate           = 0.0;//暴击率
+        private int crit                  = 0;//暴击
+        private int critResistance        = 0;
         private double critsEffect        = 2.0;//暴击效果
         private double physicalResistance = 0.0;//物理抗性
-        private double evade              = 0.05;//闪避
+        private int evade                 = 5;//闪避
         private int lifeRegeneration      = 0;//每回合生命回复
         private double magicResistance    = 0.0;
         private int manaRecovery          = 0;
         private int level                 = 1;
         private int mana                  = 0;//法力值
-        private double hitRate            = 0.75;
+        private int hit                   = 50;
         private int speed                 = 50;
 
         /**
@@ -161,9 +169,21 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             return (T) this;
         }
 
-        public T hitRate(double hitRate)
+        public T hit(int hit)
         {
-            this.hitRate = hitRate;
+            this.hit = hit;
+            return (T) this;
+        }
+
+        public T armor(int armor)
+        {
+            this.armor = armor;
+            return (T) this;
+        }
+
+        public T critResistance(int critResistance)
+        {
+            this.critResistance = critResistance;
             return (T) this;
         }
 
@@ -179,9 +199,9 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             return (T) this;
         }
 
-        public T critRate(double critRate)
+        public T crit(int crit)
         {
-            this.critRate = critRate;
+            this.crit = crit;
             return (T) this;
         }
 
@@ -220,7 +240,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             return (T) this;
         }
 
-        public T evade(double evade)
+        public T evade(int evade)
         {
             this.evade = evade;
             return (T) this;
@@ -249,8 +269,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      */
     protected BasicUnit(Builder builder)
     {
-        if (builder == null)
-            throw new NullPointerException();
+        requireNonNull(builder);
         name               = builder.name;
         hp                 = builder.maxHp;
         maxHp              = builder.maxHp;
@@ -258,14 +277,16 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         speed              = builder.speed;
         physicalAttack     = builder.physicalAttack;
         magicAttack        = builder.magicAttack;
-        critRate           = builder.critRate;
+        crit               = builder.crit;
+        critResistance     = builder.critResistance;
         critsEffect        = builder.critsEffect;
         physicalResistance = builder.physicalResistance;
+        armor              = builder.armor;
         lifeRegeneration   = builder.lifeRegeneration;
         manaRecovery       = builder.manaRecovery;
         evade              = builder.evade;
         mana               = builder.mana;
-        hitRate            = builder.hitRate;
+        hit                = builder.hit;
         magicResistance    = builder.magicResistance;
     }
 
@@ -279,7 +300,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      *     <li>物理攻击, 默认值为2</li>
      *     <li>魔法攻击, 默认值为1</li>
      *     <li>法力值, 默认值为5</li>
-     *     <li>闪避率, 默认值为0.005</li>
+     *     <li>闪避, 默认值为1</li>
      * </em>
      * @author 千年
      * @version 1.0.1
@@ -288,15 +309,15 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      * @see Role
      * @see Enemy
      */
-    protected class UnitGrowth
+    protected static class UnitGrowth//TODO:改
     {
         private int maxHpGrowth = 10;
         private int physicalAttackGrowth = 2;
         private int magicAttackGrowth = 1;
         private int manaGrowth = 5;
-        private double evadeGrowth = 0.005;
+        private int evadeGrowth = 1;
 
-        public UnitGrowth(int maxHpGrowth, int physicalAttackGrowth, int magicAttackGrowth, int manaGrowth, double evadeGrowth)
+        public UnitGrowth(int maxHpGrowth, int physicalAttackGrowth, int magicAttackGrowth, int manaGrowth, int evadeGrowth)
         {
             this.maxHpGrowth = maxHpGrowth;
             this.physicalAttackGrowth = physicalAttackGrowth;
@@ -317,11 +338,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
          */
         public void levelUpgrade()
         {
-            maxHp += maxHpGrowth;
-            physicalResistance += physicalAttackGrowth;
-            magicAttack += magicAttackGrowth;
-            mana += manaGrowth;
-            evade += evadeGrowth;
+
         }
 
         public int getMaxHpGrowth()
@@ -364,19 +381,19 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             this.manaGrowth = manaGrowth;
         }
 
-        public double getEvadeGrowth()
+        public int getEvadeGrowth()
         {
             return evadeGrowth;
         }
 
-        public void setEvadeGrowth(double evadeGrowth)
+        public void setEvadeGrowth(int evadeGrowth)
         {
             this.evadeGrowth = evadeGrowth;
         }
     }
 
     /**
-     * 用于此单位的buff模块交互
+     * 用于此单位的buff模块交互.
      *
      * @throws NullPointerException 如果{@code buff}为null
      * @see BuffModule
@@ -407,9 +424,9 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         return physicalAttack;
     }
 
-    public final double getCritRate()
+    public final int getCrit()
     {
-        return critRate;
+        return crit;
     }
 
     public final double getCritsEffect()
@@ -432,14 +449,24 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         this.magicResistance = magicResistance;
     }
 
-    public double getHitRate()
+    public int getHit()
     {
-        return hitRate;
+        return hit;
     }
 
-    public void setHitRate(double hitRate)
+    public void setHit(int hit)
     {
-        this.hitRate = hitRate;
+        this.hit = hit;
+    }
+
+    public int getArmor()
+    {
+        return armor;
+    }
+
+    public void setArmor(int armor)
+    {
+        this.armor = armor;
     }
 
     public final double getPhysicalResistance()
@@ -461,11 +488,25 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         return level;
     }
 
-    public double getEvade()
+    public int getEvade()
     {
         return evade;
     }
 
+    public int getMaxHp()
+    {
+        return maxHp;
+    }
+
+    public int getCritResistance()
+    {
+        return critResistance;
+    }
+
+    public void setCritResistance(int critResistance)
+    {
+        this.critResistance = critResistance;
+    }
 
     public void setMaxHp(int maxHp)
     {
@@ -482,9 +523,9 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         this.physicalAttack = physicalAttack;
     }
 
-    public void setCritRate(double critRate)
+    public void setCrit(int crit)
     {
-        this.critRate = critRate;
+        this.crit = crit;
     }
 
     public void setCritsEffect(double critsEffect)
@@ -497,7 +538,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         this.physicalResistance = physicalResistance;
     }
 
-    public void setEvade(double evade)
+    public void setEvade(int evade)
     {
         this.evade = evade;
     }
@@ -553,9 +594,9 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     }
 
     /**
-     * 用来判断两个对象ID是否相同
+     * 用来判断两个对象是否相同.
      *
-     * @return 如果两个对象ID相同, 返回{@code true}
+     * @return 如果两个对象相同, 返回{@code true}
      * @since 15
      */
     @Override
@@ -574,7 +615,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         BasicUnit that = (BasicUnit) o;
 
         return id == that.id && maxHp == that.maxHp && hp == that.hp && mana == that.mana && physicalAttack == that.physicalAttack
-                && Double.compare(that.critRate, critRate) == 0 && Double.compare(that.critsEffect, critsEffect) == 0
+                && Double.compare(that.crit, crit) == 0 && Double.compare(that.critsEffect, critsEffect) == 0
                 && Double.compare(that.physicalResistance, physicalResistance) == 0
                 && Double.compare(that.evade, evade) == 0 && lifeRegeneration == that.lifeRegeneration
                 && level == that.level && name.equals(that.name) && buff.equals(that.buff);
@@ -596,19 +637,23 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
                 + "[id:" + id
                 + ", 名称:" + name
                 + ", 最大生命值:" + maxHp
+                + ", 生命值:" + hp
                 + ", 等级:" + level
+                + ", 速度:" + speed
                 + ", 物理攻击:" + physicalAttack
-                + ", 魔法攻击:" + mana
-                + ", 暴击率:" + critRate * 100 + "%"
+                + ", 魔法攻击:" + magicAttack
+                + ", 暴击:" + crit
+                + ", 暴击抗性:" + critResistance
                 + ", 暴击效果:" + critsEffect * 100 + "%"
                 + ", 物理抗性:" + physicalResistance
+                + ", 护甲:" + armor
                 + ", 每回合生命回复:" +lifeRegeneration
-                + ", 闪避率:" + evade * 100 + "%"
+                + ", 闪避:" + evade
                 + "]";
     }
 
     /**
-     * 用来克隆对象
+     * 用来克隆对象.
      *
      * @return 与this对象相同的对象
      * @throws CloneNotSupportedException 类不存在时
