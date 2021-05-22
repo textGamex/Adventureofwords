@@ -1,6 +1,9 @@
 package com.java.unit;
 
 import com.java.combatSystem.BuffModule.BuffModule;
+import com.java.tools.AttributeCalculation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import static java.util.Objects.requireNonNull;
@@ -44,7 +47,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     private final int id = ++nextTextId;
 
     private final BuffModule buff = new BuffModule();
-    private final UnitGrowth growth = new UnitGrowth();
+//    private final UnitGrowth growth = new UnitGrowth();
 
     private final String name;
     /**最大生命值*/
@@ -120,6 +123,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     {
         private final String name;
 
+        private
         private int maxHp                 = 100;
         private int physicalAttack        = 0;
         private int armor                 = 0;
@@ -311,13 +315,18 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      */
     protected static class UnitGrowth//TODO:改
     {
-        private int maxHpGrowth = 10;
-        private int physicalAttackGrowth = 2;
-        private int magicAttackGrowth = 1;
-        private int manaGrowth = 5;
-        private int evadeGrowth = 1;
+        private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(UnitGrowth.class);
+        public static void main(String[] args)
+        {
+            System.out.println(levelGrowth(100, 0.08, 15));
+        }
+        private double maxHpGrowth = 0.07;
+        private double physicalAttackGrowth = 0.07;
+        private double magicAttackGrowth = 0.07;
+        private double manaGrowth = 0.07;
+        private double evadeGrowth = 0.07;
 
-        public UnitGrowth(int maxHpGrowth, int physicalAttackGrowth, int magicAttackGrowth, int manaGrowth, int evadeGrowth)
+        public UnitGrowth(double maxHpGrowth, double physicalAttackGrowth, double magicAttackGrowth, double manaGrowth, double evadeGrowth)
         {
             this.maxHpGrowth = maxHpGrowth;
             this.physicalAttackGrowth = physicalAttackGrowth;
@@ -325,12 +334,25 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             this.manaGrowth = manaGrowth;
             this.evadeGrowth = evadeGrowth;
         }
-        public UnitGrowth()
+
+        public UnitGrowth(BasicUnit unit)
         {
+
+        }
+
+        public static int levelGrowth(int attribute, double growth, int level)
+        {
+            LOGGER.trace("初始值:{}, 每次升级提升{}%, 升级次数为{}", attribute, growth * 100, level - 1);
+            for (int i = 1; i < level; i++)
+            {
+                attribute += attribute * growth;
+                LOGGER.trace("第{}次循环, 值为{}", i, attribute);
+            }
+            return attribute;
         }
 
         /**
-         * 单位升级后提升属性
+         * 单位升级后提升属性.
          *
          * @see Role
          * @see Enemy
@@ -341,52 +363,52 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
         }
 
-        public int getMaxHpGrowth()
+        public double getMaxHpGrowth()
         {
             return maxHpGrowth;
         }
 
-        public void setMaxHpGrowth(int maxHpGrowth)
+        public void setMaxHpGrowth(double maxHpGrowth)
         {
             this.maxHpGrowth = maxHpGrowth;
         }
 
-        public int getPhysicalAttackGrowth()
+        public double getPhysicalAttackGrowth()
         {
             return physicalAttackGrowth;
         }
 
-        public void setPhysicalAttackGrowth(int physicalAttackGrowth)
+        public void setPhysicalAttackGrowth(double physicalAttackGrowth)
         {
             this.physicalAttackGrowth = physicalAttackGrowth;
         }
 
-        public int getMagicAttackGrowth()
+        public double getMagicAttackGrowth()
         {
             return magicAttackGrowth;
         }
 
-        public void setMagicAttackGrowth(int magicAttackGrowth)
+        public void setMagicAttackGrowth(double magicAttackGrowth)
         {
             this.magicAttackGrowth = magicAttackGrowth;
         }
 
-        public int getManaGrowth()
+        public double getManaGrowth()
         {
             return manaGrowth;
         }
 
-        public void setManaGrowth(int manaGrowth)
+        public void setManaGrowth(double manaGrowth)
         {
             this.manaGrowth = manaGrowth;
         }
 
-        public int getEvadeGrowth()
+        public double getEvadeGrowth()
         {
             return evadeGrowth;
         }
 
-        public void setEvadeGrowth(int evadeGrowth)
+        public void setEvadeGrowth(double evadeGrowth)
         {
             this.evadeGrowth = evadeGrowth;
         }
@@ -404,10 +426,10 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         return requireNonNull(buff);
     }
 
-    public UnitGrowth growth()
-    {
-        return growth;
-    }
+//    public UnitGrowth growth()
+//    {
+//        return growth;
+//    }
 
     public final String getName()
     {

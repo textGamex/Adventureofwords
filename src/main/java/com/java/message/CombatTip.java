@@ -14,7 +14,10 @@ public final class CombatTip
     {
         combatTip(new CombatMessage("玩家", 7, AttackType.COMMON_ATTACK, "哥布林", 70));
     }
-    
+    private CombatTip()
+    {
+        throw new AssertionError();
+    }
     /**
      * 用于输出战场信息.
      *
@@ -25,8 +28,7 @@ public final class CombatTip
      */
     public static void combatTip(CombatMessage message)
     {
-        if (message == null)
-            throw new NullPointerException();
+        requireNonNull(message);
 
         //不直接写成 message.harm是因为以后可能要做分离处理
         var victimName = message.getVictimName();
@@ -42,16 +44,15 @@ public final class CombatTip
     }
 
     /**
-     * 战场信息包, 用来辅助{@code CombatTip}类, 以便实现战斗信息提示
+     * 战场信息包, 用来辅助{@code CombatTip}类, 以便实现战斗信息提示.
      *
      * <p>一个保存战斗数据的辅助类, 用于传输以下信息</p>
-     * <em>
-     *     <li>攻击者名称</li>
-     *     <li>攻击者造成的伤害量</li>
-     *     <li>攻击类型</li>
-     *     <li>被攻击者名称</li>
-     *     <li>被攻击者剩余血量</li>
-     * </em>
+     * <li>攻击者名称</li>
+     * <li>攻击者造成的伤害量</li>
+     * <li>攻击类型</li>
+     * <li>被攻击者名称</li>
+     * <li>被攻击者剩余血量</li>
+     *
      * @version 1.0.1
      * @since 16
      * @author 千年

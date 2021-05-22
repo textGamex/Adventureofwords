@@ -53,8 +53,8 @@ public class Main extends Application
                 var password = passwordField.getText();
                 if (password.equals(PASSWORD1) || password.equals(PASSWORD2))
                 {
-                    LOGGER.debug("登录成功");
                     label.setText("登录成功!");
+                    LOGGER.debug("登录成功");
                 }
                 else
                 {

@@ -12,7 +12,8 @@ package com.java.message;
 public enum AttackType
 {
     COMMON_ATTACK("普通攻击"),
-    CRIT("会心一击");
+    CRIT("会心一击"),
+    MISS("MISS");
 
     private final String typeName;
 

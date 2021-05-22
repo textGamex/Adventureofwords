@@ -8,12 +8,20 @@ import static java.util.Objects.requireNonNull;
  * 用于辅助的工具类.
  *
  * <p>此类无法实例化</p>
- * @version 1.2.2
+ * @version 1.2.3
  * @author 千年
  * @since 15
  */
 public final class GameTool
 {
+    public enum Sign
+    {
+        /**仅增加*/
+        ONLY_INCREASE,
+        /**仅减少*/
+        ONLY_REDUCED
+    };
+
     public static void main(String[] args)
     {
     }
@@ -69,7 +77,7 @@ public final class GameTool
      * @throws IllegalArgumentException 如果{@code floatingIntRange}小于0或sign的值是非法的
      * @throws NullPointerException 如果{@code sign}为null
      */
-    public static int floatingNumber(int number, int floatingIntRange, String sign)//按整数浮动
+    public static int floatingNumber(int number, int floatingIntRange, Sign sign)//按整数浮动
     {
         if (floatingIntRange < 0)
             throw new IllegalArgumentException("错误范围:" + floatingIntRange);
@@ -77,9 +85,8 @@ public final class GameTool
 
         var randomNumber = current().nextInt(floatingIntRange + 1);
         return switch (sign) {
-            case "+" -> number + randomNumber;
-            case "-" -> number - randomNumber;
-            default -> throw new IllegalArgumentException("异常参数:" + sign);
+            case ONLY_INCREASE -> number + randomNumber;
+            case ONLY_REDUCED -> number - randomNumber;
         };
     }
 
@@ -110,16 +117,16 @@ public final class GameTool
      * @throws IllegalArgumentException 如果{@code floatingPercentage}小于0.0或sign的值是非法的
      * @throws NullPointerException 如果{@code sign}为null
      */
-    public static int floatingNumber(int number, double floatingPercentage, String sign)
+    public static int floatingNumber(int number, double floatingPercentage, Sign sign)
     {
         if (floatingPercentage < 0.0)
             throw new IllegalArgumentException("错误范围:" + floatingPercentage);
+        requireNonNull(sign);
 
         var randomNumber = current().nextInt((int) floatingPercentage * number + 1);
         return switch (sign) {
-            case "+" -> number + randomNumber;
-            case "-" -> number - randomNumber;
-            default -> throw new IllegalArgumentException("异常参数:" + sign);
+            case ONLY_INCREASE -> number + randomNumber;
+            case ONLY_REDUCED -> number - randomNumber;
         };
     }
 //    public static native void cls();

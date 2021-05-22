@@ -1,6 +1,8 @@
 package com.java.tools;
 
 import com.java.unit.BasicUnit;
+import org.slf4j.LoggerFactory;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -10,6 +12,7 @@ import static java.util.Objects.requireNonNull;
 */
 public final class AttributeCalculation
 {
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AttributeCalculation.class);
     public static void main(String[] args)
     {
         System.out.println(victimEffectiveHp(100, 1.9, 0.98));
@@ -43,13 +46,15 @@ public final class AttributeCalculation
      */
     public static double victimEvade(int attackerHit, int victimEvade)
     {
-        //为了防止出现NaN错误
-        if (attackerHit + victimEvade == 0)
+        if (attackerHit <= 0)
         {
-            if (attackerHit <= 0)
-                return 1.0;
-            if (victimEvade <= 0)
-                return 0.0;
+            LOGGER.debug("attackerHit小于等于0:{}", attackerHit);
+            return 1.0;
+        }
+        if (victimEvade <= 0)
+        {
+            LOGGER.debug("victimEvade小于等于0:{}", victimEvade);
+            return 0.0;
         }
         return (double) attackerHit / (attackerHit + victimEvade);
     }
@@ -67,6 +72,7 @@ public final class AttributeCalculation
     }
 
     /**
+     * 计算攻击者的攻击暴击的概率.
      * @param attackerCrit 攻击者的暴击
      * @param victimResistance 被攻击者的暴击抗性
      * @return 攻击者的攻击暴击的概率
@@ -74,14 +80,10 @@ public final class AttributeCalculation
      */
     public static double attackerCritChance(int attackerCrit, int victimResistance)
     {
-        //为了防止出现NaN错误
-        if (attackerCrit + victimResistance == 0)
-        {
-            if (victimResistance <= 0)
-                return 1.0;
-            if (attackerCrit <= 0)
-                return 0.0;
-        }
+        if (attackerCrit <= 0)
+            return 0.0;
+        if (victimResistance <= 0)
+            return 1.0;
         return (double) attackerCrit / (attackerCrit + victimResistance);
     }
 

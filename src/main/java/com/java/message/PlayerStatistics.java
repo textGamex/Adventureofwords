@@ -311,9 +311,7 @@ public final class PlayerStatistics implements Serializable
         if (account.getId() == Identity.PLAYER)
         {
             var archive = loadPlayerStatistics(account);
-            if (archive == null)
-                throw new NullPointerException("loadPlayerStatistics·½·¨·µ»ØNull");
-            return archive;
+            return requireNonNull(archive);
         }
         else
         {
