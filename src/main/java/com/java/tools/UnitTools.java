@@ -21,12 +21,6 @@ public final class UnitTools
     private final List<String> extraAttributes = new ArrayList<>(16);
     private boolean repeatAllowed = false;
 
-    {
-        extraAttributes.add("百发百中的");
-        extraAttributes.add("带附加装甲的");
-        extraAttributes.add("幸运的");
-    }
-
     /**
      * 从前缀池中随机选择一个前缀添加在{@code name}末尾并返回.
      *

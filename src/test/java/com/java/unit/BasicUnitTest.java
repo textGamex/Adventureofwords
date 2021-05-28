@@ -2,6 +2,7 @@ package com.java.unit;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static com.java.unit.BasicUnit.UnitGrowth.calculationLevelGrowth;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,8 +26,51 @@ class BasicUnitTest
         assertEquals(8.0, unit.getCritsEffect());
         assertEquals(9, unit.getLifeRegeneration());
         assertEquals(10.0, unit.getPhysicalResistance());
-
         assertThrows(IllegalArgumentException.class, () -> new BasicUnit.Builder("µ¥Î»").maxHp(0).build());
         assertThrows(NullPointerException.class, () -> new BasicUnit.Builder(null).build());
+    }
+
+    @Test
+    void testCalculationLevelGrowthReturnZero()
+    {
+        final int result1 = calculationLevelGrowth(0, 0.5, 5);
+        final int result2 = calculationLevelGrowth(0, 0.0, 5);
+        final int result3 = calculationLevelGrowth(0, 0.5, 0);
+        final int result4 = calculationLevelGrowth(0, 0.0, 0);
+
+        assertEquals(0, result1);
+        assertEquals(0, result2);
+        assertEquals(0, result3);
+        assertEquals(0, result4);
+    }
+
+    @Test
+    void testCalculationLevelGrowthException()
+    {
+        assertThrows(IllegalArgumentException.class, () -> calculationLevelGrowth(1, 0.5, -1));
+        assertThrows(IllegalArgumentException.class, () -> calculationLevelGrowth(1, -0.5, -1));
+        assertThrows(IllegalArgumentException.class, () -> calculationLevelGrowth(-1, -0.5, -1));
+    }
+
+    @Test
+    void testCalculationLevelGrowthReturnUnchangedAttribute()
+    {
+        final int result1 = calculationLevelGrowth(10, 0.5, 0);
+        final int result2 = calculationLevelGrowth(10, 0.0, 5);
+        final int result3 = calculationLevelGrowth(10, 0.0, 0);
+
+        assertEquals(10, result1);
+        assertEquals(10, result2);
+        assertEquals(10, result3);
+    }
+
+    @Test
+    void textCalculationLevelGrowth()
+    {
+        final int result1 = calculationLevelGrowth(10, -0.5, 1);
+        final int result2 = calculationLevelGrowth(10, 0.5, 1);
+
+        assertEquals(5, result1);
+        assertEquals(15, result2);
     }
 }

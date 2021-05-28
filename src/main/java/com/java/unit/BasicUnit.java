@@ -1,8 +1,7 @@
 package com.java.unit;
 
 import com.java.combatSystem.BuffModule.BuffModule;
-import com.java.tools.AttributeCalculation;
-import org.slf4j.Logger;
+import com.ui.Main;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
@@ -47,7 +46,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     private final int id = ++nextTextId;
 
     private final BuffModule buff = new BuffModule();
-//    private final UnitGrowth growth = new UnitGrowth();
+    private final UnitGrowth growth;
 
     private final String name;
     /**最大生命值*/
@@ -123,7 +122,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     {
         private final String name;
 
-        private
+        private final UnitGrowth growth = new UnitGrowth();
         private int maxHp                 = 100;
         private int physicalAttack        = 0;
         private int armor                 = 0;
@@ -256,6 +255,35 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             return (T) this;
         }
 
+        public T maxHpGrowth(double maxHpGrowth)
+        {
+            growth.setMaxHpGrowth(maxHpGrowth);
+            return (T) this;
+        }
+
+        public T physicalAttackGrowth(double physicalAttackGrowth)
+        {
+            growth.setPhysicalAttackGrowth(physicalAttackGrowth);
+            return (T) this;
+        }
+
+        public T physicalAttackGrowth(double physicalAttackGrowth)
+        {
+            growth.setPhysicalAttackGrowth(physicalAttackGrowth);
+            return (T) this;
+        }
+
+        public T physicalAttackGrowth(double physicalAttackGrowth)
+        {
+            growth.setPhysicalAttackGrowth(physicalAttackGrowth);
+            return (T) this;
+        }
+
+        public T physicalAttackGrowth(double physicalAttackGrowth)
+        {
+            growth.setPhysicalAttackGrowth(physicalAttackGrowth);
+            return (T) this;
+        }
         public BasicUnit build()
         {
             return new BasicUnit(this);
@@ -274,6 +302,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     protected BasicUnit(Builder builder)
     {
         requireNonNull(builder);
+        growth             = requireNonNull(builder.growth);
         name               = builder.name;
         hp                 = builder.maxHp;
         maxHp              = builder.maxHp;
@@ -316,23 +345,15 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     protected static class UnitGrowth//TODO:改
     {
         private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(UnitGrowth.class);
-        public static void main(String[] args)
-        {
-            System.out.println(levelGrowth(100, 0.08, 15));
-        }
         private double maxHpGrowth = 0.07;
         private double physicalAttackGrowth = 0.07;
         private double magicAttackGrowth = 0.07;
         private double manaGrowth = 0.07;
         private double evadeGrowth = 0.07;
+        private double critGrowth = 0.07;
 
-        public UnitGrowth(double maxHpGrowth, double physicalAttackGrowth, double magicAttackGrowth, double manaGrowth, double evadeGrowth)
+        public UnitGrowth()
         {
-            this.maxHpGrowth = maxHpGrowth;
-            this.physicalAttackGrowth = physicalAttackGrowth;
-            this.magicAttackGrowth = magicAttackGrowth;
-            this.manaGrowth = manaGrowth;
-            this.evadeGrowth = evadeGrowth;
         }
 
         public UnitGrowth(BasicUnit unit)
@@ -340,13 +361,28 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
         }
 
-        public static int levelGrowth(int attribute, double growth, int level)
+        /**
+         *
+         * @param attribute 原来的属性
+         * @param growthRatio 属性成长比
+         * @param increaseLevel 提升的等级
+         * @return 计算后的属性值
+         * @throws IllegalArgumentException 如果{@code attribute}或{@code increaseLevel < 0}
+         */
+        public static int calculationLevelGrowth(int attribute, final double growthRatio, final int increaseLevel)
         {
-            LOGGER.trace("初始值:{}, 每次升级提升{}%, 升级次数为{}", attribute, growth * 100, level - 1);
-            for (int i = 1; i < level; i++)
+            if (increaseLevel < 0)
+                throw new IllegalArgumentException("increaseLevel < 0, increaseLevel:" + increaseLevel);
+            if (attribute < 0)
+                throw new IllegalArgumentException("attribute < 0, attribute:" + attribute);
+            if (increaseLevel == 0 || growthRatio == 0.0 || attribute == 0)
+                return attribute;
+
+            LOGGER.trace("初始值:{}, 每次升级提升{}%, 升级次数为{}", attribute, growthRatio * 100, increaseLevel);
+            for (int i = 0; i < increaseLevel; i++)
             {
-                attribute += attribute * growth;
-                LOGGER.trace("第{}次循环, 值为{}", i, attribute);
+                attribute += attribute * growthRatio;
+                LOGGER.trace("第{}次循环, 值为{}", i + 1, attribute);
             }
             return attribute;
         }

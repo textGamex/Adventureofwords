@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
  */
 public final class GameTool
 {
-    public enum Sign
+    public enum SpecifiedDirection
     {
         /**仅增加*/
         ONLY_INCREASE,
@@ -38,16 +38,16 @@ public final class GameTool
     /**
      * 根据传入的概率随机返回{@code false}或{@code true}.
      *
-     * @param probability 返回{@code true}的概率
+     * @param trueProbability 返回{@code true}的概率
      * @return {@code true}或{@code false}
      */
-    public static boolean randomRun (double probability)
+    public static boolean randomRun (final double trueProbability)
     {
-        if (probability >= 1.0)
+        if (trueProbability >= 1.0)
             return true;
-        if (probability <= 0.0)
+        if (trueProbability <= 0.0)
             return false;
-        return probability > current().nextDouble();
+        return trueProbability > current().nextDouble();
     }
 
     /**
@@ -58,7 +58,7 @@ public final class GameTool
      * @return {@code number}加或减 0(包含) ~ {@code floatingIntRange}(包含)的一个数
      * @throws IllegalArgumentException 如果{@code floatingIntRange}小于0
      */
-    public static int floatingNumber(int number, int floatingIntRange)//按整数浮动
+    public static int floatingNumber(final int number, final int floatingIntRange)//按整数浮动
     {
         if (floatingIntRange < 0)
             throw new IllegalArgumentException("错误范围:" + floatingIntRange);
@@ -77,7 +77,8 @@ public final class GameTool
      * @throws IllegalArgumentException 如果{@code floatingIntRange}小于0或sign的值是非法的
      * @throws NullPointerException 如果{@code sign}为null
      */
-    public static int floatingNumber(int number, int floatingIntRange, Sign sign)//按整数浮动
+    public static int floatingNumber(final int number, final int floatingIntRange,
+                                     final SpecifiedDirection sign)//按整数浮动
     {
         if (floatingIntRange < 0)
             throw new IllegalArgumentException("错误范围:" + floatingIntRange);
@@ -98,7 +99,7 @@ public final class GameTool
      * @return {@code number}加或减 0(包含) ~ {@code number * floatingPercentage}(包含)的一个数
      * @throws IllegalArgumentException 如果{@code floatingPercentage}小于0.0
      */
-    public static int floatingNumber(int number, double floatingPercentage)
+    public static int floatingNumber(final int number, final double floatingPercentage)
     {
         if (floatingPercentage < 0.0)
             throw new IllegalArgumentException("错误范围:" + floatingPercentage);
@@ -117,7 +118,7 @@ public final class GameTool
      * @throws IllegalArgumentException 如果{@code floatingPercentage}小于0.0或sign的值是非法的
      * @throws NullPointerException 如果{@code sign}为null
      */
-    public static int floatingNumber(int number, double floatingPercentage, Sign sign)
+    public static int floatingNumber(final int number, final double floatingPercentage, final SpecifiedDirection sign)
     {
         if (floatingPercentage < 0.0)
             throw new IllegalArgumentException("错误范围:" + floatingPercentage);
@@ -129,5 +130,6 @@ public final class GameTool
             case ONLY_REDUCED -> number - randomNumber;
         };
     }
+
 //    public static native void cls();
 }
