@@ -62,7 +62,7 @@ public final class BuffEffect implements Serializable
      * @param isDebuff 是debuff
      * @throws IllegalArgumentException 如果{@code timeLimit}或{@code layers}小于等于0
      */
-    public BuffEffect(int timeLimit, int layers, boolean isDebuff)
+    public BuffEffect(final int timeLimit, final int layers, final boolean isDebuff)
     {
         this(timeLimit, layers, isDebuff, false);
     }
@@ -74,7 +74,7 @@ public final class BuffEffect implements Serializable
      * @param layers 效果层数
      * @throws IllegalArgumentException 如果{@code timeLimit}或{@code layers}小于等于0
      */
-    public BuffEffect(int timeLimit, int layers)
+    public BuffEffect(final int timeLimit, final int layers)
     {
         this(timeLimit, layers, false, false);
     }

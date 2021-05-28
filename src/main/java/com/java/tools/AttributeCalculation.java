@@ -48,12 +48,12 @@ public final class AttributeCalculation
     {
         if (attackerHit <= 0)
         {
-            LOGGER.debug("attackerHit小于等于0:{}", attackerHit);
+            LOGGER.debug("attackerHit小于等于0, attackerHit:{}", attackerHit);
             return 1.0;
         }
         if (victimEvade <= 0)
         {
-            LOGGER.debug("victimEvade小于等于0:{}", victimEvade);
+            LOGGER.debug("victimEvade小于等于0, victimEvade:{}", victimEvade);
             return 0.0;
         }
         return (double) attackerHit / (attackerHit + victimEvade);
@@ -73,6 +73,7 @@ public final class AttributeCalculation
 
     /**
      * 计算攻击者的攻击暴击的概率.
+     *
      * @param attackerCrit 攻击者的暴击
      * @param victimResistance 被攻击者的暴击抗性
      * @return 攻击者的攻击暴击的概率

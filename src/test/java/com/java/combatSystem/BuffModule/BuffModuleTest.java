@@ -23,6 +23,8 @@ class BuffModuleTest
         buffs.add(BuffType.DEBILITY, new BuffEffect(10,1,true));
 
         assertThrows(NullPointerException.class, () -> buffs.add(BuffType.BLEED, null));
+        assertThrows(NullPointerException.class, () -> buffs.add(null, new BuffEffect(1, 1)));
+        assertThrows(NullPointerException.class, () -> buffs.add(null, null));
         assertTrue(buffs.have(BuffType.POISON));
         assertTrue(buffs.have(BuffType.BLEED));
         assertTrue(buffs.have(BuffType.DEBILITY));
@@ -56,6 +58,9 @@ class BuffModuleTest
         buffs.remove(BuffType.POISON);
 
         assertThrows(NullPointerException.class, () -> buffs.remove(BuffType.DEBILITY));
+        assertThrows(NullPointerException.class, () -> buffs.remove(BuffType.DEBILITY, 1));
+        assertThrows(NullPointerException.class, () -> buffs.remove(null));
+        assertThrows(NullPointerException.class, () -> buffs.remove(null, 1));
         assertFalse(buffs.have(BuffType.POISON));
     }
 

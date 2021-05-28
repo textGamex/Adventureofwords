@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 
@@ -33,7 +34,7 @@ public class BuffModule implements Serializable
     @Serial
     private static final long serialVersionUID = 6182039129119023911L;
 
-    private final EnumMap<BuffType, BuffEffect> haveBuffs = new EnumMap<>(BuffType.class);
+    private final Map<BuffType, BuffEffect> haveBuffs = new EnumMap<>(BuffType.class);
 
     /**
      * 给单位添加{@link BuffType}.
@@ -46,12 +47,10 @@ public class BuffModule implements Serializable
      * @throws NullPointerException 如果{@code buffEffect}或{@code type}为null
      * @see BuffEffect
      */
-    public final void add(BuffType type, BuffEffect buffEffect)
+    public final void add(final BuffType type, final BuffEffect buffEffect)
     {
-        if (type == null)
-            throw new NullPointerException();
-        if (buffEffect == null)
-            throw new NullPointerException();
+        requireNonNull(type);
+        requireNonNull(buffEffect);
 
         if (haveBuffs.containsKey(type))
         {
@@ -87,7 +86,7 @@ public class BuffModule implements Serializable
      * @param type buff的类型
      * @see BuffType
      */
-    public final BuffEffect getMessage(BuffType type)
+    public final BuffEffect getMessage(final BuffType type)
     {
         if (buffNotExist(requireNonNull(type)))
             throw new NullPointerException("buff不存在:" + type);
@@ -102,7 +101,7 @@ public class BuffModule implements Serializable
      * @throws NullPointerException 如果{@code aBuffType}为null
      * @return 如果存在, 返回 {@code true}, 否则返回{@code false}
      */
-    public final boolean have(BuffType aBuffType)
+    public final boolean have(final BuffType aBuffType)
     {
         return haveBuffs.containsKey(requireNonNull(aBuffType));
     }
@@ -131,7 +130,7 @@ public class BuffModule implements Serializable
      * @param type 要移除的buff类型
      * @throws NullPointerException 如果{@code type}为null或者要移除buff的不存在
      */
-    public void remove(BuffType type)
+    public void remove(final BuffType type)
     {
         if (buffNotExist(requireNonNull(type)))
             throw new NullPointerException("Buff不存在:" + type);
@@ -148,7 +147,7 @@ public class BuffModule implements Serializable
      * @see BuffType
      * @see BuffEffect
      */
-    public void remove(BuffType type, int reduceTime)
+    public void remove(final BuffType type, final int reduceTime)
     {
         requireNonNull(type);
         if (reduceTime <= 0)
@@ -172,7 +171,7 @@ public class BuffModule implements Serializable
             buff.setTimeLimit(originalTime - reduceTime);
         }
     }
-    private boolean buffNotExist(BuffType type)
+    private boolean buffNotExist(final BuffType type)
     {
         assert type != null;
         return !haveBuffs.containsKey(type);

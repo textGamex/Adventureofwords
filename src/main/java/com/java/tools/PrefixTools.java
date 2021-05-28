@@ -1,5 +1,7 @@
 package com.java.tools;
 
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,17 +11,24 @@ import static java.util.concurrent.ThreadLocalRandom.current;
 /**
  * 此类的每个对象维护着一个不同的前缀池, 默认为不允许有重复前缀.
  *
- * @version 1.1.1
+ * @version 1.1.2
  * @author 千年
  * @since 2021-5-9
  */
-public final class UnitTools
+public final class PrefixTools
 {
     public static void main(String[] args)
     {
+        var a = new PrefixTools();
+        a.setRepeatAllowed(true);
+        a.add("1");
+        a.add("1");
+        a.add("3");
+        System.out.println(a.toUsageProbabilityString());
     }
     private final List<String> extraAttributes = new ArrayList<>(16);
     private boolean repeatAllowed = false;
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PrefixTools.class);
 
     /**
      * 从前缀池中随机选择一个前缀添加在{@code name}末尾并返回.
@@ -65,12 +74,12 @@ public final class UnitTools
     /**
      * 往前缀池中添加新的前缀, 默认不允许添加重复的前缀.
      *
-     *<p>可以通过{@link UnitTools#setRepeatAllowed(boolean)}来更改是否可以重复</p>
+     *<p>可以通过{@link PrefixTools#setRepeatAllowed(boolean)}来更改是否可以重复</p>
      * @param extraAttribute 要添加的新前缀
      * @throws NullPointerException 如果{@code extraAttribute}为null
      * @throws IllegalStateException 如果此对象池不允许存在重复前缀, 但前缀池中已经存在{@code extraAttribute}
      */
-    public void add(String extraAttribute)
+    public void add(final String extraAttribute)
     {
         requireNonNull(extraAttribute);
 
@@ -81,6 +90,7 @@ public final class UnitTools
         }
         extraAttributes.add(extraAttribute);
     }
+
     private boolean notAllowedRepetition()
     {
         return !repeatAllowed;
@@ -112,5 +122,64 @@ public final class UnitTools
     public Boolean have(String extraAttribute)
     {
         return extraAttributes.contains(requireNonNull(extraAttribute));
+    }
+
+    public double calculateReturnProbability(final String prefix)
+    {
+        requireNonNull(prefix);
+        if (extraAttributes.size() == 1 && extraAttributes.contains(prefix))
+            return 1.0;
+        if (extraAttributes.size() == 0 || !extraAttributes.contains(prefix))
+            return 0.0;
+
+        return (double) this.sum(prefix) / extraAttributes.size();
+    }
+
+    /**
+     * 此对象的元素池中 {@code prefix}的总数.
+     *
+     * @param prefix 要计算总数的元素
+     * @return 返回在此对象的元素池中 {@code prefix}的总数
+     * @throws NullPointerException 如果{@code prefix}为null
+     */
+    public int sum(final String prefix)
+    {
+        requireNonNull(prefix);
+
+        int count = 0;
+        for (final var e : extraAttributes)
+            if (e.equals(prefix))
+                ++count;
+        LOGGER.trace("查找元素:{}, 共找到{}个", prefix, count);
+        return count;
+    }
+
+    public String[] toUsageProbabilityStringArray()
+    {
+        return null;
+    }
+
+    public String toUsageProbabilityString()
+    {
+        final int END = extraAttributes.size();
+        int count = 0;
+        final var string = new StringBuilder("[");
+        for (final String s : extraAttributes)
+        {
+            count++;
+            string.append("元素:").append(s).append(", 所占比例:").append(String.format("%.3f", calculateReturnProbability(s)));
+            if (count != END)
+                string.append(", ");
+        }
+        return string.append("]").toString();
+    }
+
+    @Override
+    public String toString()
+    {
+        return "PrefixTools[" +
+                "前缀:" + extraAttributes +
+                ", 允许重复元素:" + repeatAllowed +
+                ']';
     }
 }

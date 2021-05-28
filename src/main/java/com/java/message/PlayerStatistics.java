@@ -202,15 +202,6 @@ public final class PlayerStatistics implements Serializable
         this.totalVictory = totalVictory;
     }
 
-    public void addTotalKill(long addNumber)
-    {
-        totalKill += addNumber;
-    }
-    public void addTotalRound(long addNumber)
-    {
-        totalRound += addNumber;
-    }
-
     /**
      * @return 字符串表示的对象
      */
@@ -238,7 +229,7 @@ public final class PlayerStatistics implements Serializable
      * @see AccountMessage
      * @since 16
      */
-    public void saveStatistics(AccountMessage acc)
+    public void saveStatistics(final AccountMessage acc)
     {
         if (acc == null)
             throw new NullPointerException();
@@ -253,7 +244,7 @@ public final class PlayerStatistics implements Serializable
             savePlayerStatistics(acc);
         }
     }
-    private void saveGameManagerStatistics(AccountMessage account)
+    private void saveGameManagerStatistics(final AccountMessage account)
     {
         assert account != null;
 
@@ -277,7 +268,8 @@ public final class PlayerStatistics implements Serializable
             e.printStackTrace();
         }
     }
-    private void savePlayerStatistics(AccountMessage account)
+
+    private void savePlayerStatistics(final AccountMessage account)
     {
         assert account != null;
         try (var out = new ObjectOutputStream(
@@ -301,7 +293,7 @@ public final class PlayerStatistics implements Serializable
      * @see AccountMessage
      * @since 15
      */
-    public static PlayerStatistics loadStatistics(AccountMessage account) throws FileNotFoundException
+    public static PlayerStatistics loadStatistics(final AccountMessage account) throws FileNotFoundException
     {
         requireNonNull(account);
         //如果不存在,那怎么能读取呢?
@@ -318,14 +310,16 @@ public final class PlayerStatistics implements Serializable
             return loadGameManagerStatistics(account);
         }
     }
-    private static boolean fileNotExist(AccountMessage acc)
+
+    private static boolean fileNotExist(final AccountMessage acc)
     {
         assert acc != null;
 
         return acc.getId() == Identity.NONE || acc.getId() == Identity.NEW_GAME_MANAGER
                 || acc.getId() == Identity.NEW_PLAYER;
     }
-    private static PlayerStatistics loadPlayerStatistics(AccountMessage acc)
+
+    private static PlayerStatistics loadPlayerStatistics(final AccountMessage acc)
     {
         assert acc != null;
 
@@ -342,7 +336,7 @@ public final class PlayerStatistics implements Serializable
         return archive;
     }
 
-    private static PlayerStatistics loadGameManagerStatistics(AccountMessage acc) throws FileNotFoundException
+    private static PlayerStatistics loadGameManagerStatistics(final AccountMessage acc) throws FileNotFoundException
     {
         assert acc != null;
 

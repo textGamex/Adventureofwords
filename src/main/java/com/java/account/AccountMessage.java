@@ -34,7 +34,7 @@ public final class AccountMessage
      * @throws NullPointerException 如果{@code accountName}为null
      * @since 15
      */
-    public AccountMessage(String accountName)
+    public AccountMessage(final String accountName)
     {
         this.accountName = requireNonNull(accountName);
         playerPath = gameDataPath.resolve(accountName);//保存账号目录
@@ -46,7 +46,7 @@ public final class AccountMessage
      * @param fileName 保存的文件名
      * @throws NullPointerException 如果{@code fileName}为null
      */
-    public File getPlayerDataResolveFile(String fileName)
+    public File getPlayerDataResolveFile(final String fileName)
     {
        return playerPath.resolve("Data").resolve(requireNonNull(fileName)).toFile();
     }
@@ -77,7 +77,7 @@ public final class AccountMessage
      * @param id 账号的身份
      * @throws NullPointerException 如果{@code id}为null
      */
-    public void setId(Identity id)
+    public void setId(final Identity id)
     {
         this.id = requireNonNull(id);
     }
@@ -88,7 +88,7 @@ public final class AccountMessage
      * @param playerPath 设置保存玩家的各种数据的目录
      * @throws NullPointerException 如果{@code playerPath}为null
      */
-    public void setPlayerPath(Path playerPath)
+    public void setPlayerPath(final Path playerPath)
     {
         this.playerPath = requireNonNull(playerPath);
     }
@@ -98,7 +98,7 @@ public final class AccountMessage
      *
      * @throws NullPointerException 如果{@code in}为null
      */
-    public static AccountMessage readAccount(Scanner in)//从指定地方读取账户
+    public static AccountMessage readAccount(final Scanner in)//从指定地方读取账户
     {
         return new AccountMessage(requireNonNull(in).nextLine());
     }
@@ -148,7 +148,7 @@ public final class AccountMessage
      * @since 15
      * @throws NullPointerException 如果{@code account}为null
      */
-    public static void createAccountDataFolder(AccountMessage message)//
+    public static void createAccountDataFolder(final AccountMessage message)//
     {
         requireNonNull(message);
         LOGGER.debug("开始创建{}账号的数据文件夹", message.accountName);
@@ -171,7 +171,7 @@ public final class AccountMessage
         else
             LOGGER.debug("{}文件夹存在", file);
     }
-    private static boolean fileNotExist(File file)
+    private static boolean fileNotExist(final File file)
     {
         assert file != null;
         return !file.exists();
