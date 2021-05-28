@@ -31,6 +31,52 @@ class BasicUnitTest
     }
 
     @Test
+    void testAttributesIsGrowWithLevel()
+    {
+        final var unit = new BasicUnit.Builder("单位").physicalAttack(100).magicAttack(100)
+                .evade(100).mana(100).maxHp(100).crit(100).critsEffect(100).lifeRegeneration(100)
+                .physicalResistance(100.0).attributesIsGrowWithLevel(true).level(2).build();
+
+        assertEquals(107, unit.getPhysicalAttack());
+        assertEquals(107, unit.getCrit());
+        assertEquals(107, unit.getMana());
+        assertEquals(107, unit.getMagicAttack());
+    }
+
+    @Test
+    void testAttributesIsGrowWithLevelInvalid()
+    {
+        final var unit1 = new BasicUnit.Builder("单位").physicalAttack(2)
+                .evade(3).mana(101).maxHp(5).crit(7).critsEffect(8.0).lifeRegeneration(9)
+                .physicalResistance(10.0).attributesIsGrowWithLevel(true).level(1).build();
+
+        final var unit2 = new BasicUnit.Builder("单位").physicalAttack(2)
+                .evade(3).mana(101).maxHp(5).crit(7).critsEffect(8.0).lifeRegeneration(9)
+                .physicalResistance(10.0).attributesIsGrowWithLevel(false).level(1).build();
+
+        final var unit3 = new BasicUnit.Builder("单位").physicalAttack(2)
+                .evade(3).mana(101).maxHp(5).crit(7).critsEffect(8.0).lifeRegeneration(9)
+                .physicalResistance(10.0).attributesIsGrowWithLevel(false).level(99).build();
+
+        assertAllAttributesUnchanged(unit1);
+        assertAllAttributesUnchanged(unit2);
+        assertAllAttributesUnchanged(unit3);
+    }
+
+    private void assertAllAttributesUnchanged(BasicUnit unit)
+    {
+        assertEquals("单位", unit.getName());
+        assertEquals(2, unit.getPhysicalAttack());
+        assertEquals(3, unit.getEvade());
+        assertEquals(101, unit.getMana());
+        assertEquals(5, unit.getHp());
+        assertEquals(7, unit.getCrit());
+        assertEquals(8.0, unit.getCritsEffect());
+        assertEquals(9, unit.getLifeRegeneration());
+        assertEquals(10.0, unit.getPhysicalResistance());
+    }
+
+    @Test
     void testCalculationLevelGrowthReturnZero()
     {
         final int result1 = calculationLevelGrowth(0, 0.5, 5);

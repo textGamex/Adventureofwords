@@ -1,11 +1,11 @@
 package com.java.unit;
 
 import com.java.combatSystem.BuffModule.BuffModule;
-import com.ui.Main;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import static java.util.Objects.requireNonNull;
+import static com.java.unit.BasicUnit.UnitGrowth.calculationLevelGrowth;
 
 /**
  * 游戏的单位, 用于实现基本的游戏对战.
@@ -42,8 +42,8 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     @Serial
     private static final long serialVersionUID = 7938388190739071271L;
 
-    private static int nextTextId = 50000;//测试单位id
-    private final int id = ++nextTextId;
+    private static int nextTestId = 50000;//测试单位id
+    private final int id = ++nextTestId;
 
     private final BuffModule buff = new BuffModule();
     private final UnitGrowth growth;
@@ -123,6 +123,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         private final String name;
 
         private final UnitGrowth growth = new UnitGrowth();
+        private boolean attributesIsGrowWithLevel = false;
         private int maxHp                 = 100;
         private int physicalAttack        = 0;
         private int armor                 = 0;
@@ -149,6 +150,11 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             this.name = requireNonNull(name);
         }
 
+        public T attributesIsGrowWithLevel(boolean attributesIsGrowWithLevel)
+        {
+            this.attributesIsGrowWithLevel = attributesIsGrowWithLevel;
+            return (T) this;
+        }
         /**
          * @throws IllegalArgumentException 如果{@code maxHp}小于等于0
          */
@@ -267,23 +273,30 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             return (T) this;
         }
 
-        public T physicalAttackGrowth(double physicalAttackGrowth)
+        public T magicAttackGrowth(double magicAttackGrowth)
         {
-            growth.setPhysicalAttackGrowth(physicalAttackGrowth);
+            growth.setMagicAttackGrowth(magicAttackGrowth);
             return (T) this;
         }
 
-        public T physicalAttackGrowth(double physicalAttackGrowth)
+        public T manaGrowth(double manaGrowth)
         {
-            growth.setPhysicalAttackGrowth(physicalAttackGrowth);
+            growth.setManaGrowth(manaGrowth);
             return (T) this;
         }
 
-        public T physicalAttackGrowth(double physicalAttackGrowth)
+        public T evadeGrowth(double evadeGrowth)
         {
-            growth.setPhysicalAttackGrowth(physicalAttackGrowth);
+            growth.setEvadeGrowth(evadeGrowth);
             return (T) this;
         }
+
+        public T critGrowth(double critGrowth)
+        {
+            growth.setCritGrowth(critGrowth);
+            return (T) this;
+        }
+
         public BasicUnit build()
         {
             return new BasicUnit(this);
@@ -295,7 +308,8 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      *
      * <p>要用如下格式</p>
      * <pre>{@code var Object = new BasicUnit.Builder("unitName").build();}</pre>
-     * <p>而不是</p><pre>{@code var Object = new BasicUnit.Builder();}</pre>
+     * <p>而不是</p>
+     * <pre>{@code var Object = new BasicUnit.Builder();}</pre>
      * @throws NullPointerException 如果{@code builder}是null
      * @see Builder
      */
@@ -303,14 +317,19 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     {
         requireNonNull(builder);
         growth             = requireNonNull(builder.growth);
+
+        int increaseLevel = 0;
+        if (builder.attributesIsGrowWithLevel)
+            increaseLevel = builder.level - 1;
         name               = builder.name;
-        hp                 = builder.maxHp;
-        maxHp              = builder.maxHp;
+        hp                 = calculationLevelGrowth(builder.maxHp, builder.growth.maxHpGrowth, increaseLevel);
+        maxHp              = hp;
         level              = builder.level;
         speed              = builder.speed;
-        physicalAttack     = builder.physicalAttack;
-        magicAttack        = builder.magicAttack;
-        crit               = builder.crit;
+        physicalAttack     = calculationLevelGrowth(builder.physicalAttack, builder.growth.physicalAttackGrowth,
+                increaseLevel);
+        magicAttack        = calculationLevelGrowth(builder.magicAttack, builder.growth.magicAttackGrowth, increaseLevel);
+        crit               = calculationLevelGrowth(builder.crit, builder.growth.critGrowth, increaseLevel);
         critResistance     = builder.critResistance;
         critsEffect        = builder.critsEffect;
         physicalResistance = builder.physicalResistance;
@@ -318,31 +337,30 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         lifeRegeneration   = builder.lifeRegeneration;
         manaRecovery       = builder.manaRecovery;
         evade              = builder.evade;
-        mana               = builder.mana;
+        mana               = calculationLevelGrowth(builder.mana, builder.growth.manaGrowth, increaseLevel);
         hit                = builder.hit;
         magicResistance    = builder.magicResistance;
     }
 
     /**
-     * 单位成长值, 用来实现单位升级时的属性成长
+     * 单位成长值, 用来实现单位升级时的属性成长.
      *
      * <p>用来服务{@link BasicUnit}及其子类</p>
      * <p>已经实现的属性成长值</p>
-     * <em>
-     *     <li>最大生命值, 默认值为10</li>
-     *     <li>物理攻击, 默认值为2</li>
-     *     <li>魔法攻击, 默认值为1</li>
-     *     <li>法力值, 默认值为5</li>
-     *     <li>闪避, 默认值为1</li>
-     * </em>
+     * <li>最大生命值, 默认值为0.07</li>
+     * <li>物理攻击, 默认值为0.07</li>
+     * <li>魔法攻击, 默认值为0.07</li>
+     * <li>法力值, 默认值为0.07</li>
+     * <li>闪避, 默认值为0.07</li>
+     * <li>暴击, 默认值为0.07</li>
      * @author 千年
-     * @version 1.0.1
+     * @version 1.1.0
      * @since 2021-5-3
      * @see BasicUnit
      * @see Role
      * @see Enemy
      */
-    protected static class UnitGrowth//TODO:改
+    protected static class UnitGrowth
     {
         private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(UnitGrowth.class);
         private double maxHpGrowth = 0.07;
@@ -351,15 +369,6 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         private double manaGrowth = 0.07;
         private double evadeGrowth = 0.07;
         private double critGrowth = 0.07;
-
-        public UnitGrowth()
-        {
-        }
-
-        public UnitGrowth(BasicUnit unit)
-        {
-
-        }
 
         /**
          *
@@ -378,7 +387,8 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             if (increaseLevel == 0 || growthRatio == 0.0 || attribute == 0)
                 return attribute;
 
-            LOGGER.trace("初始值:{}, 每次升级提升{}%, 升级次数为{}", attribute, growthRatio * 100, increaseLevel);
+            LOGGER.trace("初始值:{}, 每次升级提升{}%, 升级次数为{}", attribute, String.format("%.3f", growthRatio * 100),
+                    increaseLevel);
             for (int i = 0; i < increaseLevel; i++)
             {
                 attribute += attribute * growthRatio;
@@ -448,12 +458,22 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         {
             this.evadeGrowth = evadeGrowth;
         }
+
+        public double getCritGrowth()
+        {
+            return critGrowth;
+        }
+
+        public void setCritGrowth(final double critGrowth)
+        {
+            this.critGrowth = critGrowth;
+        }
     }
 
     /**
      * 用于此单位的buff模块交互.
      *
-     * @throws NullPointerException 如果{@code buff}为null
+     * @throws NullPointerException 如果buff模块不存在
      * @see BuffModule
      * @return 此单位的buff对象
      */
@@ -462,10 +482,10 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         return requireNonNull(buff);
     }
 
-//    public UnitGrowth growth()
-//    {
-//        return growth;
-//    }
+    public UnitGrowth growth()
+    {
+        return growth;
+    }
 
     public final String getName()
     {
