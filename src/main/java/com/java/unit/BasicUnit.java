@@ -31,7 +31,7 @@ import static com.java.unit.BasicUnit.UnitGrowth.calculationLevelGrowth;
  *     <li>每回合生命回复, 默认值为0</li>
  *     <li>每回合法力值恢复, 默认值为0</li>
  * </ul>
- * @version 1.4.0
+ * @version 2.0.0
  * @author 千年
  * @see BuffModule
  * @see Role
@@ -41,52 +41,21 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 {
     @Serial
     private static final long serialVersionUID = 7938388190739071271L;
-
     private static int nextTestId = 50000;//测试单位id
     private final int id = ++nextTestId;
 
     private final BuffModule buff = new BuffModule();
+    private final UnitAttack attackModule = new UnitAttack();
+    private final UnitDefense defenseModule = new UnitDefense();
     private final UnitGrowth growth;
 
     private final String name;
-    /**最大生命值*/
-    private int maxHp;
-    /**生命值*/
-    private int hp;
     private int speed;
-    /**魔法值*/
-    private int mana;
-    /**物理攻击*/
-    private int physicalAttack;
-    /**法术伤害*/
-    private int magicAttack;
-    /**暴击 */
-    private int crit;
-    /**暴击抗性 */
-    private int critResistance;
-    /**暴击效果*/
-    private double critsEffect;
-
-    /*     防御类    */
-
-    /**物理抗性*/
-    private double physicalResistance;
-    private int armor;
-    /**魔法抗性*/
-    private double magicResistance;
-    /**命中*/
-    private int hit;
-    /**闪避*/
-    private int evade;
-    /**每回合生命回复*/
-    private int lifeRegeneration;
-    /**每回合法力值恢复*/
-    private int manaRecovery;
     /**单位等级*/
     private int level;
 
     /**
-     * 构建{@link BasicUnit}对象
+     * 构建{@link BasicUnit}对象.
      *
      * <p>现已实现以下属性</p>
      *
@@ -123,6 +92,8 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         private final String name;
 
         private final UnitGrowth growth = new UnitGrowth();
+        private final UnitAttack unitAttack = new UnitAttack();
+        private final UnitDefense unitDefense = new UnitDefense();
         private boolean attributesIsGrowWithLevel = false;
         private int maxHp                 = 100;
         private int physicalAttack        = 0;
@@ -319,33 +290,39 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      */
     protected BasicUnit(Builder builder)
     {
+        //TODO:以后有时间可以把攻击和防御模块的构造器写成接收Builder
         requireNonNull(builder);
         growth             = requireNonNull(builder.growth);
-
         int increaseLevel = 0;
         if (builder.attributesIsGrowWithLevel)
         {
             increaseLevel = builder.level - 1;
         }
         name               = builder.name;
-        hp                 = calculationLevelGrowth(builder.maxHp, builder.growth.maxHpGrowth, increaseLevel);
-        maxHp              = hp;
         level              = builder.level;
         speed              = builder.speed;
-        physicalAttack     = calculationLevelGrowth(builder.physicalAttack, builder.growth.physicalAttackGrowth,
-                increaseLevel);
-        magicAttack        = calculationLevelGrowth(builder.magicAttack, builder.growth.magicAttackGrowth, increaseLevel);
-        crit               = calculationLevelGrowth(builder.crit, builder.growth.critGrowth, increaseLevel);
-        critResistance     = builder.critResistance;
-        critsEffect        = builder.critsEffect;
-        physicalResistance = builder.physicalResistance;
-        armor              = builder.armor;
-        lifeRegeneration   = builder.lifeRegeneration;
-        manaRecovery       = builder.manaRecovery;
-        evade              = builder.evade;
-        mana               = calculationLevelGrowth(builder.mana, builder.growth.manaGrowth, increaseLevel);
-        hit                = builder.hit;
-        magicResistance    = builder.magicResistance;
+
+        attackModule.setPhysicalAttack(calculationLevelGrowth(builder.physicalAttack, builder.growth.physicalAttackGrowth,
+                increaseLevel));
+        attackModule.setMagicAttack(calculationLevelGrowth(builder.magicAttack, builder.growth.magicAttackGrowth,
+                increaseLevel));
+        attackModule.setCrit(calculationLevelGrowth(builder.crit, builder.growth.critGrowth,
+                increaseLevel));
+        attackModule.setMana(calculationLevelGrowth(builder.mana, builder.growth.manaGrowth,
+                increaseLevel));
+        attackModule.setHit(builder.hit);
+
+        defenseModule.setCritResistance(builder.critResistance);
+        attackModule.setCritsEffect(builder.critsEffect);
+        defenseModule.setPhysicalResistance(builder.physicalResistance);
+        defenseModule.setArmor(builder.armor);
+        defenseModule.setLifeRegeneration(builder.lifeRegeneration);
+        defenseModule.setManaRecovery(builder.manaRecovery);
+        defenseModule.setEvade(builder.evade);
+        defenseModule.setMaxHp(calculationLevelGrowth(builder.maxHp, builder.growth.maxHpGrowth,
+                increaseLevel));
+        defenseModule.setHp(defenseModule.getMaxHp());
+        defenseModule.setMagicResistance(builder.magicResistance);
     }
 
     /**
@@ -497,7 +474,17 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
     public UnitGrowth growth()
     {
-        return growth;
+        return requireNonNull(growth);
+    }
+
+    public UnitAttack attack()
+    {
+        return requireNonNull(attackModule);
+    }
+
+    public UnitDefense defense()
+    {
+        return requireNonNull(defenseModule);
     }
 
     public final String getName()
@@ -505,163 +492,14 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         return name;
     }
 
-    public final int getHp()
-    {
-        return hp;
-    }
-
-    public final int getPhysicalAttack()
-    {
-        return physicalAttack;
-    }
-
-    public final int getCrit()
-    {
-        return crit;
-    }
-
-    public final double getCritsEffect()
-    {
-        return critsEffect;
-    }
-
-    public int getMana()
-    {
-        return mana;
-    }
-
-    public double getMagicResistance()
-    {
-        return magicResistance;
-    }
-
-    public void setMagicResistance(double magicResistance)
-    {
-        this.magicResistance = magicResistance;
-    }
-
-    public int getHit()
-    {
-        return hit;
-    }
-
-    public void setHit(int hit)
-    {
-        this.hit = hit;
-    }
-
-    public int getArmor()
-    {
-        return armor;
-    }
-
-    public void setArmor(int armor)
-    {
-        this.armor = armor;
-    }
-
-    public final double getPhysicalResistance()
-    {
-        return physicalResistance;
-    }
-
     public int getId()
     {
         return id;
     }
 
-    public final int getLifeRegeneration()
-    {
-        return lifeRegeneration;
-    }
     public final int getLevel()
     {
         return level;
-    }
-
-    public int getEvade()
-    {
-        return evade;
-    }
-
-    public int getMaxHp()
-    {
-        return maxHp;
-    }
-
-    public int getCritResistance()
-    {
-        return critResistance;
-    }
-
-    public void setCritResistance(int critResistance)
-    {
-        this.critResistance = critResistance;
-    }
-
-    public void setMaxHp(int maxHp)
-    {
-        this.maxHp = maxHp;
-    }
-
-    public void setHp(int hp)
-    {
-        this.hp = hp;
-    }
-
-    public void setPhysicalAttack(int physicalAttack)
-    {
-        this.physicalAttack = physicalAttack;
-    }
-
-    public void setCrit(int crit)
-    {
-        this.crit = crit;
-    }
-
-    public void setCritsEffect(double critsEffect)
-    {
-        this.critsEffect = critsEffect;
-    }
-
-    public void setPhysicalResistance(double physicalResistance)
-    {
-        this.physicalResistance = physicalResistance;
-    }
-
-    public void setEvade(int evade)
-    {
-        this.evade = evade;
-    }
-
-    public void setMana(int mana)
-    {
-        this.mana = mana;
-    }
-
-    public void setLifeRegeneration(int lifeRegeneration)
-    {
-        this.lifeRegeneration = lifeRegeneration;
-    }
-
-    public int getMagicAttack()
-    {
-        return magicAttack;
-    }
-
-    public void setMagicAttack(int magicAttack)
-    {
-        this.magicAttack = magicAttack;
-    }
-
-    public int getManaRecovery()
-    {
-        return manaRecovery;
-    }
-
-    public void setManaRecovery(int manaRecovery)
-    {
-        this.manaRecovery = manaRecovery;
     }
 
     public int getSpeed()
@@ -710,25 +548,6 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         return this.id == other.getId();
     }
 
-    public boolean equalsAll(Object o)
-    {
-        if (this == o)
-        {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass())
-        {
-            return false;
-        }
-        BasicUnit that = (BasicUnit) o;
-
-        return id == that.id && maxHp == that.maxHp && hp == that.hp && mana == that.mana && physicalAttack == that.physicalAttack
-                && Double.compare(that.crit, crit) == 0 && Double.compare(that.critsEffect, critsEffect) == 0
-                && Double.compare(that.physicalResistance, physicalResistance) == 0
-                && Double.compare(that.evade, evade) == 0 && lifeRegeneration == that.lifeRegeneration
-                && level == that.level && name.equals(that.name) && buff.equals(that.buff);
-    }
-
     @Override
     public int hashCode()
     {
@@ -738,27 +557,27 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     /**
      * @return 字符串表示的对象
      */
-    @Override
-    public String toString()
-    {
-        return "BasicUnitAttribute"
-                + "[id:" + id
-                + ", 名称:" + name
-                + ", 最大生命值:" + maxHp
-                + ", 生命值:" + hp
-                + ", 等级:" + level
-                + ", 速度:" + speed
-                + ", 物理攻击:" + physicalAttack
-                + ", 魔法攻击:" + magicAttack
-                + ", 暴击:" + crit
-                + ", 暴击抗性:" + critResistance
-                + ", 暴击效果:" + critsEffect * 100 + "%"
-                + ", 物理抗性:" + physicalResistance
-                + ", 护甲:" + armor
-                + ", 每回合生命回复:" +lifeRegeneration
-                + ", 闪避:" + evade
-                + "]";
-    }
+//    @Override
+//    public String toString()
+//    {
+//        return "BasicUnitAttribute"
+//                + "[id:" + id
+//                + ", 名称:" + name
+//                + ", 最大生命值:" + maxHp
+//                + ", 生命值:" + hp
+//                + ", 等级:" + level
+//                + ", 速度:" + speed
+//                + ", 物理攻击:" + physicalAttack
+//                + ", 魔法攻击:" + magicAttack
+//                + ", 暴击:" + crit
+//                + ", 暴击抗性:" + critResistance
+//                + ", 暴击效果:" + critsEffect * 100 + "%"
+//                + ", 物理抗性:" + physicalResistance
+//                + ", 护甲:" + armor
+//                + ", 每回合生命回复:" +lifeRegeneration
+//                + ", 闪避:" + evade
+//                + "]";
+//    }
 
     /**
      * 用来克隆对象.
@@ -790,7 +609,6 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             throw e2;
         }
     }
-
 
     /**
      * @throws NullPointerException 如果{@code other}为null

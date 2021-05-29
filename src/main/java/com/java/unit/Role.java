@@ -90,6 +90,12 @@ public class Role extends BasicUnit
         }
     }
 
+    public static Role newStandardPrimaryLevelRole(final String name)
+    {
+        return new Role.Builder(requireNonNull(name)).speed(50).level(1).armor(1).crit(10).critsEffect(2.0)
+                .physicalAttack(20).maxHp(100).hit(50).evade(5).build();
+    }
+
     public final int getCash()
     {
         return cash;
@@ -171,18 +177,18 @@ public class Role extends BasicUnit
         var jsonFile = new JSONObject();
         jsonFile.put("名称", super.getName());
         jsonFile.put("单位等级", super.getLevel());
-        jsonFile.put("最大生命值", super.getHp());
+        jsonFile.put("最大生命值", super.defense().getHp());
         jsonFile.put("速度", super.getSpeed());
-        jsonFile.put("魔法值", super.getMana());
-        jsonFile.put("物理攻击", super.getPhysicalAttack());
-        jsonFile.put("暴击", super.getCrit());
-        jsonFile.put("暴击抗性", super.getCritResistance());
-        jsonFile.put("暴击效果", super.getCritsEffect());
-        jsonFile.put("物理抗性", super.getPhysicalResistance());
-        jsonFile.put("护甲", super.getArmor());
-        jsonFile.put("每回合生命回复", super.getLifeRegeneration());
-        jsonFile.put("命中", super.getHit());
-        jsonFile.put("闪避", super.getEvade());
+        jsonFile.put("魔法值", super.attack().getMana());
+        jsonFile.put("物理攻击", super.attack().getPhysicalAttack());
+        jsonFile.put("暴击", super.attack().getCrit());
+        jsonFile.put("暴击抗性", super.defense().getCritResistance());
+        jsonFile.put("暴击效果", super.attack().getCritsEffect());
+        jsonFile.put("物理抗性", super.defense().getPhysicalResistance());
+        jsonFile.put("护甲", super.defense().getArmor());
+        jsonFile.put("每回合生命回复", super.defense().getLifeRegeneration());
+        jsonFile.put("命中", super.attack().getHit());
+        jsonFile.put("闪避", super.defense().getEvade());
         jsonFile.put("持有货币", cash);
         jsonFile.put("角色拥有经验", exp);
         jsonFile.put("升到下一级所需经验", upgradeNeedXp);
@@ -197,6 +203,7 @@ public class Role extends BasicUnit
             e.printStackTrace();
         }
     }
+
     private void savePlayerData(AccountMessage account)
     {
         assert account != null;
@@ -244,6 +251,7 @@ public class Role extends BasicUnit
             return loadGameManagerData(account);
         }
     }
+
     private static boolean fileNotExist(AccountMessage acc)
     {
         assert acc != null;
@@ -251,6 +259,7 @@ public class Role extends BasicUnit
         return acc.getId() == Identity.NONE || acc.getId() == Identity.NEW_GAME_MANAGER
                 || acc.getId() == Identity.NEW_PLAYER;
     }
+
     private static Role loadPlayerData(AccountMessage acc)
     {
         assert acc != null;

@@ -22,18 +22,18 @@ class RoleTest
         assertTrue(role instanceof Role);
 
         assertEquals("²âÊÔ", role.getName());
-        assertEquals(1, role.getHp());
-        assertEquals(2, role.getPhysicalAttack());
+        assertEquals(1, role.defense().getHp());
+        assertEquals(2, role.attack().getPhysicalAttack());
         assertEquals(3, role.getLevel());
         assertEquals(4, role.getExp());
-        assertEquals(5, role.getMana());
-        assertEquals(6, role.getLifeRegeneration());
-        assertEquals(7, role.getEvade());
-        assertEquals(8, role.getCrit());
-        assertEquals(9.0, role.getCritsEffect());
+        assertEquals(5, role.attack().getMana());
+        assertEquals(6, role.defense().getLifeRegeneration());
+        assertEquals(7, role.defense().getEvade());
+        assertEquals(8, role.attack().getCrit());
+        assertEquals(9.0, role.attack().getCritsEffect());
         assertEquals(10, role.getCash());
         assertEquals(11, role.getUpgradeNeedXp());
-        assertEquals(12.0, role.getPhysicalResistance());
+        assertEquals(12.0, role.defense().getPhysicalResistance());
 
         assertThrows(NullPointerException.class, () -> Role.loadData(null));
     }
@@ -47,18 +47,18 @@ class RoleTest
         var data = Role.loadData(account);
 
         assertEquals("²âÊÔ", data.getName());
-        assertEquals(1, data.getHp());
-        assertEquals(2, data.getPhysicalAttack());
+        assertEquals(1, data.defense().getHp());
+        assertEquals(2, data.attack().getPhysicalAttack());
         assertEquals(3, data.getLevel());
         assertEquals(4, data.getExp());
-        assertEquals(5, data.getMana());
-        assertEquals(6, data.getLifeRegeneration());
-        assertEquals(7.0, data.getEvade());
-        assertEquals(8, data.getCrit());
-        assertEquals(9.0, data.getCritsEffect());
+        assertEquals(5, data.attack().getMana());
+        assertEquals(6, data.defense().getLifeRegeneration());
+        assertEquals(7.0, data.defense().getEvade());
+        assertEquals(8, data.attack().getCrit());
+        assertEquals(9.0, data.attack().getCritsEffect());
         assertEquals(10, data.getCash());
         assertEquals(11, data.getUpgradeNeedXp());
-        assertEquals(12.0, data.getPhysicalResistance());
+        assertEquals(12.0, data.defense().getPhysicalResistance());
 
         assertThrows(NullPointerException.class, () -> role.saveData(null));
     }

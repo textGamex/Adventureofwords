@@ -17,15 +17,15 @@ class BasicUnitTest
                 .physicalResistance(10.0).build();
 
         assertEquals("单位", unit.getName());
-        assertEquals(2, unit.getPhysicalAttack());
-        assertEquals(3, unit.getEvade());
-        assertEquals(101, unit.getMana());
-        assertEquals(5, unit.getHp());
+        assertEquals(2, unit.attack().getPhysicalAttack());
+        assertEquals(3, unit.defense().getEvade());
+        assertEquals(101, unit.attack().getMana());
+        assertEquals(5, unit.defense().getHp());
         assertEquals(6, unit.getLevel());
-        assertEquals(7, unit.getCrit());
-        assertEquals(8.0, unit.getCritsEffect());
-        assertEquals(9, unit.getLifeRegeneration());
-        assertEquals(10.0, unit.getPhysicalResistance());
+        assertEquals(7, unit.attack().getCrit());
+        assertEquals(8.0, unit.attack().getCritsEffect());
+        assertEquals(9, unit.defense().getLifeRegeneration());
+        assertEquals(10.0, unit.defense().getPhysicalResistance());
         assertThrows(IllegalArgumentException.class, () -> new BasicUnit.Builder("单位").maxHp(0).build());
         assertThrows(NullPointerException.class, () -> new BasicUnit.Builder(null).build());
     }
@@ -37,10 +37,10 @@ class BasicUnitTest
                 .evade(100).mana(100).maxHp(100).crit(100).critsEffect(100).lifeRegeneration(100)
                 .physicalResistance(100.0).attributesIsGrowWithLevel(true).level(2).build();
 
-        assertEquals(107, unit.getPhysicalAttack());
-        assertEquals(107, unit.getCrit());
-        assertEquals(107, unit.getMana());
-        assertEquals(107, unit.getMagicAttack());
+        assertEquals(107, unit.attack().getPhysicalAttack());
+        assertEquals(107, unit.attack().getCrit());
+        assertEquals(107, unit.attack().getMana());
+        assertEquals(107, unit.attack().getMagicAttack());
     }
 
     @Test
@@ -66,14 +66,14 @@ class BasicUnitTest
     private void assertAllAttributesUnchanged(BasicUnit unit)
     {
         assertEquals("单位", unit.getName());
-        assertEquals(2, unit.getPhysicalAttack());
-        assertEquals(3, unit.getEvade());
-        assertEquals(101, unit.getMana());
-        assertEquals(5, unit.getHp());
-        assertEquals(7, unit.getCrit());
-        assertEquals(8.0, unit.getCritsEffect());
-        assertEquals(9, unit.getLifeRegeneration());
-        assertEquals(10.0, unit.getPhysicalResistance());
+        assertEquals(2, unit.attack().getPhysicalAttack());
+        assertEquals(3, unit.defense().getEvade());
+        assertEquals(101, unit.attack().getMana());
+        assertEquals(5, unit.defense().getHp());
+        assertEquals(7, unit.attack().getCrit());
+        assertEquals(8.0, unit.attack().getCritsEffect());
+        assertEquals(9, unit.defense().getLifeRegeneration());
+        assertEquals(10.0, unit.defense().getPhysicalResistance());
     }
 
     @Test

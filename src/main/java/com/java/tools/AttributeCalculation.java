@@ -33,7 +33,7 @@ public final class AttributeCalculation
         requireNonNull(attacker);
         requireNonNull(victim);
 
-        return victimEvade(attacker.getHit(), attacker.getEvade());
+        return victimEvade(attacker.attack().getHit(), attacker.defense().getEvade());
     }
 
     /**
@@ -68,7 +68,7 @@ public final class AttributeCalculation
      */
     public static double attackerCritChance(BasicUnit attacker, BasicUnit victim)
     {
-        return attackerCritChance(requireNonNull(attacker).getCrit(), requireNonNull(victim).getCritResistance());
+        return attackerCritChance(requireNonNull(attacker).attack().getCrit(), requireNonNull(victim).defense().getCritResistance());
     }
 
     /**
@@ -102,8 +102,8 @@ public final class AttributeCalculation
      */
     public static double attackerPhysicalDamage(BasicUnit attacker, BasicUnit victim)
     {
-        return attackerPhysicalDamage(requireNonNull(attacker).getPhysicalAttack(),
-                requireNonNull(victim).getArmor());
+        return attackerPhysicalDamage(requireNonNull(attacker).attack().getPhysicalAttack(),
+                requireNonNull(victim).defense().getArmor());
     }
 
     /**
@@ -145,7 +145,7 @@ public final class AttributeCalculation
     {
         var damage = attackerPhysicalDamage(attacker, victim);
         var critChance = attackerCritChance(attacker, victim);
-        return damage * (1 - critChance) + damage * critChance * attacker.getCritsEffect();
+        return damage * (1 - critChance) + damage * critChance * attacker.attack().getCritsEffect();
     }
 
     /**
@@ -158,7 +158,7 @@ public final class AttributeCalculation
      */
     public static double victimEffectiveHp(BasicUnit attacker, BasicUnit victim)
     {
-        var physicalAttack = requireNonNull(attacker).getPhysicalAttack();
+        var physicalAttack = requireNonNull(attacker).attack().getPhysicalAttack();
         if (physicalAttack == 0)
         {
             ++physicalAttack;
@@ -171,7 +171,7 @@ public final class AttributeCalculation
         {
             return Integer.MAX_VALUE;
         }
-        return victim.getMaxHp() / (1.0 - damageReduction) / (1.0 - evadeChance);
+        return victim.defense().getMaxHp() / (1.0 - damageReduction) / (1.0 - evadeChance);
     }
 
     /**
