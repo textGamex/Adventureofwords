@@ -17,10 +17,11 @@ import java.util.logging.Logger;
 */
 public final class AdventureOfWordsMain
 {
+    private final static String VERSION_PARAMETER = "-version";
     public static void main(String[] args)
     {
         Logger.getGlobal().setLevel(Level.ALL);
-        if (args.length != 0 && args[0].equalsIgnoreCase("-version"))
+        if (args.length != 0 && VERSION_PARAMETER.equalsIgnoreCase(args[0]))
         {
             System.out.println("°æ±¾ºÅ: 0.1Beta");
             System.exit(0);

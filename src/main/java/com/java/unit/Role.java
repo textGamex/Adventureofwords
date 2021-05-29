@@ -110,23 +110,9 @@ public class Role extends BasicUnit
         return upgradeNeedXp;
     }
 
-    public final void addUpgradeNeedXP(int addUpgradeXP)
-    {
-        upgradeNeedXp += addUpgradeXP;
-    }
-
-    public final void addEXP(int gainEXP)
-    {
-        exp += gainEXP;
-    }
-
     public final void addCash(int addCash)
     {
         cash += addCash;
-    }
-
-    public final void addTotalGameScore(int addGameScore)
-    {
     }
 
     @Override
@@ -166,13 +152,17 @@ public class Role extends BasicUnit
     public void saveData(AccountMessage acc)
     {
         if (acc == null)
+        {
             throw new NullPointerException();
+        }
         if (acc.getId() == Identity.GAME_MANAGER || acc.getId() == Identity.NEW_GAME_MANAGER)
         {
             saveGameManagerData(acc);
         }
         else
+        {
             savePlayerData(acc);
+        }
     }
     private void saveGameManagerData(AccountMessage account)
     {
@@ -231,16 +221,22 @@ public class Role extends BasicUnit
     public static Role loadData(AccountMessage account) throws FileNotFoundException
     {
         if (account == null)
+        {
             throw new NullPointerException();
+        }
         //如果不存在,那怎么能读取呢?
         if (fileNotExist(account))
+        {
             throw new IllegalStateException("文件不存在,Id: " + account.getId());
+        }
 
         if (account.getId() == Identity.PLAYER)
         {
             var archive = loadPlayerData(account);
             if (archive == null)
+            {
                 throw new NullPointerException("loadPlayer方法返回Null");
+            }
             return archive;
         }
         else

@@ -16,6 +16,9 @@ import static java.util.Objects.requireNonNull;
  */
 public class Enemy extends BasicUnit
 {
+    /**
+     * 敌对单位级别.
+     */
     enum EnemyType
     {
         COMMON,

@@ -7,6 +7,9 @@ import static com.java.tools.AttributeCalculation.*;
 import static com.java.tools.GameTool.*;
 import static com.java.message.CombatTip.*;
 
+/**
+ * @author Ç§Äê
+ */
 public final class CombatSimulation
 {
 //    public static void main(String[] args)

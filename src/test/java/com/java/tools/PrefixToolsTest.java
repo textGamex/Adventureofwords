@@ -90,4 +90,22 @@ class PrefixToolsTest
         assertEquals(0, sum2);
         assertThrows(NullPointerException.class, () -> attribute.sum(null));
     }
+
+    @Test
+    void testToNumberOfOccurrencesArray()
+    {
+        attribute.setRepeatAllowed(true);
+        attribute.add("sss");
+        attribute.add("sss");
+        attribute.add("sss");
+        attribute.add("aaa");
+        attribute.add("aaa");
+        attribute.add("mmm");
+
+        var num = attribute.toNumberOfOccurrencesArray();
+
+        assertEquals(3, num.get(0).getValue());
+        assertEquals(2, num.get(1).getValue());
+        assertEquals(1, num.get(2).getValue());
+    }
 }

@@ -34,14 +34,16 @@ public final class BattleSystem
     private double roleAttackFactor;
     private double roleCritRateFactor;
     private double roleCritsEffectFactor;
-    private double roleDamageFactor;//承伤系数
+    //承伤系数
+    private double roleDamageFactor;
     private double rolePhysicalResistanceFactor;
     private double roleMagicResistanceFactor;
 
     private double enemyAttackFactor;
     private double enemyCritRateFactor;
     private double enemyCritsEffectFactor;
-    private double enemyDamageFactor;//承伤系数
+    //承伤系数
+    private double enemyDamageFactor;
     private double enemyPhysicalResistanceFactor;
     private double enemyMagicResistanceFactor;
 

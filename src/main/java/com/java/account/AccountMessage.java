@@ -37,7 +37,8 @@ public final class AccountMessage
     public AccountMessage(final String accountName)
     {
         this.accountName = requireNonNull(accountName);
-        playerPath = gameDataPath.resolve(accountName);//保存账号目录
+        //保存账号目录
+        playerPath = gameDataPath.resolve(accountName);
         id = authentication();
     }
 
@@ -102,10 +103,11 @@ public final class AccountMessage
     {
         return new AccountMessage(requireNonNull(in).nextLine());
     }
-
-    private Identity authentication()//身份验证模块
+    //身份验证模块
+    private Identity authentication()
     {
-        var folder = playerPath.toFile();//构造账号路径
+        //构造账号路径
+        var folder = playerPath.toFile();
         LOGGER.debug(folder.toString());
 
         /*账号不存在且是内部人员*/
@@ -120,7 +122,8 @@ public final class AccountMessage
             LOGGER.debug("{}是内部人员账号", accountName);
             return Identity.GAME_MANAGER;
         }
-        else if (fileNotExist(folder))//账号不存在而且是玩家
+        //账号不存在而且是玩家
+        else if (fileNotExist(folder))
         {
             LOGGER.debug("{}是新的玩家账号", accountName);
             return Identity.NEW_PLAYER;
@@ -169,7 +172,9 @@ public final class AccountMessage
             }
         }
         else
+        {
             LOGGER.debug("{}文件夹存在", file);
+        }
     }
     private static boolean fileNotExist(final File file)
     {

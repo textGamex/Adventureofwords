@@ -1,5 +1,8 @@
 package com.java.message;
 
+/**
+ * @author Ç§Äê
+ */
 public final class PrivateData
 {
     public static final String ACCOUNT1 = "program-0";

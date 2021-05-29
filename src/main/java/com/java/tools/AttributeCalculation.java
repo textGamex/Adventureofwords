@@ -82,9 +82,13 @@ public final class AttributeCalculation
     public static double attackerCritChance(int attackerCrit, int victimResistance)
     {
         if (attackerCrit <= 0)
+        {
             return 0.0;
+        }
         if (victimResistance <= 0)
+        {
             return 1.0;
+        }
         return (double) attackerCrit / (attackerCrit + victimResistance);
     }
 
@@ -119,9 +123,13 @@ public final class AttributeCalculation
         if (attackerPhysicalAttack + victimArmor == 0)
         {
             if (victimArmor <= 0)
+            {
                 attack = ++attackerPhysicalAttack;
+            }
             if (attackerPhysicalAttack <= 0)
+            {
                 armor = ++victimArmor;
+            }
         }
         return attack * attack / (attack + armor);
     }
@@ -152,27 +160,34 @@ public final class AttributeCalculation
     {
         var physicalAttack = requireNonNull(attacker).getPhysicalAttack();
         if (physicalAttack == 0)
+        {
             ++physicalAttack;
+        }
 
         var damage = attackerPhysicalDamage(attacker, victim);
         var damageReduction = (physicalAttack - damage) / physicalAttack;
         var evadeChance = victimEvade(attacker, victim);
         if (evadeChance >= 1.0 || damageReduction >= 1.0)
+        {
             return Integer.MAX_VALUE;
+        }
         return victim.getMaxHp() / (1.0 - damageReduction) / (1.0 - evadeChance);
     }
 
     /**
+     * 被攻击者有效HP.
      *
-     * @param victimHp
-     * @param damageReduction
-     * @param evadeChance
-     * @return
+     * @param victimHp 被攻击者的HP
+     * @param damageReduction 伤害减免率
+     * @param evadeChance 闪避概率
+     * @return 返回被攻击者有效HP
      */
     public static double victimEffectiveHp(int victimHp, double damageReduction, double evadeChance)
     {
         if (evadeChance >= 1.0 || damageReduction >= 1.0)
+        {
             return Integer.MAX_VALUE;
+        }
         return victimHp / (1.0 - damageReduction) / (1.0 - evadeChance);
     }
 }

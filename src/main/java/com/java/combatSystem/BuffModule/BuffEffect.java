@@ -45,9 +45,13 @@ public final class BuffEffect implements Serializable
     public BuffEffect(int timeLimit, int layers, boolean debuff, boolean timeLess)
     {
         if (timeLimit <= 0)
+        {
             throw new IllegalArgumentException("非法参数,timeLimit:" + timeLimit);
+        }
         if (layers <= 0)
+        {
             throw new IllegalArgumentException("非法参数,layers:" + layers);
+        }
         this.timeLimit = timeLimit;
         this.layers = layers;
         this.debuff = debuff;
@@ -132,8 +136,14 @@ public final class BuffEffect implements Serializable
     @Override
     public boolean equals(@Nullable Object o)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
         BuffEffect that = (BuffEffect) o;
         return timeLimit == that.timeLimit && layers == that.layers && debuff == that.debuff && timeLess == that.timeLess;
     }

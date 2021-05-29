@@ -161,7 +161,9 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         public T maxHp(int maxHp)
         {
             if (maxHp <= 0)
+            {
                 throw new IllegalArgumentException("异常参数: " + maxHp);
+            }
             this.maxHp = maxHp;
             return (T) this;
         }
@@ -244,7 +246,9 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         public T level(int level)
         {
             if (level < 0)
+            {
                 throw new IllegalArgumentException("异常参数:" + level);
+            }
             this.level = level;
             return (T) this;
         }
@@ -320,7 +324,9 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
         int increaseLevel = 0;
         if (builder.attributesIsGrowWithLevel)
+        {
             increaseLevel = builder.level - 1;
+        }
         name               = builder.name;
         hp                 = calculationLevelGrowth(builder.maxHp, builder.growth.maxHpGrowth, increaseLevel);
         maxHp              = hp;
@@ -354,7 +360,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      * <li>闪避, 默认值为0.07</li>
      * <li>暴击, 默认值为0.07</li>
      * @author 千年
-     * @version 1.1.0
+     * @version 1.1.2
      * @since 2021-5-3
      * @see BasicUnit
      * @see Role
@@ -377,15 +383,22 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
          * @param increaseLevel 提升的等级
          * @return 计算后的属性值
          * @throws IllegalArgumentException 如果{@code attribute}或{@code increaseLevel < 0}
+         * @since 2021-5-28
          */
         public static int calculationLevelGrowth(int attribute, final double growthRatio, final int increaseLevel)
         {
             if (increaseLevel < 0)
+            {
                 throw new IllegalArgumentException("increaseLevel < 0, increaseLevel:" + increaseLevel);
+            }
             if (attribute < 0)
+            {
                 throw new IllegalArgumentException("attribute < 0, attribute:" + attribute);
+            }
             if (increaseLevel == 0 || growthRatio == 0.0 || attribute == 0)
+            {
                 return attribute;
+            }
 
             LOGGER.trace("初始值:{}, 每次升级提升{}%, 升级次数为{}", attribute, String.format("%.3f", growthRatio * 100),
                     increaseLevel);
@@ -667,7 +680,9 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     public void setLevel(int level)
     {
         if (level <= 0)
+        {
             throw new IllegalArgumentException("异常参数:" + level);
+        }
         this.level = level;
     }
 
@@ -680,16 +695,31 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     @Override
     public final boolean equals(Object otherObject)
     {
-        if (this == otherObject) return true;
-        if (otherObject == null) return false;
-        if (!(otherObject instanceof BasicUnit other)) return false;
+        if (this == otherObject)
+        {
+            return true;
+        }
+        if (otherObject == null)
+        {
+            return false;
+        }
+        if (!(otherObject instanceof BasicUnit other))
+        {
+            return false;
+        }
         return this.id == other.getId();
     }
 
     public boolean equalsAll(Object o)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
         BasicUnit that = (BasicUnit) o;
 
         return id == that.id && maxHp == that.maxHp && hp == that.hp && mana == that.mana && physicalAttack == that.physicalAttack
@@ -761,9 +791,11 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         }
     }
 
+
     /**
      * @throws NullPointerException 如果{@code other}为null
      */
+    @Override
     public int compareTo(BasicUnit other)
     {
         return Integer.compare(id, requireNonNull(other).getId());

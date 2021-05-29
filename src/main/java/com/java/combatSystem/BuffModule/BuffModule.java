@@ -89,7 +89,9 @@ public class BuffModule implements Serializable
     public final BuffEffect getMessage(final BuffType type)
     {
         if (buffNotExist(requireNonNull(type)))
+        {
             throw new NullPointerException("buff不存在:" + type);
+        }
 
         return haveBuffs.get(type);
     }
@@ -133,7 +135,9 @@ public class BuffModule implements Serializable
     public void remove(final BuffType type)
     {
         if (buffNotExist(requireNonNull(type)))
+        {
             throw new NullPointerException("Buff不存在:" + type);
+        }
         haveBuffs.remove(type);
     }
 
@@ -151,10 +155,14 @@ public class BuffModule implements Serializable
     {
         requireNonNull(type);
         if (reduceTime <= 0)
+        {
             throw new IllegalArgumentException("非法参数:" + reduceTime);
+        }
 
         if (buffNotExist(type))
+        {
             throw new NullPointerException("Buff不存在:" + type);
+        }
 
         var buff = haveBuffs.get(type);
         var originalTime = buff.getTimeLimit();
@@ -202,7 +210,9 @@ public class BuffModule implements Serializable
         for (var buff : allBuff)
         {
             if (buff.getValue().isDebuff())
+            {
                 remove(buff.getKey());
+            }
         }
     }
 
@@ -214,8 +224,14 @@ public class BuffModule implements Serializable
     @Override
     public boolean equals(Object o)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
         BuffModule that = (BuffModule) o;
         return haveBuffs.equals(that.haveBuffs);
     }

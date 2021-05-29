@@ -1,5 +1,9 @@
 package com.java.account;
 
+/**
+ * 账号的身份枚举.
+ * @author 千年
+ */
 public enum Identity
 {
     /**新玩家*/

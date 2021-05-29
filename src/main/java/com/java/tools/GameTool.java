@@ -44,9 +44,13 @@ public final class GameTool
     public static boolean randomRun (final double trueProbability)
     {
         if (trueProbability >= 1.0)
+        {
             return true;
+        }
         if (trueProbability <= 0.0)
+        {
             return false;
+        }
         return trueProbability > current().nextDouble();
     }
 
@@ -61,7 +65,9 @@ public final class GameTool
     public static int floatingNumber(final int number, final int floatingIntRange)//°´ÕûÊı¸¡¶¯
     {
         if (floatingIntRange < 0)
+        {
             throw new IllegalArgumentException("´íÎó·¶Î§:" + floatingIntRange);
+        }
 
         var randomNumber = current().nextInt(floatingIntRange + 1);
         return current().nextBoolean() ? number + randomNumber : number - randomNumber;
@@ -81,7 +87,9 @@ public final class GameTool
                                      final SpecifiedDirection sign)//°´ÕûÊı¸¡¶¯
     {
         if (floatingIntRange < 0)
+        {
             throw new IllegalArgumentException("´íÎó·¶Î§:" + floatingIntRange);
+        }
         requireNonNull(sign);
 
         var randomNumber = current().nextInt(floatingIntRange + 1);
@@ -102,7 +110,9 @@ public final class GameTool
     public static int floatingNumber(final int number, final double floatingPercentage)
     {
         if (floatingPercentage < 0.0)
+        {
             throw new IllegalArgumentException("´íÎó·¶Î§:" + floatingPercentage);
+        }
 
         var randomNumber = current().nextInt((int) floatingPercentage * number + 1);
         return current().nextBoolean() ? number + randomNumber : number - randomNumber;
@@ -121,7 +131,9 @@ public final class GameTool
     public static int floatingNumber(final int number, final double floatingPercentage, final SpecifiedDirection sign)
     {
         if (floatingPercentage < 0.0)
+        {
             throw new IllegalArgumentException("´íÎó·¶Î§:" + floatingPercentage);
+        }
         requireNonNull(sign);
 
         var randomNumber = current().nextInt((int) floatingPercentage * number + 1);

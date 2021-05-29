@@ -38,11 +38,16 @@ public final class CombatTip
         var harm = message.getHarm();
 
         if (message.getHarm() == 0)
+        {
             System.out.printf("%s使用%s对%s发起了攻击, 但未造成伤害", attackerName, message.getAttackType(), victimName);
-        else if (message.getHarm() > 0)
+        } else if (message.getHarm() > 0)
+        {
             System.out.printf("[系统]%s使用%s对%s造成了%d点伤害,%s还剩%d点生命值%n",attackerName, message.getHarmTypeName(),
                 victimName, message.getHarm(), victimName, message.getVictimSurplusHp());
-        else throw new IllegalArgumentException("异常伤害:" + harm);
+        } else
+        {
+            throw new IllegalArgumentException("异常伤害:" + harm);
+        }
     }
 
     /**

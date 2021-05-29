@@ -29,18 +29,21 @@ public class LoginUi
                 System.out.println("登录成功!");
                 System.out.println("欢迎您再次来到文字冒险的世界");
                 break;
+            default: throw new AssertionError();
         }
         return account;
     }
     private static void verifyPassword()
     {
         var in = new Scanner(System.in);
-        String password = "";
+        String password;
 
         System.out.print("请输入密码: ");
         password = in.nextLine();
         if (password.equals(PASSWORD1) || password.equals(PASSWORD2))
+        {
             System.out.println("登录成功!");
+        }
         else
         {
             System.out.println("密码错误!");
