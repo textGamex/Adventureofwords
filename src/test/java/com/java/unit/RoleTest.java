@@ -62,4 +62,23 @@ class RoleTest
 
         assertThrows(NullPointerException.class, () -> role.saveData(null));
     }
+
+    @Test
+    void newStandardPrimaryLevelRole()
+    {
+        final var unit = Role.newStandardPrimaryLevelRole("测试单位");
+
+        assertEquals("测试单位", unit.getName());
+        assertEquals(100, unit.defense().getMaxHp());
+        assertEquals(50, unit.getSpeed());
+        assertEquals(1, unit.getLevel());
+        assertEquals(1, unit.defense().getArmor());
+        assertEquals(10, unit.attack().getCrit());
+        assertEquals(2.0, unit.attack().getCritsEffect());
+        assertEquals(50, unit.defense().getCritResistance());
+        assertEquals(20,  unit.attack().getPhysicalAttack());
+        assertEquals(50, unit.attack().getHit());
+        assertEquals(5, unit.defense().getEvade());
+    }
 }
+

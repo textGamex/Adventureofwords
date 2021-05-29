@@ -90,10 +90,17 @@ public class Role extends BasicUnit
         }
     }
 
+    /**
+     * 构建一个一级标准玩家角色对象.
+     *
+     * @param name 名称
+     * @return 返回一个一级标准玩家角色对象
+     * @throws NullPointerException 如果{@code name}为null
+     */
     public static Role newStandardPrimaryLevelRole(final String name)
     {
-        return new Role.Builder(requireNonNull(name)).speed(50).level(1).armor(1).crit(10).critsEffect(2.0)
-                .physicalAttack(20).maxHp(100).hit(50).evade(5).build();
+        return new Role.Builder(requireNonNull(name)).maxHp(100).speed(50).level(1).armor(1).crit(10)
+                .critsEffect(2.0).critResistance(50).physicalAttack(20).hit(50).evade(5).build();
     }
 
     public final int getCash()
@@ -114,11 +121,6 @@ public class Role extends BasicUnit
     public final int getUpgradeNeedXp()
     {
         return upgradeNeedXp;
-    }
-
-    public final void addCash(int addCash)
-    {
-        cash += addCash;
     }
 
     @Override
@@ -289,7 +291,8 @@ public class Role extends BasicUnit
         }
         catch (IOException e)
         {
-            var e2 = new FileNotFoundException();
+            var e2 = new FileNotFoundException(
+                    acc.getPlayerDataResolveFile("RoleAttribute.json").toString() + "不存在");
             e2.initCause(e);
             throw e2;
         }

@@ -19,8 +19,6 @@ public class UnitDefense
     private int evade;
     /**每回合生命回复*/
     private int lifeRegeneration;
-    /**每回合法力值恢复*/
-    private int manaRecovery;
     /**暴击抗性 */
     private int critResistance;
 
@@ -84,15 +82,6 @@ public class UnitDefense
         this.lifeRegeneration = lifeRegeneration;
     }
 
-    public int getManaRecovery()
-    {
-        return manaRecovery;
-    }
-
-    public void setManaRecovery(final int manaRecovery)
-    {
-        this.manaRecovery = manaRecovery;
-    }
 
     public int getCritResistance()
     {

@@ -14,7 +14,7 @@ class BasicUnitTest
     {
         var unit = new BasicUnit.Builder("单位").physicalAttack(2)
                 .evade(3).mana(101).maxHp(5).level(6).crit(7).critsEffect(8.0).lifeRegeneration(9)
-                .physicalResistance(10.0).build();
+                .physicalResistance(10.0).manaRecovery(11).magicResistance(12).build();
 
         assertEquals("单位", unit.getName());
         assertEquals(2, unit.attack().getPhysicalAttack());
@@ -26,6 +26,8 @@ class BasicUnitTest
         assertEquals(8.0, unit.attack().getCritsEffect());
         assertEquals(9, unit.defense().getLifeRegeneration());
         assertEquals(10.0, unit.defense().getPhysicalResistance());
+        assertEquals(11, unit.attack().getManaRecovery());
+        assertEquals(12, unit.defense().getMagicResistance());
         assertThrows(IllegalArgumentException.class, () -> new BasicUnit.Builder("单位").maxHp(0).build());
         assertThrows(NullPointerException.class, () -> new BasicUnit.Builder(null).build());
     }

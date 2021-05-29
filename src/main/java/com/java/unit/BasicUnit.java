@@ -311,13 +311,13 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         attackModule.setMana(calculationLevelGrowth(builder.mana, builder.growth.manaGrowth,
                 increaseLevel));
         attackModule.setHit(builder.hit);
+        attackModule.setManaRecovery(builder.manaRecovery);
 
         defenseModule.setCritResistance(builder.critResistance);
         attackModule.setCritsEffect(builder.critsEffect);
         defenseModule.setPhysicalResistance(builder.physicalResistance);
         defenseModule.setArmor(builder.armor);
         defenseModule.setLifeRegeneration(builder.lifeRegeneration);
-        defenseModule.setManaRecovery(builder.manaRecovery);
         defenseModule.setEvade(builder.evade);
         defenseModule.setMaxHp(calculationLevelGrowth(builder.maxHp, builder.growth.maxHpGrowth,
                 increaseLevel));

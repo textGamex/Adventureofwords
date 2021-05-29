@@ -17,6 +17,8 @@ public class UnitAttack
     private int hit;
     /**法力值*/
     private int mana;
+    /**每回合法力值恢复*/
+    private int manaRecovery;
 
     public int getPhysicalAttack()
     {
@@ -76,5 +78,15 @@ public class UnitAttack
     public void setMana(final int mana)
     {
         this.mana = mana;
+    }
+
+    public int getManaRecovery()
+    {
+        return manaRecovery;
+    }
+
+    public void setManaRecovery(final int manaRecovery)
+    {
+        this.manaRecovery = manaRecovery;
     }
 }
