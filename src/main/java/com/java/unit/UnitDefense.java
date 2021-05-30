@@ -1,5 +1,6 @@
 package com.java.unit;
 
+import static com.java.antiSpam.AntiSpam.*;
 /**
  * @author 千年
  */
@@ -10,9 +11,9 @@ public class UnitDefense
     /**生命值*/
     private int hp;
     /**物理抗性*/
-    private double physicalResistance;
+    private long physicalResistance;
     /**魔法抗性*/
-    private double magicResistance;
+    private long magicResistance;
     /**护甲*/
     private int armor;
     /**闪避*/
@@ -24,82 +25,82 @@ public class UnitDefense
 
     public int getMaxHp()
     {
-        return maxHp;
+        return decryptInt(maxHp);
     }
 
     public void setMaxHp(final int maxHp)
     {
-        this.maxHp = maxHp;
+        this.maxHp = encryptionInt(maxHp);
     }
 
     public int getHp()
     {
-        return hp;
+        return decryptInt(hp);
     }
 
     public void setHp(final int hp)
     {
-        this.hp = hp;
+        this.hp = encryptionInt(hp);
     }
 
     public double getPhysicalResistance()
     {
-        return physicalResistance;
+        return decryptDouble(physicalResistance);
     }
 
     public void setPhysicalResistance(final double physicalResistance)
     {
-        this.physicalResistance = physicalResistance;
+        this.physicalResistance = encryptionDouble(physicalResistance);
     }
 
     public int getArmor()
     {
-        return armor;
+        return  decryptInt(armor);
     }
 
     public void setArmor(final int armor)
     {
-        this.armor = armor;
+        this.armor = encryptionInt(armor);
     }
 
     public int getEvade()
     {
-        return evade;
+        return decryptInt(evade);
     }
 
     public void setEvade(final int evade)
     {
-        this.evade = evade;
+        this.evade = encryptionInt(evade);
     }
 
     public int getLifeRegeneration()
     {
-        return lifeRegeneration;
+        return decryptInt(lifeRegeneration);
     }
 
     public void setLifeRegeneration(final int lifeRegeneration)
     {
-        this.lifeRegeneration = lifeRegeneration;
+        this.lifeRegeneration = encryptionInt(lifeRegeneration);
     }
 
 
     public int getCritResistance()
     {
-        return critResistance;
+        return decryptInt(critResistance);
     }
 
     public void setCritResistance(final int critResistance)
     {
-        this.critResistance = critResistance;
+        this.critResistance = encryptionInt(critResistance);
     }
 
     public double getMagicResistance()
     {
-        return magicResistance;
+        return decryptDouble(magicResistance);
     }
 
     public void setMagicResistance(final double magicResistance)
     {
-        this.magicResistance = magicResistance;
+        this.magicResistance = encryptionDouble(magicResistance);
     }
 }
