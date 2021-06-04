@@ -34,8 +34,11 @@ public final class PlayerStatistics implements Serializable
     public static final Logger LOGGER = LoggerFactory.getLogger(PlayerStatistics.class);
     @Serial
     private static final long serialVersionUID = 7935923925807359121L;
+    /**总击杀*/
     private long totalKill;
+    /**总回合数*/
     private long totalRound;
+    /**攻击总次数*/
     private long totalAttack;
     /**总伤害*/
     private long totalHarm;
@@ -44,8 +47,6 @@ public final class PlayerStatistics implements Serializable
     private long totalXp;
     private long totalCash;
     private long totalValue;
-    //游玩总时间 TODO:未实现
-//    private long
 
     public PlayerStatistics()
     {
@@ -120,6 +121,11 @@ public final class PlayerStatistics implements Serializable
         return totalCash;
     }
 
+    public void addTotalHarm(final int harm)
+    {
+        totalHarm += harm;
+    }
+
     /**
      * @param totalCash 一共获得的货币
      * @throws IllegalArgumentException 如果{@code totalCash}小于0
@@ -178,7 +184,7 @@ public final class PlayerStatistics implements Serializable
     }
 
     /**
-     * @param totalAttack 总击杀
+     * @param totalAttack 总攻击次数
      * @throws IllegalArgumentException 如果{@code totalAttack}小于0
      */
     public void setTotalAttack(long totalAttack)
@@ -224,7 +230,7 @@ public final class PlayerStatistics implements Serializable
     {
         return  "PlayerStatistics" +
                 "[玩家总击杀数:" + totalKill +
-                ", 总场数:" + totalRound +
+                ", 总回合数:" + totalRound +
                 ", 普通攻击次数:" + totalAttack +
                 ", 总伤害:" + totalHarm +
                 ", 胜利场数:" + totalVictory +
@@ -266,7 +272,7 @@ public final class PlayerStatistics implements Serializable
 
         var jsonFile = new JSONObject();
         jsonFile.put("玩家总击杀数", totalKill);
-        jsonFile.put("总场数", totalRound);
+        jsonFile.put("总回合数", totalRound);
         jsonFile.put("普通攻击次数", totalAttack);
         jsonFile.put("总伤害", totalHarm);
         jsonFile.put("胜利场数", totalVictory);
@@ -373,7 +379,7 @@ public final class PlayerStatistics implements Serializable
         var json = JSONObject.parseObject(line);
 
         var totalKill = json.getLongValue("玩家总击杀数");
-        var totalRound = json.getLongValue("总场数");
+        var totalRound = json.getLongValue("总回合数");
         var totalAttack = json.getLongValue("普通攻击次数");
         var totalHarm = json.getLongValue("总伤害");
         var totalVictory = json.getLongValue("胜利场数");

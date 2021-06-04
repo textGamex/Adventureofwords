@@ -1,5 +1,8 @@
 package com.java.combatSystem.BuffModule;
 
+import com.java.battleSystem.BuffModule.BuffEffect;
+import com.java.battleSystem.BuffModule.BuffModule;
+import com.java.battleSystem.BuffModule.BuffType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.java.tools;
+package com.java.battleSystem;
 
 import com.java.unit.BasicUnit;
 import org.slf4j.LoggerFactory;
@@ -6,45 +6,47 @@ import org.slf4j.LoggerFactory;
 import static java.util.Objects.requireNonNull;
 
 /**
+ * 用于计算与战斗相关的数值.
+ *
  * @author 留恋千年
  * @version 1.0.2
  * @since 20221-5-15
 */
-public final class AttributeCalculation
+public final class BattleAttributeCalculation
 {
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AttributeCalculation.class);
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(BattleAttributeCalculation.class);
     public static void main(String[] args)
     {
         System.out.println(victimEffectiveHp(100, 1.9, 0.98));
     }
 
     /**
-     * 计算攻击者的攻击未命中的几率.
+     * 计算攻击者的攻击命中的几率.
      *
      * @param attacker 攻击者
      * @param victim 被攻击者
      * @throws NullPointerException 如果{@code attacker}或{@code victim}为null
-     * @return 攻击者的攻击未命中的几率
+     * @return 攻击者的攻击命中的几率
      * @see BasicUnit
      * @since 2021-5-15
      */
-    public static double victimEvade(BasicUnit attacker, BasicUnit victim)
+    public static double attackHitRate(final BasicUnit attacker, final BasicUnit victim)
     {
         requireNonNull(attacker);
         requireNonNull(victim);
 
-        return victimEvade(attacker.attack().getHit(), attacker.defense().getEvade());
+        return attackHitRate(attacker.attack().getHit(), victim.defense().getEvade());
     }
 
     /**
-     * 根据给定的数值计算攻击者的攻击未命中的几率.
+     * 根据给定的数值计算攻击者的攻击命中的几率.
      *
      * @param attackerHit 攻击者的命中
      * @param victimEvade 被攻击者的闪避
-     * @return 攻击者的攻击未命中的几率
+     * @return 攻击者的攻击命中的几率
      * @since 2021-5-15
      */
-    public static double victimEvade(int attackerHit, int victimEvade)
+    public static double attackHitRate(final int attackerHit, final int victimEvade)
     {
         if (attackerHit <= 0)
         {
@@ -53,7 +55,7 @@ public final class AttributeCalculation
         }
         if (victimEvade <= 0)
         {
-            LOGGER.debug("victimEvade小于等于0, victimEvade:{}", victimEvade);
+            LOGGER.debug("victimEvade小于等于0, attackHitRate:{}", victimEvade);
             return 0.0;
         }
         return (double) attackerHit / (attackerHit + victimEvade);
@@ -66,9 +68,10 @@ public final class AttributeCalculation
      * @throws NullPointerException 如果{@code attacker}或{@code victim}为null
      * @since 2021-5-16
      */
-    public static double attackerCritChance(BasicUnit attacker, BasicUnit victim)
+    public static double attackerCritChance(final BasicUnit attacker, final BasicUnit victim)
     {
-        return attackerCritChance(requireNonNull(attacker).attack().getCrit(), requireNonNull(victim).defense().getCritResistance());
+        return attackerCritChance(requireNonNull(attacker).attack().getCrit(),
+                requireNonNull(victim).defense().getCritResistance());
     }
 
     /**
@@ -79,7 +82,7 @@ public final class AttributeCalculation
      * @return 攻击者的攻击暴击的概率
      * @since 2021-5-16
      */
-    public static double attackerCritChance(int attackerCrit, int victimResistance)
+    public static double attackerCritChance(final int attackerCrit, final int victimResistance)
     {
         if (attackerCrit <= 0)
         {
@@ -100,7 +103,7 @@ public final class AttributeCalculation
      * @throws NullPointerException 如果{@code attacker}或{@code victim}为null
      * @return 攻击者的伤害
      */
-    public static double attackerPhysicalDamage(BasicUnit attacker, BasicUnit victim)
+    public static double attackerPhysicalDamage(final BasicUnit attacker, final BasicUnit victim)
     {
         return attackerPhysicalDamage(requireNonNull(attacker).attack().getPhysicalAttack(),
                 requireNonNull(victim).defense().getArmor());
@@ -141,7 +144,7 @@ public final class AttributeCalculation
      * @param victim 被攻击者
      * @throws NullPointerException 如果{@code attacker}或{@code victim}为null
      */
-    public double DPR(BasicUnit attacker, BasicUnit victim)
+    public double DPR(final BasicUnit attacker, final BasicUnit victim)
     {
         var damage = attackerPhysicalDamage(attacker, victim);
         var critChance = attackerCritChance(attacker, victim);
@@ -156,7 +159,7 @@ public final class AttributeCalculation
      * @return 返回被攻击者的有效生命值
      * @throws NullPointerException 如果{@code attacker}或{@code victim}为null
      */
-    public static double victimEffectiveHp(BasicUnit attacker, BasicUnit victim)
+    public static double victimEffectiveHp(final BasicUnit attacker, final BasicUnit victim)
     {
         var physicalAttack = requireNonNull(attacker).attack().getPhysicalAttack();
         if (physicalAttack == 0)
@@ -166,7 +169,7 @@ public final class AttributeCalculation
 
         var damage = attackerPhysicalDamage(attacker, victim);
         var damageReduction = (physicalAttack - damage) / physicalAttack;
-        var evadeChance = victimEvade(attacker, victim);
+        var evadeChance = attackHitRate(attacker, victim);
         if (evadeChance >= 1.0 || damageReduction >= 1.0)
         {
             return Integer.MAX_VALUE;
@@ -175,19 +178,46 @@ public final class AttributeCalculation
     }
 
     /**
-     * 被攻击者有效HP.
+     * 计算被攻击者有效HP.
      *
      * @param victimHp 被攻击者的HP
      * @param damageReduction 伤害减免率
      * @param evadeChance 闪避概率
      * @return 返回被攻击者有效HP
      */
-    public static double victimEffectiveHp(int victimHp, double damageReduction, double evadeChance)
+    public static double victimEffectiveHp(final int victimHp, final double damageReduction, final double evadeChance)
     {
         if (evadeChance >= 1.0 || damageReduction >= 1.0)
         {
             return Integer.MAX_VALUE;
         }
         return victimHp / (1.0 - damageReduction) / (1.0 - evadeChance);
+    }
+
+    /**
+     *  计算攻击者对被攻击者的暴击伤害.
+     *
+     * @param attacker 攻击者
+     * @param victim 被攻击者
+     * @return 攻击者对被攻击者的暴击伤害
+     * @throws NullPointerException 如果{@code attacker}或{@code victim}为null
+     */
+    public static int criticalDamage(final BasicUnit attacker, final BasicUnit victim)
+    {
+       final var hurt = attackerPhysicalDamage(requireNonNull(attacker), requireNonNull(victim));
+       return criticalDamage(hurt, attacker.attack().getCritsEffect());
+    }
+
+    /**
+     *  计算攻击者对被攻击者的暴击伤害.
+     *
+     * @param hurt 攻击者对被攻击者可以造成的的伤害
+     * @param critsEffect 攻击者的暴击效果
+     * @return 攻击者对被攻击者的暴击伤害
+     * @throws NullPointerException 如果{@code attacker}或{@code victim}为null
+     */
+    public static int criticalDamage(final double hurt, final double critsEffect)
+    {
+        return Math.round((float) (hurt * critsEffect));
     }
 }

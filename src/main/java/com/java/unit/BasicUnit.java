@@ -1,6 +1,6 @@
 package com.java.unit;
 
-import com.java.combatSystem.BuffModule.BuffModule;
+import com.java.battleSystem.BuffModule.BuffModule;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
@@ -472,36 +472,63 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         return requireNonNull(buff);
     }
 
+    /**
+     *
+     * @return 返回单位的升级模块
+     */
     public UnitGrowth growth()
     {
         return requireNonNull(growth);
     }
 
+    /**
+     *
+     * @return 返回单位的攻击模块
+     */
     public UnitAttack attack()
     {
         return requireNonNull(attackModule);
     }
 
+    /**
+     *
+     * @return 返回单位的防御模块
+     */
     public UnitDefense defense()
     {
         return requireNonNull(defenseModule);
     }
 
+    /**
+     *
+     * @return 返回单位名称
+     */
     public final String getName()
     {
         return name;
     }
-
+    /**
+     *
+     * @return 返回单位的唯一ID
+     */
     public int getId()
     {
         return id;
     }
 
+    /**
+     *
+     * @return 返回单位的等级
+     */
     public final int getLevel()
     {
         return level;
     }
 
+    /**
+     *
+     * @return 返回单位的速度
+     */
     public int getSpeed()
     {
         return speed;
@@ -512,6 +539,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         this.speed = speed;
     }
 
+//    public void
     /**
      * @throws IllegalArgumentException 如果{@code level}小于等于0
      */
@@ -546,6 +574,11 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             return false;
         }
         return this.id == other.getId();
+    }
+
+    public void subtractHp(final int subtractHp)
+    {
+        defense().setHp(defense().getHp() - subtractHp);
     }
 
     @Override

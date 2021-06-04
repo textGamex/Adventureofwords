@@ -26,6 +26,10 @@ public class UnitDefense implements Serializable
     /**暴击抗性 */
     private int critResistance;
 
+    /**
+     *
+     * @return 返回单位的最大生命值
+     */
     public int getMaxHp()
     {
         return decryptInt(maxHp);
@@ -36,6 +40,10 @@ public class UnitDefense implements Serializable
         this.maxHp = encryptionInt(maxHp);
     }
 
+    /**
+     *
+     * @return 返回单位的生命值
+     */
     public int getHp()
     {
         return decryptInt(hp);
@@ -46,6 +54,10 @@ public class UnitDefense implements Serializable
         this.hp = encryptionInt(hp);
     }
 
+    /**
+     *
+     * @return 返回单位的
+     */
     public double getPhysicalResistance()
     {
         return decryptDouble(physicalResistance);
@@ -56,6 +68,10 @@ public class UnitDefense implements Serializable
         this.physicalResistance = encryptionDouble(physicalResistance);
     }
 
+    /**
+     *
+     * @return 返回单位的闪避
+     */
     public int getArmor()
     {
         return  decryptInt(armor);
@@ -66,16 +82,25 @@ public class UnitDefense implements Serializable
         this.armor = encryptionInt(armor);
     }
 
+    /**
+     *
+     * @return 返回单位的闪避
+     */
     public int getEvade()
     {
         return decryptInt(evade);
     }
+
 
     public void setEvade(final int evade)
     {
         this.evade = encryptionInt(evade);
     }
 
+    /**
+     *
+     * @return 返回单位的每回合生命回复
+     */
     public int getLifeRegeneration()
     {
         return decryptInt(lifeRegeneration);
@@ -86,7 +111,10 @@ public class UnitDefense implements Serializable
         this.lifeRegeneration = encryptionInt(lifeRegeneration);
     }
 
-
+    /**
+     *
+     * @return 返回单位的暴击抗性
+     */
     public int getCritResistance()
     {
         return decryptInt(critResistance);
@@ -97,6 +125,10 @@ public class UnitDefense implements Serializable
         this.critResistance = encryptionInt(critResistance);
     }
 
+    /**
+     *
+     * @return 返回单位的魔法抗性
+     */
     public double getMagicResistance()
     {
         return decryptDouble(magicResistance);

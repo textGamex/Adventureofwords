@@ -1,4 +1,4 @@
-package com.java.combatSystem.BuffModule;
+package com.java.battleSystem.BuffModule;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -1,5 +1,6 @@
 package com.java.tools;
 
+import org.slf4j.LoggerFactory;
 
 import static java.util.concurrent.ThreadLocalRandom.current;
 import static java.util.Objects.requireNonNull;
@@ -14,6 +15,7 @@ import static java.util.Objects.requireNonNull;
  */
 public final class GameTool
 {
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(GameTool.class);
     public enum SpecifiedDirection
     {
         /**仅增加*/
@@ -141,6 +143,19 @@ public final class GameTool
             case ONLY_INCREASE -> number + randomNumber;
             case ONLY_REDUCED -> number - randomNumber;
         };
+    }
+
+    public static int floatingNumber(final double number, final double floatingPercentage)
+    {
+        if (floatingPercentage < 0.0)
+        {
+            throw new IllegalArgumentException("错误范围:" + floatingPercentage);
+        }
+
+        final int max = Math.round((float) (floatingPercentage * number)) + 1;
+        var randomNumber = current().nextInt(max);
+        LOGGER.debug("随机上限为:{}, 随机出的数:{}", max - 1, randomNumber);
+        return (int) (current().nextBoolean() ? number + randomNumber : number - randomNumber);
     }
 
     public static int bytesToInt(byte[] b)

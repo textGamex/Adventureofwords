@@ -1,4 +1,4 @@
-package com.java.combatSystem.BuffModule;
+package com.java.battleSystem.BuffModule;
 
 import java.io.Serializable;
 
@@ -36,6 +36,7 @@ public enum BuffType implements Serializable
     DELICATE("易伤"),
     SLOW_DOWN("减速"),
     SILENT("沉默"),
+    VERTIGO("眩晕"),
     RECOVER("恢复"),
     RELIEVE("净化"),
     PHYSICS_PIERCE_THROUGH("物理穿透"),
@@ -48,7 +49,7 @@ public enum BuffType implements Serializable
     }
 
     /**
-     * 获得这个buff类型的名称
+     * 获得这个buff类型的名称.
      *
      * @return 这个buff类型的名称
      */

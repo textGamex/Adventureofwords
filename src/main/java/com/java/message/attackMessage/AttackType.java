@@ -1,19 +1,18 @@
-package com.java.message;
+package com.java.message.attackMessage;
 
 /**
  * 攻击类型
  *
  * @author Millennium
  * @version 1.0.0
- * @see CombatTip
- * @see com.java.message.CombatTip.CombatMessage
+ * @see BattleTip
+ * @see BattleTip.AttackMessage
  * @since 15
 */
 public enum AttackType
 {
     COMMON_ATTACK("普通攻击"),
-    CRIT("会心一击"),
-    MISS("MISS");
+    CRIT("会心一击");
 
     private final String typeName;
 
