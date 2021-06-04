@@ -179,15 +179,18 @@ public final class PrefixTools
      */
     public String toRandomToProbabilityString()
     {
-        final int end = extraAttributes.size();
+        var list = toNumberOfOccurrencesArray();
+        final int end = list.size();
+        final int size = extraAttributes.size();
         int count = 0;
 
-        final var string = new StringBuilder("[");
-        for (final var s : toNumberOfOccurrencesArray())
+        final var string = new StringBuilder();
+        string.append("共有").append(size).append("个元素").append("[");
+        for (final var s : list)
         {
             count++;
-            string.append("元素:").append(s.getKey()).append(", 所占比例:").append(
-                    String.format("%.3f", (double) s.getValue() / end));
+            string.append("元素:").append(s.getKey()).append(", 总数:").append(s.getValue()).append(", 所占比例:").append(
+                    String.format("%.3f", (double) s.getValue() / size));
             if (count != end)
             {
                 string.append(", ");

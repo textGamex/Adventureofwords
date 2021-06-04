@@ -3,6 +3,8 @@ package com.java.unit;
 import com.alibaba.fastjson.JSONObject;
 import com.java.account.AccountMessage;
 import com.java.account.Identity;
+import com.java.localPersistence.SaveData;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -204,16 +206,7 @@ public class Role extends BasicUnit
 
     private void savePlayerData(AccountMessage account)
     {
-        assert account != null;
-        try (var out = new ObjectOutputStream(
-                new FileOutputStream(account.getPlayerDataResolveFile("RoleAttribute.dat"))))
-        {
-            out.writeObject(this);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        SaveData.saveObjectData(this, requireNonNull(account).getPlayerDataResolveFile("RoleAttribute.dat"));
     }
 
     /**
