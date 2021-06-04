@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
  *
  * <p>此类无法实例化</p>
  * @version 1.2.3
- * @author 千年
+ * @author 留恋千年
  * @since 15
  */
 public final class GameTool

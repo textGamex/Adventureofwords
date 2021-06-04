@@ -16,7 +16,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @version 1.2.1
  * @since 15
- * @author 千年
+ * @author 留恋千年
  */
 public final class AccountMessage
 {
@@ -103,6 +103,7 @@ public final class AccountMessage
     {
         return new AccountMessage(requireNonNull(in).nextLine());
     }
+
     //身份验证模块
     private Identity authentication()
     {
@@ -114,23 +115,23 @@ public final class AccountMessage
         final var isGameManager = accountName.equals(PrivateData.ACCOUNT1) || accountName.equals(PrivateData.ACCOUNT2);
         if (fileNotExist(folder) && isGameManager)
         {
-            LOGGER.debug("{}是新的内部人员账号", accountName);
+            LOGGER.debug("[{}]是新的内部人员账号", accountName);
             return Identity.NEW_GAME_MANAGER;
         }
         else if (folder.exists() && isGameManager)
         {
-            LOGGER.debug("{}是内部人员账号", accountName);
+            LOGGER.debug("[{}]是内部人员账号", accountName);
             return Identity.GAME_MANAGER;
         }
         //账号不存在而且是玩家
         else if (fileNotExist(folder))
         {
-            LOGGER.debug("{}是新的玩家账号", accountName);
+            LOGGER.debug("[{}]是新的玩家账号", accountName);
             return Identity.NEW_PLAYER;
         }
         else
         {
-            LOGGER.debug("{}是玩家账号", accountName);
+            LOGGER.debug("[{}]是玩家账号", accountName);
             return Identity.PLAYER;
         }
     }
@@ -154,7 +155,7 @@ public final class AccountMessage
     public static void createAccountDataFolder(final AccountMessage message)//
     {
         requireNonNull(message);
-        LOGGER.debug("开始创建{}账号的数据文件夹", message.accountName);
+        LOGGER.debug("开始创建[{}]账号的数据文件夹", message.accountName);
 
         var file = gameDataPath.resolve(message.accountName).toFile();
         if (fileNotExist(file))

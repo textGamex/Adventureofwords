@@ -22,8 +22,8 @@ import static java.util.Objects.requireNonNull;
  * <li>获得的所有分数</li>
  * <li>获得的所有经验</li>
  * <li>获得的所有货币</li>
- * @author Millennium
- * @version 0.3.2
+ * @author 留恋千年
+ * @version 1.0.0
  * @since 15
 */
 public final class PlayerStatistics implements Serializable
@@ -333,7 +333,7 @@ public final class PlayerStatistics implements Serializable
     {
         assert acc != null;
 
-        return acc.getId() == Identity.NONE || acc.getId() == Identity.NEW_GAME_MANAGER
+        return acc.getId() == Identity.NEW_GAME_MANAGER
                 || acc.getId() == Identity.NEW_PLAYER;
     }
 

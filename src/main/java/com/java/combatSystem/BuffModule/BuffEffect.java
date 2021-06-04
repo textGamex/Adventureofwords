@@ -20,7 +20,7 @@ import java.io.Serializable;
  * @see BuffType
  * @version 1.3.5
  * @since 15
- * @author 認定
+ * @author 藻禅認定
  */
 public final class BuffEffect implements Serializable
 {

@@ -3,13 +3,14 @@ package com.java.unit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
- * @author 認定
+ * @author 藻禅認定
  */
-public class UnitAttack
+public class UnitAttack implements Serializable
 {
     public static void main(String[] args)
     {

@@ -2,7 +2,7 @@ package com.java.account;
 
 /**
  * 账号的身份枚举.
- * @author 千年
+ * @author 留恋千年
  */
 public enum Identity
 {
@@ -14,6 +14,4 @@ public enum Identity
     PLAYER,
     /**内部人员*/
     GAME_MANAGER,
-    /**无*/
-    NONE
 }

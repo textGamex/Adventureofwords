@@ -1,10 +1,13 @@
 package com.java.unit;
 
-import static com.java.antiSpam.AntiSpam.*;
+import java.io.Serializable;
+
+import static com.java.antiSpam.MemoryEncryption.*;
+
 /**
- * @author 千年
+ * @author 留恋千年
  */
-public class UnitDefense
+public class UnitDefense implements Serializable
 {
     /**最大生命值*/
     private int maxHp;

@@ -32,7 +32,7 @@ import static com.java.unit.BasicUnit.UnitGrowth.calculationLevelGrowth;
  *     <li>每回合法力值恢复, 默认值为0</li>
  * </ul>
  * @version 2.0.0
- * @author 千年
+ * @author 留恋千年
  * @see BuffModule
  * @see Role
  * @see Enemy
@@ -84,7 +84,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      * @see Role.Builder
      * @see Enemy.Builder
      * @since 15
-     * @author 千年
+     * @author 留恋千年
      * @version 1.4.1
      */
     public static class Builder<T extends Builder<T>>
@@ -336,14 +336,14 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      * <li>法力值, 默认值为0.07</li>
      * <li>闪避, 默认值为0.07</li>
      * <li>暴击, 默认值为0.07</li>
-     * @author 千年
+     * @author 留恋千年
      * @version 1.1.2
      * @since 2021-5-3
      * @see BasicUnit
      * @see Role
      * @see Enemy
      */
-    protected static class UnitGrowth
+    protected static class UnitGrowth implements Serializable
     {
         private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(UnitGrowth.class);
         private double maxHpGrowth = 0.07;

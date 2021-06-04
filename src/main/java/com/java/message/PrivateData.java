@@ -1,7 +1,7 @@
 package com.java.message;
 
 /**
- * @author 認定
+ * @author 藻禅認定
  */
 public final class PrivateData
 {

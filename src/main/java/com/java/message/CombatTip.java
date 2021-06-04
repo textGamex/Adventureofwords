@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * 战斗提示信息.
  *
- * @author 千年
+ * @author 留恋千年
  * @version 1.0.2
  * @since 16
 */
@@ -62,7 +62,7 @@ public final class CombatTip
      *
      * @version 1.0.1
      * @since 16
-     * @author 千年
+     * @author 留恋千年
      * @see com.java.combatSystem.BattleSystem
      * @see CombatMessage
      */

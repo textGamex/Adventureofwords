@@ -7,12 +7,15 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
- * @author 千年
+ * 用于内存加密, 防止修改器修改数据.
+ *
+ * @author 留恋千年
  * @since 2021-5-30
+ * @version 1.1.0
  */
-public class AntiSpam
+public class MemoryEncryption
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AntiSpam.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MemoryEncryption.class);
     private static int keyInt;
     private static long keyLong;
     static

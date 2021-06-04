@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.io.NotSerializableException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,6 +80,14 @@ class RoleTest
         assertEquals(20,  unit.attack().getPhysicalAttack());
         assertEquals(50, unit.attack().getHit());
         assertEquals(5, unit.defense().getEvade());
+    }
+
+    @Test
+    void testRoleSave()
+    {
+        var unit = new Role.Builder("²âÊÔ").build();
+
+        assertDoesNotThrow(() -> unit.saveData( new AccountMessage("²âÊÔ")));
     }
 }
 

@@ -14,7 +14,7 @@ class BasicUnitTest
     {
         var unit = new BasicUnit.Builder("单位").physicalAttack(2)
                 .evade(3).mana(101).maxHp(5).level(6).crit(7).critsEffect(8.0).lifeRegeneration(9)
-                .physicalResistance(10.0).manaRecovery(11).magicResistance(100000).build();
+                .physicalResistance(10.0).manaRecovery(11).magicResistance(12).build();
 
         assertEquals("单位", unit.getName());
         assertEquals(2, unit.attack().getPhysicalAttack());
@@ -121,4 +121,12 @@ class BasicUnitTest
         assertEquals(5, result1);
         assertEquals(15, result2);
     }
+
+//    @Test
+//    void testBasicUnitSave()
+//    {
+//        var object = new BasicUnit.Builder<BasicUnit.Builder>("测试").build();
+//
+//
+//    }
 }

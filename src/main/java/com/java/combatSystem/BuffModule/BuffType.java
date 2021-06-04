@@ -23,7 +23,7 @@ import java.io.Serializable;
  *     <li>物理穿透</li>
  *     <li>法术穿透</li>
  * </em>
- * @author 千年
+ * @author 留恋千年
  * @version 1.1.0
  * @since 15
  * @see BuffModule

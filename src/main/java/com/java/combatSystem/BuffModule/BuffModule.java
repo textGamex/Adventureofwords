@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
  * @see BuffType
  * @version 1.3.3
  * @since 15
- * @author 認定
+ * @author 藻禅認定
  */
 public class BuffModule implements Serializable
 {

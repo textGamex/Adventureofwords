@@ -1,8 +1,10 @@
 package com.java.unit;
 
+import java.io.Serializable;
+
 /**
- * @author 認定
+ * @author 藻禅認定
  */
-public class UnitMessage
+public class UnitMessage implements Serializable
 {
 }

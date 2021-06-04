@@ -12,14 +12,12 @@ import static java.util.Objects.requireNonNull;
 /**
  * {@inheritDoc}
  * <p>且具有一下额外属性</p>
- * <em>
- *     <li>持有货币</li>
- *     <li>拥有经验</li>
- *     <li>升到下一级所需经验</li>
- *     <li>角色创建日期及时间</li>
- * </em>
- * @version 0.3.2
- * @author 千年
+ * <li>持有货币</li>
+ * <li>拥有经验</li>
+ * <li>升到下一级所需经验</li>
+ * <li>角色创建日期及时间</li>
+ * @version 1.0.0
+ * @author 留恋千年
  */
 public class Role extends BasicUnit
 {
@@ -47,7 +45,7 @@ public class Role extends BasicUnit
     }
 
     /**
-     * @author 千年
+     * @author 留恋千年
      * @version 1.1.2
      * @see com.java.unit.BasicUnit.Builder
      */
@@ -159,10 +157,7 @@ public class Role extends BasicUnit
      */
     public void saveData(AccountMessage acc)
     {
-        if (acc == null)
-        {
-            throw new NullPointerException();
-        }
+        requireNonNull(acc);
         if (acc.getId() == Identity.GAME_MANAGER || acc.getId() == Identity.NEW_GAME_MANAGER)
         {
             saveGameManagerData(acc);
@@ -172,6 +167,7 @@ public class Role extends BasicUnit
             savePlayerData(acc);
         }
     }
+
     private void saveGameManagerData(AccountMessage account)
     {
         assert account != null;
@@ -258,7 +254,7 @@ public class Role extends BasicUnit
     {
         assert acc != null;
 
-        return acc.getId() == Identity.NONE || acc.getId() == Identity.NEW_GAME_MANAGER
+        return acc.getId() == Identity.NEW_GAME_MANAGER
                 || acc.getId() == Identity.NEW_PLAYER;
     }
 

@@ -11,7 +11,7 @@ import static java.util.concurrent.ThreadLocalRandom.current;
  * 此类的每个对象维护着一个不同的前缀池, 默认为不允许有重复前缀.
  *
  * @version 1.3.1
- * @author 千年
+ * @author 留恋千年
  * @since 2021-5-9
  */
 public final class PrefixTools

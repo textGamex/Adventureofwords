@@ -48,7 +48,7 @@ public class Enemy extends BasicUnit
      * @see BasicUnit
      * @since 15
      * @version 1.1.0
-     * @author 認定
+     * @author 藻禅認定
      */
     public static class Builder extends BasicUnit.Builder<Builder>
     {

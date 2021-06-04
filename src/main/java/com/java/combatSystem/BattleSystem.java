@@ -19,7 +19,7 @@ import com.java.unit.Role;
  *     <li>玩家/敌对单位法术抗性系数</li>
  * </em>
  * @version 0.2.3
- * @author 千年
+ * @author 留恋千年
  * @since 15
  */
 public final class BattleSystem

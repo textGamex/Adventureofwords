@@ -8,7 +8,7 @@ import static com.java.tools.GameTool.*;
 import static com.java.message.CombatTip.*;
 
 /**
- * @author 認定
+ * @author 藻禅認定
  */
 public final class CombatSimulation
 {
