@@ -7,6 +7,9 @@ import com.java.unit.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import static com.java.battleSystem.BattleSystem.*;
 import static com.java.battleSystem.BattleAttributeCalculation.*;
 
@@ -20,24 +23,20 @@ public final class BattleSimulation
 
     public static void main(String[] args) throws Exception
     {
-//        final var account1 = new AccountMessage(ACCOUNT1);
-//        final var account2 = new AccountMessage(ACCOUNT2);
-//        final var roleStatistics = PlayerStatistics.loadStatistics(account1);
-//        final var enemyStatistics = PlayerStatistics.loadStatistics(account2);
-
+        var start = Instant.now();
         final var roleStatistics = new PlayerStatistics();
         final var enemyStatistics = new PlayerStatistics();
 
         var role = new Role.Builder("玩家").maxHp(100).physicalAttack(20).armor(1).crit(10).critsEffect(2.0)
                 .critResistance(50).hit(50).evade(5).build();
-        var enemy = new Enemy.Builder("哥布林").maxHp(155).physicalAttack(10).armor(5).critResistance(90)
+        var enemy = new Enemy.Builder("哥布林").maxHp(165).physicalAttack(10).armor(5).critResistance(90)
                 .crit(3).hit(58).evade(9).critsEffect(2.0).build();
 
 
         for (var i = 0; i < MAX;)
         {
-            roleStatistics.setTotalRound(roleStatistics.getTotalRound() + 1);
-            enemyStatistics.setTotalRound(enemyStatistics.getTotalRound() + 1);
+            roleStatistics.addTotalRound(1);
+            enemyStatistics.addTotalRound(1);
             if (canAct(role))
             {
                 if (canHit(role, enemy))
@@ -135,11 +134,15 @@ public final class BattleSimulation
                 continue;
             }
         }
+        var endTime = Instant.now();
+        var time = Duration.between(start, endTime);
+
+        System.out.println("耗时:" + time.toMillis() + "ms");
+
         System.out.println("游戏结束");
-//        roleStatistics.saveStatistics(account1);
-//        enemyStatistics.saveStatistics(account2);
         System.out.println(roleStatistics);
-        System.out.println("玩家胜率为" + (double) (roleStatistics.getTotalVictory() / MAX));
+        double number = (double) roleStatistics.getTotalVictory() / MAX;
+        System.out.println("玩家胜率为" + number);
         System.out.println(enemyStatistics);
     }
 

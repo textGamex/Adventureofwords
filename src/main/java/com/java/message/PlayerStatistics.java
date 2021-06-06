@@ -75,6 +75,11 @@ public final class PlayerStatistics implements Serializable
         this.totalValue = totalValue;
     }
 
+    public void addTotalRound(final long addRound)
+    {
+        totalRound += addRound;
+    }
+
     public long getTotalKill()
     {
         return totalKill;
@@ -268,6 +273,7 @@ public final class PlayerStatistics implements Serializable
             savePlayerStatistics(acc);
         }
     }
+
     private void saveGameManagerStatistics(final AccountMessage account)
     {
         assert account != null;

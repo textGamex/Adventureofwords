@@ -32,10 +32,11 @@ public final class GameTool
     {
         throw new AssertionError();
     }
-//    static
-//    {
-//        System.loadLibrary("AdventureWords-DLL");TODO:重新编译一下,头文件现在路径不对了
-//    }
+
+    static
+    {
+        System.loadLibrary("randomEngine");
+    }
 
     /**
      * 根据传入的概率随机返回{@code false}或{@code true}.
@@ -53,7 +54,7 @@ public final class GameTool
         {
             return false;
         }
-        return trueProbability > current().nextDouble();
+        return randomReturnBoolean(current().nextInt(), trueProbability);
     }
 
     /**
@@ -154,7 +155,7 @@ public final class GameTool
 
         final int max = Math.round((float) (floatingPercentage * number)) + 1;
         var randomNumber = current().nextInt(max);
-        LOGGER.debug("随机上限为:{}, 随机出的数:{}", max - 1, randomNumber);
+        LOGGER.trace("随机上限为:{}, 随机出的数:{}", max - 1, randomNumber);
         return (int) (current().nextBoolean() ? number + randomNumber : number - randomNumber);
     }
 
@@ -219,5 +220,15 @@ public final class GameTool
         }
         return b;
     }
-//    public static native void cls();
+    public static native void cls();
+
+    /**
+     * 根据给定的概率返回一个布尔值.
+     *
+     * <p>通过调用DLL来实现</p>
+     * @param seed 种子值
+     * @param trueProbability 返回{@code true}的概率
+     * @return {@code true}或{@code false}
+     */
+    public static native boolean randomReturnBoolean(int seed, double trueProbability);
 }
