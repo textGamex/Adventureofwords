@@ -1,6 +1,7 @@
 # 项目排除路径
 /src/javaLogic/Message/PrivateData.java
 target/
+logs
 target/*
 target
 # Compiled class file
