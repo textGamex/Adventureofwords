@@ -2,6 +2,7 @@
 /src/javaLogic/Message/PrivateData.java
 target/
 logs
+logs/*
 target/*
 target
 # Compiled class file
