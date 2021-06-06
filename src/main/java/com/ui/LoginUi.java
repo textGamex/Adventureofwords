@@ -4,12 +4,28 @@ import com.java.account.AccountMessage;
 import static com.java.message.PrivateData.*;
 import java.util.Scanner;
 
-public class LoginUi
+/**
+ * @author ¡Ù¡µ«ßƒÍ
+ */
+public class LoginUi extends Ui
 {
-    public static void main(String[] args)
+    private final LoginUi loginUi = new LoginUi();
+    private LoginUi()
+    {
+
+    }
+
+    public Ui getLoginUi()
+    {
+        return loginUi;
+    }
+
+    @Override
+    public void show()
     {
         loginMain();
     }
+
     public static AccountMessage loginMain()
     {
         System.out.print("«Î ‰»Î’À∫≈: ");
@@ -33,6 +49,7 @@ public class LoginUi
         }
         return account;
     }
+
     private static void verifyPassword()
     {
         var in = new Scanner(System.in);

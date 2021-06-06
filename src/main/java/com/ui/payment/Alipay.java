@@ -1,14 +1,29 @@
 package com.ui.payment;
 
+import com.ui.Ui;
+
 import javax.swing.*;
 import java.awt.*;
 
-public final class Alipay
+/**
+ * @author 留恋千年
+ * @version 1.0.0
+ */
+public final class Alipay extends Ui
 {
-    public static void main(String[] args)
+    private final Alipay alipay = new Alipay();
+
+    private Alipay()
     {
-        Alipay.showCollectionCode();
+
     }
+
+    public Ui newAlipay()
+    {
+        return alipay;
+    }
+
+
     public static void showCollectionCode()
     {
         EventQueue.invokeLater(() -> {
@@ -21,5 +36,11 @@ public final class Alipay
             label.setIcon(new ImageIcon("resources\\image\\Alipay.jpg"));//TODO:图片加载不出来
             jframe.setVisible(true);   //显示
         });
+    }
+
+    @Override
+    public void show()
+    {
+        showCollectionCode();
     }
 }

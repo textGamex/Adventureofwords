@@ -24,10 +24,6 @@ public final class GameTool
         ONLY_REDUCED
     };
 
-    public static void main(String[] args)
-    {
-    }
-
     private GameTool()
     {
         throw new AssertionError();

@@ -19,7 +19,7 @@ import static com.java.battleSystem.BattleAttributeCalculation.*;
 public final class BattleSimulation
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(BattleSimulation.class);
-    public static final int MAX = 100000;
+    public static final int MAX = 30000;
 
     public static void main(String[] args) throws Exception
     {
@@ -29,9 +29,8 @@ public final class BattleSimulation
 
         var role = new Role.Builder("玩家").maxHp(100).physicalAttack(20).armor(1).crit(10).critsEffect(2.0)
                 .critResistance(50).hit(50).evade(5).build();
-        var enemy = new Enemy.Builder("哥布林").maxHp(165).physicalAttack(10).armor(5).critResistance(90)
+        var enemy = new Enemy.Builder("哥布林").maxHp(160).physicalAttack(10).armor(5).critResistance(90)
                 .crit(3).hit(58).evade(9).critsEffect(2.0).build();
-
 
         for (var i = 0; i < MAX;)
         {

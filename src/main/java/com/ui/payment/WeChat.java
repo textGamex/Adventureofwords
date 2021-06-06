@@ -1,14 +1,33 @@
 package com.ui.payment;
 
+import com.ui.Ui;
+
 import javax.swing.*;
 import java.awt.*;
 
-public final class WeChat extends JFrame
+/**
+ * @author ÁôÁµÇ§Äê
+ * @version 1.1.0
+ */
+public final class WeChat extends Ui
 {
     public static void main(String[] args)
     {
         WeChat.showCollectionCode();
     }
+
+    private final WeChat weChat = new WeChat();
+
+    private WeChat()
+    {
+
+    }
+
+    public Ui newWeChat()
+    {
+        return weChat;
+    }
+
     public static void showCollectionCode()
     {
         EventQueue.invokeLater(() -> {
@@ -23,4 +42,9 @@ public final class WeChat extends JFrame
         });
     }
 
+    @Override
+    public void show()
+    {
+        showCollectionCode();
+    }
 }

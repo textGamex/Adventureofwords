@@ -31,9 +31,5 @@ public final class AdventureOfWordsMain
         WeChat.showCollectionCode();
         var account = LoginUi.loginMain();
 
-//        var role = new RoleAttribute();
-//        var enemy = EnemyUnit.getEnemyUnit("∏Á≤º¡÷");
-        
-//        BattleSystem.Main(role, enemy);
     }
 }
