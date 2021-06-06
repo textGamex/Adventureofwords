@@ -59,7 +59,7 @@ public final class BattleTip
         }
         else if (message.getHarm() > 0)
         {
-            System.out.printf("[系统]%s使用%s对%s造成了%d点伤害,%s还剩%d点生命值%n",attackerName, message.getHarmTypeName(),
+            System.out.printf("[系统]%s使用[%s]对%s造成了%d点伤害,%s还剩%d点生命值%n",attackerName, message.getHarmTypeName(),
                 victimName, message.getHarm(), victimName, message.getVictimSurplusHp());
         }
         else
