@@ -3,6 +3,7 @@ package com.java.unit;
 import com.alibaba.fastjson.JSONObject;
 import com.java.account.AccountMessage;
 import com.java.account.Identity;
+import com.java.localPersistence.JsonBase;
 import com.java.localPersistence.SaveData;
 
 import java.io.*;
@@ -170,9 +171,14 @@ public class Role extends BasicUnit
         }
     }
 
-    private void saveGameManagerData(AccountMessage account)
+    public void saveGameManagerData(final AccountMessage account)
     {
-        assert account != null;
+        saveGameManagerData(requireNonNull(account).getPlayerDataResolveFile("RoleAttribute.json"));
+    }
+
+    public void saveGameManagerData(final File path)
+    {
+        requireNonNull(path);
 
         var jsonFile = new JSONObject();
         jsonFile.put("名称", super.getName());
@@ -187,14 +193,14 @@ public class Role extends BasicUnit
         jsonFile.put("物理抗性", super.defense().getPhysicalResistance());
         jsonFile.put("护甲", super.defense().getArmor());
         jsonFile.put("每回合生命回复", super.defense().getLifeRegeneration());
+        jsonFile.put("每回合魔法值回复", super.attack().getManaRecovery());
         jsonFile.put("命中", super.attack().getHit());
         jsonFile.put("闪避", super.defense().getEvade());
         jsonFile.put("持有货币", cash);
         jsonFile.put("角色拥有经验", exp);
         jsonFile.put("升到下一级所需经验", upgradeNeedXp);
 
-        try (var out = new PrintWriter(
-                account.getPlayerDataResolveFile("RoleAttribute.json"), StandardCharsets.UTF_8))
+        try (var out = new PrintWriter(path, StandardCharsets.UTF_8))
         {
             out.println(jsonFile.toJSONString());
         }
@@ -204,7 +210,7 @@ public class Role extends BasicUnit
         }
     }
 
-    private void savePlayerData(AccountMessage account)
+    private void savePlayerData(final AccountMessage account)
     {
         SaveData.saveObjectData(this, requireNonNull(account).getPlayerDataResolveFile("RoleAttribute.dat"));
     }
@@ -216,12 +222,9 @@ public class Role extends BasicUnit
      * @throws FileNotFoundException 如果要读取的文件不存在
      * @since 15
      */
-    public static Role loadData(AccountMessage account) throws FileNotFoundException
+    public static Role loadData(final AccountMessage account) throws FileNotFoundException
     {
-        if (account == null)
-        {
-            throw new NullPointerException();
-        }
+        requireNonNull(account);
         //如果不存在,那怎么能读取呢?
         if (fileNotExist(account))
         {
@@ -243,21 +246,24 @@ public class Role extends BasicUnit
         }
     }
 
-    private static boolean fileNotExist(AccountMessage acc)
+    private static boolean fileNotExist(final AccountMessage acc)
     {
         assert acc != null;
 
-        return acc.getId() == Identity.NEW_GAME_MANAGER
-                || acc.getId() == Identity.NEW_PLAYER;
+        return acc.getId() == Identity.NEW_GAME_MANAGER || acc.getId() == Identity.NEW_PLAYER;
     }
 
-    private static Role loadPlayerData(AccountMessage acc)
+    public static Role loadPlayerData(final AccountMessage acc)
     {
-        assert acc != null;
+        return loadPlayerData(requireNonNull(acc).getPlayerDataResolveFile("RoleAttribute.dat"));
+    }
+
+    public static Role loadPlayerData(final File path)
+    {
+        requireNonNull(path);
 
         Role archive = null;
-        try (var in = new ObjectInputStream(new FileInputStream(
-                acc.getPlayerDataResolveFile("RoleAttribute.dat"))))
+        try (var in = new ObjectInputStream(new FileInputStream(path)))
         {
             archive = (Role) in.readObject();
         }
@@ -268,24 +274,14 @@ public class Role extends BasicUnit
         return archive;
     }
 
-    private static Role loadGameManagerData(AccountMessage acc) throws FileNotFoundException
+    public static Role loadGameManagerData(final AccountMessage acc) throws FileNotFoundException
     {
-        assert acc != null;
+        return loadGameManagerData(requireNonNull(acc).getPlayerDataResolveFile("RoleAttribute.json"));
+    }
 
-        String line;
-        try (var in = new Scanner(acc.getPlayerDataResolveFile(
-                "RoleAttribute.json"), StandardCharsets.UTF_8))
-        {
-            line = in.nextLine();
-        }
-        catch (IOException e)
-        {
-            var e2 = new FileNotFoundException(
-                    acc.getPlayerDataResolveFile("RoleAttribute.json").toString() + "不存在");
-            e2.initCause(e);
-            throw e2;
-        }
-        var json = JSONObject.parseObject(line);
+    public static Role loadGameManagerData(final File path) throws FileNotFoundException
+    {
+        var json = JsonBase.loadJsonFile(requireNonNull(path));
 
         var name = json.getString("名称");
         var level = json.getIntValue("单位等级");
@@ -302,12 +298,13 @@ public class Role extends BasicUnit
         var evade = json.getIntValue("闪避");
         var cash = json.getIntValue("持有货币");
         var lifeRegeneration = json.getIntValue("每回合生命回复");
+        var manaRecovery = json.getIntValue("每回合魔法值回复");
         var exp = json.getIntValue("角色拥有经验");
         var upgradeNeedXp = json.getIntValue("升到下一级所需经验");
 
         return new Builder(name).level(level).maxHp(hp).mana(mana).physicalAttack(atk).cash(cash).crit(crit).speed(speed)
                 .physicalResistance(physicalResistance).critsEffect(critsEffect).hit(hit).evade(evade).exp(exp)
                 .lifeRegeneration(lifeRegeneration).upgradeNeedXp(upgradeNeedXp).critResistance(critResistance)
-                .armor(armor).build();
+                .armor(armor).manaRecovery(manaRecovery).build();
     }
 }

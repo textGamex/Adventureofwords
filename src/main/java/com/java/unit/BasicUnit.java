@@ -1,6 +1,7 @@
 package com.java.unit;
 
 import com.java.battleSystem.BuffModule.BuffModule;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
@@ -590,27 +591,28 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     /**
      * @return 字符串表示的对象
      */
-//    @Override
-//    public String toString()
-//    {
-//        return "BasicUnitAttribute"
-//                + "[id:" + id
-//                + ", 名称:" + name
-//                + ", 最大生命值:" + maxHp
-//                + ", 生命值:" + hp
-//                + ", 等级:" + level
-//                + ", 速度:" + speed
-//                + ", 物理攻击:" + physicalAttack
-//                + ", 魔法攻击:" + magicAttack
-//                + ", 暴击:" + crit
-//                + ", 暴击抗性:" + critResistance
-//                + ", 暴击效果:" + critsEffect * 100 + "%"
-//                + ", 物理抗性:" + physicalResistance
-//                + ", 护甲:" + armor
-//                + ", 每回合生命回复:" +lifeRegeneration
-//                + ", 闪避:" + evade
-//                + "]";
-//    }
+    @Override
+    public String toString()
+    {
+        return "BasicUnitAttribute"
+                + "[id:" + id
+                + ", 名称:" + name
+                + ", 最大生命值:" + defenseModule.getMaxHp()
+                + ", 生命值:" + defenseModule.getHp()
+                + ", 等级:" + level
+                + ", 速度:" + speed
+                + ", 物理攻击:" + attackModule.getPhysicalAttack()
+                + ", 魔法攻击:" + attackModule.getPhysicalAttack()
+                + ", 暴击:" + attackModule.getCrit()
+                + ", 暴击抗性:" + defenseModule.getCritResistance()
+                + ", 暴击效果:" + attackModule.getManaRecovery() * 100 + "%"
+                + ", 物理抗性:" + defenseModule.getPhysicalResistance()
+                + ", 护甲:" + defenseModule.getArmor()
+                + ", 每回合生命回复:" + defenseModule.getLifeRegeneration()
+                + ", 每回合魔法值回复:" + attackModule.getManaRecovery()
+                + ", 闪避:" + defenseModule.getEvade()
+                + "]";
+    }
 
     /**
      * 用来克隆对象.
@@ -647,7 +649,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      * @throws NullPointerException 如果{@code other}为null
      */
     @Override
-    public int compareTo(BasicUnit other)
+    public int compareTo(@NotNull BasicUnit other)
     {
         return Integer.compare(id, requireNonNull(other).getId());
     }
