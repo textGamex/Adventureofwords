@@ -38,6 +38,8 @@ public final class PlayerStatistics implements Serializable
     private long totalKill;
     /**总回合数*/
     private long totalRound;
+//    /**总战斗次数*/
+//    private long total
     /**攻击总次数*/
     private long totalAttack;
     /**总伤害*/
@@ -229,7 +231,7 @@ public final class PlayerStatistics implements Serializable
     public String toString()
     {
         return  "PlayerStatistics" +
-                "[玩家总击杀数:" + totalKill +
+                "[总击杀数:" + totalKill +
                 ", 总回合数:" + totalRound +
                 ", 普通攻击次数:" + totalAttack +
                 ", 总伤害:" + totalHarm +
@@ -271,7 +273,7 @@ public final class PlayerStatistics implements Serializable
         assert account != null;
 
         var jsonFile = new JSONObject();
-        jsonFile.put("玩家总击杀数", totalKill);
+        jsonFile.put("总击杀数", totalKill);
         jsonFile.put("总回合数", totalRound);
         jsonFile.put("普通攻击次数", totalAttack);
         jsonFile.put("总伤害", totalHarm);
@@ -378,7 +380,7 @@ public final class PlayerStatistics implements Serializable
         }
         var json = JSONObject.parseObject(line);
 
-        var totalKill = json.getLongValue("玩家总击杀数");
+        var totalKill = json.getLongValue("总击杀数");
         var totalRound = json.getLongValue("总回合数");
         var totalAttack = json.getLongValue("普通攻击次数");
         var totalHarm = json.getLongValue("总伤害");

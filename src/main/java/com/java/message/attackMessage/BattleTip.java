@@ -31,11 +31,6 @@ public final class BattleTip
         }
     }
 
-    public static void main(String[] args)
-    {
-        printAttackMessage(new AttackMessage("Íæ¼Ò", 7, AttackType.COMMON_ATTACK, "¸ç²¼ÁÖ", 70));
-    }
-
     private BattleTip()
     {
         throw new AssertionError();
