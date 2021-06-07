@@ -1,6 +1,8 @@
 package com.java.tools;
 
+import com.java.localPersistence.DataPath;
 import org.slf4j.LoggerFactory;
+import java.nio.file.Paths;
 
 import static java.util.concurrent.ThreadLocalRandom.current;
 import static java.util.Objects.requireNonNull;
@@ -31,7 +33,14 @@ public final class GameTool
 
     static
     {
-        System.loadLibrary("randomEngine");
+        try
+        {
+            System.loadLibrary("randomEngine");
+        }
+        catch (UnsatisfiedLinkError e)
+        {
+        System.load("C:\\Program Files (x86)\\Adventure-of-words\\lib\\randomEngine.dll");
+        }
     }
 
     /**

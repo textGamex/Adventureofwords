@@ -11,7 +11,6 @@ public final class DataPath
 {
     public static void main(String[] args)
     {
-        System.out.println(System.getProperty("user.home"));
     }
     public static final Path GAME_DATA_PATH = Paths.get(System.getProperty("user.home"), "AppData",
             "Local", "Adventure of words");

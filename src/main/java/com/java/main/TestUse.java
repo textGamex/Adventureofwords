@@ -1,18 +1,17 @@
 package com.java.main;
 
-import com.alibaba.fastjson.JSONObject;
 import com.java.localPersistence.DataPath;
 import com.java.localPersistence.JsonBase;
 import com.java.message.PlayerStatistics;
 import com.java.message.attackMessage.AttackType;
 import com.java.message.attackMessage.BattleTip;
 import com.java.tools.GameTool;
+import com.java.tools.UiTool;
 import com.java.unit.BasicUnit;
 import com.java.unit.Role;
 import com.ui.ConsoleProgressBar;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Objects;
@@ -25,7 +24,7 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * @author 留恋千年
- * @version 1.0.0
+ * @version 1.2.0
  * @since 2021-6-6
  */
 public class TestUse
@@ -34,7 +33,7 @@ public class TestUse
     private static final File ENEMY_FILE = DataPath.DESKTOP.resolve("敌对单位属性.json").toFile();
     private static final String SETTING_FILE_NAME = "setting.json";
     private static final File SETTING_FILE_PATH = DataPath.GAME_DATA_PATH.resolve(SETTING_FILE_NAME).toFile();
-    private static GameSetting setting = new GameSetting(true);
+    private static final GameSetting SETTING = GameSetting.getGameSetting();
 
     static
     {
@@ -42,12 +41,12 @@ public class TestUse
         {
             println("正在初始化...");
             printProgressBar();
-            saveSetting(SETTING_FILE_PATH);
+            GameSetting.getGameSetting().saveSetting(SETTING_FILE_PATH);
             println("初始化成功");
         }
         try
         {
-            setting = loadSetting(SETTING_FILE_PATH);
+            loadSetting(SETTING_FILE_PATH);
         }
         catch (FileNotFoundException e)
         {
@@ -60,10 +59,11 @@ public class TestUse
         Role role = null;
         Role enemy = null;
 
+
         if (ROLE_FILE.exists() && ENEMY_FILE.exists())
         {
             println("检测到属性文件, 加载中...");
-            if (setting.isOpenLoadAnimation())
+            if (SETTING.isOpenLoadAnimation())
             {
                 printProgressBar();
             }
@@ -74,7 +74,7 @@ public class TestUse
         if (!ROLE_FILE.exists() && !ENEMY_FILE.exists())
         {
             println("属性文件不存在, 正在创建中...");
-            if (setting.isOpenLoadAnimation())
+            if (SETTING.isOpenLoadAnimation())
             {
                 printProgressBar();
             }
@@ -85,45 +85,30 @@ public class TestUse
             println("创建成功");
         }
 
-        if (!ROLE_FILE.exists() || !ENEMY_FILE.exists())
-        {
-            println("属性文件已损坏, 正在修复中...");
-            if (!ROLE_FILE.exists())
-            {
-                role = Role.newStandardPrimaryLevelRole("白博森");
-                role.saveGameManagerData(ROLE_FILE);
-                if (setting.isOpenLoadAnimation())
-                {
-                    printProgressBar();
-                }
-            }
-            else
-            {
-                enemy = Role.newStandardPrimaryLevelRole("张羽");
-                enemy.saveGameManagerData(ENEMY_FILE);
-                if (setting.isOpenLoadAnimation())
-                {
-                    printProgressBar();
-                }
-            }
-            println("属性文件修复成功");
-        }
-
         assert role != null;
-
         final var in = new Scanner(System.in);
+        String[] uiArray =
+        {
+             "查看双方属性",
+             "开始战斗",
+             "重新载入单位属性文件属性",
+             "退出",
+             "开启加载动画",
+             "清空控制台"
+        };
+
         while (true)
         {
             separator();
-            //TODO:有很大的优化空间
-            if (setting.isOpenLoadAnimation())
+            if (SETTING.isOpenLoadAnimation())
             {
-                println("1.查看双方属性   2.开始战斗   3.重新载入单位属性文件属性   4.退出   5.关闭加载动画");
+                uiArray[4] = "关闭加载动画";
             }
             else
             {
-                println("1.查看双方属性   2.开始战斗   3.重新载入单位属性文件属性   4.退出   5.开启加载动画");
+               uiArray[4] = "开启加载动画";
             }
+            println(UiTool.generateUi(uiArray));
             switch (in.nextInt())
             {
                 case 1 -> {
@@ -138,7 +123,7 @@ public class TestUse
                 case 3 -> {
                     separator();
                     println("正在载入中...");
-                    if (setting.isOpenLoadAnimation())
+                    if (SETTING.isOpenLoadAnimation())
                     {
                         printProgressBar();
                     }
@@ -148,9 +133,10 @@ public class TestUse
                 }
                 case 4 -> System.exit(0);
                 case 5 -> {
-                    setting.setLoadAnimation(!setting.isOpenLoadAnimation());
-                    saveSetting(SETTING_FILE_PATH);
+                    SETTING.setLoadAnimation(!SETTING.isOpenLoadAnimation());
+                    GameSetting.getGameSetting().saveSetting(SETTING_FILE_PATH);
                 }
+                case 6 -> GameTool.cls();
                 default -> {
                     separator();
                     println("请输入支持的选项");
@@ -304,28 +290,19 @@ public class TestUse
        ConsoleProgressBar.loadSpecifiedTime(1700, 65, '|');
     }
 
-    public static void saveSetting(final File path)
-    {
-        requireNonNull(path);
-        var jsonFile = new JSONObject();
-        jsonFile.put("显示加载动画", setting.isOpenLoadAnimation());
-
-        try (var out = new PrintWriter(path, StandardCharsets.UTF_8))
-        {
-            out.println(jsonFile.toJSONString());
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public static GameSetting loadSetting(final File path) throws FileNotFoundException
+    public static void loadSetting(final File path) throws FileNotFoundException
     {
         var json = JsonBase.loadJsonFile(requireNonNull(path));
 
         var loadAnimation = json.getBooleanValue("显示加载动画");
+        GameSetting.getGameSetting().setLoadAnimation(loadAnimation);
+    }
 
-        return new GameSetting(loadAnimation);
+    /**
+     * 修复属性文件.
+     */
+    private void repairPropertiesFile()
+    {
+
     }
 }

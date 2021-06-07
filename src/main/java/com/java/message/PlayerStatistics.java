@@ -3,6 +3,7 @@ package com.java.message;
 import com.alibaba.fastjson.JSONObject;
 import com.java.account.AccountMessage;
 import com.java.account.Identity;
+import com.java.localPersistence.JsonBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -371,20 +372,7 @@ public final class PlayerStatistics implements Serializable
     private static PlayerStatistics loadGameManagerStatistics(final AccountMessage acc) throws FileNotFoundException
     {
         assert acc != null;
-
-        String line;
-        try (var in = new Scanner(acc.getPlayerDataResolveFile(
-                "PlayerStatistics.json"), StandardCharsets.UTF_8))
-        {
-            line = in.nextLine();
-        }
-        catch (IOException e)
-        {
-            var e2 = new FileNotFoundException();
-            e2.initCause(e);
-            throw e2;
-        }
-        var json = JSONObject.parseObject(line);
+        var json = JsonBase.loadJsonFile(acc.getPlayerDataResolveFile("PlayerStatistics.json"));
 
         var totalKill = json.getLongValue("总击杀数");
         var totalRound = json.getLongValue("总回合数");
