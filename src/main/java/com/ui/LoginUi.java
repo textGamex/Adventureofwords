@@ -9,15 +9,15 @@ import java.util.Scanner;
  */
 public class LoginUi extends Ui
 {
-    private final LoginUi loginUi = new LoginUi();
+    private static final LoginUi LOGIN_UI = new LoginUi();
     private LoginUi()
     {
 
     }
 
-    public Ui getLoginUi()
+    public static Ui getLoginUi()
     {
-        return loginUi;
+        return LOGIN_UI;
     }
 
     @Override

@@ -1,18 +1,17 @@
 package com.java.main;
 
-import com.alibaba.fastjson.JSONObject;
 import com.java.localPersistence.DataPath;
 import com.java.localPersistence.JsonBase;
 import com.java.message.PlayerStatistics;
 import com.java.message.attackMessage.AttackType;
 import com.java.message.attackMessage.BattleTip;
 import com.java.tools.GameTool;
+import com.java.tools.UiTool;
 import com.java.unit.BasicUnit;
 import com.java.unit.Role;
 import com.ui.ConsoleProgressBar;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Objects;
@@ -25,7 +24,7 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * @author 留恋千年
- * @version 1.0.0
+ * @version 1.2.0
  * @since 2021-6-6
  */
 public class TestUse
@@ -34,7 +33,8 @@ public class TestUse
     private static final File ENEMY_FILE = DataPath.DESKTOP.resolve("敌对单位属性.json").toFile();
     private static final String SETTING_FILE_NAME = "setting.json";
     private static final File SETTING_FILE_PATH = DataPath.GAME_DATA_PATH.resolve(SETTING_FILE_NAME).toFile();
-    private static GameSetting setting = new GameSetting(true);
+    private static final GameSetting SETTING = GameSetting.getGameSetting();
+    private static char separatorCharacter = '-';
 
     static
     {
@@ -42,12 +42,23 @@ public class TestUse
         {
             println("正在初始化...");
             printProgressBar();
-            saveSetting(SETTING_FILE_PATH);
+            GameSetting.getGameSetting().saveSetting(SETTING_FILE_PATH);
             println("初始化成功");
+        }
+        else
+        {
+            try
+            {
+                SETTING.loadSettingFile(SETTING_FILE_PATH);
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
         }
         try
         {
-            setting = loadSetting(SETTING_FILE_PATH);
+            loadSetting(SETTING_FILE_PATH);
         }
         catch (FileNotFoundException e)
         {
@@ -63,7 +74,7 @@ public class TestUse
         if (ROLE_FILE.exists() && ENEMY_FILE.exists())
         {
             println("检测到属性文件, 加载中...");
-            if (setting.isOpenLoadAnimation())
+            if (SETTING.isOpenLoadAnimation())
             {
                 printProgressBar();
             }
@@ -74,7 +85,7 @@ public class TestUse
         if (!ROLE_FILE.exists() && !ENEMY_FILE.exists())
         {
             println("属性文件不存在, 正在创建中...");
-            if (setting.isOpenLoadAnimation())
+            if (SETTING.isOpenLoadAnimation())
             {
                 printProgressBar();
             }
@@ -85,45 +96,30 @@ public class TestUse
             println("创建成功");
         }
 
-        if (!ROLE_FILE.exists() || !ENEMY_FILE.exists())
-        {
-            println("属性文件已损坏, 正在修复中...");
-            if (!ROLE_FILE.exists())
-            {
-                role = Role.newStandardPrimaryLevelRole("白博森");
-                role.saveGameManagerData(ROLE_FILE);
-                if (setting.isOpenLoadAnimation())
-                {
-                    printProgressBar();
-                }
-            }
-            else
-            {
-                enemy = Role.newStandardPrimaryLevelRole("张羽");
-                enemy.saveGameManagerData(ENEMY_FILE);
-                if (setting.isOpenLoadAnimation())
-                {
-                    printProgressBar();
-                }
-            }
-            println("属性文件修复成功");
-        }
-
         assert role != null;
-
         final var in = new Scanner(System.in);
+        String[] uiArray =
+        {
+             "查看双方属性",
+             "开始战斗",
+             "重新载入单位属性文件属性",
+             "退出",
+             "开启加载动画",
+             "清空控制台"
+        };
+
         while (true)
         {
             separator();
-            //TODO:有很大的优化空间
-            if (setting.isOpenLoadAnimation())
+            if (SETTING.isOpenLoadAnimation())
             {
-                println("1.查看双方属性   2.开始战斗   3.重新载入单位属性文件属性   4.退出   5.关闭加载动画");
+                uiArray[4] = "关闭加载动画";
             }
             else
             {
-                println("1.查看双方属性   2.开始战斗   3.重新载入单位属性文件属性   4.退出   5.开启加载动画");
+               uiArray[4] = "开启加载动画";
             }
+            println(UiTool.generateUi(uiArray));
             switch (in.nextInt())
             {
                 case 1 -> {
@@ -138,7 +134,7 @@ public class TestUse
                 case 3 -> {
                     separator();
                     println("正在载入中...");
-                    if (setting.isOpenLoadAnimation())
+                    if (SETTING.isOpenLoadAnimation())
                     {
                         printProgressBar();
                     }
@@ -148,9 +144,10 @@ public class TestUse
                 }
                 case 4 -> System.exit(0);
                 case 5 -> {
-                    setting.setLoadAnimation(!setting.isOpenLoadAnimation());
-                    saveSetting(SETTING_FILE_PATH);
+                    SETTING.setLoadAnimation(!SETTING.isOpenLoadAnimation());
+                    GameSetting.getGameSetting().saveSetting(SETTING_FILE_PATH);
                 }
+                case 6 -> GameTool.cls();
                 default -> {
                     separator();
                     println("请输入支持的选项");
@@ -177,27 +174,24 @@ public class TestUse
             {
                 if (canHit(role, enemy))
                 {
+                    var originalMessage = new BattleTip.AttackMessage(
+                            role.getName(), 0, AttackType.COMMON_ATTACK, enemy.getName(), enemy.defense().getHp());
+                    int hurt;
                     if (attackCanCrit(role, enemy))
                     {
-                        final var hurt = normalAttackDamage(role, enemy);
-                        final var critHurt = criticalDamage(hurt, role.attack().getCritsEffect());
-                        enemy.subtractHp(critHurt);
-
-                        roleStatistics.addTotalHarm(critHurt);
-
-                        BattleTip.printAttackMessage(new BattleTip.AttackMessage(role.getName(), critHurt,
-                                AttackType.CRIT, enemy.getName(), enemy.defense().getHp()));
+                        int commonHurt = normalAttackDamage(role, enemy);
+                        hurt = criticalDamage(commonHurt, role.attack().getCritsEffect());
+                        originalMessage.setAttackType(AttackType.CRIT);
                     }
                     else
                     {
-                        final var hurt = normalAttackDamage(role, enemy);
-                        enemy.subtractHp(hurt);
-
-                        roleStatistics.addTotalHarm(hurt);
-
-                        BattleTip.printAttackMessage(new BattleTip.AttackMessage(role.getName(), hurt,
-                                AttackType.COMMON_ATTACK, enemy.getName(), enemy.defense().getHp()));
+                        hurt = normalAttackDamage(role, enemy);
+                        originalMessage.setAttackType(AttackType.COMMON_ATTACK);
                     }
+                    enemy.subtractHp(hurt);
+                    originalMessage.setHarm(hurt);
+                    println(BattleTip.returnAttackMessage(originalMessage));
+                    roleStatistics.addTotalHarm(hurt);
                     roleStatistics.setTotalAttack(roleStatistics.getTotalAttack() + 1);
                 }
                 else
@@ -225,29 +219,25 @@ public class TestUse
             {
                 if (canHit(enemy, role))
                 {
+                    var originalMessage = new BattleTip.AttackMessage(
+                            enemy.getName(), 0, AttackType.COMMON_ATTACK, role.getName(), role.defense().getHp());
+                    int hurt;
                     if (attackCanCrit(enemy, role))
                     {
-                        final var hurt = normalAttackDamage(enemy, role);
-                        final var critHurt = criticalDamage(hurt, enemy.attack().getCritsEffect());
-                        role.subtractHp(critHurt);
-
-                        enemyStatistics.addTotalHarm(critHurt);
-
-                        BattleTip.printAttackMessage(new BattleTip.AttackMessage(enemy.getName(), critHurt,
-                                AttackType.CRIT, role.getName(), role.defense().getHp()));
+                        int commonHurt = normalAttackDamage(enemy, enemy);
+                        hurt = criticalDamage(commonHurt, enemy.attack().getCritsEffect());
+                        originalMessage.setAttackType(AttackType.CRIT);
                     }
                     else
                     {
-                        final var hurt = normalAttackDamage(enemy, role);
-                        role.subtractHp(hurt);
-
-                        enemyStatistics.addTotalHarm(hurt);
-
-                        BattleTip.printAttackMessage(new BattleTip.AttackMessage(enemy.getName(), hurt,
-                                AttackType.COMMON_ATTACK, role.getName(), role.defense().getHp()));
-
-                        enemyStatistics.setTotalAttack(enemyStatistics.getTotalAttack() + 1);
+                        hurt = normalAttackDamage(enemy, role);
+                        originalMessage.setAttackType(AttackType.COMMON_ATTACK);
                     }
+                    role.subtractHp(hurt);
+                    originalMessage.setHarm(hurt);
+                    println(BattleTip.returnAttackMessage(originalMessage));
+                    enemyStatistics.addTotalHarm(hurt);
+                    enemyStatistics.setTotalAttack(roleStatistics.getTotalAttack() + 1);
                 }
                 else
                 {
@@ -262,7 +252,7 @@ public class TestUse
             if (role.defense().getHp() <= 0)
             {
                 println("敌对单位胜利!");
-                println(enemy.getName() + "仅剩{}点血" + enemy.defense().getHp());
+                println(enemy.getName() + "仅剩" + enemy.defense().getHp() + "点血");
                 enemyStatistics.setTotalVictory(enemyStatistics.getTotalVictory() + 1);
                 enemyStatistics.setTotalKill(enemyStatistics.getTotalKill() + 1);
                 stateRecovery(role);
@@ -304,28 +294,19 @@ public class TestUse
        ConsoleProgressBar.loadSpecifiedTime(1700, 65, '|');
     }
 
-    public static void saveSetting(final File path)
-    {
-        requireNonNull(path);
-        var jsonFile = new JSONObject();
-        jsonFile.put("显示加载动画", setting.isOpenLoadAnimation());
-
-        try (var out = new PrintWriter(path, StandardCharsets.UTF_8))
-        {
-            out.println(jsonFile.toJSONString());
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public static GameSetting loadSetting(final File path) throws FileNotFoundException
+    public static void loadSetting(final File path) throws FileNotFoundException
     {
         var json = JsonBase.loadJsonFile(requireNonNull(path));
 
         var loadAnimation = json.getBooleanValue("显示加载动画");
+        GameSetting.getGameSetting().setLoadAnimation(loadAnimation);
+    }
 
-        return new GameSetting(loadAnimation);
+    /**
+     * 修复属性文件.
+     */
+    private void repairPropertiesFile()
+    {
+
     }
 }

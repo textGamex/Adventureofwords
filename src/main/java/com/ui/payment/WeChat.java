@@ -16,7 +16,7 @@ public final class WeChat extends Ui
         WeChat.showCollectionCode();
     }
 
-    private final WeChat weChat = new WeChat();
+    private static final WeChat WECHAT = new WeChat();
 
     private WeChat()
     {
@@ -25,7 +25,7 @@ public final class WeChat extends Ui
 
     public Ui newWeChat()
     {
-        return weChat;
+        return WECHAT;
     }
 
     public static void showCollectionCode()

@@ -1,6 +1,9 @@
 package com.java.tools;
 
+import com.java.localPersistence.DataPath;
 import org.slf4j.LoggerFactory;
+import java.nio.file.Paths;
+import java.util.Arrays;
 
 import static java.util.concurrent.ThreadLocalRandom.current;
 import static java.util.Objects.requireNonNull;
@@ -24,6 +27,10 @@ public final class GameTool
         ONLY_REDUCED
     };
 
+    public static void main(String[] args)
+    {
+        System.out.println(Arrays.toString(GameTool.intToBytes(256)));
+    }
     private GameTool()
     {
         throw new AssertionError();
@@ -31,7 +38,14 @@ public final class GameTool
 
     static
     {
-        System.loadLibrary("randomEngine");
+        try
+        {
+            System.loadLibrary("randomEngine");
+        }
+        catch (UnsatisfiedLinkError e)
+        {
+        System.load("C:\\Program Files (x86)\\Adventure-of-words\\lib\\randomEngine.dll");
+        }
     }
 
     /**

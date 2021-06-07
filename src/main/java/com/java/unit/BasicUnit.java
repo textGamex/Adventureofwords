@@ -605,7 +605,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
                 + ", 魔法攻击:" + attackModule.getPhysicalAttack()
                 + ", 暴击:" + attackModule.getCrit()
                 + ", 暴击抗性:" + defenseModule.getCritResistance()
-                + ", 暴击效果:" + attackModule.getManaRecovery() * 100 + "%"
+                + ", 暴击效果:" + attackModule.getCritsEffect() * 100 + "%"
                 + ", 物理抗性:" + defenseModule.getPhysicalResistance()
                 + ", 护甲:" + defenseModule.getArmor()
                 + ", 每回合生命回复:" + defenseModule.getLifeRegeneration()

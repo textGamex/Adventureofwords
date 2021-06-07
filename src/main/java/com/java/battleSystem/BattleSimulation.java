@@ -48,7 +48,7 @@ public final class BattleSimulation
 
                         roleStatistics.addTotalHarm(critHurt);
 
-//                        BattleTip.printAttackMessage(new BattleTip.AttackMessage(role.getName(), critHurt,
+//                        BattleTip.returnAttackMessage(new BattleTip.AttackMessage(role.getName(), critHurt,
 //                                AttackType.CRIT, enemy.getName(), enemy.defense().getHp()));
                     }
                     else
@@ -58,7 +58,7 @@ public final class BattleSimulation
 
                         roleStatistics.addTotalHarm(hurt);
 
-//                        BattleTip.printAttackMessage(new BattleTip.AttackMessage(role.getName(), hurt,
+//                        BattleTip.returnAttackMessage(new BattleTip.AttackMessage(role.getName(), hurt,
 //                                AttackType.COMMON_ATTACK, enemy.getName(), enemy.defense().getHp()));
                     }
                     roleStatistics.setTotalAttack(roleStatistics.getTotalAttack() + 1);
@@ -96,7 +96,7 @@ public final class BattleSimulation
 
                         enemyStatistics.addTotalHarm(critHurt);
 
-//                        BattleTip.printAttackMessage(new BattleTip.AttackMessage(enemy.getName(), critHurt,
+//                        BattleTip.returnAttackMessage(new BattleTip.AttackMessage(enemy.getName(), critHurt,
 //                                AttackType.CRIT, role.getName(), role.defense().getHp()));
                     }
                     else
@@ -106,7 +106,7 @@ public final class BattleSimulation
 
                         enemyStatistics.addTotalHarm(hurt);
 
-//                        BattleTip.printAttackMessage(new BattleTip.AttackMessage(enemy.getName(), hurt,
+//                        BattleTip.returnAttackMessage(new BattleTip.AttackMessage(enemy.getName(), hurt,
 //                                AttackType.COMMON_ATTACK, role.getName(), role.defense().getHp()));
                     }
                     enemyStatistics.setTotalAttack(enemyStatistics.getTotalAttack() + 1);

@@ -44,7 +44,7 @@ public final class BattleTip
      * @throws IllegalArgumentException 如果{@code message.getHarm()}方法的返回值小于0
      * @param message 战场信息包
      */
-    public static void printAttackMessage(AttackMessage message)
+    public static String returnAttackMessage(AttackMessage message)
     {
         requireNonNull(message);
 
@@ -55,11 +55,11 @@ public final class BattleTip
 
         if (message.getHarm() == 0)
         {
-            System.out.printf("%s使用%s对%s发起了攻击, 但未造成伤害", attackerName, message.getAttackType(), victimName);
+            return String.format("%s使用[%s]对%s发起了攻击, 但未造成伤害", attackerName, message.getHarmTypeName(), victimName);
         }
         else if (message.getHarm() > 0)
         {
-            System.out.printf("[系统]%s使用[%s]对%s造成了%d点伤害,%s还剩%d点生命值%n",attackerName, message.getHarmTypeName(),
+            return String.format("%s使用[%s]对%s造成了%d点伤害,%s还剩%d点生命值",attackerName, message.getHarmTypeName(),
                 victimName, message.getHarm(), victimName, message.getVictimSurplusHp());
         }
         else
@@ -87,8 +87,8 @@ public final class BattleTip
     public static final class AttackMessage
     {
         private final String attackerName;
-        private final int harm;
-        private final AttackType attackType;
+        private int harm;
+        private AttackType attackType;
 
         private final String victimName;
         private final int victimSurplusHp;
@@ -139,6 +139,16 @@ public final class BattleTip
         public int getVictimSurplusHp()
         {
             return victimSurplusHp;
+        }
+
+        public void setAttackType(final AttackType attackType)
+        {
+            this.attackType = attackType;
+        }
+
+        public void setHarm(final int harm)
+        {
+            this.harm = harm;
         }
     }
 

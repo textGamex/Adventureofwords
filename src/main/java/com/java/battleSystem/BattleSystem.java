@@ -74,10 +74,6 @@ public final class BattleSystem
         return true;
     }
 
-//    public static boolean canAttack(BasicUnit attacker)
-//    {
-//
-//    }
     /**
      * º∆À„∆’Õ®π•ª˜…À∫¶.
      *

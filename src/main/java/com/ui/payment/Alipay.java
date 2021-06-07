@@ -11,16 +11,16 @@ import java.awt.*;
  */
 public final class Alipay extends Ui
 {
-    private final Alipay alipay = new Alipay();
+    private static final Alipay ALIPAY = new Alipay();
 
     private Alipay()
     {
 
     }
 
-    public Ui newAlipay()
+    public static Ui newAlipay()
     {
-        return alipay;
+        return ALIPAY;
     }
 
 
