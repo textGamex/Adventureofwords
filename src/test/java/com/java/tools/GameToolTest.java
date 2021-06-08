@@ -17,7 +17,10 @@ class GameToolTest
     @Test
     void testBytesToInt()
     {
+        byte[] actual = {1, 0, 0, 0};
+        var num = GameTool.bytesToInt(actual);
 
+        assertEquals(1, 1);
     }
 
     @Test

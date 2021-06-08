@@ -9,9 +9,6 @@ import java.nio.file.Paths;
  */
 public final class DataPath
 {
-    public static void main(String[] args)
-    {
-    }
     public static final Path GAME_DATA_PATH = Paths.get(System.getProperty("user.home"), "AppData",
             "Local", "Adventure of words");
     public static final Path DESKTOP = Paths.get(System.getProperty("user.home"), "Desktop");

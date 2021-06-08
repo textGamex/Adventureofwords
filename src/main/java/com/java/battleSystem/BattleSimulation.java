@@ -151,5 +151,4 @@ public final class BattleSimulation
         unit.defense().setHp(unit.defense().getMaxHp());
     }
 
-
 }

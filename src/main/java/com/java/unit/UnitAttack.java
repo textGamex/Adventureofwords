@@ -50,6 +50,10 @@ public class UnitAttack implements Serializable
     /**每回合法力值恢复*/
     private int manaRecovery;
 
+    /**
+     *
+     * @return 返回此单位的物理攻击
+     */
     public int getPhysicalAttack()
     {
         return physicalAttack ^ keyInt;
@@ -60,6 +64,10 @@ public class UnitAttack implements Serializable
         this.physicalAttack = physicalAttack ^ keyInt;
     }
 
+    /**
+     *
+     * @return 返回此单位的魔法攻击
+     */
     public int getMagicAttack()
     {
         return magicAttack ^ keyInt;
@@ -70,6 +78,10 @@ public class UnitAttack implements Serializable
         this.magicAttack = magicAttack ^ keyInt;
     }
 
+    /**
+     *
+     * @return 返回此单位的暴击
+     */
     public int getCrit()
     {
         return crit ^ keyInt;
@@ -80,6 +92,10 @@ public class UnitAttack implements Serializable
         this.crit = crit ^ keyInt;
     }
 
+    /**
+     *
+     * @return 返回此单位的暴击效果
+     */
     public double getCritsEffect()
     {
         return (double) (critsEffect ^ keyLong) / DOUBLE_ACCURACY;
@@ -94,6 +110,10 @@ public class UnitAttack implements Serializable
         LOGGER.trace("实际存储值:{}", this.critsEffect);
     }
 
+    /**
+     *
+     * @return 返回此单位的命中
+     */
     public int getHit()
     {
         return hit ^ keyInt;
@@ -104,6 +124,10 @@ public class UnitAttack implements Serializable
         this.hit = hit ^ keyInt;
     }
 
+    /**
+     *
+     * @return 返回此单位的法力值
+     */
     public int getMana()
     {
         return mana ^ keyInt;
@@ -114,6 +138,10 @@ public class UnitAttack implements Serializable
         this.mana = mana ^ keyInt;
     }
 
+    /**
+     *
+     * @return 返回此单位的每回合法力值回复
+     */
     public int getManaRecovery()
     {
         return manaRecovery ^ keyInt;
