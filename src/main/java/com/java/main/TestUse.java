@@ -23,6 +23,8 @@ import static com.java.battleSystem.BattleSystem.normalAttackDamage;
 import static java.util.Objects.requireNonNull;
 
 /**
+ * 用于提供给测试和策划进行游戏测试.
+ *
  * @author 留恋千年
  * @version 1.2.0
  * @since 2021-6-6
