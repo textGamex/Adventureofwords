@@ -3,14 +3,14 @@ package com.java.message;
 import com.alibaba.fastjson.JSONObject;
 import com.java.account.AccountMessage;
 import com.java.account.Identity;
-import com.java.localPersistence.JsonBase;
+import com.java.localPersistence.JsonBaseTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
 import static java.util.Objects.requireNonNull;
+
 /**
  * 用于统计玩家的游戏信息.
  *
@@ -29,9 +29,6 @@ import static java.util.Objects.requireNonNull;
 */
 public final class PlayerStatistics implements Serializable
 {
-    public static void main(String[] args)
-    {
-    }
     public static final Logger LOGGER = LoggerFactory.getLogger(PlayerStatistics.class);
     @Serial
     private static final long serialVersionUID = 7935923925807359121L;
@@ -259,10 +256,7 @@ public final class PlayerStatistics implements Serializable
      */
     public void saveStatistics(final AccountMessage acc)
     {
-        if (acc == null)
-        {
-            throw new NullPointerException();
-        }
+        requireNonNull(acc);
         if (acc.getId() == Identity.GAME_MANAGER || acc.getId() == Identity.NEW_GAME_MANAGER)
         {
             LOGGER.debug("{}账号采用json方式保存", acc.getAccountName());
@@ -372,7 +366,7 @@ public final class PlayerStatistics implements Serializable
     private static PlayerStatistics loadGameManagerStatistics(final AccountMessage acc) throws FileNotFoundException
     {
         assert acc != null;
-        var json = JsonBase.loadJsonFile(acc.getPlayerDataResolveFile("PlayerStatistics.json"));
+        var json = JsonBaseTool.loadJsonFile(acc.getPlayerDataResolveFile("PlayerStatistics.json"));
 
         var totalKill = json.getLongValue("总击杀数");
         var totalRound = json.getLongValue("总回合数");

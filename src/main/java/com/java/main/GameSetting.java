@@ -1,7 +1,7 @@
 package com.java.main;
 
 import com.alibaba.fastjson.JSONObject;
-import com.java.localPersistence.JsonBase;
+import com.java.localPersistence.JsonBaseTool;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,12 +19,6 @@ import static java.util.Objects.requireNonNull;
 public class GameSetting
 {
     private static final GameSetting GAME_SETTING = new GameSetting();
-
-    public static void main(String[] args)
-    {
-        var a = "-".toCharArray();
-        System.out.println(a[1]);
-    }
     private GameSetting()
     {
 
@@ -40,7 +34,7 @@ public class GameSetting
     }
 
     private boolean openLoadAnimation = true;
-    private char separatorCharacter = '-';
+    private String separatorCharacter = "-";
     /**
      * 把设置文件保存在本地.
      */
@@ -50,7 +44,7 @@ public class GameSetting
         var jsonFile = new JSONObject();
 
         jsonFile.put("显示加载动画", isOpenLoadAnimation());
-        jsonFile.put("分隔符", String.valueOf(getSeparatorCharacter()));
+        jsonFile.put("分隔符", getSeparatorCharacter());
 
         try (var out = new PrintWriter(path, StandardCharsets.UTF_8))
         {
@@ -64,11 +58,10 @@ public class GameSetting
 
     public void loadSettingFile(final File path) throws FileNotFoundException
     {
-        var jsonData = JsonBase.loadJsonFile(requireNonNull(path));
+        var jsonData = JsonBaseTool.loadJsonFile(requireNonNull(path));
 
         openLoadAnimation = jsonData.getBooleanValue("显示加载动画");
-        var chars = jsonData.getString("分隔符").toCharArray();
-        separatorCharacter = chars[0];
+        separatorCharacter = jsonData.getString("分隔符");
     }
 
     public boolean isOpenLoadAnimation()
@@ -81,13 +74,17 @@ public class GameSetting
         this.openLoadAnimation = openLoadAnimation;
     }
 
-    public char getSeparatorCharacter()
+    public String getSeparatorCharacter()
     {
         return separatorCharacter;
     }
 
-    public void setSeparatorCharacter(final char separatorCharacter)
+    /**
+     * @param separatorCharacter 分隔符
+     * @throws NullPointerException 如果{@code separatorCharacter}为null
+     */
+    public void setSeparatorCharacter(final String separatorCharacter)
     {
-        this.separatorCharacter = separatorCharacter;
+        this.separatorCharacter = requireNonNull(separatorCharacter);
     }
 }

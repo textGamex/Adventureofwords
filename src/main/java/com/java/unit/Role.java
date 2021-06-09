@@ -3,13 +3,13 @@ package com.java.unit;
 import com.alibaba.fastjson.JSONObject;
 import com.java.account.AccountMessage;
 import com.java.account.Identity;
-import com.java.localPersistence.JsonBase;
+import com.java.localPersistence.JsonBaseTool;
 import com.java.localPersistence.SaveData;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.Scanner;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -281,7 +281,7 @@ public class Role extends BasicUnit
 
     public static Role loadGameManagerData(final File path) throws FileNotFoundException
     {
-        var json = JsonBase.loadJsonFile(requireNonNull(path));
+        var json = JsonBaseTool.loadJsonFile(requireNonNull(path));
 
         var name = json.getString("名称");
         var level = json.getIntValue("单位等级");

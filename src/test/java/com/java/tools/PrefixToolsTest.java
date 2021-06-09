@@ -108,4 +108,23 @@ class PrefixToolsTest
         assertEquals(2, num.get(1).getValue());
         assertEquals(1, num.get(2).getValue());
     }
+
+    @Test
+    void testRemoveIf()
+    {
+        attribute.setRepeatAllowed(true);
+        attribute.add("sss");
+        attribute.add("sss");
+        attribute.add("sss");
+        attribute.add("aaa");
+        attribute.add("aaa");
+        attribute.add("mmm");
+
+        attribute.removeIf("sss");
+        attribute.removeIf("mmm");
+
+        assertFalse(attribute.have("sss"));
+        assertFalse(attribute.have("mmm"));
+        assertTrue(attribute.have("aaa"));
+    }
 }

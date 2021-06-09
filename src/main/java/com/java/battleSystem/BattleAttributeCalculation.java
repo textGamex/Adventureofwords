@@ -20,6 +20,11 @@ public final class BattleAttributeCalculation
         System.out.println(victimEffectiveHp(100, 1.9, 0.98));
     }
 
+    private BattleAttributeCalculation()
+    {
+        throw new AssertionError();
+    }
+
     /**
      * 计算攻击者的攻击命中的几率.
      *
@@ -62,6 +67,8 @@ public final class BattleAttributeCalculation
     }
 
     /**
+     * 返回攻击者对被攻击者的攻击暴击的概率.
+     *
      * @param attacker 攻击者
      * @param victim 被攻击者
      * @return 攻击者的攻击暴击的概率

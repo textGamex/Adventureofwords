@@ -3,6 +3,7 @@ package com.java.tools;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.concurrent.ThreadLocalRandom.current;
@@ -173,6 +174,11 @@ public final class PrefixTools
         return null;
     }
 
+    public void removeIf(final String element)
+    {
+        Predicate<String> predicate1 = Predicate.isEqual(element);
+        extraAttributes.removeIf(predicate1);
+    }
     /**
      *
      * @return

@@ -11,11 +11,15 @@ import java.util.Scanner;
 
 /**
  * @author 留恋千年
- * @version 1.0.0
+ * @version 1.1.0
  * @since 2021-6-6
  */
-public class JsonBase
+public class JsonBaseTool
 {
+    private JsonBaseTool()
+    {
+        throw new AssertionError();
+    }
     /**
      * 读取json文件并返回json对象.
      *
@@ -34,7 +38,7 @@ public class JsonBase
         }
         catch (IOException e)
         {
-            var e2 = new FileNotFoundException(path + "不存在");
+            var e2 = new FileNotFoundException(path + " 不存在");
             e2.initCause(e);
             throw e2;
         }

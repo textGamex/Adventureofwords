@@ -1,7 +1,7 @@
 package com.java.main;
 
 import com.java.localPersistence.DataPath;
-import com.java.localPersistence.JsonBase;
+import com.java.localPersistence.JsonBaseTool;
 import com.java.message.PlayerStatistics;
 import com.java.message.attackMessage.AttackType;
 import com.java.message.attackMessage.BattleTip;
@@ -34,7 +34,6 @@ public class TestUse
     private static final String SETTING_FILE_NAME = "setting.json";
     private static final File SETTING_FILE_PATH = DataPath.GAME_DATA_PATH.resolve(SETTING_FILE_NAME).toFile();
     private static final GameSetting SETTING = GameSetting.getGameSetting();
-    private static char separatorCharacter = '-';
 
     static
     {
@@ -275,7 +274,7 @@ public class TestUse
 
     public static void separator()
     {
-        System.out.println("-".repeat(65));
+        UiTool.separator(SETTING.getSeparatorCharacter(), 90);
     }
 
     private static void stateRecovery(final BasicUnit unit)
@@ -291,12 +290,12 @@ public class TestUse
 
     private static void printProgressBar()
     {
-       ConsoleProgressBar.loadSpecifiedTime(1700, 65, '|');
+       ConsoleProgressBar.loadSpecifiedTime(2000, 65, '|');
     }
 
     public static void loadSetting(final File path) throws FileNotFoundException
     {
-        var json = JsonBase.loadJsonFile(requireNonNull(path));
+        var json = JsonBaseTool.loadJsonFile(requireNonNull(path));
 
         var loadAnimation = json.getBooleanValue("œ‘ æº”‘ÿ∂Øª≠");
         GameSetting.getGameSetting().setLoadAnimation(loadAnimation);
