@@ -346,13 +346,16 @@ public final class PlayerStatistics implements Serializable
                 || acc.getId() == Identity.NEW_PLAYER;
     }
 
-    private static PlayerStatistics loadPlayerStatistics(final AccountMessage acc)
+    public static PlayerStatistics loadPlayerStatistics(final AccountMessage acc)
     {
-        assert acc != null;
+        return loadPlayerStatistics(requireNonNull(acc).getPlayerDataResolveFile("PlayerStatistics.dat"));
+    }
 
+    public static PlayerStatistics loadPlayerStatistics(final File path)
+    {
+        requireNonNull(path);
         PlayerStatistics archive = null;
-        try (var in = new ObjectInputStream(new FileInputStream(
-                acc.getPlayerDataResolveFile("PlayerStatistics.dat"))))
+        try (var in = new ObjectInputStream(new FileInputStream(path)))
         {
             archive = (PlayerStatistics) in.readObject();
         }
@@ -363,10 +366,21 @@ public final class PlayerStatistics implements Serializable
         return archive;
     }
 
-    private static PlayerStatistics loadGameManagerStatistics(final AccountMessage acc) throws FileNotFoundException
+    /**
+     *
+     * @param acc
+     * @return
+     * @throws FileNotFoundException
+     */
+    public static PlayerStatistics loadGameManagerStatistics(final AccountMessage acc) throws FileNotFoundException
     {
-        assert acc != null;
-        var json = JsonBaseTool.loadJsonFile(acc.getPlayerDataResolveFile("PlayerStatistics.json"));
+        return loadGameManagerStatistics(requireNonNull(acc).getPlayerDataResolveFile("PlayerStatistics.json"));
+    }
+
+    public static PlayerStatistics loadGameManagerStatistics(final File path) throws FileNotFoundException
+    {
+
+        var json = JsonBaseTool.loadJsonFile(requireNonNull(path));
 
         var totalKill = json.getLongValue("总击杀数");
         var totalRound = json.getLongValue("总回合数");
