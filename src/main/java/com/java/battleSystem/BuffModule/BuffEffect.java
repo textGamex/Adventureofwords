@@ -22,7 +22,7 @@ import java.io.Serializable;
  * @since 15
  * @author ¡Ù¡µ«ßƒÍ
  */
-public final class BuffEffect implements Serializable
+public final class BuffEffect implements Serializable, Cloneable
 {
     @Serial
     private static final long serialVersionUID = 6938381291107023911L;
@@ -146,5 +146,18 @@ public final class BuffEffect implements Serializable
         }
         BuffEffect that = (BuffEffect) o;
         return timeLimit == that.timeLimit && layers == that.layers && debuff == that.debuff && timeLess == that.timeLess;
+    }
+
+    @Override
+    public BuffEffect clone()
+    {
+        try
+        {
+            return (BuffEffect) super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            return null;
+        }
     }
 }

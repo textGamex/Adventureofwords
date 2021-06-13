@@ -294,11 +294,9 @@ public final class PlayerStatistics implements Serializable
         }
     }
 
-    private void savePlayerStatistics(final AccountMessage account)
+    public void savePlayerStatistics(final File path)
     {
-        assert account != null;
-        try (var out = new ObjectOutputStream(
-                new FileOutputStream(account.getPlayerDataResolveFile("PlayerStatistics.dat"))))
+        try (var out = new ObjectOutputStream(new FileOutputStream(requireNonNull(path))))
         {
             out.writeObject(this);
         }
@@ -306,6 +304,11 @@ public final class PlayerStatistics implements Serializable
         {
             e.printStackTrace();
         }
+    }
+
+    public void savePlayerStatistics(final AccountMessage account)
+    {
+        savePlayerStatistics(requireNonNull(account).getPlayerDataResolveFile("PlayerStatistics.dat"));
     }
 
     /**
@@ -338,14 +341,6 @@ public final class PlayerStatistics implements Serializable
         }
     }
 
-    private static boolean fileNotExist(final AccountMessage acc)
-    {
-        assert acc != null;
-
-        return acc.getId() == Identity.NEW_GAME_MANAGER
-                || acc.getId() == Identity.NEW_PLAYER;
-    }
-
     public static PlayerStatistics loadPlayerStatistics(final AccountMessage acc)
     {
         return loadPlayerStatistics(requireNonNull(acc).getPlayerDataResolveFile("PlayerStatistics.dat"));
@@ -368,9 +363,10 @@ public final class PlayerStatistics implements Serializable
 
     /**
      *
-     * @param acc
-     * @return
-     * @throws FileNotFoundException
+     * @param acc 要读取的账号
+     * @return 此账号对应的统计信息
+     * @throws FileNotFoundException 文件不存在
+     * @throws NullPointerException 如果{@code acc}为null
      */
     public static PlayerStatistics loadGameManagerStatistics(final AccountMessage acc) throws FileNotFoundException
     {
@@ -379,7 +375,6 @@ public final class PlayerStatistics implements Serializable
 
     public static PlayerStatistics loadGameManagerStatistics(final File path) throws FileNotFoundException
     {
-
         var json = JsonBaseTool.loadJsonFile(requireNonNull(path));
 
         var totalKill = json.getLongValue("总击杀数");
@@ -393,5 +388,13 @@ public final class PlayerStatistics implements Serializable
 
         return new PlayerStatistics(totalKill, totalRound, totalAttack, totalHarm, totalVictory, totalXp, totalCash,
                 totalValue);
+    }
+
+    private static boolean fileNotExist(final AccountMessage acc)
+    {
+        assert acc != null;
+
+        return acc.getId() == Identity.NEW_GAME_MANAGER
+                || acc.getId() == Identity.NEW_PLAYER;
     }
 }

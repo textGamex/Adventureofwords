@@ -23,12 +23,6 @@ import static java.util.Objects.requireNonNull;
  */
 public class BuffModule implements Serializable
 {
-    public static void main(String[] args)
-    {
-        var buff = new BuffModule();
-        buff.add(BuffType.POISON, new BuffEffect(12,1));
-        buff.remove(BuffType.POISON, 1);
-    }
     public static final Logger LOGGER = LoggerFactory.getLogger(BuffModule.class);
 
     @Serial

@@ -34,7 +34,7 @@ class GameToolTest
     }
 
     @Test
-    void testFloatingNumberException()
+    void testFloatingNumberIllegalArgument()
     {
         assertThrows(IllegalArgumentException.class, () -> floatingNumber(10, -10));
         assertThrows(IllegalArgumentException.class, () -> floatingNumber(10, -10,
@@ -42,5 +42,13 @@ class GameToolTest
         assertThrows(IllegalArgumentException.class, () -> floatingNumber(10, -1.1));
         assertThrows(IllegalArgumentException.class, () -> floatingNumber(10, -1.1,
                 SpecifiedDirection.ONLY_INCREASE));
+        assertThrows(IllegalArgumentException.class, () -> floatingNumber(10.1, -1.1));
+    }
+
+    @Test
+    void testFloatingNumberNullPointer()
+    {
+        assertThrows(NullPointerException.class, () -> floatingNumber(10, 10, null));
+        assertThrows(NullPointerException.class, () -> floatingNumber(10, 1.1, null));
     }
 }

@@ -3,18 +3,22 @@ package com.java.message;
 import com.java.account.AccountMessage;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import static com.java.message.PlayerStatistics.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerStatisticsTest
 {
-
+    PlayerStatistics testThrow = new PlayerStatistics(1, 2, 3, 4,
+            5, 6, 7,8);
     @Test
-    void loadStatistics() throws FileNotFoundException
+    void testLoadStatistics() throws FileNotFoundException
     {
         var testAccount = new AccountMessage(PrivateData.ACCOUNT2);
-        var gameManagerStatistics = new PlayerStatistics(1, 2, 3, 4, 5, 6, 7,8);
+        var gameManagerStatistics = new PlayerStatistics(1, 2, 3, 4,
+                5, 6, 7,8);
 
         gameManagerStatistics.saveStatistics(testAccount);
         var data = PlayerStatistics.loadStatistics(testAccount);
@@ -27,5 +31,41 @@ class PlayerStatisticsTest
         assertEquals(6, data.getTotalXp());
         assertEquals(7, data.getTotalCash());
         assertEquals(8, data.getTotalValue());
+    }
+
+    @Test
+    void testSavePlayerStatisticsNullPointer()
+    {
+        assertThrows(NullPointerException.class, () -> testThrow.savePlayerStatistics((AccountMessage) null));
+        assertThrows(NullPointerException.class, () -> testThrow.savePlayerStatistics((File) null));
+    }
+
+    @Test
+    void testSaveStatisticsNullPointer()
+    {
+        assertThrows(NullPointerException.class, () -> testThrow.saveStatistics(null));
+    }
+
+    @Test
+    void testLoadStatisticsNullPointer()
+    {
+        assertThrows(NullPointerException.class, () -> loadStatistics(null));
+        assertThrows(NullPointerException.class, () -> loadPlayerStatistics((AccountMessage) null));
+        assertThrows(NullPointerException.class, () -> loadPlayerStatistics((File) null));
+        assertThrows(NullPointerException.class, () -> loadGameManagerStatistics((AccountMessage) null));
+        assertThrows(NullPointerException.class, () -> loadGameManagerStatistics((File) null));
+    }
+
+    @Test
+    void testSetIllegalArgument()
+    {
+        assertThrows(IllegalArgumentException.class, () -> testThrow.setTotalKill(-1));
+        assertThrows(IllegalArgumentException.class, () -> testThrow.setTotalValue(-1));
+        assertThrows(IllegalArgumentException.class, () -> testThrow.setTotalVictory(-1));
+        assertThrows(IllegalArgumentException.class, () -> testThrow.setTotalCash(-1));
+        assertThrows(IllegalArgumentException.class, () -> testThrow.setTotalHarm(-1));
+        assertThrows(IllegalArgumentException.class, () -> testThrow.setTotalXp(-1));
+        assertThrows(IllegalArgumentException.class, () -> testThrow.setTotalAttack(-1));
+        assertThrows(IllegalArgumentException.class, () -> testThrow.setTotalRound(-1));
     }
 }

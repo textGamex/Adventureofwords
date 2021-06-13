@@ -34,8 +34,9 @@ class BuffModuleTest
     }
 
     @Test
-    void getMessage()
+    void testGetMessageNullPointer()
     {
+        assertThrows(NullPointerException.class, () -> buffs.getMessage(BuffType.POISON));
     }
 
     @Test
@@ -89,6 +90,7 @@ class BuffModuleTest
         assertTrue(buffs.isEmpty());
     }
 
+    @Test
     void clearDebuff()
     {
         buffs.add(BuffType.POISON, new BuffEffect(10,1,true));
@@ -101,4 +103,18 @@ class BuffModuleTest
         assertTrue(buffs.have(BuffType.DEBILITY));
     }
 
+    @Test
+    void clearDebuffNullPointer()
+    {
+        assertThrows(NullPointerException.class, () -> buffs.add(null,
+                new BuffEffect(10,1,true)));
+        assertThrows(NullPointerException.class, () -> buffs.add(BuffType.POISON, null));
+        assertThrows(NullPointerException.class, () -> buffs.add(null, null));
+    }
+
+    @Test
+    void testRemoveIllegalArgument()
+    {
+        assertThrows(IllegalArgumentException.class, () -> buffs.remove(BuffType.POISON, -1));
+    }
 }

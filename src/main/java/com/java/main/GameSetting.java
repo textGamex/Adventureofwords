@@ -37,6 +37,7 @@ public class GameSetting
 
     private boolean openLoadAnimation = true;
     private String separatorCharacter = "-";
+
     /**
      * 把设置文件保存在本地.
      */
@@ -58,12 +59,17 @@ public class GameSetting
         }
     }
 
-    public void loadSettingFile(final File path) throws FileNotFoundException
+    public static GameSetting loadSettingFile(final File path) throws FileNotFoundException
     {
         var jsonData = JsonBaseTool.loadJsonFile(requireNonNull(path));
 
-        openLoadAnimation = jsonData.getBooleanValue("显示加载动画");
-        separatorCharacter = jsonData.getString("分隔符");
+        var openLoadAnimation = jsonData.getBooleanValue("显示加载动画");
+        var separatorCharacter = jsonData.getString("分隔符");
+
+        GAME_SETTING.setLoadAnimation(openLoadAnimation);
+        GAME_SETTING.setSeparatorCharacter(separatorCharacter);
+
+        return GAME_SETTING;
     }
 
     public boolean isOpenLoadAnimation()

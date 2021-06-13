@@ -50,7 +50,7 @@ public class TestUse
         {
             try
             {
-                SETTING.loadSettingFile(SETTING_FILE_PATH);
+                GameSetting.loadSettingFile(SETTING_FILE_PATH);
             }
             catch (FileNotFoundException e)
             {
