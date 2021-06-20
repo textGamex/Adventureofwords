@@ -1,6 +1,6 @@
 package com.java.main;
 
-import com.ui.LoginUi;
+import com.ui.LoginBaseUi;
 import com.ui.payment.Alipay;
 import com.ui.payment.WeChat;
 
@@ -8,8 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * ¿ªÊ¼Àà
- * <p>ÓÎÏ·ÏîÄ¿µØÖ·:</p>
+ * å¼€å§‹ç±»
+ * <p>æ¸¸æˆé¡¹ç›®åœ°å€:</p>
  * <a href="https://gitee.com/mengxin_C/adventure-of-words">gitee</a>
  * <a href="https://github.com/mengxinC/Adventureofwords">github</a>
  *@author Millennium
@@ -23,13 +23,13 @@ public final class AdventureOfWordsMain
         Logger.getGlobal().setLevel(Level.ALL);
         if (args.length != 0 && VERSION_PARAMETER.equalsIgnoreCase(args[0]))
         {
-            System.out.println("°æ±¾ºÅ: 0.1Beta");
+            System.out.println("ç‰ˆæœ¬å·: 0.1Beta");
             System.exit(0);
         }
-        System.out.println("´óÒ¯¿´×ÅÉÍ");
+        System.out.println("å¤§çˆ·çœ‹ç€èµ");
         Alipay.showCollectionCode();
         WeChat.showCollectionCode();
-        var account = LoginUi.loginMain();
+        var account = LoginBaseUi.loginMain();
 
     }
 }

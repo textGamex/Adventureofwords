@@ -1,7 +1,7 @@
 package com.java.message.attackMessage;
 
 /**
- * ¹¥»÷ÀàÐÍ
+ * æ”»å‡»ç±»åž‹
  *
  * @author Millennium
  * @version 1.0.0
@@ -11,8 +11,8 @@ package com.java.message.attackMessage;
 */
 public enum AttackType
 {
-    COMMON_ATTACK("ÆÕÍ¨¹¥»÷"),
-    CRIT("»áÐÄÒ»»÷");
+    COMMON_ATTACK("æ™®é€šæ”»å‡»"),
+    CRIT("ä¼šå¿ƒä¸€å‡»");
 
     private final String typeName;
 

@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  */
 public class UnitAttack implements Serializable
 {
@@ -25,7 +25,7 @@ public class UnitAttack implements Serializable
     {
         try
         {
-            //²»ÖªµÀºÃÊ¹²»ºÃÊ¹
+            //ä¸çŸ¥é“å¥½ä½¿ä¸å¥½ä½¿
             keyInt = SecureRandom.getInstanceStrong().nextInt();;
             keyLong = SecureRandom.getInstanceStrong().nextLong();;
         }
@@ -35,24 +35,24 @@ public class UnitAttack implements Serializable
         }
     }
     private static final long DOUBLE_ACCURACY = 10000000000000L;
-    /**ÎïÀí¹¥»÷*/
+    /**ç‰©ç†æ”»å‡»*/
     private int physicalAttack;
-    /**·¨ÊõÉËº¦*/
+    /**æ³•æœ¯ä¼¤å®³*/
     private int magicAttack;
-    /**±©»÷ */
+    /**æš´å‡» */
     private int crit;
-    /**±©»÷Ğ§¹û*/
+    /**æš´å‡»æ•ˆæœ*/
     private long critsEffect;
-    /**ÃüÖĞ*/
+    /**å‘½ä¸­*/
     private int hit;
-    /**·¨Á¦Öµ*/
+    /**æ³•åŠ›å€¼*/
     private int mana;
-    /**Ã¿»ØºÏ·¨Á¦Öµ»Ö¸´*/
+    /**æ¯å›åˆæ³•åŠ›å€¼æ¢å¤*/
     private int manaRecovery;
 
     /**
      *
-     * @return ·µ»Ø´Ëµ¥Î»µÄÎïÀí¹¥»÷
+     * @return è¿”å›æ­¤å•ä½çš„ç‰©ç†æ”»å‡»
      */
     public int getPhysicalAttack()
     {
@@ -66,7 +66,7 @@ public class UnitAttack implements Serializable
 
     /**
      *
-     * @return ·µ»Ø´Ëµ¥Î»µÄÄ§·¨¹¥»÷
+     * @return è¿”å›æ­¤å•ä½çš„é­”æ³•æ”»å‡»
      */
     public int getMagicAttack()
     {
@@ -80,7 +80,7 @@ public class UnitAttack implements Serializable
 
     /**
      *
-     * @return ·µ»Ø´Ëµ¥Î»µÄ±©»÷
+     * @return è¿”å›æ­¤å•ä½çš„æš´å‡»
      */
     public int getCrit()
     {
@@ -94,7 +94,7 @@ public class UnitAttack implements Serializable
 
     /**
      *
-     * @return ·µ»Ø´Ëµ¥Î»µÄ±©»÷Ğ§¹û
+     * @return è¿”å›æ­¤å•ä½çš„æš´å‡»æ•ˆæœ
      */
     public double getCritsEffect()
     {
@@ -103,16 +103,16 @@ public class UnitAttack implements Serializable
 
     public void setCritsEffect(final double critsEffect)
     {
-        LOGGER.trace("´«ÈëÖµ:{}", critsEffect);
+        LOGGER.trace("ä¼ å…¥å€¼:{}", critsEffect);
         long v = (long) (critsEffect * DOUBLE_ACCURACY);
-        LOGGER.trace("×ª»»ÎªÕûÊı:{}", v);
+        LOGGER.trace("è½¬æ¢ä¸ºæ•´æ•°:{}", v);
         this.critsEffect = v ^ keyLong;
-        LOGGER.trace("Êµ¼Ê´æ´¢Öµ:{}", this.critsEffect);
+        LOGGER.trace("å®é™…å­˜å‚¨å€¼:{}", this.critsEffect);
     }
 
     /**
      *
-     * @return ·µ»Ø´Ëµ¥Î»µÄÃüÖĞ
+     * @return è¿”å›æ­¤å•ä½çš„å‘½ä¸­
      */
     public int getHit()
     {
@@ -126,7 +126,7 @@ public class UnitAttack implements Serializable
 
     /**
      *
-     * @return ·µ»Ø´Ëµ¥Î»µÄ·¨Á¦Öµ
+     * @return è¿”å›æ­¤å•ä½çš„æ³•åŠ›å€¼
      */
     public int getMana()
     {
@@ -140,7 +140,7 @@ public class UnitAttack implements Serializable
 
     /**
      *
-     * @return ·µ»Ø´Ëµ¥Î»µÄÃ¿»ØºÏ·¨Á¦Öµ»Ø¸´
+     * @return è¿”å›æ­¤å•ä½çš„æ¯å›åˆæ³•åŠ›å€¼å›å¤
      */
     public int getManaRecovery()
     {

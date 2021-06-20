@@ -5,30 +5,30 @@ import java.io.Serializable;
 import static com.java.antiSpam.MemoryEncryption.*;
 
 /**
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  */
 public class UnitDefense implements Serializable
 {
-    /**×î´óÉúÃüÖµ*/
+    /**æœ€å¤§ç”Ÿå‘½å€¼*/
     private int maxHp;
-    /**ÉúÃüÖµ*/
+    /**ç”Ÿå‘½å€¼*/
     private int hp;
-    /**ÎïÀí¿¹ĞÔ*/
+    /**ç‰©ç†æŠ—æ€§*/
     private long physicalResistance;
-    /**Ä§·¨¿¹ĞÔ*/
+    /**é­”æ³•æŠ—æ€§*/
     private long magicResistance;
-    /**»¤¼×*/
+    /**æŠ¤ç”²*/
     private int armor;
-    /**ÉÁ±Ü*/
+    /**é—ªé¿*/
     private int evade;
-    /**Ã¿»ØºÏÉúÃü»Ø¸´*/
+    /**æ¯å›åˆç”Ÿå‘½å›å¤*/
     private int lifeRegeneration;
-    /**±©»÷¿¹ĞÔ */
+    /**æš´å‡»æŠ—æ€§ */
     private int critResistance;
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄ×î´óÉúÃüÖµ
+     * @return è¿”å›å•ä½çš„æœ€å¤§ç”Ÿå‘½å€¼
      */
     public int getMaxHp()
     {
@@ -42,7 +42,7 @@ public class UnitDefense implements Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄÉúÃüÖµ
+     * @return è¿”å›å•ä½çš„ç”Ÿå‘½å€¼
      */
     public int getHp()
     {
@@ -56,7 +56,7 @@ public class UnitDefense implements Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄ
+     * @return è¿”å›å•ä½çš„
      */
     public double getPhysicalResistance()
     {
@@ -70,7 +70,7 @@ public class UnitDefense implements Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄÉÁ±Ü
+     * @return è¿”å›å•ä½çš„é—ªé¿
      */
     public int getArmor()
     {
@@ -84,7 +84,7 @@ public class UnitDefense implements Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄÉÁ±Ü
+     * @return è¿”å›å•ä½çš„é—ªé¿
      */
     public int getEvade()
     {
@@ -99,7 +99,7 @@ public class UnitDefense implements Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄÃ¿»ØºÏÉúÃü»Ø¸´
+     * @return è¿”å›å•ä½çš„æ¯å›åˆç”Ÿå‘½å›å¤
      */
     public int getLifeRegeneration()
     {
@@ -113,7 +113,7 @@ public class UnitDefense implements Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄ±©»÷¿¹ĞÔ
+     * @return è¿”å›å•ä½çš„æš´å‡»æŠ—æ€§
      */
     public int getCritResistance()
     {
@@ -127,7 +127,7 @@ public class UnitDefense implements Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄÄ§·¨¿¹ĞÔ
+     * @return è¿”å›å•ä½çš„é­”æ³•æŠ—æ€§
      */
     public double getMagicResistance()
     {

@@ -24,7 +24,7 @@ public class Main extends Application
         Group root = new Group();
         Scene scene = new Scene(root, 300, 80);
         stage.setScene(scene);
-        stage.setTitle("ÇëÊäÈë¹ÜÀíÔ±ÃÜÂë");
+        stage.setTitle("è¯·è¾“å…¥ç®¡ç†å‘˜å¯†ç ");
 
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
@@ -33,12 +33,12 @@ public class Main extends Application
 
         scene.setRoot(grid);
 
-        Button submit = new Button("È·¶¨");
+        Button submit = new Button("ç¡®å®š");
         GridPane.setConstraints(submit, 1, 0);
         grid.getChildren().add(submit);
 
         PasswordField passwordField = new PasswordField();
-        passwordField.setPrefColumnCount(15);//ÉèÖÃÎÄ±¾Óò³¤¶È
+        passwordField.setPrefColumnCount(15);//è®¾ç½®æ–‡æœ¬åŸŸé•¿åº¦
         grid.getChildren().add(passwordField);
 
         final Label label = new Label();
@@ -53,13 +53,13 @@ public class Main extends Application
                 var password = passwordField.getText();
                 if (password.equals(PASSWORD1) || password.equals(PASSWORD2))
                 {
-                    label.setText("µÇÂ¼³É¹¦!");
-                    LOGGER.debug("µÇÂ¼³É¹¦");
+                    label.setText("ç™»å½•æˆåŠŸ!");
+                    LOGGER.debug("ç™»å½•æˆåŠŸ");
                 }
                 else
                 {
-                    LOGGER.debug("ÃÜÂë´íÎó");
-                    label.setText("ÃÜÂë´íÎó! 3ÃëºóÓÎÏ·ÍË³ö!");
+                    LOGGER.debug("å¯†ç é”™è¯¯");
+                    label.setText("å¯†ç é”™è¯¯! 3ç§’åæ¸¸æˆé€€å‡º!");
                     try
                     {
                         Thread.sleep(3000);
@@ -73,7 +73,7 @@ public class Main extends Application
             }
             else
             {
-                label.setText("ÇëÊäÈëÃÜÂë!");
+                label.setText("è¯·è¾“å…¥å¯†ç !");
             }
         });
 

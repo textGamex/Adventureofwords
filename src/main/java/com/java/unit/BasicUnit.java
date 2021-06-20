@@ -9,31 +9,31 @@ import static java.util.Objects.requireNonNull;
 import static com.java.unit.BasicUnit.UnitGrowth.calculationLevelGrowth;
 
 /**
- * ÓÎÏ·µÄµ¥Î», ÓÃÓÚÊµÏÖ»ù±¾µÄÓÎÏ·¶ÔÕ½.
+ * æ¸¸æˆçš„å•ä½, ç”¨äºå®ç°åŸºæœ¬çš„æ¸¸æˆå¯¹æˆ˜.
  *
- * <p>ÏÖÒÑÊµÏÖÒÔÏÂÊôĞÔ</p>
+ * <p>ç°å·²å®ç°ä»¥ä¸‹å±æ€§</p>
  * <ul>
- *     <li>µ¥Î»Ãû³Æ, ÎŞÄ¬ÈÏÖµ</li>
- *     <li>µ¥Î»µÈ¼¶, Ä¬ÈÏÖµÎª1</li>
- *     <li>×î´óÉúÃüÖµ, Ä¬ÈÏÖµÎª100</li>
- *     <li>µ¥Î»ÊôĞÔ³É³¤Öµ, Ä¬ÈÏÖµ²Î¼û{@link UnitGrowth}</li>
- *     <li>ËÙ¶È, Ä¬ÈÏÖµÎª50</li>
- *     <li>ÎïÀí¹¥»÷, Ä¬ÈÏÖµÎª0</li>
- *     <li>Ä§·¨¹¥»÷, Ä¬ÈÏÖµÎª0</li>
- *     <li>Ä§·¨Öµ, Ä¬ÈÏÖµÎª0</li>
- *     <li>±©»÷, Ä¬ÈÏÖµÎª0</li>
- *     <li>±©»÷¿¹ĞÔ, Ä¬ÈÏÖµÎª0</li>
- *     <li>±©»÷Ğ§¹û, Ä¬ÈÏÖµÎª2.0</li>
- *     <li>ÃüÖĞ, Ä¬ÈÏÖµÎª50</li>
- *     <li>ÉÁ±Ü, Ä¬ÈÏÖµÎª5</li>
- *     <li>ÎïÀí¿¹ĞÔ, Ä¬ÈÏÖµÎª0</li>
- *     <li>»¤¼×, Ä¬ÈÏÖµÎª0</li>
- *     <li>Ä§·¨¿¹ĞÔ, Ä¬ÈÏÖµÎª0</li>
- *     <li>Ã¿»ØºÏÉúÃü»Ø¸´, Ä¬ÈÏÖµÎª0</li>
- *     <li>Ã¿»ØºÏ·¨Á¦Öµ»Ö¸´, Ä¬ÈÏÖµÎª0</li>
+ *     <li>å•ä½åç§°, æ— é»˜è®¤å€¼</li>
+ *     <li>å•ä½ç­‰çº§, é»˜è®¤å€¼ä¸º1</li>
+ *     <li>æœ€å¤§ç”Ÿå‘½å€¼, é»˜è®¤å€¼ä¸º100</li>
+ *     <li>å•ä½å±æ€§æˆé•¿å€¼, é»˜è®¤å€¼å‚è§{@link UnitGrowth}</li>
+ *     <li>é€Ÿåº¦, é»˜è®¤å€¼ä¸º50</li>
+ *     <li>ç‰©ç†æ”»å‡», é»˜è®¤å€¼ä¸º0</li>
+ *     <li>é­”æ³•æ”»å‡», é»˜è®¤å€¼ä¸º0</li>
+ *     <li>é­”æ³•å€¼, é»˜è®¤å€¼ä¸º0</li>
+ *     <li>æš´å‡», é»˜è®¤å€¼ä¸º0</li>
+ *     <li>æš´å‡»æŠ—æ€§, é»˜è®¤å€¼ä¸º0</li>
+ *     <li>æš´å‡»æ•ˆæœ, é»˜è®¤å€¼ä¸º2.0</li>
+ *     <li>å‘½ä¸­, é»˜è®¤å€¼ä¸º50</li>
+ *     <li>é—ªé¿, é»˜è®¤å€¼ä¸º5</li>
+ *     <li>ç‰©ç†æŠ—æ€§, é»˜è®¤å€¼ä¸º0</li>
+ *     <li>æŠ¤ç”², é»˜è®¤å€¼ä¸º0</li>
+ *     <li>é­”æ³•æŠ—æ€§, é»˜è®¤å€¼ä¸º0</li>
+ *     <li>æ¯å›åˆç”Ÿå‘½å›å¤, é»˜è®¤å€¼ä¸º0</li>
+ *     <li>æ¯å›åˆæ³•åŠ›å€¼æ¢å¤, é»˜è®¤å€¼ä¸º0</li>
  * </ul>
  * @version 2.0.0
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @see BuffModule
  * @see Role
  * @see Enemy
@@ -42,7 +42,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 {
     @Serial
     private static final long serialVersionUID = 7938388190739071271L;
-    private static int nextTestId = 50000;//²âÊÔµ¥Î»id
+    private static int nextTestId = 50000;//æµ‹è¯•å•ä½id
     private final int id = ++nextTestId;
 
     private final BuffModule buff = new BuffModule();
@@ -52,40 +52,40 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
     private final String name;
     private int speed;
-    /**µ¥Î»µÈ¼¶*/
+    /**å•ä½ç­‰çº§*/
     private int level;
 
     /**
-     * ¹¹½¨{@link BasicUnit}¶ÔÏó.
+     * æ„å»º{@link BasicUnit}å¯¹è±¡.
      *
-     * <p>ÏÖÒÑÊµÏÖÒÔÏÂÊôĞÔ</p>
+     * <p>ç°å·²å®ç°ä»¥ä¸‹å±æ€§</p>
      *
-     * <li>µ¥Î»Ãû³Æ, ÎŞÄ¬ÈÏÖµ</li>
-     * <li>µ¥Î»µÈ¼¶, Ä¬ÈÏÖµÎª1</li>
-     * <li>×î´óÉúÃüÖµ, Ä¬ÈÏÖµÎª100</li>
-     * <li>ËÙ¶È, Ä¬ÈÏÖµÎª50</li>
-     * <li>ÎïÀí¹¥»÷, Ä¬ÈÏÖµÎª0</li>
-     * <li>Ä§·¨¹¥»÷, Ä¬ÈÏÖµÎª0</li>
-     * <li>Ä§·¨Öµ, Ä¬ÈÏÖµÎª0</li>
-     * <li>±©»÷, Ä¬ÈÏÖµÎª0</li>
-     * <li>±©»÷¿¹ĞÔ, Ä¬ÈÏÖµÎª0</li>
-     * <li>±©»÷Ğ§¹û, Ä¬ÈÏÖµÎª2.0</li>
-     * <li>ÃüÖĞ, Ä¬ÈÏÖµÎª50</li>
-     * <li>ÉÁ±Ü, Ä¬ÈÏÖµÎª5</li>
-     * <li>ÎïÀí¿¹ĞÔ, Ä¬ÈÏÖµÎª0</li>
-     * <li>»¤¼×, Ä¬ÈÏÖµÎª0</li>
-     * <li>Ä§·¨¿¹ĞÔ, Ä¬ÈÏÖµÎª0</li>
-     * <li>Ã¿»ØºÏÉúÃü»Ø¸´, Ä¬ÈÏÖµÎª0</li>
-     * <li>Ã¿»ØºÏ·¨Á¦Öµ»Ö¸´, Ä¬ÈÏÖµÎª0</li>
+     * <li>å•ä½åç§°, æ— é»˜è®¤å€¼</li>
+     * <li>å•ä½ç­‰çº§, é»˜è®¤å€¼ä¸º1</li>
+     * <li>æœ€å¤§ç”Ÿå‘½å€¼, é»˜è®¤å€¼ä¸º100</li>
+     * <li>é€Ÿåº¦, é»˜è®¤å€¼ä¸º50</li>
+     * <li>ç‰©ç†æ”»å‡», é»˜è®¤å€¼ä¸º0</li>
+     * <li>é­”æ³•æ”»å‡», é»˜è®¤å€¼ä¸º0</li>
+     * <li>é­”æ³•å€¼, é»˜è®¤å€¼ä¸º0</li>
+     * <li>æš´å‡», é»˜è®¤å€¼ä¸º0</li>
+     * <li>æš´å‡»æŠ—æ€§, é»˜è®¤å€¼ä¸º0</li>
+     * <li>æš´å‡»æ•ˆæœ, é»˜è®¤å€¼ä¸º2.0</li>
+     * <li>å‘½ä¸­, é»˜è®¤å€¼ä¸º50</li>
+     * <li>é—ªé¿, é»˜è®¤å€¼ä¸º5</li>
+     * <li>ç‰©ç†æŠ—æ€§, é»˜è®¤å€¼ä¸º0</li>
+     * <li>æŠ¤ç”², é»˜è®¤å€¼ä¸º0</li>
+     * <li>é­”æ³•æŠ—æ€§, é»˜è®¤å€¼ä¸º0</li>
+     * <li>æ¯å›åˆç”Ÿå‘½å›å¤, é»˜è®¤å€¼ä¸º0</li>
+     * <li>æ¯å›åˆæ³•åŠ›å€¼æ¢å¤, é»˜è®¤å€¼ä¸º0</li>
      *
-     * <strong>²Î¿¼Effective Java(µÚÈı°æ)µÚ¶şÌõ</strong>
-     * <p>²ÉÓÃ·ºĞÍÀ´Ê¹×ÓÀàÄÜÕı³£¹¤×÷</p>
-     * <strong>×¢Òâ:´Ë¹¹½¨Æ÷ÎŞ·¨Ö±½Ó²Ù×÷{@link UnitGrowth}¶ÔÏó, Çë´´½¨¶ÔÏóºóÔÙ¶Ô{@link UnitGrowth}¶ÔÏó½øĞĞ²Ù×÷</strong>
+     * <strong>å‚è€ƒEffective Java(ç¬¬ä¸‰ç‰ˆ)ç¬¬äºŒæ¡</strong>
+     * <p>é‡‡ç”¨æ³›å‹æ¥ä½¿å­ç±»èƒ½æ­£å¸¸å·¥ä½œ</p>
+     * <strong>æ³¨æ„:æ­¤æ„å»ºå™¨æ— æ³•ç›´æ¥æ“ä½œ{@link UnitGrowth}å¯¹è±¡, è¯·åˆ›å»ºå¯¹è±¡åå†å¯¹{@link UnitGrowth}å¯¹è±¡è¿›è¡Œæ“ä½œ</strong>
      * @see BasicUnit
      * @see Role.Builder
      * @see Enemy.Builder
      * @since 15
-     * @author ÁôÁµÇ§Äê
+     * @author ç•™æ‹åƒå¹´
      * @version 1.4.1
      */
     public static class Builder<T extends Builder<T>>
@@ -100,22 +100,22 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         private int physicalAttack        = 0;
         private int armor                 = 0;
         private int magicAttack           = 0;
-        private int crit                  = 0;//±©»÷
+        private int crit                  = 0;//æš´å‡»
         private int critResistance        = 0;
-        private double critsEffect        = 2.0;//±©»÷Ğ§¹û
-        private double physicalResistance = 0.0;//ÎïÀí¿¹ĞÔ
-        private int evade                 = 5;//ÉÁ±Ü
-        private int lifeRegeneration      = 0;//Ã¿»ØºÏÉúÃü»Ø¸´
+        private double critsEffect        = 2.0;//æš´å‡»æ•ˆæœ
+        private double physicalResistance = 0.0;//ç‰©ç†æŠ—æ€§
+        private int evade                 = 5;//é—ªé¿
+        private int lifeRegeneration      = 0;//æ¯å›åˆç”Ÿå‘½å›å¤
         private double magicResistance    = 0.0;
         private int manaRecovery          = 0;
         private int level                 = 1;
-        private int mana                  = 0;//·¨Á¦Öµ
+        private int mana                  = 0;//æ³•åŠ›å€¼
         private int hit                   = 50;
         private int speed                 = 50;
 
         /**
-         * @param name µ¥Î»Ãû³Æ
-         * @throws NullPointerException Èç¹û{@code name}ÊÇnull
+         * @param name å•ä½åç§°
+         * @throws NullPointerException å¦‚æœ{@code name}æ˜¯null
          */
         public Builder(String name)
         {
@@ -128,13 +128,13 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             return (T) this;
         }
         /**
-         * @throws IllegalArgumentException Èç¹û{@code maxHp}Ğ¡ÓÚµÈÓÚ0
+         * @throws IllegalArgumentException å¦‚æœ{@code maxHp}å°äºç­‰äº0
          */
         public T maxHp(int maxHp)
         {
             if (maxHp <= 0)
             {
-                throw new IllegalArgumentException("Òì³£²ÎÊı: " + maxHp);
+                throw new IllegalArgumentException("å¼‚å¸¸å‚æ•°: " + maxHp);
             }
             this.maxHp = maxHp;
             return (T) this;
@@ -213,13 +213,13 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         }
 
         /**
-         * @throws IllegalArgumentException Èç¹û{@code level}Ğ¡ÓÚµÈÓÚ0
+         * @throws IllegalArgumentException å¦‚æœ{@code level}å°äºç­‰äº0
          */
         public T level(int level)
         {
             if (level < 0)
             {
-                throw new IllegalArgumentException("Òì³£²ÎÊı:" + level);
+                throw new IllegalArgumentException("å¼‚å¸¸å‚æ•°:" + level);
             }
             this.level = level;
             return (T) this;
@@ -280,18 +280,18 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     }
 
     /**
-     * ¹¹½¨{@link BasicUnit}¶ÔÏó.
+     * æ„å»º{@link BasicUnit}å¯¹è±¡.
      *
-     * <p>ÒªÓÃÈçÏÂ¸ñÊ½</p>
+     * <p>è¦ç”¨å¦‚ä¸‹æ ¼å¼</p>
      * <pre>{@code var Object = new BasicUnit.Builder("unitName").build();}</pre>
-     * <p>¶ø²»ÊÇ</p>
+     * <p>è€Œä¸æ˜¯</p>
      * <pre>{@code var Object = new BasicUnit.Builder();}</pre>
-     * @throws NullPointerException Èç¹û{@code builder}ÊÇnull
+     * @throws NullPointerException å¦‚æœ{@code builder}æ˜¯null
      * @see Builder
      */
     protected BasicUnit(Builder builder)
     {
-        //TODO:ÒÔºóÓĞÊ±¼ä¿ÉÒÔ°Ñ¹¥»÷ºÍ·ÀÓùÄ£¿éµÄ¹¹ÔìÆ÷Ğ´³É½ÓÊÕBuilder
+        //TODO:ä»¥åæœ‰æ—¶é—´å¯ä»¥æŠŠæ”»å‡»å’Œé˜²å¾¡æ¨¡å—çš„æ„é€ å™¨å†™æˆæ¥æ”¶Builder
         requireNonNull(builder);
         growth             = requireNonNull(builder.growth);
         int increaseLevel = 0;
@@ -327,17 +327,17 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     }
 
     /**
-     * µ¥Î»³É³¤Öµ, ÓÃÀ´ÊµÏÖµ¥Î»Éı¼¶Ê±µÄÊôĞÔ³É³¤.
+     * å•ä½æˆé•¿å€¼, ç”¨æ¥å®ç°å•ä½å‡çº§æ—¶çš„å±æ€§æˆé•¿.
      *
-     * <p>ÓÃÀ´·şÎñ{@link BasicUnit}¼°Æä×ÓÀà</p>
-     * <p>ÒÑ¾­ÊµÏÖµÄÊôĞÔ³É³¤Öµ</p>
-     * <li>×î´óÉúÃüÖµ, Ä¬ÈÏÖµÎª0.07</li>
-     * <li>ÎïÀí¹¥»÷, Ä¬ÈÏÖµÎª0.07</li>
-     * <li>Ä§·¨¹¥»÷, Ä¬ÈÏÖµÎª0.07</li>
-     * <li>·¨Á¦Öµ, Ä¬ÈÏÖµÎª0.07</li>
-     * <li>ÉÁ±Ü, Ä¬ÈÏÖµÎª0.07</li>
-     * <li>±©»÷, Ä¬ÈÏÖµÎª0.07</li>
-     * @author ÁôÁµÇ§Äê
+     * <p>ç”¨æ¥æœåŠ¡{@link BasicUnit}åŠå…¶å­ç±»</p>
+     * <p>å·²ç»å®ç°çš„å±æ€§æˆé•¿å€¼</p>
+     * <li>æœ€å¤§ç”Ÿå‘½å€¼, é»˜è®¤å€¼ä¸º0.07</li>
+     * <li>ç‰©ç†æ”»å‡», é»˜è®¤å€¼ä¸º0.07</li>
+     * <li>é­”æ³•æ”»å‡», é»˜è®¤å€¼ä¸º0.07</li>
+     * <li>æ³•åŠ›å€¼, é»˜è®¤å€¼ä¸º0.07</li>
+     * <li>é—ªé¿, é»˜è®¤å€¼ä¸º0.07</li>
+     * <li>æš´å‡», é»˜è®¤å€¼ä¸º0.07</li>
+     * @author ç•™æ‹åƒå¹´
      * @version 1.1.2
      * @since 2021-5-3
      * @see BasicUnit
@@ -356,11 +356,11 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
         /**
          *
-         * @param attribute Ô­À´µÄÊôĞÔ
-         * @param growthRatio ÊôĞÔ³É³¤±È
-         * @param increaseLevel ÌáÉıµÄµÈ¼¶
-         * @return ¼ÆËãºóµÄÊôĞÔÖµ
-         * @throws IllegalArgumentException Èç¹û{@code attribute}»ò{@code increaseLevel < 0}
+         * @param attribute åŸæ¥çš„å±æ€§
+         * @param growthRatio å±æ€§æˆé•¿æ¯”
+         * @param increaseLevel æå‡çš„ç­‰çº§
+         * @return è®¡ç®—åçš„å±æ€§å€¼
+         * @throws IllegalArgumentException å¦‚æœ{@code attribute}æˆ–{@code increaseLevel < 0}
          * @since 2021-5-28
          */
         public static int calculationLevelGrowth(int attribute, final double growthRatio, final int increaseLevel)
@@ -378,18 +378,18 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
                 return attribute;
             }
 
-            LOGGER.trace("³õÊ¼Öµ:{}, Ã¿´ÎÉı¼¶ÌáÉı{}%, Éı¼¶´ÎÊıÎª{}", attribute, String.format("%.3f", growthRatio * 100),
+            LOGGER.trace("åˆå§‹å€¼:{}, æ¯æ¬¡å‡çº§æå‡{}%, å‡çº§æ¬¡æ•°ä¸º{}", attribute, String.format("%.3f", growthRatio * 100),
                     increaseLevel);
             for (int i = 0; i < increaseLevel; i++)
             {
                 attribute += attribute * growthRatio;
-                LOGGER.trace("µÚ{}´ÎÑ­»·, ÖµÎª{}", i + 1, attribute);
+                LOGGER.trace("ç¬¬{}æ¬¡å¾ªç¯, å€¼ä¸º{}", i + 1, attribute);
             }
             return attribute;
         }
 
         /**
-         * µ¥Î»Éı¼¶ºóÌáÉıÊôĞÔ.
+         * å•ä½å‡çº§åæå‡å±æ€§.
          *
          * @see Role
          * @see Enemy
@@ -462,11 +462,11 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     }
 
     /**
-     * ÓÃÓÚ´Ëµ¥Î»µÄbuffÄ£¿é½»»¥.
+     * ç”¨äºæ­¤å•ä½çš„buffæ¨¡å—äº¤äº’.
      *
-     * @throws NullPointerException Èç¹ûbuffÄ£¿é²»´æÔÚ
+     * @throws NullPointerException å¦‚æœbuffæ¨¡å—ä¸å­˜åœ¨
      * @see BuffModule
-     * @return ´Ëµ¥Î»µÄbuff¶ÔÏó
+     * @return æ­¤å•ä½çš„buffå¯¹è±¡
      */
     public BuffModule buff()
     {
@@ -475,7 +475,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄÉı¼¶Ä£¿é
+     * @return è¿”å›å•ä½çš„å‡çº§æ¨¡å—
      */
     public UnitGrowth growth()
     {
@@ -484,7 +484,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄ¹¥»÷Ä£¿é
+     * @return è¿”å›å•ä½çš„æ”»å‡»æ¨¡å—
      */
     public UnitAttack attack()
     {
@@ -493,7 +493,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄ·ÀÓùÄ£¿é
+     * @return è¿”å›å•ä½çš„é˜²å¾¡æ¨¡å—
      */
     public UnitDefense defense()
     {
@@ -502,15 +502,16 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»Ãû³Æ
+     * @return è¿”å›å•ä½åç§°
      */
     public final String getName()
     {
         return name;
     }
+
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄÎ¨Ò»ID
+     * @return è¿”å›å•ä½çš„å”¯ä¸€ID
      */
     public int getId()
     {
@@ -519,7 +520,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄµÈ¼¶
+     * @return è¿”å›å•ä½çš„ç­‰çº§
      */
     public final int getLevel()
     {
@@ -528,7 +529,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
     /**
      *
-     * @return ·µ»Øµ¥Î»µÄËÙ¶È
+     * @return è¿”å›å•ä½çš„é€Ÿåº¦
      */
     public int getSpeed()
     {
@@ -542,21 +543,21 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 
 //    public void
     /**
-     * @throws IllegalArgumentException Èç¹û{@code level}Ğ¡ÓÚµÈÓÚ0
+     * @throws IllegalArgumentException å¦‚æœ{@code level}å°äºç­‰äº0
      */
     public void setLevel(int level)
     {
         if (level <= 0)
         {
-            throw new IllegalArgumentException("Òì³£²ÎÊı:" + level);
+            throw new IllegalArgumentException("å¼‚å¸¸å‚æ•°:" + level);
         }
         this.level = level;
     }
 
     /**
-     * ÓÃÀ´ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÍ¬.
+     * ç”¨æ¥åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åŒ.
      *
-     * @return Èç¹ûÁ½¸ö¶ÔÏóÏàÍ¬, ·µ»Ø{@code true}
+     * @return å¦‚æœä¸¤ä¸ªå¯¹è±¡ç›¸åŒ, è¿”å›{@code true}
      * @since 15
      */
     @Override
@@ -589,36 +590,36 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     }
 
     /**
-     * @return ×Ö·û´®±íÊ¾µÄ¶ÔÏó
+     * @return å­—ç¬¦ä¸²è¡¨ç¤ºçš„å¯¹è±¡
      */
     @Override
     public String toString()
     {
         return "BasicUnitAttribute"
                 + "[id:" + id
-                + ", Ãû³Æ:" + name
-                + ", ×î´óÉúÃüÖµ:" + defenseModule.getMaxHp()
-                + ", ÉúÃüÖµ:" + defenseModule.getHp()
-                + ", µÈ¼¶:" + level
-                + ", ËÙ¶È:" + speed
-                + ", ÎïÀí¹¥»÷:" + attackModule.getPhysicalAttack()
-                + ", Ä§·¨¹¥»÷:" + attackModule.getPhysicalAttack()
-                + ", ±©»÷:" + attackModule.getCrit()
-                + ", ±©»÷¿¹ĞÔ:" + defenseModule.getCritResistance()
-                + ", ±©»÷Ğ§¹û:" + attackModule.getCritsEffect() * 100 + "%"
-                + ", ÎïÀí¿¹ĞÔ:" + defenseModule.getPhysicalResistance()
-                + ", »¤¼×:" + defenseModule.getArmor()
-                + ", Ã¿»ØºÏÉúÃü»Ø¸´:" + defenseModule.getLifeRegeneration()
-                + ", Ã¿»ØºÏÄ§·¨Öµ»Ø¸´:" + attackModule.getManaRecovery()
-                + ", ÉÁ±Ü:" + defenseModule.getEvade()
+                + ", åç§°:" + name
+                + ", æœ€å¤§ç”Ÿå‘½å€¼:" + defenseModule.getMaxHp()
+                + ", ç”Ÿå‘½å€¼:" + defenseModule.getHp()
+                + ", ç­‰çº§:" + level
+                + ", é€Ÿåº¦:" + speed
+                + ", ç‰©ç†æ”»å‡»:" + attackModule.getPhysicalAttack()
+                + ", é­”æ³•æ”»å‡»:" + attackModule.getPhysicalAttack()
+                + ", æš´å‡»:" + attackModule.getCrit()
+                + ", æš´å‡»æŠ—æ€§:" + defenseModule.getCritResistance()
+                + ", æš´å‡»æ•ˆæœ:" + attackModule.getCritsEffect() * 100 + "%"
+                + ", ç‰©ç†æŠ—æ€§:" + defenseModule.getPhysicalResistance()
+                + ", æŠ¤ç”²:" + defenseModule.getArmor()
+                + ", æ¯å›åˆç”Ÿå‘½å›å¤:" + defenseModule.getLifeRegeneration()
+                + ", æ¯å›åˆé­”æ³•å€¼å›å¤:" + attackModule.getManaRecovery()
+                + ", é—ªé¿:" + defenseModule.getEvade()
                 + "]";
     }
 
     /**
-     * ÓÃÀ´¿ËÂ¡¶ÔÏó.
+     * ç”¨æ¥å…‹éš†å¯¹è±¡.
      *
-     * @return Óëthis¶ÔÏóÏàÍ¬µÄ¶ÔÏó
-     * @throws CloneNotSupportedException Àà²»´æÔÚÊ±
+     * @return ä¸thiså¯¹è±¡ç›¸åŒçš„å¯¹è±¡
+     * @throws CloneNotSupportedException ç±»ä¸å­˜åœ¨æ—¶
      */
     @Override
     public Object clone() throws CloneNotSupportedException
@@ -646,7 +647,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
     }
 
     /**
-     * @throws NullPointerException Èç¹û{@code other}Îªnull
+     * @throws NullPointerException å¦‚æœ{@code other}ä¸ºnull
      */
     @Override
     public int compareTo(@NotNull BasicUnit other)

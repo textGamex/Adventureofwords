@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @version 1.1.0
  */
 public final class DataPath

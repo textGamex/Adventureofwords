@@ -12,18 +12,18 @@ import java.nio.charset.StandardCharsets;
 import static java.util.Objects.requireNonNull;
 
 /**
- * ÓÃÓÚÍ³¼ÆÍæ¼ÒµÄÓÎÏ·ĞÅÏ¢.
+ * ç”¨äºç»Ÿè®¡ç©å®¶çš„æ¸¸æˆä¿¡æ¯.
  *
- * <p>ÏÖÒÑ¼ÇÂ¼Ò»ÏÂĞÅÏ¢</p>
+ * <p>ç°å·²è®°å½•ä¸€ä¸‹ä¿¡æ¯</p>
  *
- * <li>ÓÎÏ·×Ü³¡Êı</li>
- * <li>ÆÕÍ¨¹¥»÷´ÎÊı</li>
- * <li>×ÜÉËº¦</li>
- * <li>Ê¤Àû³¡Êı</li>
- * <li>»ñµÃµÄËùÓĞ·ÖÊı</li>
- * <li>»ñµÃµÄËùÓĞ¾­Ñé</li>
- * <li>»ñµÃµÄËùÓĞ»õ±Ò</li>
- * @author ÁôÁµÇ§Äê
+ * <li>æ¸¸æˆæ€»åœºæ•°</li>
+ * <li>æ™®é€šæ”»å‡»æ¬¡æ•°</li>
+ * <li>æ€»ä¼¤å®³</li>
+ * <li>èƒœåˆ©åœºæ•°</li>
+ * <li>è·å¾—çš„æ‰€æœ‰åˆ†æ•°</li>
+ * <li>è·å¾—çš„æ‰€æœ‰ç»éªŒ</li>
+ * <li>è·å¾—çš„æ‰€æœ‰è´§å¸</li>
+ * @author ç•™æ‹åƒå¹´
  * @version 1.0.0
  * @since 15
 */
@@ -32,17 +32,17 @@ public final class PlayerStatistics implements Serializable
     public static final Logger LOGGER = LoggerFactory.getLogger(PlayerStatistics.class);
     @Serial
     private static final long serialVersionUID = 7935923925807359121L;
-    /**×Ü»÷É±*/
+    /**æ€»å‡»æ€*/
     private long totalKill;
-    /**×Ü»ØºÏÊı*/
+    /**æ€»å›åˆæ•°*/
     private long totalRound;
-//    /**×ÜÕ½¶·´ÎÊı*/
+//    /**æ€»æˆ˜æ–—æ¬¡æ•°*/
 //    private long total
-    /**¹¥»÷×Ü´ÎÊı*/
+    /**æ”»å‡»æ€»æ¬¡æ•°*/
     private long totalAttack;
-    /**×ÜÉËº¦*/
+    /**æ€»ä¼¤å®³*/
     private long totalHarm;
-    /**Ê¤Àû³¡Êı*/
+    /**èƒœåˆ©åœºæ•°*/
     private long totalVictory;
     private long totalXp;
     private long totalCash;
@@ -109,14 +109,14 @@ public final class PlayerStatistics implements Serializable
     }
 
     /**
-     * @param totalXp Ò»¹²»ñµÃµÄ¾­Ñé
-     * @throws IllegalArgumentException Èç¹û{@code totalXp}Ğ¡ÓÚ0
+     * @param totalXp ä¸€å…±è·å¾—çš„ç»éªŒ
+     * @throws IllegalArgumentException å¦‚æœ{@code totalXp}å°äº0
      */
     public void setTotalXp(long totalXp)
     {
         if (totalXp < 0)
         {
-            throw new IllegalArgumentException("²»ÄÜÎª¸ºÊı:" + totalXp);
+            throw new IllegalArgumentException("ä¸èƒ½ä¸ºè´Ÿæ•°:" + totalXp);
         }
         this.totalXp = totalXp;
     }
@@ -132,14 +132,14 @@ public final class PlayerStatistics implements Serializable
     }
 
     /**
-     * @param totalCash Ò»¹²»ñµÃµÄ»õ±Ò
-     * @throws IllegalArgumentException Èç¹û{@code totalCash}Ğ¡ÓÚ0
+     * @param totalCash ä¸€å…±è·å¾—çš„è´§å¸
+     * @throws IllegalArgumentException å¦‚æœ{@code totalCash}å°äº0
      */
     public void setTotalCash(long totalCash)
     {
         if (totalCash < 0)
         {
-            throw new IllegalArgumentException("²»ÄÜÎª¸ºÊı:" + totalCash);
+            throw new IllegalArgumentException("ä¸èƒ½ä¸ºè´Ÿæ•°:" + totalCash);
         }
         this.totalCash = totalCash;
     }
@@ -150,107 +150,107 @@ public final class PlayerStatistics implements Serializable
     }
 
     /**
-     * @param totalValue Ò»¹²»ñµÃµÄ·ÖÊı
-     * @throws IllegalArgumentException Èç¹û{@code totalValue}Ğ¡ÓÚ0
+     * @param totalValue ä¸€å…±è·å¾—çš„åˆ†æ•°
+     * @throws IllegalArgumentException å¦‚æœ{@code totalValue}å°äº0
      */
     public void setTotalValue(long totalValue)
     {
         if (totalValue < 0)
         {
-            throw new IllegalArgumentException("²»ÄÜÎª¸ºÊı:" + totalValue);
+            throw new IllegalArgumentException("ä¸èƒ½ä¸ºè´Ÿæ•°:" + totalValue);
         }
         this.totalValue = totalValue;
     }
 
     /**
-     * @param totalKill ×Ü»÷É±
-     * @throws IllegalArgumentException Èç¹û{@code totalKill}Ğ¡ÓÚ0
+     * @param totalKill æ€»å‡»æ€
+     * @throws IllegalArgumentException å¦‚æœ{@code totalKill}å°äº0
      */
     public void setTotalKill(long totalKill)
     {
         if (totalKill < 0)
         {
-            throw new IllegalArgumentException("²»ÄÜÎª¸ºÊı:" + totalKill);
+            throw new IllegalArgumentException("ä¸èƒ½ä¸ºè´Ÿæ•°:" + totalKill);
         }
         this.totalKill = totalKill;
     }
 
     /**
-     * @param totalRound ÓÎÏ·×Ü»ØºÏÊı
-     * @throws IllegalArgumentException Èç¹û{@code totalRound}Ğ¡ÓÚ0
+     * @param totalRound æ¸¸æˆæ€»å›åˆæ•°
+     * @throws IllegalArgumentException å¦‚æœ{@code totalRound}å°äº0
      */
     public void setTotalRound(long totalRound)
     {
         if (totalRound < 0)
         {
-            throw new IllegalArgumentException("²»ÄÜÎª¸ºÊı:" + totalRound);
+            throw new IllegalArgumentException("ä¸èƒ½ä¸ºè´Ÿæ•°:" + totalRound);
         }
         this.totalRound = totalRound;
     }
 
     /**
-     * @param totalAttack ×Ü¹¥»÷´ÎÊı
-     * @throws IllegalArgumentException Èç¹û{@code totalAttack}Ğ¡ÓÚ0
+     * @param totalAttack æ€»æ”»å‡»æ¬¡æ•°
+     * @throws IllegalArgumentException å¦‚æœ{@code totalAttack}å°äº0
      */
     public void setTotalAttack(long totalAttack)
     {
         if (totalAttack < 0)
         {
-            throw new IllegalArgumentException("²»ÄÜÎª¸ºÊı:" + totalAttack);
+            throw new IllegalArgumentException("ä¸èƒ½ä¸ºè´Ÿæ•°:" + totalAttack);
         }
         this.totalAttack = totalAttack;
     }
 
     /**
-     * @param totalHarm ×ÜÉËº¦
-     * @throws IllegalArgumentException Èç¹û{@code totalHarm}Ğ¡ÓÚ0
+     * @param totalHarm æ€»ä¼¤å®³
+     * @throws IllegalArgumentException å¦‚æœ{@code totalHarm}å°äº0
      */
     public void setTotalHarm(long totalHarm)
     {
         if (totalHarm < 0)
         {
-            throw new IllegalArgumentException("²»ÄÜÎª¸ºÊı:" + totalHarm);
+            throw new IllegalArgumentException("ä¸èƒ½ä¸ºè´Ÿæ•°:" + totalHarm);
         }
         this.totalHarm = totalHarm;
     }
 
     /**
-     * @param totalVictory ×ÜÊ¤³¡
-     * @throws IllegalArgumentException Èç¹û{@code totalVictory}Ğ¡ÓÚ0
+     * @param totalVictory æ€»èƒœåœº
+     * @throws IllegalArgumentException å¦‚æœ{@code totalVictory}å°äº0
      */
     public void setTotalVictory(long totalVictory)
     {
         if (totalVictory < 0)
         {
-            throw new IllegalArgumentException("²»ÄÜÎª¸ºÊı:" + totalVictory);
+            throw new IllegalArgumentException("ä¸èƒ½ä¸ºè´Ÿæ•°:" + totalVictory);
         }
         this.totalVictory = totalVictory;
     }
 
     /**
-     * @return ×Ö·û´®±íÊ¾µÄ¶ÔÏó
+     * @return å­—ç¬¦ä¸²è¡¨ç¤ºçš„å¯¹è±¡
      */
     @Override
     public String toString()
     {
         return  "PlayerStatistics" +
-                "[×Ü»÷É±Êı:" + totalKill +
-                ", ×Ü»ØºÏÊı:" + totalRound +
-                ", ÆÕÍ¨¹¥»÷´ÎÊı:" + totalAttack +
-                ", ×ÜÉËº¦:" + totalHarm +
-                ", Ê¤Àû³¡Êı:" + totalVictory +
-                ", Ò»¹²»ñµÃµÄ¾­Ñé:" + totalXp +
-                ", Ò»¹²»ñµÃµÄ»õ±Ò:" + totalCash +
-                ", Ò»¹²»ñµÃµÄ·ÖÊı:" + totalValue +
+                "[æ€»å‡»æ€æ•°:" + totalKill +
+                ", æ€»å›åˆæ•°:" + totalRound +
+                ", æ™®é€šæ”»å‡»æ¬¡æ•°:" + totalAttack +
+                ", æ€»ä¼¤å®³:" + totalHarm +
+                ", èƒœåˆ©åœºæ•°:" + totalVictory +
+                ", ä¸€å…±è·å¾—çš„ç»éªŒ:" + totalXp +
+                ", ä¸€å…±è·å¾—çš„è´§å¸:" + totalCash +
+                ", ä¸€å…±è·å¾—çš„åˆ†æ•°:" + totalValue +
                 "]";
     }
 
     /**
-     * ¸ù¾İÕËºÅÀàĞÍÑ¡Ôñ²»Í¬µÄ±£´æ·½Ê½À´±£´æÍ³¼ÆĞÅÏ¢.
+     * æ ¹æ®è´¦å·ç±»å‹é€‰æ‹©ä¸åŒçš„ä¿å­˜æ–¹å¼æ¥ä¿å­˜ç»Ÿè®¡ä¿¡æ¯.
      *
-     * <p>Èç¹ûÕË»§ÀàĞÍÊÇÍæ¼Ò,ÔòÓÃĞòÁĞ»¯·½Ê½±£´æ,Èç¹ûÊÇÄÚ²¿ÈËÔ±,ÔòÓÃjson±£´æ</p>
-     * @throws NullPointerException Èç¹û{@code acc}Îªnull
-     * @param acc ÕËºÅ
+     * <p>å¦‚æœè´¦æˆ·ç±»å‹æ˜¯ç©å®¶,åˆ™ç”¨åºåˆ—åŒ–æ–¹å¼ä¿å­˜,å¦‚æœæ˜¯å†…éƒ¨äººå‘˜,åˆ™ç”¨jsonä¿å­˜</p>
+     * @throws NullPointerException å¦‚æœ{@code acc}ä¸ºnull
+     * @param acc è´¦å·
      * @see AccountMessage
      * @since 16
      */
@@ -259,12 +259,12 @@ public final class PlayerStatistics implements Serializable
         requireNonNull(acc);
         if (acc.getId() == Identity.GAME_MANAGER || acc.getId() == Identity.NEW_GAME_MANAGER)
         {
-            LOGGER.debug("{}ÕËºÅ²ÉÓÃjson·½Ê½±£´æ", acc.getAccountName());
+            LOGGER.debug("{}è´¦å·é‡‡ç”¨jsonæ–¹å¼ä¿å­˜", acc.getAccountName());
             saveGameManagerStatistics(acc);
         }
         else
         {
-            LOGGER.debug("{}ÕËºÅ²ÉÓÃ¿ÉĞò»¯·½Ê½±£´æ", acc.getAccountName());
+            LOGGER.debug("{}è´¦å·é‡‡ç”¨å¯åºåŒ–æ–¹å¼ä¿å­˜", acc.getAccountName());
             savePlayerStatistics(acc);
         }
     }
@@ -274,14 +274,14 @@ public final class PlayerStatistics implements Serializable
         assert account != null;
 
         var jsonFile = new JSONObject();
-        jsonFile.put("×Ü»÷É±Êı", totalKill);
-        jsonFile.put("×Ü»ØºÏÊı", totalRound);
-        jsonFile.put("ÆÕÍ¨¹¥»÷´ÎÊı", totalAttack);
-        jsonFile.put("×ÜÉËº¦", totalHarm);
-        jsonFile.put("Ê¤Àû³¡Êı", totalVictory);
-        jsonFile.put("Ò»¹²»ñµÃµÄ¾­Ñé", totalXp);
-        jsonFile.put("Ò»¹²»ñµÃµÄ»õ±Ò", totalCash);
-        jsonFile.put("Ò»¹²»ñµÃµÄ·ÖÊı", totalValue);
+        jsonFile.put("æ€»å‡»æ€æ•°", totalKill);
+        jsonFile.put("æ€»å›åˆæ•°", totalRound);
+        jsonFile.put("æ™®é€šæ”»å‡»æ¬¡æ•°", totalAttack);
+        jsonFile.put("æ€»ä¼¤å®³", totalHarm);
+        jsonFile.put("èƒœåˆ©åœºæ•°", totalVictory);
+        jsonFile.put("ä¸€å…±è·å¾—çš„ç»éªŒ", totalXp);
+        jsonFile.put("ä¸€å…±è·å¾—çš„è´§å¸", totalCash);
+        jsonFile.put("ä¸€å…±è·å¾—çš„åˆ†æ•°", totalValue);
 
         try (var out = new PrintWriter(
                 account.getPlayerDataResolveFile("PlayerStatistics.json"), StandardCharsets.UTF_8))
@@ -313,21 +313,21 @@ public final class PlayerStatistics implements Serializable
 
     /**
      *
-     * @param account ÕËºÅĞÅÏ¢
-     * @return  ´ËÕËºÅ¶ÔÓ¦µÄÓÎÏ·Í³¼ÆĞÅÏ¢
-     * @throws FileNotFoundException Èç¹û¶ÁÈ¡µÄÎÄ¼ş²»´æÔÚ
-     * @throws NullPointerException Èç¹û{@code account}Îªnull
-     * @throws IllegalStateException Èç¹û{@code account}µÄid×Ö¶ÎÎª{@code NEW_PLAYER}»ò{@code NEW_GAME_MANAGER}
+     * @param account è´¦å·ä¿¡æ¯
+     * @return  æ­¤è´¦å·å¯¹åº”çš„æ¸¸æˆç»Ÿè®¡ä¿¡æ¯
+     * @throws FileNotFoundException å¦‚æœè¯»å–çš„æ–‡ä»¶ä¸å­˜åœ¨
+     * @throws NullPointerException å¦‚æœ{@code account}ä¸ºnull
+     * @throws IllegalStateException å¦‚æœ{@code account}çš„idå­—æ®µä¸º{@code NEW_PLAYER}æˆ–{@code NEW_GAME_MANAGER}
      * @see AccountMessage
      * @since 15
      */
     public static PlayerStatistics loadStatistics(final AccountMessage account) throws FileNotFoundException
     {
         requireNonNull(account);
-        //Èç¹û²»´æÔÚ,ÄÇÔõÃ´ÄÜ¶ÁÈ¡ÄØ?
+        //å¦‚æœä¸å­˜åœ¨,é‚£æ€ä¹ˆèƒ½è¯»å–å‘¢?
         if (fileNotExist(account))
         {
-            throw new IllegalStateException("ÎÄ¼ş²»´æÔÚ,Id: " + account.getId());
+            throw new IllegalStateException("æ–‡ä»¶ä¸å­˜åœ¨,Id: " + account.getId());
         }
 
         if (account.getId() == Identity.PLAYER)
@@ -363,10 +363,10 @@ public final class PlayerStatistics implements Serializable
 
     /**
      *
-     * @param acc Òª¶ÁÈ¡µÄÕËºÅ
-     * @return ´ËÕËºÅ¶ÔÓ¦µÄÍ³¼ÆĞÅÏ¢
-     * @throws FileNotFoundException ÎÄ¼ş²»´æÔÚ
-     * @throws NullPointerException Èç¹û{@code acc}Îªnull
+     * @param acc è¦è¯»å–çš„è´¦å·
+     * @return æ­¤è´¦å·å¯¹åº”çš„ç»Ÿè®¡ä¿¡æ¯
+     * @throws FileNotFoundException æ–‡ä»¶ä¸å­˜åœ¨
+     * @throws NullPointerException å¦‚æœ{@code acc}ä¸ºnull
      */
     public static PlayerStatistics loadGameManagerStatistics(final AccountMessage acc) throws FileNotFoundException
     {
@@ -377,14 +377,14 @@ public final class PlayerStatistics implements Serializable
     {
         var json = JsonBaseTool.loadJsonFile(requireNonNull(path));
 
-        var totalKill = json.getLongValue("×Ü»÷É±Êı");
-        var totalRound = json.getLongValue("×Ü»ØºÏÊı");
-        var totalAttack = json.getLongValue("ÆÕÍ¨¹¥»÷´ÎÊı");
-        var totalHarm = json.getLongValue("×ÜÉËº¦");
-        var totalVictory = json.getLongValue("Ê¤Àû³¡Êı");
-        var totalXp = json.getLongValue("Ò»¹²»ñµÃµÄ¾­Ñé");
-        var totalCash = json.getLongValue("Ò»¹²»ñµÃµÄ»õ±Ò");
-        var totalValue = json.getLongValue("Ò»¹²»ñµÃµÄ·ÖÊı");
+        var totalKill = json.getLongValue("æ€»å‡»æ€æ•°");
+        var totalRound = json.getLongValue("æ€»å›åˆæ•°");
+        var totalAttack = json.getLongValue("æ™®é€šæ”»å‡»æ¬¡æ•°");
+        var totalHarm = json.getLongValue("æ€»ä¼¤å®³");
+        var totalVictory = json.getLongValue("èƒœåˆ©åœºæ•°");
+        var totalXp = json.getLongValue("ä¸€å…±è·å¾—çš„ç»éªŒ");
+        var totalCash = json.getLongValue("ä¸€å…±è·å¾—çš„è´§å¸");
+        var totalValue = json.getLongValue("ä¸€å…±è·å¾—çš„åˆ†æ•°");
 
         return new PlayerStatistics(totalKill, totalRound, totalAttack, totalHarm, totalVictory, totalXp, totalCash,
                 totalValue);

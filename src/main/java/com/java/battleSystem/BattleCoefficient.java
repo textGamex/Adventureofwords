@@ -12,7 +12,7 @@ public class BattleCoefficient
     private double roleAttackFactor;
     private double roleCritRateFactor;
     private double roleCritsEffectFactor;
-    //³ĞÉËÏµÊı
+    //æ‰¿ä¼¤ç³»æ•°
     private double roleDamageFactor;
     private double rolePhysicalResistanceFactor;
     private double roleMagicResistanceFactor;
@@ -20,13 +20,13 @@ public class BattleCoefficient
     private double enemyAttackFactor;
     private double enemyCritRateFactor;
     private double enemyCritsEffectFactor;
-    //³ĞÉËÏµÊı
+    //æ‰¿ä¼¤ç³»æ•°
     private double enemyDamageFactor;
     private double enemyPhysicalResistanceFactor;
     private double enemyMagicResistanceFactor;
 
     /**
-     * ÓÃÀ´¹¹½¨{@code BattleSystem}¶ÔÏó
+     * ç”¨æ¥æ„å»º{@code BattleSystem}å¯¹è±¡
      * @version 1.0.2
      * @since 16
      */
@@ -38,14 +38,14 @@ public class BattleCoefficient
         private double roleAttackFactor             = 1.0;
         private double roleCritRateFactor           = 1.0;
         private double roleCritsEffectFactor        = 1.0;
-        private double roleDamageCoefficient        = 1.0;//³ĞÉËÏµÊı
+        private double roleDamageCoefficient        = 1.0;//æ‰¿ä¼¤ç³»æ•°
         private double rolePhysicalResistanceFactor = 1.0;
         private double roleMagicResistanceFactor    = 1.0;
 
         private double enemyAttackFactor             = 1.0;
         private double enemyCritRateFactor           = 1.0;
         private double enemyCritsEffectFactor        = 1.0;
-        private double enemyDamageCoefficient        = 1.0;//³ĞÉËÏµÊı
+        private double enemyDamageCoefficient        = 1.0;//æ‰¿ä¼¤ç³»æ•°
         private double enemyPhysicalResistanceFactor = 1.0;
         private double enemyMagicResistanceFactor    = 1.0;
 
@@ -246,27 +246,27 @@ public class BattleCoefficient
     }
 
     /**
-     * @return ×Ö·û´®±íÊ¾µÄ¶ÔÏó
+     * @return å­—ç¬¦ä¸²è¡¨ç¤ºçš„å¯¹è±¡
      */
     @Override
     public String toString()
     {
         return "BattleSystem[" +
-                "¾­Ñé½±ÀøÏµÊı:" + expRewardsFactor +
-                ", »õ±Ò½±ÀøÏµÊı:" + cashRewardsFactor +
-                ", µÃ·Ö½±ÀøÏµÊı:" + valueFactor +
-                ", Íæ¼ÒÎïÀí¹¥»÷ÏµÊı:" + roleAttackFactor +
-                ", ½ÇÉ«±©»÷ÂÊÏµÊı:" + roleCritRateFactor +
-                ", ½ÇÉ«±©»÷Ğ§¹ûÏµÊı:" + roleCritsEffectFactor +
-                ", ½ÇÉ«ËùÊÜÉËº¦ÏµÊı:" + roleDamageFactor +
-                ", Íæ¼ÒÎïÀí¿¹ĞÔÏµÊı:" + rolePhysicalResistanceFactor +
-                ", Íæ¼Ò·¨Êõ¿¹ĞÔÏµÊı:" + roleMagicResistanceFactor +
-                ", µĞÈËÎïÀí¹¥»÷ÏµÊı:" + enemyAttackFactor +
-                ", µĞÈË±©»÷ÂÊÏµÊı:" + enemyCritRateFactor +
-                ", µĞÈË±©»÷Ğ§¹ûÏµÊı:" + enemyCritsEffectFactor +
-                ", µĞÈËËùÊÜÉËº¦ÏµÊı:" + enemyDamageFactor +
-                ", µĞÈËÎïÀí¿¹ĞÔÏµÊı:" + enemyPhysicalResistanceFactor +
-                ", µĞÈË·¨Êõ¿¹ĞÔÏµÊı:" + enemyMagicResistanceFactor +
+                "ç»éªŒå¥–åŠ±ç³»æ•°:" + expRewardsFactor +
+                ", è´§å¸å¥–åŠ±ç³»æ•°:" + cashRewardsFactor +
+                ", å¾—åˆ†å¥–åŠ±ç³»æ•°:" + valueFactor +
+                ", ç©å®¶ç‰©ç†æ”»å‡»ç³»æ•°:" + roleAttackFactor +
+                ", è§’è‰²æš´å‡»ç‡ç³»æ•°:" + roleCritRateFactor +
+                ", è§’è‰²æš´å‡»æ•ˆæœç³»æ•°:" + roleCritsEffectFactor +
+                ", è§’è‰²æ‰€å—ä¼¤å®³ç³»æ•°:" + roleDamageFactor +
+                ", ç©å®¶ç‰©ç†æŠ—æ€§ç³»æ•°:" + rolePhysicalResistanceFactor +
+                ", ç©å®¶æ³•æœ¯æŠ—æ€§ç³»æ•°:" + roleMagicResistanceFactor +
+                ", æ•Œäººç‰©ç†æ”»å‡»ç³»æ•°:" + enemyAttackFactor +
+                ", æ•Œäººæš´å‡»ç‡ç³»æ•°:" + enemyCritRateFactor +
+                ", æ•Œäººæš´å‡»æ•ˆæœç³»æ•°:" + enemyCritsEffectFactor +
+                ", æ•Œäººæ‰€å—ä¼¤å®³ç³»æ•°:" + enemyDamageFactor +
+                ", æ•Œäººç‰©ç†æŠ—æ€§ç³»æ•°:" + enemyPhysicalResistanceFactor +
+                ", æ•Œäººæ³•æœ¯æŠ—æ€§ç³»æ•°:" + enemyMagicResistanceFactor +
                 ']';
     }
 }

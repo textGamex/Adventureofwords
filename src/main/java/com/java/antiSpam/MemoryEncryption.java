@@ -7,9 +7,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
- * ÓÃÓÚÄÚ´æ¼ÓÃÜ, ·ÀÖ¹ĞŞ¸ÄÆ÷ĞŞ¸ÄÊı¾İ.
+ * ç”¨äºå†…å­˜åŠ å¯†, é˜²æ­¢ä¿®æ”¹å™¨ä¿®æ”¹æ•°æ®.
  *
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @since 2021-5-30
  * @version 1.1.0
  */
@@ -22,7 +22,7 @@ public class MemoryEncryption
     {
         try
         {
-            //²»ÖªµÀºÃÊ¹²»ºÃÊ¹
+            //ä¸çŸ¥é“å¥½ä½¿ä¸å¥½ä½¿
             keyInt = SecureRandom.getInstanceStrong().nextInt();;
             keyLong = SecureRandom.getInstanceStrong().nextLong();;
         }
@@ -44,10 +44,10 @@ public class MemoryEncryption
     }
 
     /**
-     * ¼ÓÃÜ.
+     * åŠ å¯†.
      *
-     * @param value Òª¼ÓÃÜµÄÖµ
-     * @return ·µ»Ø¾­¹ı¼ÓÃÜµÄ {@code value}
+     * @param value è¦åŠ å¯†çš„å€¼
+     * @return è¿”å›ç»è¿‡åŠ å¯†çš„ {@code value}
      */
     public static int encryptionInt(final int value)
     {
@@ -55,27 +55,27 @@ public class MemoryEncryption
     }
 
     /**
-     * ¼ÓÃÜ.
+     * åŠ å¯†.
      *
-     * @param value Òª¼ÓÃÜµÄÖµ
-     * @return ·µ»Ø¾­¹ı¼ÓÃÜµÄ {@code value}
+     * @param value è¦åŠ å¯†çš„å€¼
+     * @return è¿”å›ç»è¿‡åŠ å¯†çš„ {@code value}
      */
     public static long encryptionDouble(final double value)
     {
-        //TODO:ÓĞbug, µ±doubleºÜ´óÊ±»áÒç³ö, ÓĞÊ±¼ä°ÑdoubleÈ¥ÁË
-        LOGGER.trace("´«ÈëÖµ:{}", value);
+        //TODO:æœ‰bug, å½“doubleå¾ˆå¤§æ—¶ä¼šæº¢å‡º, æœ‰æ—¶é—´æŠŠdoubleå»äº†
+        LOGGER.trace("ä¼ å…¥å€¼:{}", value);
         long v = (long) ( value * DOUBLE_ACCURACY);
-        LOGGER.trace("×ª»»ÎªÕûÊı:{}", v);
+        LOGGER.trace("è½¬æ¢ä¸ºæ•´æ•°:{}", v);
         var result =  v ^ keyLong;
-        LOGGER.trace("¼ÓÃÜºó:{}", result);
+        LOGGER.trace("åŠ å¯†å:{}", result);
         return result;
     }
 
     /**
-     * ½âÃÜ.
+     * è§£å¯†.
      *
-     * @param valueLock Òª½âÃÜµÄÖµ
-     * @return ·µ»ØÎ´¼ÓÃÜÖ®Ç°µÄÖµ
+     * @param valueLock è¦è§£å¯†çš„å€¼
+     * @return è¿”å›æœªåŠ å¯†ä¹‹å‰çš„å€¼
      */
     public static int decryptInt(final int valueLock)
     {
@@ -83,15 +83,15 @@ public class MemoryEncryption
     }
 
     /**
-     * ½âÃÜ.
+     * è§£å¯†.
      *
-     * @param valueLock Òª½âÃÜµÄÖµ
-     * @return ·µ»ØÎ´¼ÓÃÜÖ®Ç°µÄÖµ
+     * @param valueLock è¦è§£å¯†çš„å€¼
+     * @return è¿”å›æœªåŠ å¯†ä¹‹å‰çš„å€¼
      */
     public static double decryptDouble(final long valueLock)
     {
         double result = (double) (valueLock ^ keyLong) / DOUBLE_ACCURACY;
-        LOGGER.trace("½âÃÜÇ°:{}, ½âÃÜºó:{}", valueLock, result);
+        LOGGER.trace("è§£å¯†å‰:{}, è§£å¯†å:{}", valueLock, result);
         return result;
     }
 }

@@ -23,16 +23,16 @@ import static com.java.battleSystem.BattleSystem.normalAttackDamage;
 import static java.util.Objects.requireNonNull;
 
 /**
- * ÓÃÓÚÌá¹©¸ø²âÊÔºÍ²ß»®½øĞĞÓÎÏ·²âÊÔ.
+ * ç”¨äºæä¾›ç»™æµ‹è¯•å’Œç­–åˆ’è¿›è¡Œæ¸¸æˆæµ‹è¯•.
  *
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @version 1.2.0
  * @since 2021-6-6
  */
 public class TestUse
 {
-    private static final File ROLE_FILE = DataPath.DESKTOP.resolve("Íæ¼ÒÊôĞÔ.json").toFile();
-    private static final File ENEMY_FILE = DataPath.DESKTOP.resolve("µĞ¶Ôµ¥Î»ÊôĞÔ.json").toFile();
+    private static final File ROLE_FILE = DataPath.DESKTOP.resolve("ç©å®¶å±æ€§.json").toFile();
+    private static final File ENEMY_FILE = DataPath.DESKTOP.resolve("æ•Œå¯¹å•ä½å±æ€§.json").toFile();
     private static final String SETTING_FILE_NAME = "setting.json";
     private static final File SETTING_FILE_PATH = DataPath.GAME_DATA_PATH.resolve(SETTING_FILE_NAME).toFile();
     private static final GameSetting SETTING = GameSetting.getGameSetting();
@@ -41,10 +41,10 @@ public class TestUse
     {
         if (!SETTING_FILE_PATH.exists())
         {
-            println("ÕıÔÚ³õÊ¼»¯...");
+            println("æ­£åœ¨åˆå§‹åŒ–...");
             printProgressBar();
             GameSetting.getGameSetting().saveSetting(SETTING_FILE_PATH);
-            println("³õÊ¼»¯³É¹¦");
+            println("åˆå§‹åŒ–æˆåŠŸ");
         }
         else
         {
@@ -74,7 +74,7 @@ public class TestUse
 
         if (ROLE_FILE.exists() && ENEMY_FILE.exists())
         {
-            println("¼ì²âµ½ÊôĞÔÎÄ¼ş, ¼ÓÔØÖĞ...");
+            println("æ£€æµ‹åˆ°å±æ€§æ–‡ä»¶, åŠ è½½ä¸­...");
             if (SETTING.isOpenLoadAnimation())
             {
                 printProgressBar();
@@ -85,28 +85,28 @@ public class TestUse
 
         if (!ROLE_FILE.exists() && !ENEMY_FILE.exists())
         {
-            println("ÊôĞÔÎÄ¼ş²»´æÔÚ, ÕıÔÚ´´½¨ÖĞ...");
+            println("å±æ€§æ–‡ä»¶ä¸å­˜åœ¨, æ­£åœ¨åˆ›å»ºä¸­...");
             if (SETTING.isOpenLoadAnimation())
             {
                 printProgressBar();
             }
-            role = Role.newStandardPrimaryLevelRole("°×²©É­");
-            enemy = Role.newStandardPrimaryLevelRole("ÕÅÓğ");
+            role = Role.newStandardPrimaryLevelRole("ç™½åšæ£®");
+            enemy = Role.newStandardPrimaryLevelRole("å¼ ç¾½");
             role.saveGameManagerData(ROLE_FILE);
             enemy.saveGameManagerData(ENEMY_FILE);
-            println("´´½¨³É¹¦");
+            println("åˆ›å»ºæˆåŠŸ");
         }
 
         assert role != null;
         final var in = new Scanner(System.in);
         String[] uiArray =
         {
-             "²é¿´Ë«·½ÊôĞÔ",
-             "¿ªÊ¼Õ½¶·",
-             "ÖØĞÂÔØÈëµ¥Î»ÊôĞÔÎÄ¼şÊôĞÔ",
-             "ÍË³ö",
-             "¿ªÆô¼ÓÔØ¶¯»­",
-             "Çå¿Õ¿ØÖÆÌ¨"
+             "æŸ¥çœ‹åŒæ–¹å±æ€§",
+             "å¼€å§‹æˆ˜æ–—",
+             "é‡æ–°è½½å…¥å•ä½å±æ€§æ–‡ä»¶å±æ€§",
+             "é€€å‡º",
+             "å¼€å¯åŠ è½½åŠ¨ç”»",
+             "æ¸…ç©ºæ§åˆ¶å°"
         };
 
         while (true)
@@ -114,19 +114,19 @@ public class TestUse
             separator();
             if (SETTING.isOpenLoadAnimation())
             {
-                uiArray[4] = "¹Ø±Õ¼ÓÔØ¶¯»­";
+                uiArray[4] = "å…³é—­åŠ è½½åŠ¨ç”»";
             }
             else
             {
-               uiArray[4] = "¿ªÆô¼ÓÔØ¶¯»­";
+               uiArray[4] = "å¼€å¯åŠ è½½åŠ¨ç”»";
             }
             println(UiTool.generateUi(uiArray));
             switch (in.nextInt())
             {
                 case 1 -> {
                     separator();
-                    println("Íæ¼Ò:" + role);
-                    println("µĞ¶Ôµ¥Î»:" + enemy);
+                    println("ç©å®¶:" + role);
+                    println("æ•Œå¯¹å•ä½:" + enemy);
                 }
                 case 2 -> {
                     GameTool.cls();
@@ -134,14 +134,14 @@ public class TestUse
                 }
                 case 3 -> {
                     separator();
-                    println("ÕıÔÚÔØÈëÖĞ...");
+                    println("æ­£åœ¨è½½å…¥ä¸­...");
                     if (SETTING.isOpenLoadAnimation())
                     {
                         printProgressBar();
                     }
                     role = Role.loadGameManagerData(ROLE_FILE);
                     enemy = Role.loadGameManagerData(ENEMY_FILE);
-                    println("ÔØÈë³É¹¦");
+                    println("è½½å…¥æˆåŠŸ");
                 }
                 case 4 -> System.exit(0);
                 case 5 -> {
@@ -151,7 +151,7 @@ public class TestUse
                 case 6 -> GameTool.cls();
                 default -> {
                     separator();
-                    println("ÇëÊäÈëÖ§³ÖµÄÑ¡Ïî");
+                    println("è¯·è¾“å…¥æ”¯æŒçš„é€‰é¡¹");
                     separator();
                 }
             }
@@ -197,18 +197,18 @@ public class TestUse
                 }
                 else
                 {
-                    println(role.getName() + "Î´»÷ÖĞ" + enemy.getName());
+                    println(role.getName() + "æœªå‡»ä¸­" + enemy.getName());
                 }
             }
             else
             {
-                println("²»ÄÜĞĞ¶¯");
+                println("ä¸èƒ½è¡ŒåŠ¨");
             }
 
             if (enemy.defense().getHp() <= 0)
             {
-                println(role.getName() + "½öÊ£" + role.defense().getHp() + "µãÑª");
-                println("Íæ¼ÒÊ¤Àû!");
+                println(role.getName() + "ä»…å‰©" + role.defense().getHp() + "ç‚¹è¡€");
+                println("ç©å®¶èƒœåˆ©!");
                 stateRecovery(role);
                 stateRecovery(enemy);
                 roleStatistics.setTotalKill(roleStatistics.getTotalKill() + 1);
@@ -242,18 +242,18 @@ public class TestUse
                 }
                 else
                 {
-                    println(enemy.getName() + "Î´»÷ÖĞ" + role.getName());
+                    println(enemy.getName() + "æœªå‡»ä¸­" + role.getName());
                 }
             }
             else
             {
-                println("²»ÄÜĞĞ¶¯");
+                println("ä¸èƒ½è¡ŒåŠ¨");
             }
 
             if (role.defense().getHp() <= 0)
             {
-                println("µĞ¶Ôµ¥Î»Ê¤Àû!");
-                println(enemy.getName() + "½öÊ£" + enemy.defense().getHp() + "µãÑª");
+                println("æ•Œå¯¹å•ä½èƒœåˆ©!");
+                println(enemy.getName() + "ä»…å‰©" + enemy.defense().getHp() + "ç‚¹è¡€");
                 enemyStatistics.setTotalVictory(enemyStatistics.getTotalVictory() + 1);
                 enemyStatistics.setTotalKill(enemyStatistics.getTotalKill() + 1);
                 stateRecovery(role);
@@ -264,11 +264,11 @@ public class TestUse
 
         var endTime = Instant.now();
         var time = Duration.between(start, endTime);
-        println("ÓÎÏ·½áÊø");
+        println("æ¸¸æˆç»“æŸ");
         separator();
-        println("ºÄÊ±:" + time.toMinutesPart() + "·Ö" + time.toSecondsPart() + "Ãë" + time.toMillisPart() + "ºÁÃë");
+        println("è€—æ—¶:" + time.toMinutesPart() + "åˆ†" + time.toSecondsPart() + "ç§’" + time.toMillisPart() + "æ¯«ç§’");
         separator();
-        println("Í³¼ÆĞÅÏ¢");
+        println("ç»Ÿè®¡ä¿¡æ¯");
         separator();
         println(String.valueOf(roleStatistics));
         println(String.valueOf(enemyStatistics));
@@ -287,7 +287,7 @@ public class TestUse
 
     private static void println(final String s)
     {
-        System.out.println("[ÏµÍ³]" + Objects.requireNonNull(s));
+        System.out.println("[ç³»ç»Ÿ]" + Objects.requireNonNull(s));
     }
 
     private static void printProgressBar()
@@ -299,12 +299,12 @@ public class TestUse
     {
         var json = JsonBaseTool.loadJsonFile(requireNonNull(path));
 
-        var loadAnimation = json.getBooleanValue("ÏÔÊ¾¼ÓÔØ¶¯»­");
+        var loadAnimation = json.getBooleanValue("æ˜¾ç¤ºåŠ è½½åŠ¨ç”»");
         GameSetting.getGameSetting().setLoadAnimation(loadAnimation);
     }
 
     /**
-     * ĞŞ¸´ÊôĞÔÎÄ¼ş.
+     * ä¿®å¤å±æ€§æ–‡ä»¶.
      */
     private void repairPropertiesFile()
     {

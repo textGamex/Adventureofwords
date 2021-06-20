@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * {@inheritDoc}
- * <p>ÇÒ¾ßÓĞÒ»ÏÂ¶îÍâÊôĞÔ</p>
+ * <p>ä¸”å…·æœ‰ä¸€ä¸‹é¢å¤–å±æ€§</p>
  * <em>
- *     <li>ËùÖµ¾­Ñé</li>
- *     <li>ËùÖµ»õ±Ò</li>
- *     <li>ËùÖµ·ÖÊı</li>
- *     <li>µĞ¶Ôµ¥Î»ÀàĞÍ</li>
+ *     <li>æ‰€å€¼ç»éªŒ</li>
+ *     <li>æ‰€å€¼è´§å¸</li>
+ *     <li>æ‰€å€¼åˆ†æ•°</li>
+ *     <li>æ•Œå¯¹å•ä½ç±»å‹</li>
  * </em>
  * @version 0.3.2
  * @author Millennium
@@ -17,7 +17,7 @@ import static java.util.Objects.requireNonNull;
 public class Enemy extends BasicUnit
 {
     /**
-     * µĞ¶Ôµ¥Î»¼¶±ğ.
+     * æ•Œå¯¹å•ä½çº§åˆ«.
      */
     enum EnemyType
     {
@@ -25,13 +25,13 @@ public class Enemy extends BasicUnit
         ELITE,
         BOSS
     }
-    /**ËùÖµ·ÖÊı */
+    /**æ‰€å€¼åˆ†æ•° */
     private final int value;
-    /**ËùÖµ¾­Ñé */
+    /**æ‰€å€¼ç»éªŒ */
     private final int xp;
-    /**ËùÖµÓ²±Ò */
+    /**æ‰€å€¼ç¡¬å¸ */
     private final int cash;
-    /**µĞ¶Ôµ¥Î»ÀàĞÍ*/
+    /**æ•Œå¯¹å•ä½ç±»å‹*/
     private final EnemyType type;
 
     public Enemy(Builder builder)
@@ -44,11 +44,11 @@ public class Enemy extends BasicUnit
     }
 
     /**
-     * ÓÃÓÚ¹¹½¨{@code Enemy}¶ÔÏó
+     * ç”¨äºæ„å»º{@code Enemy}å¯¹è±¡
      * @see BasicUnit
      * @since 15
      * @version 1.1.0
-     * @author ÁôÁµÇ§Äê
+     * @author ç•™æ‹åƒå¹´
      */
     public static class Builder extends BasicUnit.Builder<Builder>
     {
@@ -58,8 +58,8 @@ public class Enemy extends BasicUnit
         private EnemyType type = EnemyType.COMMON;
 
         /**
-         * @param name µĞ¶Ôµ¥Î»µÄÃû³Æ
-         * @throws NullPointerException Èç¹û{@code name}Îªnull
+         * @param name æ•Œå¯¹å•ä½çš„åç§°
+         * @throws NullPointerException å¦‚æœ{@code name}ä¸ºnull
          */
         public Builder(String name)
         {
@@ -79,8 +79,8 @@ public class Enemy extends BasicUnit
         }
 
         /**
-         * µĞ¶Ôµ¥Î»µÄÀàĞÍ, Ó¦Îª{@link EnemyType}ÖĞµÄÒ»¸ö
-         * @throws NullPointerException Èç¹û{@code type}Îªnull
+         * æ•Œå¯¹å•ä½çš„ç±»å‹, åº”ä¸º{@link EnemyType}ä¸­çš„ä¸€ä¸ª
+         * @throws NullPointerException å¦‚æœ{@code type}ä¸ºnull
          * @see EnemyType
          */
         public Builder type(EnemyType type)
@@ -96,7 +96,7 @@ public class Enemy extends BasicUnit
         }
 
         /**
-         * @return Ò»¸öÒÑ¾­¹¹½¨ºÃµÄ {@code Enemy}¶ÔÏó
+         * @return ä¸€ä¸ªå·²ç»æ„å»ºå¥½çš„ {@code Enemy}å¯¹è±¡
          */
         @Override
         public Enemy build()
@@ -126,15 +126,15 @@ public class Enemy extends BasicUnit
     }
 
     /**
-     * @return ×Ö·û´®±íÊ¾µÄ¶ÔÏó
+     * @return å­—ç¬¦ä¸²è¡¨ç¤ºçš„å¯¹è±¡
      */
     @Override
     public String toString()
     {
         return  super.toString()
-                + "[ËùÖµ·ÖÊı:" + value +
-                ", ËùÖµ¾­Ñé:" + xp +
-                ", ËùÖµÓ²±Ò:" + cash +
+                + "[æ‰€å€¼åˆ†æ•°:" + value +
+                ", æ‰€å€¼ç»éªŒ:" + xp +
+                ", æ‰€å€¼ç¡¬å¸:" + cash +
                 ']';
     }
 }

@@ -9,10 +9,10 @@ import static java.util.Objects.requireNonNull;
 import static java.util.concurrent.ThreadLocalRandom.current;
 
 /**
- * ´ËÀàµÄÃ¿¸ö¶ÔÏóÎ¬»¤×ÅÒ»¸ö²»Í¬µÄÇ°×º³Ø, Ä¬ÈÏÎª²»ÔÊĞíÓĞÖØ¸´Ç°×º.
+ * æ­¤ç±»çš„æ¯ä¸ªå¯¹è±¡ç»´æŠ¤ç€ä¸€ä¸ªä¸åŒçš„å‰ç¼€æ± , é»˜è®¤ä¸ºä¸å…è®¸æœ‰é‡å¤å‰ç¼€.
  *
  * @version 1.3.1
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @since 2021-5-9
  */
 public final class PrefixTools
@@ -35,11 +35,11 @@ public final class PrefixTools
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PrefixTools.class);
 
     /**
-     * ´ÓÇ°×º³ØÖĞËæ»úÑ¡ÔñÒ»¸öÇ°×ºÌí¼ÓÔÚ{@code name}Ä©Î²²¢·µ»Ø.
+     * ä»å‰ç¼€æ± ä¸­éšæœºé€‰æ‹©ä¸€ä¸ªå‰ç¼€æ·»åŠ åœ¨{@code name}æœ«å°¾å¹¶è¿”å›.
      *
-     * @throws NullPointerException Èç¹û{@code name}Îªnull
-     * @param name Òª¼ÓÇ°×ºµÄµ¥Î»Ãû³Æ
-     * @return Ò»¸öÌí¼ÓÁËËæ»úÇ°×ºµÄµ¥Î»Ãû³Æ
+     * @throws NullPointerException å¦‚æœ{@code name}ä¸ºnull
+     * @param name è¦åŠ å‰ç¼€çš„å•ä½åç§°
+     * @return ä¸€ä¸ªæ·»åŠ äº†éšæœºå‰ç¼€çš„å•ä½åç§°
      */
     public String randomExtraAttribute(String name)
     {
@@ -50,10 +50,10 @@ public final class PrefixTools
     }
 
     /**
-     * ·µ»Ø´ËÇ°×º³ØµÄÇ°×ºÊı, Èç¹û´ËÇ°×º³Ø°üº¬¶à¸öInteger.MAX_VALUEÔªËØ£¬Ôò·µ»ØInteger.MAX_VALUE.
+     * è¿”å›æ­¤å‰ç¼€æ± çš„å‰ç¼€æ•°, å¦‚æœæ­¤å‰ç¼€æ± åŒ…å«å¤šä¸ªInteger.MAX_VALUEå…ƒç´ ï¼Œåˆ™è¿”å›Integer.MAX_VALUE.
      *
-     * <p>·µ»Ø´ËÇ°×º³ØµÄÇ°×ºÊı, Èç¹û´ËÇ°×º³Ø°üº¬¶à¸öInteger.MAX_VALUEÔªËØ£¬Ôò·µ»ØInteger.MAX_VALUE.</p>
-     * @return ·µ»Ø´ËÇ°×º³ØµÄÇ°×ºÊı
+     * <p>è¿”å›æ­¤å‰ç¼€æ± çš„å‰ç¼€æ•°, å¦‚æœæ­¤å‰ç¼€æ± åŒ…å«å¤šä¸ªInteger.MAX_VALUEå…ƒç´ ï¼Œåˆ™è¿”å›Integer.MAX_VALUE.</p>
+     * @return è¿”å›æ­¤å‰ç¼€æ± çš„å‰ç¼€æ•°
      */
     public int size()
     {
@@ -61,9 +61,9 @@ public final class PrefixTools
     }
 
     /**
-     * ÓÃÀ´ÉèÖÃ´ËÇ°×º³ØÊÇ·ñÔÊĞíÓĞÖØ¸´µÄÇ°×º, Ä¬ÈÏÎª²»ÔÊĞíÓĞÖØ¸´Ç°×º.
+     * ç”¨æ¥è®¾ç½®æ­¤å‰ç¼€æ± æ˜¯å¦å…è®¸æœ‰é‡å¤çš„å‰ç¼€, é»˜è®¤ä¸ºä¸å…è®¸æœ‰é‡å¤å‰ç¼€.
      *
-     * @param repeatAllowed Îª{@code true}Ê±ÔÊĞíÓĞÖØ¸´Ç°×º, Îª{@code false}Ê±²»ÔÊĞí´æÔÚÖØ¸´Ç°×º
+     * @param repeatAllowed ä¸º{@code true}æ—¶å…è®¸æœ‰é‡å¤å‰ç¼€, ä¸º{@code false}æ—¶ä¸å…è®¸å­˜åœ¨é‡å¤å‰ç¼€
      */
     public void setRepeatAllowed(boolean repeatAllowed)
     {
@@ -76,12 +76,12 @@ public final class PrefixTools
     }
 
     /**
-     * ÍùÇ°×º³ØÖĞÌí¼ÓĞÂµÄÇ°×º, Ä¬ÈÏ²»ÔÊĞíÌí¼ÓÖØ¸´µÄÇ°×º.
+     * å¾€å‰ç¼€æ± ä¸­æ·»åŠ æ–°çš„å‰ç¼€, é»˜è®¤ä¸å…è®¸æ·»åŠ é‡å¤çš„å‰ç¼€.
      *
-     *<p>¿ÉÒÔÍ¨¹ı{@link PrefixTools#setRepeatAllowed(boolean)}À´¸ü¸ÄÊÇ·ñ¿ÉÒÔÖØ¸´</p>
-     * @param extraAttribute ÒªÌí¼ÓµÄĞÂÇ°×º
-     * @throws NullPointerException Èç¹û{@code extraAttribute}Îªnull
-     * @throws IllegalStateException Èç¹û´Ë¶ÔÏó³Ø²»ÔÊĞí´æÔÚÖØ¸´Ç°×º, µ«Ç°×º³ØÖĞÒÑ¾­´æÔÚ{@code extraAttribute}
+     *<p>å¯ä»¥é€šè¿‡{@link PrefixTools#setRepeatAllowed(boolean)}æ¥æ›´æ”¹æ˜¯å¦å¯ä»¥é‡å¤</p>
+     * @param extraAttribute è¦æ·»åŠ çš„æ–°å‰ç¼€
+     * @throws NullPointerException å¦‚æœ{@code extraAttribute}ä¸ºnull
+     * @throws IllegalStateException å¦‚æœæ­¤å¯¹è±¡æ± ä¸å…è®¸å­˜åœ¨é‡å¤å‰ç¼€, ä½†å‰ç¼€æ± ä¸­å·²ç»å­˜åœ¨{@code extraAttribute}
      */
     public void add(final String extraAttribute)
     {
@@ -91,7 +91,7 @@ public final class PrefixTools
         {
             if (extraAttributes.contains(extraAttribute))
             {
-                throw new IllegalStateException("´ËÇ°×º³Ø²»ÔÊĞí´æÔÚÖØ¸´Ç°×º");
+                throw new IllegalStateException("æ­¤å‰ç¼€æ± ä¸å…è®¸å­˜åœ¨é‡å¤å‰ç¼€");
             }
         }
         extraAttributes.add(extraAttribute);
@@ -103,9 +103,9 @@ public final class PrefixTools
     }
 
     /**
-     * ·µ»ØÒ»¸ö°üº¬´ËÇ°×º³ØÖĞËùÓĞÇ°×ºµÄÊı×é.
+     * è¿”å›ä¸€ä¸ªåŒ…å«æ­¤å‰ç¼€æ± ä¸­æ‰€æœ‰å‰ç¼€çš„æ•°ç»„.
      *
-     * @return ·µ»ØÒ»¸ö×Ö·û´®Êı×é
+     * @return è¿”å›ä¸€ä¸ªå­—ç¬¦ä¸²æ•°ç»„
      */
     public String[] toArrays()
     {
@@ -113,7 +113,7 @@ public final class PrefixTools
     }
 
     /**
-     * ´Ó´ËÇ°×º³ØÖĞÉ¾³ıËùÓĞÇ°×º.
+     * ä»æ­¤å‰ç¼€æ± ä¸­åˆ é™¤æ‰€æœ‰å‰ç¼€.
      */
     public void clear()
     {
@@ -121,9 +121,9 @@ public final class PrefixTools
     }
 
     /**
-     * @param extraAttribute ÒªÅĞ¶ÏÊÇ·ñÒÑ¾­´æÔÚµÄÇ°×º
-     * @return Èç¹ûÇ°×º³ØÖĞ´æÔÚ {@code extraAttribute}·µ»Ø{@code true}, ·ñÔò·µ»Ø{@code false}
-     * @throws NullPointerException Èç¹û{@code extraAttribute}Îªnull
+     * @param extraAttribute è¦åˆ¤æ–­æ˜¯å¦å·²ç»å­˜åœ¨çš„å‰ç¼€
+     * @return å¦‚æœå‰ç¼€æ± ä¸­å­˜åœ¨ {@code extraAttribute}è¿”å›{@code true}, å¦åˆ™è¿”å›{@code false}
+     * @throws NullPointerException å¦‚æœ{@code extraAttribute}ä¸ºnull
      */
     public Boolean have(String extraAttribute)
     {
@@ -146,11 +146,11 @@ public final class PrefixTools
     }
 
     /**
-     * ´Ë¶ÔÏóµÄÔªËØ³ØÖĞ {@code prefix}µÄ×ÜÊı.
+     * æ­¤å¯¹è±¡çš„å…ƒç´ æ± ä¸­ {@code prefix}çš„æ€»æ•°.
      *
-     * @param prefix Òª¼ÆËã×ÜÊıµÄÔªËØ
-     * @return ·µ»ØÔÚ´Ë¶ÔÏóµÄÔªËØ³ØÖĞ {@code prefix}µÄ×ÜÊı
-     * @throws NullPointerException Èç¹û{@code prefix}Îªnull
+     * @param prefix è¦è®¡ç®—æ€»æ•°çš„å…ƒç´ 
+     * @return è¿”å›åœ¨æ­¤å¯¹è±¡çš„å…ƒç´ æ± ä¸­ {@code prefix}çš„æ€»æ•°
+     * @throws NullPointerException å¦‚æœ{@code prefix}ä¸ºnull
      * @since 2021-5-28
      */
     public int sum(final String prefix)
@@ -165,7 +165,7 @@ public final class PrefixTools
                 ++count;
             }
         }
-        LOGGER.trace("²éÕÒÔªËØ:{}, ¹²ÕÒµ½{}¸ö", prefix, count);
+        LOGGER.trace("æŸ¥æ‰¾å…ƒç´ :{}, å…±æ‰¾åˆ°{}ä¸ª", prefix, count);
         return count;
     }
 
@@ -191,11 +191,11 @@ public final class PrefixTools
         int count = 0;
 
         final var string = new StringBuilder();
-        string.append("¹²ÓĞ").append(size).append("¸öÔªËØ").append("[");
+        string.append("å…±æœ‰").append(size).append("ä¸ªå…ƒç´ ").append("[");
         for (final var s : list)
         {
             count++;
-            string.append("ÔªËØ:").append(s.getKey()).append(", ×ÜÊı:").append(s.getValue()).append(", ËùÕ¼±ÈÀı:").append(
+            string.append("å…ƒç´ :").append(s.getKey()).append(", æ€»æ•°:").append(s.getValue()).append(", æ‰€å æ¯”ä¾‹:").append(
                     String.format("%.3f", (double) s.getValue() / size));
             if (count != end)
             {
@@ -206,10 +206,10 @@ public final class PrefixTools
     }
 
     /**
-     * ´ËÇ°×º³Ø°´³öÏÖ´ÎÊıµ¹ĞòÅÅĞòµÄ{@code List}.
+     * æ­¤å‰ç¼€æ± æŒ‰å‡ºç°æ¬¡æ•°å€’åºæ’åºçš„{@code List}.
      *
      * @since 2021-5-29
-     * @return ·µ»Ø´ËÇ°×º³Ø°´³öÏÖ´ÎÊıµ¹ĞòÅÅĞòµÄ {@code List}, {@code Map}µÄ¼üÎªÔªËØ³ØÖĞµÄÔªËØ, ÖµÎª¶ÔÓ¦µÄ³öÏÖ´ÎÊı
+     * @return è¿”å›æ­¤å‰ç¼€æ± æŒ‰å‡ºç°æ¬¡æ•°å€’åºæ’åºçš„ {@code List}, {@code Map}çš„é”®ä¸ºå…ƒç´ æ± ä¸­çš„å…ƒç´ , å€¼ä¸ºå¯¹åº”çš„å‡ºç°æ¬¡æ•°
      */
     protected List<Map.Entry<String, Integer>> toNumberOfOccurrencesArray()
     {
@@ -217,15 +217,15 @@ public final class PrefixTools
         for (final String s : extraAttributes)
         {
             countMap.merge(s, 1, Integer::sum);
-            LOGGER.trace("ÔªËØ³ØÖµ:{}", s);
+            LOGGER.trace("å…ƒç´ æ± å€¼:{}", s);
         }
 
         final List<Map.Entry<String, Integer>> list = new ArrayList<>(countMap.entrySet());
-        //½µĞòÅÅĞò
+        //é™åºæ’åº
         list.sort(Map.Entry.comparingByValue((num1, num2) -> num2.compareTo(num1)));
         for (final var e : list)
         {
-            LOGGER.trace("¼ü:{}, Öµ:{}", e.getKey(),  e.getValue());
+            LOGGER.trace("é”®:{}, å€¼:{}", e.getKey(),  e.getValue());
         }
 
         return list;
@@ -235,8 +235,8 @@ public final class PrefixTools
     public String toString()
     {
         return "PrefixTools[" +
-                "Ç°×º:" + extraAttributes +
-                ", ÔÊĞíÖØ¸´ÔªËØ:" + repeatAllowed +
+                "å‰ç¼€:" + extraAttributes +
+                ", å…è®¸é‡å¤å…ƒç´ :" + repeatAllowed +
                 ']';
     }
 

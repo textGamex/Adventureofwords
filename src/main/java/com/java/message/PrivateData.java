@@ -1,7 +1,7 @@
 package com.java.message;
 
 /**
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  */
 public final class PrivateData
 {

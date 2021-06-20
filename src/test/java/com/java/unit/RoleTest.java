@@ -12,17 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RoleTest
 {
-    private static final Role role = new Role.Builder("²âÊÔ").maxHp(1).physicalAttack(2).level(3).exp(4).mana(5)
+    private static final Role role = new Role.Builder("æµ‹è¯•").maxHp(1).physicalAttack(2).level(3).exp(4).mana(5)
         .lifeRegeneration(6).evade(7).crit(8).critsEffect(9.0).cash(10).upgradeNeedXp(11)
         .physicalResistance(12.0).build();
 
-    @DisplayName("BuilderÄ£Ê½²âÊÔ")
+    @DisplayName("Builderæ¨¡å¼æµ‹è¯•")
     @Test
     void Builder()
     {
         assertTrue(role instanceof Role);
 
-        assertEquals("²âÊÔ", role.getName());
+        assertEquals("æµ‹è¯•", role.getName());
         assertEquals(1, role.defense().getHp());
         assertEquals(2, role.attack().getPhysicalAttack());
         assertEquals(3, role.getLevel());
@@ -47,7 +47,7 @@ class RoleTest
 
         var data = Role.loadData(account);
 
-        assertEquals("²âÊÔ", data.getName());
+        assertEquals("æµ‹è¯•", data.getName());
         assertEquals(1, data.defense().getHp());
         assertEquals(2, data.attack().getPhysicalAttack());
         assertEquals(3, data.getLevel());
@@ -67,9 +67,9 @@ class RoleTest
     @Test
     void newStandardPrimaryLevelRole()
     {
-        final var unit = Role.newStandardPrimaryLevelRole("²âÊÔµ¥Î»");
+        final var unit = Role.newStandardPrimaryLevelRole("æµ‹è¯•å•ä½");
 
-        assertEquals("²âÊÔµ¥Î»", unit.getName());
+        assertEquals("æµ‹è¯•å•ä½", unit.getName());
         assertEquals(100, unit.defense().getMaxHp());
         assertEquals(50, unit.getSpeed());
         assertEquals(1, unit.getLevel());
@@ -85,9 +85,9 @@ class RoleTest
     @Test
     void testRoleSave()
     {
-        var unit = new Role.Builder("²âÊÔ").build();
+        var unit = new Role.Builder("æµ‹è¯•").build();
 
-        assertDoesNotThrow(() -> unit.saveData( new AccountMessage("²âÊÔ")));
+        assertDoesNotThrow(() -> unit.saveData( new AccountMessage("æµ‹è¯•")));
     }
 }
 

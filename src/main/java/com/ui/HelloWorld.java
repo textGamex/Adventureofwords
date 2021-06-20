@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+/**
+ * @author 留恋千年
+ */
 public class HelloWorld extends Application
 {
     @Override

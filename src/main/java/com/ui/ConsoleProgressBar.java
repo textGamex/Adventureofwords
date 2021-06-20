@@ -3,25 +3,25 @@ package com.ui;
 import java.text.DecimalFormat;
 
 /**
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @author 1.1.0
  */
 public final class ConsoleProgressBar
 {
     /**
-     * ½ø¶ÈÌõ³¤¶È
+     * è¿›åº¦æ¡é•¿åº¦
      */
     private final int barLen;
 
     /**
-     * ÓÃÓÚ½ø¶ÈÌõÏÔÊ¾µÄ×Ö·û
+     * ç”¨äºè¿›åº¦æ¡æ˜¾ç¤ºçš„å­—ç¬¦
      */
     private final char showChar;
 
     private final DecimalFormat formater = new DecimalFormat("#.##%");
 
     /**
-     * Ê¹ÓÃÏµÍ³±ê×¼Êä³ö£¬ÏÔÊ¾×Ö·û½ø¶ÈÌõ¼°Æä°Ù·Ö±È
+     * ä½¿ç”¨ç³»ç»Ÿæ ‡å‡†è¾“å‡ºï¼Œæ˜¾ç¤ºå­—ç¬¦è¿›åº¦æ¡åŠå…¶ç™¾åˆ†æ¯”
      */
     public ConsoleProgressBar(final int barLen, final char showChar)
     {
@@ -30,11 +30,11 @@ public final class ConsoleProgressBar
     }
 
     /**
-     * Ê¹ÓÃÖ¸¶¨µÄ×Ö·û¼ÓÔØÖ¸¶¨Ê±¼ä.
+     * ä½¿ç”¨æŒ‡å®šçš„å­—ç¬¦åŠ è½½æŒ‡å®šæ—¶é—´.
      *
-     * @param totalMillis ¼ÓÔØ×ÜÊ±¼ä(ms)
-     * @param length ½ø¶ÈÌõ³¤¶È
-     * @param showChar ½ø¶ÈÌõËùÓÃ×Ö·û
+     * @param totalMillis åŠ è½½æ€»æ—¶é—´(ms)
+     * @param length è¿›åº¦æ¡é•¿åº¦
+     * @param showChar è¿›åº¦æ¡æ‰€ç”¨å­—ç¬¦
      */
     public static void loadSpecifiedTime(long totalMillis, int length, char showChar)
     {
@@ -59,9 +59,9 @@ public final class ConsoleProgressBar
         }
     }
     /**
-     * ÏÔÊ¾½ø¶ÈÌõ.
+     * æ˜¾ç¤ºè¿›åº¦æ¡.
      *
-     * @param value ×î´ó½ø¶È
+     * @param value æœ€å¤§è¿›åº¦
      */
     public void show(final int value)
     {
@@ -72,9 +72,9 @@ public final class ConsoleProgressBar
 
         reset();
 
-        // ±ÈÀı
+        // æ¯”ä¾‹
         float rate = (float) (value * 1.0 / 100);
-        // ±ÈÀı*½ø¶ÈÌõ×Ü³¤¶È=µ±Ç°³¤¶È
+        // æ¯”ä¾‹*è¿›åº¦æ¡æ€»é•¿åº¦=å½“å‰é•¿åº¦
         draw(barLen, rate);
         if (value == 100L)
         {
@@ -83,15 +83,15 @@ public final class ConsoleProgressBar
     }
 
     /**
-     * »­Ö¸¶¨³¤¶È¸öshowChar.
+     * ç”»æŒ‡å®šé•¿åº¦ä¸ªshowChar.
      *
-     * @param rate ½ø¶È°Ù·Ö±È
-     * @param barLength ½ø¶ÈÌõ×Ü³¤¶È
+     * @param rate è¿›åº¦ç™¾åˆ†æ¯”
+     * @param barLength è¿›åº¦æ¡æ€»é•¿åº¦
      */
     private void draw(final int barLength, final float rate)
     {
         int len = (int) (rate * barLength);
-        System.out.print("½ø¶È: ");
+        System.out.print("è¿›åº¦: ");
         for (int i = 0; i < len; i++)
         {
             System.out.print(showChar);
@@ -104,7 +104,7 @@ public final class ConsoleProgressBar
     }
 
     /**
-     * ¹â±êÒÆ¶¯µ½ĞĞÊ×.
+     * å…‰æ ‡ç§»åŠ¨åˆ°è¡Œé¦–.
      */
     private void reset()
     {
@@ -112,7 +112,7 @@ public final class ConsoleProgressBar
     }
 
     /**
-     * Íê³Éºó»»ĞĞ.
+     * å®Œæˆåæ¢è¡Œ.
      */
     private void afterComplete()
     {

@@ -7,50 +7,50 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * ÓÃÓÚÃèÊöbuffµÄ¾ßÌåĞ§¹û.
+ * ç”¨äºæè¿°buffçš„å…·ä½“æ•ˆæœ.
  *
- * <p>Ò»¸öbuff¾ßÓĞÒÔÏÂĞÅÏ¢</p>
+ * <p>ä¸€ä¸ªbuffå…·æœ‰ä»¥ä¸‹ä¿¡æ¯</p>
  * <em>
- *     <li>³ÖĞø»ØºÏ</li>
- *     <li>Ğ§¹û²ãÊı</li>
- *     <li>ÊÇ·ñÊÇDebuff</li>
- *     <li>ÊÇ·ñÊÇ±»¶¯</li>
+ *     <li>æŒç»­å›åˆ</li>
+ *     <li>æ•ˆæœå±‚æ•°</li>
+ *     <li>æ˜¯å¦æ˜¯Debuff</li>
+ *     <li>æ˜¯å¦æ˜¯è¢«åŠ¨</li>
  * </em>
  * @see BuffModule
  * @see BuffType
  * @version 1.3.5
  * @since 15
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  */
 public final class BuffEffect implements Serializable, Cloneable
 {
     @Serial
     private static final long serialVersionUID = 6938381291107023911L;
-    /**³ÖĞø»ØºÏ*/
+    /**æŒç»­å›åˆ*/
     private int timeLimit;
-    /**Ğ§¹û²ãÊı*/
+    /**æ•ˆæœå±‚æ•°*/
     private int layers;
-    /**ÊÇ·ñÊÇDebuff*/
+    /**æ˜¯å¦æ˜¯Debuff*/
     private final boolean debuff;
-    /**ÊÇ·ñÊÇ±»¶¯*/
+    /**æ˜¯å¦æ˜¯è¢«åŠ¨*/
     private final boolean timeLess;
 
     /**
-     * @param timeLimit Ğ§¹û³ÖĞø»ØºÏ
-     * @param layers Ğ§¹û²ãÊı
-     * @param debuff ÊÇdebuff
-     * @param timeLess ÊÇÌØĞÔ
-     * @throws IllegalArgumentException Èç¹û{@code timeLimit}»ò{@code layers}Ğ¡ÓÚµÈÓÚ0
+     * @param timeLimit æ•ˆæœæŒç»­å›åˆ
+     * @param layers æ•ˆæœå±‚æ•°
+     * @param debuff æ˜¯debuff
+     * @param timeLess æ˜¯ç‰¹æ€§
+     * @throws IllegalArgumentException å¦‚æœ{@code timeLimit}æˆ–{@code layers}å°äºç­‰äº0
      */
     public BuffEffect(int timeLimit, int layers, boolean debuff, boolean timeLess)
     {
         if (timeLimit <= 0)
         {
-            throw new IllegalArgumentException("·Ç·¨²ÎÊı,timeLimit:" + timeLimit);
+            throw new IllegalArgumentException("éæ³•å‚æ•°,timeLimit:" + timeLimit);
         }
         if (layers <= 0)
         {
-            throw new IllegalArgumentException("·Ç·¨²ÎÊı,layers:" + layers);
+            throw new IllegalArgumentException("éæ³•å‚æ•°,layers:" + layers);
         }
         this.timeLimit = timeLimit;
         this.layers = layers;
@@ -59,12 +59,12 @@ public final class BuffEffect implements Serializable, Cloneable
     }
 
     /**
-     * {@code timeLess}Ä¬ÈÏÎª{@code false}
+     * {@code timeLess}é»˜è®¤ä¸º{@code false}
      *
-     * @param timeLimit Ğ§¹û³ÖĞø»ØºÏ
-     * @param layers Ğ§¹û²ãÊı
-     * @param isDebuff ÊÇdebuff
-     * @throws IllegalArgumentException Èç¹û{@code timeLimit}»ò{@code layers}Ğ¡ÓÚµÈÓÚ0
+     * @param timeLimit æ•ˆæœæŒç»­å›åˆ
+     * @param layers æ•ˆæœå±‚æ•°
+     * @param isDebuff æ˜¯debuff
+     * @throws IllegalArgumentException å¦‚æœ{@code timeLimit}æˆ–{@code layers}å°äºç­‰äº0
      */
     public BuffEffect(final int timeLimit, final int layers, final boolean isDebuff)
     {
@@ -72,11 +72,11 @@ public final class BuffEffect implements Serializable, Cloneable
     }
 
     /**
-     * {@code timeLess}ºÍ{@code debug}Ä¬ÈÏÎª{@code false}
+     * {@code timeLess}å’Œ{@code debug}é»˜è®¤ä¸º{@code false}
      *
-     * @param timeLimit Ğ§¹û³ÖĞø»ØºÏ
-     * @param layers Ğ§¹û²ãÊı
-     * @throws IllegalArgumentException Èç¹û{@code timeLimit}»ò{@code layers}Ğ¡ÓÚµÈÓÚ0
+     * @param timeLimit æ•ˆæœæŒç»­å›åˆ
+     * @param layers æ•ˆæœå±‚æ•°
+     * @throws IllegalArgumentException å¦‚æœ{@code timeLimit}æˆ–{@code layers}å°äºç­‰äº0
      */
     public BuffEffect(final int timeLimit, final int layers)
     {
@@ -94,9 +94,9 @@ public final class BuffEffect implements Serializable, Cloneable
     }
 
     /**
-     * Èç¹ûÊÇ¸ºÃæĞ§¹û, ·µ»Ø{@code true}
+     * å¦‚æœæ˜¯è´Ÿé¢æ•ˆæœ, è¿”å›{@code true}
      *
-     * @return Èç¹ûÊÇ¸ºÃæĞ§¹û, ·µ»Ø{@code true}
+     * @return å¦‚æœæ˜¯è´Ÿé¢æ•ˆæœ, è¿”å›{@code true}
      */
     public boolean isDebuff()
     {
@@ -119,17 +119,17 @@ public final class BuffEffect implements Serializable, Cloneable
     }
 
     /**
-     * @return ×Ö·û´®±íÊ¾µÄ¶ÔÏó
+     * @return å­—ç¬¦ä¸²è¡¨ç¤ºçš„å¯¹è±¡
      */
     @NotNull
     @Override
     public String toString()
     {
         return "BuffMessage[" +
-                "³ÖĞø»ØºÏ:" + timeLimit +
-                ", Ğ§¹û²ãÊı:" + layers +
+                "æŒç»­å›åˆ:" + timeLimit +
+                ", æ•ˆæœå±‚æ•°:" + layers +
                 ", Debuff:" + debuff +
-                ", ÌØĞÔ:" + timeLess +
+                ", ç‰¹æ€§:" + timeLess +
                 ']';
     }
 

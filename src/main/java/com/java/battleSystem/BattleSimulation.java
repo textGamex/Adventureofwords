@@ -14,7 +14,7 @@ import static com.java.battleSystem.BattleSystem.*;
 import static com.java.battleSystem.BattleAttributeCalculation.*;
 
 /**
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  */
 public final class BattleSimulation
 {
@@ -27,9 +27,9 @@ public final class BattleSimulation
         final var roleStatistics = new PlayerStatistics();
         final var enemyStatistics = new PlayerStatistics();
 
-        var role = new Role.Builder("Íæ¼Ò").maxHp(100).physicalAttack(20).armor(1).crit(10).critsEffect(2.0)
+        var role = new Role.Builder("ç©å®¶").maxHp(100).physicalAttack(20).armor(1).crit(10).critsEffect(2.0)
                 .critResistance(50).hit(50).evade(5).build();
-        var enemy = new Enemy.Builder("¸ç²¼ÁÖ").maxHp(160).physicalAttack(10).armor(5).critResistance(90)
+        var enemy = new Enemy.Builder("å“¥å¸ƒæ—").maxHp(160).physicalAttack(10).armor(5).critResistance(90)
                 .crit(3).hit(58).evade(9).critsEffect(2.0).build();
 
         for (var i = 0; i < MAX;)
@@ -65,17 +65,17 @@ public final class BattleSimulation
                 }
                 else
                 {
-                    LOGGER.debug(role.getName() + "Î´»÷ÖĞ" + enemy.getName());
+                    LOGGER.debug(role.getName() + "æœªå‡»ä¸­" + enemy.getName());
                 }
             }
             else
             {
-                LOGGER.debug("²»ÄÜĞĞ¶¯");
+                LOGGER.debug("ä¸èƒ½è¡ŒåŠ¨");
             }
             if (enemy.defense().getHp() <= 0)
             {
-                LOGGER.trace("{}½öÊ£{}µãÑª",role.getName(), role.defense().getHp());
-                LOGGER.debug("Íæ¼ÒÊ¤Àû!");
+                LOGGER.trace("{}ä»…å‰©{}ç‚¹è¡€",role.getName(), role.defense().getHp());
+                LOGGER.debug("ç©å®¶èƒœåˆ©!");
                 stateRecovery(role);
                 stateRecovery(enemy);
                 roleStatistics.setTotalKill(roleStatistics.getTotalKill() + 1);
@@ -113,17 +113,17 @@ public final class BattleSimulation
                 }
                 else
                 {
-                    LOGGER.debug(enemy.getName() + "Î´»÷ÖĞ" + role.getName());
+                    LOGGER.debug(enemy.getName() + "æœªå‡»ä¸­" + role.getName());
                 }
             }
             else
             {
-                LOGGER.debug("²»ÄÜĞĞ¶¯");
+                LOGGER.debug("ä¸èƒ½è¡ŒåŠ¨");
             }
             if (role.defense().getHp() <= 0)
             {
-                LOGGER.debug("µĞ¶Ôµ¥Î»Ê¤Àû!");
-                LOGGER.trace("{}½öÊ£{}µãÑª",enemy.getName(), enemy.defense().getHp());
+                LOGGER.debug("æ•Œå¯¹å•ä½èƒœåˆ©!");
+                LOGGER.trace("{}ä»…å‰©{}ç‚¹è¡€",enemy.getName(), enemy.defense().getHp());
                 enemyStatistics.setTotalVictory(enemyStatistics.getTotalVictory() + 1);
                 enemyStatistics.setTotalKill(enemyStatistics.getTotalKill() + 1);
                 stateRecovery(role);
@@ -136,12 +136,12 @@ public final class BattleSimulation
         var endTime = Instant.now();
         var time = Duration.between(start, endTime);
 
-        System.out.println("ºÄÊ±:" + time.toMillis() + "ms");
+        System.out.println("è€—æ—¶:" + time.toMillis() + "ms");
 
-        System.out.println("ÓÎÏ·½áÊø");
+        System.out.println("æ¸¸æˆç»“æŸ");
         System.out.println(roleStatistics);
         double number = (double) roleStatistics.getTotalVictory() / MAX;
-        System.out.println("Íæ¼ÒÊ¤ÂÊÎª" + number);
+        System.out.println("ç©å®¶èƒœç‡ä¸º" + number);
         System.out.println(enemyStatistics);
     }
 

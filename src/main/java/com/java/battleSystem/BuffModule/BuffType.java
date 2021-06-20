@@ -3,44 +3,44 @@ package com.java.battleSystem.BuffModule;
 import java.io.Serializable;
 
 /**
- * ÓÃÓÚ¸¨ÖúÊµÏÖ{@link BuffModule}ÀàµÄÃ¶¾ÙÀà.
+ * ç”¨äºŽè¾…åŠ©å®žçŽ°{@link BuffModule}ç±»çš„æžšä¸¾ç±».
  *
- * <p>ÏÖÔÚÊµÏÖµÄ¸ºÃæÐ§¹û</p>
+ * <p>çŽ°åœ¨å®žçŽ°çš„è´Ÿé¢æ•ˆæžœ</p>
  * <em>
- *     <li>Á÷Ñª</li>
- *     <li>ÖÐ¶¾</li>
- *     <li>ÐéÈõ</li>
- *     <li>Ò×ÉË</li>
- *     <li>¼õËÙ</li>
- *     <li>ÐéÈõ</li>
- *     <li>³ÁÄ¬</li>
+ *     <li>æµè¡€</li>
+ *     <li>ä¸­æ¯’</li>
+ *     <li>è™šå¼±</li>
+ *     <li>æ˜“ä¼¤</li>
+ *     <li>å‡é€Ÿ</li>
+ *     <li>è™šå¼±</li>
+ *     <li>æ²‰é»˜</li>
  * </em>
  *
- * <p>ÏÖÔÚÊµÏÖµÄÔöÒæÐ§¹û</p>
+ * <p>çŽ°åœ¨å®žçŽ°çš„å¢žç›Šæ•ˆæžœ</p>
  * <em>
- *     <li>»Ö¸´</li>
- *     <li>¾»»¯</li>
- *     <li>ÎïÀí´©Í¸</li>
- *     <li>·¨Êõ´©Í¸</li>
+ *     <li>æ¢å¤</li>
+ *     <li>å‡€åŒ–</li>
+ *     <li>ç‰©ç†ç©¿é€</li>
+ *     <li>æ³•æœ¯ç©¿é€</li>
  * </em>
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @version 1.1.0
  * @since 15
  * @see BuffModule
  */
 public enum BuffType implements Serializable
 {
-    BLEED("Á÷Ñª"),
-    POISON("ÖÐ¶¾"),
-    DEBILITY("ÐéÈõ"),
-    DELICATE("Ò×ÉË"),
-    SLOW_DOWN("¼õËÙ"),
-    SILENT("³ÁÄ¬"),
-    VERTIGO("Ñ£ÔÎ"),
-    RECOVER("»Ö¸´"),
-    RELIEVE("¾»»¯"),
-    PHYSICS_PIERCE_THROUGH("ÎïÀí´©Í¸"),
-    MAGIC_PIERCE_THROUGH("·¨Êõ´©Í¸");
+    BLEED("æµè¡€"),
+    POISON("ä¸­æ¯’"),
+    DEBILITY("è™šå¼±"),
+    DELICATE("æ˜“ä¼¤"),
+    SLOW_DOWN("å‡é€Ÿ"),
+    SILENT("æ²‰é»˜"),
+    VERTIGO("çœ©æ™•"),
+    RECOVER("æ¢å¤"),
+    RELIEVE("å‡€åŒ–"),
+    PHYSICS_PIERCE_THROUGH("ç‰©ç†ç©¿é€"),
+    MAGIC_PIERCE_THROUGH("æ³•æœ¯ç©¿é€");
 
     private final String type;
     BuffType(String type)
@@ -49,9 +49,9 @@ public enum BuffType implements Serializable
     }
 
     /**
-     * »ñµÃÕâ¸öbuffÀàÐÍµÄÃû³Æ.
+     * èŽ·å¾—è¿™ä¸ªbuffç±»åž‹çš„åç§°.
      *
-     * @return Õâ¸öbuffÀàÐÍµÄÃû³Æ
+     * @return è¿™ä¸ªbuffç±»åž‹çš„åç§°
      */
     public String getType()
     {

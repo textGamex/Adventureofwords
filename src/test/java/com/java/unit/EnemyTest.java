@@ -9,7 +9,7 @@ class EnemyTest
     @Test
     void Builder()
     {
-       var enemy = new Enemy.Builder("�жԵ�λ").cash(1).build();
+       var enemy = new Enemy.Builder("敌对单位").cash(1).build();
 
        assertTrue(enemy instanceof Enemy);
     }

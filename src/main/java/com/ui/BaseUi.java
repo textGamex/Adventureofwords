@@ -1,14 +1,14 @@
 package com.ui;
 
 /**
- * @author 留恋千年
+ * @author 鐣欐亱鍗冨勾
  * @version 1.0.0
  * @since 2021-6-6
  */
-public abstract class Ui
+public abstract class BaseUi
 {
     /**
-     * 显示Ui界面.
+     * 鏄剧ずUi鐣岄潰.
      */
     public abstract void show();
 }

@@ -6,9 +6,9 @@ import org.slf4j.LoggerFactory;
 import static java.util.Objects.requireNonNull;
 
 /**
- * ÓÃÓÚ¼ÆËãÓëÕ½¶·Ïà¹ØµÄÊıÖµ.
+ * ç”¨äºè®¡ç®—ä¸æˆ˜æ–—ç›¸å…³çš„æ•°å€¼.
  *
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @version 1.0.2
  * @since 20221-5-15
 */
@@ -26,12 +26,12 @@ public final class BattleAttributeCalculation
     }
 
     /**
-     * ¼ÆËã¹¥»÷ÕßµÄ¹¥»÷ÃüÖĞµÄ¼¸ÂÊ.
+     * è®¡ç®—æ”»å‡»è€…çš„æ”»å‡»å‘½ä¸­çš„å‡ ç‡.
      *
-     * @param attacker ¹¥»÷Õß
-     * @param victim ±»¹¥»÷Õß
-     * @throws NullPointerException Èç¹û{@code attacker}»ò{@code victim}Îªnull
-     * @return ¹¥»÷ÕßµÄ¹¥»÷ÃüÖĞµÄ¼¸ÂÊ
+     * @param attacker æ”»å‡»è€…
+     * @param victim è¢«æ”»å‡»è€…
+     * @throws NullPointerException å¦‚æœ{@code attacker}æˆ–{@code victim}ä¸ºnull
+     * @return æ”»å‡»è€…çš„æ”»å‡»å‘½ä¸­çš„å‡ ç‡
      * @see BasicUnit
      * @since 2021-5-15
      */
@@ -44,35 +44,35 @@ public final class BattleAttributeCalculation
     }
 
     /**
-     * ¸ù¾İ¸ø¶¨µÄÊıÖµ¼ÆËã¹¥»÷ÕßµÄ¹¥»÷ÃüÖĞµÄ¼¸ÂÊ.
+     * æ ¹æ®ç»™å®šçš„æ•°å€¼è®¡ç®—æ”»å‡»è€…çš„æ”»å‡»å‘½ä¸­çš„å‡ ç‡.
      *
-     * @param attackerHit ¹¥»÷ÕßµÄÃüÖĞ
-     * @param victimEvade ±»¹¥»÷ÕßµÄÉÁ±Ü
-     * @return ¹¥»÷ÕßµÄ¹¥»÷ÃüÖĞµÄ¼¸ÂÊ
+     * @param attackerHit æ”»å‡»è€…çš„å‘½ä¸­
+     * @param victimEvade è¢«æ”»å‡»è€…çš„é—ªé¿
+     * @return æ”»å‡»è€…çš„æ”»å‡»å‘½ä¸­çš„å‡ ç‡
      * @since 2021-5-15
      */
     public static double attackHitRate(final int attackerHit, final int victimEvade)
     {
         if (attackerHit <= 0)
         {
-            LOGGER.debug("attackerHitĞ¡ÓÚµÈÓÚ0, attackerHit:{}", attackerHit);
+            LOGGER.debug("attackerHitå°äºç­‰äº0, attackerHit:{}", attackerHit);
             return 1.0;
         }
         if (victimEvade <= 0)
         {
-            LOGGER.debug("victimEvadeĞ¡ÓÚµÈÓÚ0, attackHitRate:{}", victimEvade);
+            LOGGER.debug("victimEvadeå°äºç­‰äº0, attackHitRate:{}", victimEvade);
             return 0.0;
         }
         return (double) attackerHit / (attackerHit + victimEvade);
     }
 
     /**
-     * ·µ»Ø¹¥»÷Õß¶Ô±»¹¥»÷ÕßµÄ¹¥»÷±©»÷µÄ¸ÅÂÊ.
+     * è¿”å›æ”»å‡»è€…å¯¹è¢«æ”»å‡»è€…çš„æ”»å‡»æš´å‡»çš„æ¦‚ç‡.
      *
-     * @param attacker ¹¥»÷Õß
-     * @param victim ±»¹¥»÷Õß
-     * @return ¹¥»÷ÕßµÄ¹¥»÷±©»÷µÄ¸ÅÂÊ
-     * @throws NullPointerException Èç¹û{@code attacker}»ò{@code victim}Îªnull
+     * @param attacker æ”»å‡»è€…
+     * @param victim è¢«æ”»å‡»è€…
+     * @return æ”»å‡»è€…çš„æ”»å‡»æš´å‡»çš„æ¦‚ç‡
+     * @throws NullPointerException å¦‚æœ{@code attacker}æˆ–{@code victim}ä¸ºnull
      * @since 2021-5-16
      */
     public static double attackerCritChance(final BasicUnit attacker, final BasicUnit victim)
@@ -82,11 +82,11 @@ public final class BattleAttributeCalculation
     }
 
     /**
-     * ¼ÆËã¹¥»÷ÕßµÄ¹¥»÷±©»÷µÄ¸ÅÂÊ.
+     * è®¡ç®—æ”»å‡»è€…çš„æ”»å‡»æš´å‡»çš„æ¦‚ç‡.
      *
-     * @param attackerCrit ¹¥»÷ÕßµÄ±©»÷
-     * @param victimResistance ±»¹¥»÷ÕßµÄ±©»÷¿¹ĞÔ
-     * @return ¹¥»÷ÕßµÄ¹¥»÷±©»÷µÄ¸ÅÂÊ
+     * @param attackerCrit æ”»å‡»è€…çš„æš´å‡»
+     * @param victimResistance è¢«æ”»å‡»è€…çš„æš´å‡»æŠ—æ€§
+     * @return æ”»å‡»è€…çš„æ”»å‡»æš´å‡»çš„æ¦‚ç‡
      * @since 2021-5-16
      */
     public static double attackerCritChance(final int attackerCrit, final int victimResistance)
@@ -103,12 +103,12 @@ public final class BattleAttributeCalculation
     }
 
     /**
-     * ¼ÆËã¹¥»÷ÕßÄÜ¶Ô±»¹¥»÷Õß´ò³öµÄÉËº¦.
+     * è®¡ç®—æ”»å‡»è€…èƒ½å¯¹è¢«æ”»å‡»è€…æ‰“å‡ºçš„ä¼¤å®³.
      *
-     * @param attacker ¹¥»÷Õß
-     * @param victim ±»¹¥»÷Õß
-     * @throws NullPointerException Èç¹û{@code attacker}»ò{@code victim}Îªnull
-     * @return ¹¥»÷ÕßµÄÉËº¦
+     * @param attacker æ”»å‡»è€…
+     * @param victim è¢«æ”»å‡»è€…
+     * @throws NullPointerException å¦‚æœ{@code attacker}æˆ–{@code victim}ä¸ºnull
+     * @return æ”»å‡»è€…çš„ä¼¤å®³
      */
     public static double attackerPhysicalDamage(final BasicUnit attacker, final BasicUnit victim)
     {
@@ -117,19 +117,19 @@ public final class BattleAttributeCalculation
     }
 
     /**
-     * ÓÃ¸ø¶¨µÄÊıÖµ¼ÆËã¹¥»÷ÕßÄÜ¶Ô±»¹¥»÷Õß´ò³öµÄÉËº¦.
+     * ç”¨ç»™å®šçš„æ•°å€¼è®¡ç®—æ”»å‡»è€…èƒ½å¯¹è¢«æ”»å‡»è€…æ‰“å‡ºçš„ä¼¤å®³.
      *
-     * @param attackerPhysicalAttack ¹¥»÷ÕßµÄÎïÀí¹¥»÷
-     * @param victimArmor ±»¹¥»÷ÕßµÄ»¤¼×Öµ
-     * @throws NullPointerException Èç¹û{@code attacker}»ò{@code victim}Îªnull
-     * @return ¹¥»÷ÕßµÄÉËº¦
+     * @param attackerPhysicalAttack æ”»å‡»è€…çš„ç‰©ç†æ”»å‡»
+     * @param victimArmor è¢«æ”»å‡»è€…çš„æŠ¤ç”²å€¼
+     * @throws NullPointerException å¦‚æœ{@code attacker}æˆ–{@code victim}ä¸ºnull
+     * @return æ”»å‡»è€…çš„ä¼¤å®³
      */
     public static double attackerPhysicalDamage(double attackerPhysicalAttack, double victimArmor)
     {
         var attack = attackerPhysicalAttack;
         var armor = victimArmor;
 
-        //ÎªÁË·ÀÖ¹³öÏÖNaN´íÎó
+        //ä¸ºäº†é˜²æ­¢å‡ºç°NaNé”™è¯¯
         if (attackerPhysicalAttack + victimArmor == 0)
         {
             if (victimArmor <= 0)
@@ -145,11 +145,11 @@ public final class BattleAttributeCalculation
     }
 
     /**
-     * ¼ÆËãÃ¿»ØºÏÉËº¦.
+     * è®¡ç®—æ¯å›åˆä¼¤å®³.
      *
-     * @param attacker ¹¥»÷Õß
-     * @param victim ±»¹¥»÷Õß
-     * @throws NullPointerException Èç¹û{@code attacker}»ò{@code victim}Îªnull
+     * @param attacker æ”»å‡»è€…
+     * @param victim è¢«æ”»å‡»è€…
+     * @throws NullPointerException å¦‚æœ{@code attacker}æˆ–{@code victim}ä¸ºnull
      */
     public double DPR(final BasicUnit attacker, final BasicUnit victim)
     {
@@ -159,12 +159,12 @@ public final class BattleAttributeCalculation
     }
 
     /**
-     * ¼ÆËã±»¹¥»÷ÕßµÄÓĞĞ§ÉúÃüÖµ, Èç¹û±»¹¥»÷ÕßµÄÉÁ±ÜÂÊ»òÉËº¦¼õÃâ´óÓÚµÈÓÚ100%, ·µ»Ø{@code Integer.MAX_VALUE}.
+     * è®¡ç®—è¢«æ”»å‡»è€…çš„æœ‰æ•ˆç”Ÿå‘½å€¼, å¦‚æœè¢«æ”»å‡»è€…çš„é—ªé¿ç‡æˆ–ä¼¤å®³å‡å…å¤§äºç­‰äº100%, è¿”å›{@code Integer.MAX_VALUE}.
      *
-     * @param attacker ¹¥»÷Õß
-     * @param victim ±»¹¥»÷Õß
-     * @return ·µ»Ø±»¹¥»÷ÕßµÄÓĞĞ§ÉúÃüÖµ
-     * @throws NullPointerException Èç¹û{@code attacker}»ò{@code victim}Îªnull
+     * @param attacker æ”»å‡»è€…
+     * @param victim è¢«æ”»å‡»è€…
+     * @return è¿”å›è¢«æ”»å‡»è€…çš„æœ‰æ•ˆç”Ÿå‘½å€¼
+     * @throws NullPointerException å¦‚æœ{@code attacker}æˆ–{@code victim}ä¸ºnull
      */
     public static double victimEffectiveHp(final BasicUnit attacker, final BasicUnit victim)
     {
@@ -185,12 +185,12 @@ public final class BattleAttributeCalculation
     }
 
     /**
-     * ¼ÆËã±»¹¥»÷ÕßÓĞĞ§HP.
+     * è®¡ç®—è¢«æ”»å‡»è€…æœ‰æ•ˆHP.
      *
-     * @param victimHp ±»¹¥»÷ÕßµÄHP
-     * @param damageReduction ÉËº¦¼õÃâÂÊ
-     * @param evadeChance ÉÁ±Ü¸ÅÂÊ
-     * @return ·µ»Ø±»¹¥»÷ÕßÓĞĞ§HP
+     * @param victimHp è¢«æ”»å‡»è€…çš„HP
+     * @param damageReduction ä¼¤å®³å‡å…ç‡
+     * @param evadeChance é—ªé¿æ¦‚ç‡
+     * @return è¿”å›è¢«æ”»å‡»è€…æœ‰æ•ˆHP
      */
     public static double victimEffectiveHp(final int victimHp, final double damageReduction, final double evadeChance)
     {
@@ -202,12 +202,12 @@ public final class BattleAttributeCalculation
     }
 
     /**
-     *  ¼ÆËã¹¥»÷Õß¶Ô±»¹¥»÷ÕßµÄ±©»÷ÉËº¦.
+     *  è®¡ç®—æ”»å‡»è€…å¯¹è¢«æ”»å‡»è€…çš„æš´å‡»ä¼¤å®³.
      *
-     * @param attacker ¹¥»÷Õß
-     * @param victim ±»¹¥»÷Õß
-     * @return ¹¥»÷Õß¶Ô±»¹¥»÷ÕßµÄ±©»÷ÉËº¦
-     * @throws NullPointerException Èç¹û{@code attacker}»ò{@code victim}Îªnull
+     * @param attacker æ”»å‡»è€…
+     * @param victim è¢«æ”»å‡»è€…
+     * @return æ”»å‡»è€…å¯¹è¢«æ”»å‡»è€…çš„æš´å‡»ä¼¤å®³
+     * @throws NullPointerException å¦‚æœ{@code attacker}æˆ–{@code victim}ä¸ºnull
      */
     public static int criticalDamage(final BasicUnit attacker, final BasicUnit victim)
     {
@@ -216,12 +216,12 @@ public final class BattleAttributeCalculation
     }
 
     /**
-     *  ¼ÆËã¹¥»÷Õß¶Ô±»¹¥»÷ÕßµÄ±©»÷ÉËº¦.
+     *  è®¡ç®—æ”»å‡»è€…å¯¹è¢«æ”»å‡»è€…çš„æš´å‡»ä¼¤å®³.
      *
-     * @param hurt ¹¥»÷Õß¶Ô±»¹¥»÷Õß¿ÉÒÔÔì³ÉµÄµÄÉËº¦
-     * @param critsEffect ¹¥»÷ÕßµÄ±©»÷Ğ§¹û
-     * @return ¹¥»÷Õß¶Ô±»¹¥»÷ÕßµÄ±©»÷ÉËº¦
-     * @throws NullPointerException Èç¹û{@code attacker}»ò{@code victim}Îªnull
+     * @param hurt æ”»å‡»è€…å¯¹è¢«æ”»å‡»è€…å¯ä»¥é€ æˆçš„çš„ä¼¤å®³
+     * @param critsEffect æ”»å‡»è€…çš„æš´å‡»æ•ˆæœ
+     * @return æ”»å‡»è€…å¯¹è¢«æ”»å‡»è€…çš„æš´å‡»ä¼¤å®³
+     * @throws NullPointerException å¦‚æœ{@code attacker}æˆ–{@code victim}ä¸ºnull
      */
     public static int criticalDamage(final double hurt, final double critsEffect)
     {

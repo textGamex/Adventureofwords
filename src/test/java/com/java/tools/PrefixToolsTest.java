@@ -25,15 +25,15 @@ class PrefixToolsTest
     void add()
     {
 
-        attribute.add("²»ÔÊĞíÖØ¸´µÄ²âÊÔ");
+        attribute.add("ä¸å…è®¸é‡å¤çš„æµ‹è¯•");
 
         assertThrows(NullPointerException.class, () -> attribute.add(null));
-        assertThrows(IllegalStateException.class, () -> attribute.add("²»ÔÊĞíÖØ¸´µÄ²âÊÔ"));
+        assertThrows(IllegalStateException.class, () -> attribute.add("ä¸å…è®¸é‡å¤çš„æµ‹è¯•"));
 
         attribute.setRepeatAllowed(true);
-        attribute.add("ÔÊĞíÖØ¸´µÄ²âÊÔ");
+        attribute.add("å…è®¸é‡å¤çš„æµ‹è¯•");
 
-        assertDoesNotThrow(() ->attribute.add("ÔÊĞíÖØ¸´µÄ²âÊÔ"));
+        assertDoesNotThrow(() ->attribute.add("å…è®¸é‡å¤çš„æµ‹è¯•"));
     }
 
     @Test

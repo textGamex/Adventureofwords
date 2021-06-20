@@ -3,9 +3,9 @@ package com.java.tools;
 import static java.util.Objects.requireNonNull;
 
 /**
- * ÓÃÓÚ¹¹½¨UIµÄ¹¤¾ß.
+ * ç”¨äºæ„å»ºUIçš„å·¥å…·.
  *
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @since 2021-6-7
  * @version 1.0.0
  */
@@ -17,11 +17,11 @@ public final class UiTool
     }
 
     /**
-     * ¸ù¾İ´«ÈëµÄ×Ö·û´®Êı×éÀ´Á´½ÓÉú³ÉÒ»¸öUI½çÃæ.
+     * æ ¹æ®ä¼ å…¥çš„å­—ç¬¦ä¸²æ•°ç»„æ¥é“¾æ¥ç”Ÿæˆä¸€ä¸ªUIç•Œé¢.
      *
-     * @param test UIÎÄ×Ö
+     * @param test UIæ–‡å­—
      * @return UI
-     * @throws NullPointerException Èç¹û{@code test}»òÊı×éÖĞµÄÔªËØÎªnull
+     * @throws NullPointerException å¦‚æœ{@code test}æˆ–æ•°ç»„ä¸­çš„å…ƒç´ ä¸ºnull
      */
     public static String generateUi(final String[] test)
     {
@@ -36,12 +36,12 @@ public final class UiTool
     }
 
     /**
-     * ¸ù¾İ´«ÈëµÄ×Ö·ûºÍÊıÁ¿×Ô¶¯´òÓ¡·Ö¸ô·û.
+     * æ ¹æ®ä¼ å…¥çš„å­—ç¬¦å’Œæ•°é‡è‡ªåŠ¨æ‰“å°åˆ†éš”ç¬¦.
      *
-     * @param separatorCharacter Òª´òÓ¡µÄ·Ö¸ô·û
-     * @param count Òª´òÓ¡µÄÊıÁ¿
-     * @throws IllegalArgumentException Èç¹û{@code length}Îª¸º
-     * @throws NullPointerException Èç¹û{@code separatorCharacter}Îªnull
+     * @param separatorCharacter è¦æ‰“å°çš„åˆ†éš”ç¬¦
+     * @param count è¦æ‰“å°çš„æ•°é‡
+     * @throws IllegalArgumentException å¦‚æœ{@code length}ä¸ºè´Ÿ
+     * @throws NullPointerException å¦‚æœ{@code separatorCharacter}ä¸ºnull
      */
     public static void separator(final String separatorCharacter, final int count)
     {

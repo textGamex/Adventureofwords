@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @version 1.1.0
  * @since 2021-6-6
  */
@@ -21,12 +21,12 @@ public class JsonBaseTool
         throw new AssertionError();
     }
     /**
-     * ¶ÁÈ¡jsonÎÄ¼ş²¢·µ»Øjson¶ÔÏó.
+     * è¯»å–jsonæ–‡ä»¶å¹¶è¿”å›jsonå¯¹è±¡.
      *
-     * @param path Òª¶ÁÈ¡µÄjsonÎÄ¼şµÄÂ·¾¶
-     * @return ´ËÎÄ¼şµÄjson¶ÔÏó
-     * @throws FileNotFoundException Èç¹û{@code path}²»´æÔÚ
-     * @throws NullPointerException Èç¹û{@code path}Îªnull
+     * @param path è¦è¯»å–çš„jsonæ–‡ä»¶çš„è·¯å¾„
+     * @return æ­¤æ–‡ä»¶çš„jsonå¯¹è±¡
+     * @throws FileNotFoundException å¦‚æœ{@code path}ä¸å­˜åœ¨
+     * @throws NullPointerException å¦‚æœ{@code path}ä¸ºnull
      */
     public static JSONObject loadJsonFile(final File path) throws FileNotFoundException
     {
@@ -38,7 +38,7 @@ public class JsonBaseTool
         }
         catch (IOException e)
         {
-            var e2 = new FileNotFoundException(path + " ²»´æÔÚ");
+            var e2 = new FileNotFoundException(path + " ä¸å­˜åœ¨");
             e2.initCause(e);
             throw e2;
         }

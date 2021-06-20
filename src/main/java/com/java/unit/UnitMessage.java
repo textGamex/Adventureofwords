@@ -3,7 +3,7 @@ package com.java.unit;
 import java.io.Serializable;
 
 /**
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  */
 public class UnitMessage implements Serializable
 {

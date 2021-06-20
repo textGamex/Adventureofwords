@@ -10,22 +10,22 @@ import static java.util.Objects.requireNonNull;
 import static com.java.battleSystem.BattleAttributeCalculation.*;
 
 /**
- * Õ½¶·ÏµÍ³, ÓÃÀ´´¦ÀíÍæ¼ÒÕ½¶·ºÍÕ½¶·Ïà¹ØµÄÊıÖµ´¦Àí.
+ * æˆ˜æ–—ç³»ç»Ÿ, ç”¨æ¥å¤„ç†ç©å®¶æˆ˜æ–—å’Œæˆ˜æ–—ç›¸å…³çš„æ•°å€¼å¤„ç†.
  *
- * <p>ÒÑ¾­ÊµÏÖµÄÏµÊı</p>
+ * <p>å·²ç»å®ç°çš„ç³»æ•°</p>
  * <em>
- *     <li>Íæ¼Ò¾­Ñé½±ÀøÏµÊı</li>
- *     <li>Íæ¼Ò»õ±Ò½±ÀøÏµÊı</li>
- *     <li>Íæ¼Ò·ÖÊı½±ÀøÏµÊı</li>
- *     <li>Íæ¼Ò/µĞ¶Ôµ¥Î»¹¥»÷ÏµÊı</li>
- *     <li>Íæ¼Ò/µĞ¶Ôµ¥Î»±©»÷ÂÊ</li>
- *     <li>Íæ¼Ò/µĞ¶Ôµ¥Î»±©»÷Ğ§¹û</li>
- *     <li>Íæ¼Ò/µĞ¶Ôµ¥Î»³ĞÉËÏµÊı</li>
- *     <li>Íæ¼Ò/µĞ¶Ôµ¥Î»ÎïÀí¿¹ĞÔÏµÊı</li>
- *     <li>Íæ¼Ò/µĞ¶Ôµ¥Î»·¨Êõ¿¹ĞÔÏµÊı</li>
+ *     <li>ç©å®¶ç»éªŒå¥–åŠ±ç³»æ•°</li>
+ *     <li>ç©å®¶è´§å¸å¥–åŠ±ç³»æ•°</li>
+ *     <li>ç©å®¶åˆ†æ•°å¥–åŠ±ç³»æ•°</li>
+ *     <li>ç©å®¶/æ•Œå¯¹å•ä½æ”»å‡»ç³»æ•°</li>
+ *     <li>ç©å®¶/æ•Œå¯¹å•ä½æš´å‡»ç‡</li>
+ *     <li>ç©å®¶/æ•Œå¯¹å•ä½æš´å‡»æ•ˆæœ</li>
+ *     <li>ç©å®¶/æ•Œå¯¹å•ä½æ‰¿ä¼¤ç³»æ•°</li>
+ *     <li>ç©å®¶/æ•Œå¯¹å•ä½ç‰©ç†æŠ—æ€§ç³»æ•°</li>
+ *     <li>ç©å®¶/æ•Œå¯¹å•ä½æ³•æœ¯æŠ—æ€§ç³»æ•°</li>
  * </em>
  * @version 1.0.0
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @since 15
  * @see BattleCoefficient
  */
@@ -33,19 +33,19 @@ public final class BattleSystem
 {
     public static void main(String[] args)
     {
-        final var role = Role.newStandardPrimaryLevelRole("ÈËÎï");
-        final var enemy = Role.newStandardPrimaryLevelRole("µĞ¶Ôµ¥Î»");
+        final var role = Role.newStandardPrimaryLevelRole("äººç‰©");
+        final var enemy = Role.newStandardPrimaryLevelRole("æ•Œå¯¹å•ä½");
         System.out.println(normalAttackDamage(role, enemy));
     }
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(BattleSystem.class);
 
     /**
-     * ÅĞ¶Ï¹¥»÷ÕßÊÇ·ñ¿ÉÒÔ¶Ô±»±»¹¥»÷ÕßÔì³É±©»÷.
+     * åˆ¤æ–­æ”»å‡»è€…æ˜¯å¦å¯ä»¥å¯¹è¢«è¢«æ”»å‡»è€…é€ æˆæš´å‡».
      *
-     * @param attacker ¹¥»÷Õß
-     * @param victim ±»¹¥»÷Õß
-     * @return Èç¹û¿ÉÒÔÔì³É±©»÷, ·µ»Ø{@code true}, ·ñÔò·µ»Ø{@code false}
+     * @param attacker æ”»å‡»è€…
+     * @param victim è¢«æ”»å‡»è€…
+     * @return å¦‚æœå¯ä»¥é€ æˆæš´å‡», è¿”å›{@code true}, å¦åˆ™è¿”å›{@code false}
      */
     public static boolean attackCanCrit(final BasicUnit attacker, final BasicUnit victim)
     {
@@ -58,11 +58,11 @@ public final class BattleSystem
     }
 
     /**
-     * ¸ù¾İµ¥Î»µÄ×´Ì¬À´ÅĞ¶Ï±¾»ØºÏÊÇ·ñ¿ÉÒÔĞĞ¶¯.
+     * æ ¹æ®å•ä½çš„çŠ¶æ€æ¥åˆ¤æ–­æœ¬å›åˆæ˜¯å¦å¯ä»¥è¡ŒåŠ¨.
      *
-     * @param unit Òª½øĞĞÅĞ¶ÏµÄµ¥Î»
-     * @return Èç¹û¿ÉÒÔĞĞ¶¯, ·µ»Ø{@code true}, ·ñÔò·µ»Ø{@code false}
-     * @throws NullPointerException Èç¹û{@code unit}Îªnull
+     * @param unit è¦è¿›è¡Œåˆ¤æ–­çš„å•ä½
+     * @return å¦‚æœå¯ä»¥è¡ŒåŠ¨, è¿”å›{@code true}, å¦åˆ™è¿”å›{@code false}
+     * @throws NullPointerException å¦‚æœ{@code unit}ä¸ºnull
      */
     public static boolean canAct(final BasicUnit unit)
     {
@@ -75,17 +75,17 @@ public final class BattleSystem
     }
 
     /**
-     * ¼ÆËãÆÕÍ¨¹¥»÷ÉËº¦.
+     * è®¡ç®—æ™®é€šæ”»å‡»ä¼¤å®³.
      *
-     * @return ·µ»ØÆÕÍ¨¹¥»÷ÉËº¦
+     * @return è¿”å›æ™®é€šæ”»å‡»ä¼¤å®³
      */
     public static int normalAttackDamage(final BasicUnit attacker, final BasicUnit victim)
     {
-        LOGGER.debug("¹¥»÷Õß¹¥»÷Á¦:{}, ±»¹¥»÷Õß»¤¼×:{}", attacker.attack().getPhysicalAttack(), victim.defense().getArmor());
+        LOGGER.debug("æ”»å‡»è€…æ”»å‡»åŠ›:{}, è¢«æ”»å‡»è€…æŠ¤ç”²:{}", attacker.attack().getPhysicalAttack(), victim.defense().getArmor());
         final var attackPower = attackerPhysicalDamage(requireNonNull(attacker), requireNonNull(victim));
-        LOGGER.debug("ÉËº¦:{}", attackPower);
+        LOGGER.debug("ä¼¤å®³:{}", attackPower);
         final var hurt = floatingNumber(attackPower, 0.2);
-        LOGGER.debug("Ëæ»úºóµÄÉËº¦:{}", hurt);
+        LOGGER.debug("éšæœºåçš„ä¼¤å®³:{}", hurt);
 
         return hurt;
     }

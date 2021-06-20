@@ -1,15 +1,15 @@
 package com.ui.payment;
 
-import com.ui.Ui;
+import com.ui.BaseUi;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * @author 留恋千年
+ * @author 鐣欐亱鍗冨勾
  * @version 1.1.0
  */
-public final class WeChat extends Ui
+public final class WeChat extends BaseUi
 {
     public static void main(String[] args)
     {
@@ -23,7 +23,7 @@ public final class WeChat extends Ui
 
     }
 
-    public Ui newWeChat()
+    public BaseUi newWeChat()
     {
         return WECHAT;
     }
@@ -31,14 +31,14 @@ public final class WeChat extends Ui
     public static void showCollectionCode()
     {
         EventQueue.invokeLater(() -> {
-            JFrame jframe  = new JFrame("微信支付");
+            JFrame jframe  = new JFrame("寰俊鏀粯");
             jframe.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             jframe.setSize(500,700);
-            jframe.setLocationRelativeTo(null);//在屏幕中居中显示
+            jframe.setLocationRelativeTo(null);//鍦ㄥ睆骞曚腑灞呬腑鏄剧ず
             JLabel label = new JLabel();
             jframe.add(label);
             label.setIcon(new ImageIcon("resources\\image\\WeChat.png"));
-            jframe.setVisible(true);   //显示
+            jframe.setVisible(true);   //鏄剧ず
         });
     }
 

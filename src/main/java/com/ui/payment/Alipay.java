@@ -1,15 +1,15 @@
 package com.ui.payment;
 
-import com.ui.Ui;
+import com.ui.BaseUi;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @version 1.0.0
  */
-public final class Alipay extends Ui
+public final class Alipay extends BaseUi
 {
     private static final Alipay ALIPAY = new Alipay();
 
@@ -18,7 +18,7 @@ public final class Alipay extends Ui
 
     }
 
-    public static Ui newAlipay()
+    public static BaseUi newAlipay()
     {
         return ALIPAY;
     }
@@ -27,14 +27,14 @@ public final class Alipay extends Ui
     public static void showCollectionCode()
     {
         EventQueue.invokeLater(() -> {
-            JFrame jframe  = new JFrame("Ö§¸¶±¦Ö§¸¶");
+            JFrame jframe  = new JFrame("æ”¯ä»˜å®æ”¯ä»˜");
             jframe.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             jframe.setSize(420,700);
-            jframe.setLocationRelativeTo(null);//ÔÚÆÁÄ»ÖĞ¾ÓÖĞÏÔÊ¾
+            jframe.setLocationRelativeTo(null);//åœ¨å±å¹•ä¸­å±…ä¸­æ˜¾ç¤º
             JLabel label = new JLabel();
             jframe.add(label);
-            label.setIcon(new ImageIcon("resources\\image\\Alipay.jpg"));//TODO:Í¼Æ¬¼ÓÔØ²»³öÀ´
-            jframe.setVisible(true);   //ÏÔÊ¾
+            label.setIcon(new ImageIcon("resources\\image\\Alipay.jpg"));//TODO:å›¾ç‰‡åŠ è½½ä¸å‡ºæ¥
+            jframe.setVisible(true);   //æ˜¾ç¤º
         });
     }
 

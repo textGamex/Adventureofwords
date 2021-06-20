@@ -4,20 +4,20 @@ import com.java.battleSystem.BattleSystem;
 
 import static java.util.Objects.requireNonNull;
 /**
- * Õ½¶·ÌáÊ¾ĞÅÏ¢.
+ * æˆ˜æ–—æç¤ºä¿¡æ¯.
  *
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @version 1.0.2
  * @since 16
 */
 public final class BattleTip
 {
     /**
-     * @author ÁôÁµÇ§Äê
+     * @author ç•™æ‹åƒå¹´
      */
     public enum CauseOfNoInjury
     {
-        MISS("Î´ÃüÖĞ");
+        MISS("æœªå‘½ä¸­");
         private final String typeName;
 
         CauseOfNoInjury(String type)
@@ -37,50 +37,50 @@ public final class BattleTip
     }
 
     /**
-     * ÓÃÓÚÊä³öÕ½³¡ĞÅÏ¢.
+     * ç”¨äºè¾“å‡ºæˆ˜åœºä¿¡æ¯.
      *
      * @see AttackMessage
-     * @throws NullPointerException Èç¹ûm{@code message}Îªnull
-     * @throws IllegalArgumentException Èç¹û{@code message.getHarm()}·½·¨µÄ·µ»ØÖµĞ¡ÓÚ0
-     * @param message Õ½³¡ĞÅÏ¢°ü
+     * @throws NullPointerException å¦‚æœm{@code message}ä¸ºnull
+     * @throws IllegalArgumentException å¦‚æœ{@code message.getHarm()}æ–¹æ³•çš„è¿”å›å€¼å°äº0
+     * @param message æˆ˜åœºä¿¡æ¯åŒ…
      */
     public static String returnAttackMessage(AttackMessage message)
     {
         requireNonNull(message);
 
-        //²»Ö±½ÓĞ´³É message.harmÊÇÒòÎªÒÔºó¿ÉÄÜÒª×ö·ÖÀë´¦Àí
+        //ä¸ç›´æ¥å†™æˆ message.harmæ˜¯å› ä¸ºä»¥åå¯èƒ½è¦åšåˆ†ç¦»å¤„ç†
         var victimName = message.getVictimName();
         var attackerName = message.getAttackerName();
         var harm = message.getHarm();
 
         if (message.getHarm() == 0)
         {
-            return String.format("%sÊ¹ÓÃ[%s]¶Ô%s·¢ÆğÁË¹¥»÷, µ«Î´Ôì³ÉÉËº¦", attackerName, message.getHarmTypeName(), victimName);
+            return String.format("%sä½¿ç”¨[%s]å¯¹%så‘èµ·äº†æ”»å‡», ä½†æœªé€ æˆä¼¤å®³", attackerName, message.getHarmTypeName(), victimName);
         }
         else if (message.getHarm() > 0)
         {
-            return String.format("%sÊ¹ÓÃ[%s]¶Ô%sÔì³ÉÁË%dµãÉËº¦,%s»¹Ê£%dµãÉúÃüÖµ",attackerName, message.getHarmTypeName(),
+            return String.format("%sä½¿ç”¨[%s]å¯¹%sé€ æˆäº†%dç‚¹ä¼¤å®³,%sè¿˜å‰©%dç‚¹ç”Ÿå‘½å€¼",attackerName, message.getHarmTypeName(),
                 victimName, message.getHarm(), victimName, message.getVictimSurplusHp());
         }
         else
         {
-            throw new IllegalArgumentException("Òì³£ÉËº¦:" + harm);
+            throw new IllegalArgumentException("å¼‚å¸¸ä¼¤å®³:" + harm);
         }
     }
 
     /**
-     * Õ½³¡ĞÅÏ¢°ü, ÓÃÀ´¸¨Öú{@code BattleTip}Àà, ÒÔ±ãÊµÏÖÕ½¶·ĞÅÏ¢ÌáÊ¾.
+     * æˆ˜åœºä¿¡æ¯åŒ…, ç”¨æ¥è¾…åŠ©{@code BattleTip}ç±», ä»¥ä¾¿å®ç°æˆ˜æ–—ä¿¡æ¯æç¤º.
      *
-     * <p>Ò»¸ö±£´æÕ½¶·Êı¾İµÄ¸¨ÖúÀà, ÓÃÓÚ´«ÊäÒÔÏÂĞÅÏ¢</p>
-     * <li>¹¥»÷ÕßÃû³Æ</li>
-     * <li>¹¥»÷ÕßÔì³ÉµÄÉËº¦Á¿</li>
-     * <li>¹¥»÷ÀàĞÍ</li>
-     * <li>±»¹¥»÷ÕßÃû³Æ</li>
-     * <li>±»¹¥»÷ÕßÊ£ÓàÑªÁ¿</li>
+     * <p>ä¸€ä¸ªä¿å­˜æˆ˜æ–—æ•°æ®çš„è¾…åŠ©ç±», ç”¨äºä¼ è¾“ä»¥ä¸‹ä¿¡æ¯</p>
+     * <li>æ”»å‡»è€…åç§°</li>
+     * <li>æ”»å‡»è€…é€ æˆçš„ä¼¤å®³é‡</li>
+     * <li>æ”»å‡»ç±»å‹</li>
+     * <li>è¢«æ”»å‡»è€…åç§°</li>
+     * <li>è¢«æ”»å‡»è€…å‰©ä½™è¡€é‡</li>
      *
      * @version 1.0.1
      * @since 16
-     * @author ÁôÁµÇ§Äê
+     * @author ç•™æ‹åƒå¹´
      * @see BattleSystem
      * @see AttackMessage
      */
@@ -94,13 +94,13 @@ public final class BattleTip
         private final int victimSurplusHp;
 
         /**
-         * @param attackerName ¹¥»÷ÕßµÄÃû×Ö
-         * @param victimName ±»¹¥»÷ÕßµÄÃû×Ö
-         * @param harm ¹¥»÷ÕßÔì³ÉµÄÉËº¦
-         * @param attackType ÉËº¦ÀàĞÍ
-         * @param victimSurplusHp ±»¹¥»÷ºóÊ£ÓàÑªÁ¿
-         * @author ÁôÁµÇ§Äê
-         * @throws NullPointerException Èç¹û{@code attackerName}»ò{@code victimName}Îªnull
+         * @param attackerName æ”»å‡»è€…çš„åå­—
+         * @param victimName è¢«æ”»å‡»è€…çš„åå­—
+         * @param harm æ”»å‡»è€…é€ æˆçš„ä¼¤å®³
+         * @param attackType ä¼¤å®³ç±»å‹
+         * @param victimSurplusHp è¢«æ”»å‡»åå‰©ä½™è¡€é‡
+         * @author ç•™æ‹åƒå¹´
+         * @throws NullPointerException å¦‚æœ{@code attackerName}æˆ–{@code victimName}ä¸ºnull
          * @since 16
          */
         public AttackMessage(String attackerName, int harm, AttackType attackType, String victimName, int victimSurplusHp)

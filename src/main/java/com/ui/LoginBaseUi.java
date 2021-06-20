@@ -5,17 +5,17 @@ import static com.java.message.PrivateData.*;
 import java.util.Scanner;
 
 /**
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  */
-public class LoginUi extends Ui
+public class LoginBaseUi extends BaseUi
 {
-    private static final LoginUi LOGIN_UI = new LoginUi();
-    private LoginUi()
+    private static final LoginBaseUi LOGIN_UI = new LoginBaseUi();
+    private LoginBaseUi()
     {
 
     }
 
-    public static Ui getLoginUi()
+    public static BaseUi getLoginUi()
     {
         return LOGIN_UI;
     }
@@ -28,7 +28,7 @@ public class LoginUi extends Ui
 
     public static AccountMessage loginMain()
     {
-        System.out.print("ÇëÊäÈëÕËºÅ: ");
+        System.out.print("è¯·è¾“å…¥è´¦å·: ");
         var account = AccountMessage.readAccount(new Scanner(System.in));
 
         switch (account.getId())
@@ -36,14 +36,14 @@ public class LoginUi extends Ui
             case NEW_GAME_MANAGER:
                 verifyPassword();
             case NEW_PLAYER:
-                System.out.println("ÄúºÃ!ĞÂÍæ¼Ò");
+                System.out.println("æ‚¨å¥½!æ–°ç©å®¶");
                 account.createAccountDataFolder();
                 break;
             case GAME_MANAGER:
                 verifyPassword();
             case PLAYER:
-                System.out.println("µÇÂ¼³É¹¦!");
-                System.out.println("»¶Ó­ÄúÔÙ´ÎÀ´µ½ÎÄ×ÖÃ°ÏÕµÄÊÀ½ç");
+                System.out.println("ç™»å½•æˆåŠŸ!");
+                System.out.println("æ¬¢è¿æ‚¨å†æ¬¡æ¥åˆ°æ–‡å­—å†’é™©çš„ä¸–ç•Œ");
                 break;
             default: throw new AssertionError();
         }
@@ -55,16 +55,16 @@ public class LoginUi extends Ui
         var in = new Scanner(System.in);
         String password;
 
-        System.out.print("ÇëÊäÈëÃÜÂë: ");
+        System.out.print("è¯·è¾“å…¥å¯†ç : ");
         password = in.nextLine();
         if (password.equals(PASSWORD1) || password.equals(PASSWORD2))
         {
-            System.out.println("µÇÂ¼³É¹¦!");
+            System.out.println("ç™»å½•æˆåŠŸ!");
         }
         else
         {
-            System.out.println("ÃÜÂë´íÎó!");
-            System.out.println("3ÃëºóÓÎÏ·ÍË³ö!");
+            System.out.println("å¯†ç é”™è¯¯!");
+            System.out.println("3ç§’åæ¸¸æˆé€€å‡º!");
             try
             {
                 Thread.sleep(3000);

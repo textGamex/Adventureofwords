@@ -11,15 +11,15 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 
 /**
- * BuffÄ£¿é, ÓÃÓÚºÍ{@link com.java.unit.BasicUnit}Àà½»»¥.
+ * Buffæ¨¡å—, ç”¨äºå’Œ{@link com.java.unit.BasicUnit}ç±»äº¤äº’.
  *
- * <p>ÓÃÓÚÊµÏÖÓÎÏ·µÄbuff»úÖÆ, ¾ßÓĞÒ»°ã»ØºÏÖÆÓÎÏ·buffÏà¹ØµÄ´ó²¿·Ö¹¦ÄÜ</p>
+ * <p>ç”¨äºå®ç°æ¸¸æˆçš„buffæœºåˆ¶, å…·æœ‰ä¸€èˆ¬å›åˆåˆ¶æ¸¸æˆbuffç›¸å…³çš„å¤§éƒ¨åˆ†åŠŸèƒ½</p>
  * @see com.java.unit.BasicUnit
  * @see BuffEffect
  * @see BuffType
  * @version 1.3.3
  * @since 15
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  */
 public class BuffModule implements Serializable
 {
@@ -31,14 +31,14 @@ public class BuffModule implements Serializable
     private final Map<BuffType, BuffEffect> haveBuffs = new EnumMap<>(BuffType.class);
 
     /**
-     * ¸øµ¥Î»Ìí¼Ó{@link BuffType}.
+     * ç»™å•ä½æ·»åŠ {@link BuffType}.
      *
-     * <p>¸øµ¥Î»Ìí¼Óbuff, Èç¹ûÒªÌí¼ÓµÄĞ§¹ûÒÑ´æÔÚ, Ôò³ÖĞø»ØºÏÊıºÍĞ§¹û²ãÊı³ıÓÚ2È»ºóºÍÒÑ´æÔÚµÄ{@code buffEffect}µÄtimeºÍlayerÏà¼Ó</p>
-     * <p>Èç¹û{@link BuffEffect#isTimeLess()}·½·¨µÄ·µ»ØÖµÎª{@code true}, ÔòÖ±½ÓÌæ»»</p>
-     * @param type ÒªÌí¼ÓµÄbuffÀàĞÍ
-     * @param buffEffect Ìí¼ÓµÄbuffµÄ¾ßÌåĞ§¹û
+     * <p>ç»™å•ä½æ·»åŠ buff, å¦‚æœè¦æ·»åŠ çš„æ•ˆæœå·²å­˜åœ¨, åˆ™æŒç»­å›åˆæ•°å’Œæ•ˆæœå±‚æ•°é™¤äº2ç„¶åå’Œå·²å­˜åœ¨çš„{@code buffEffect}çš„timeå’Œlayerç›¸åŠ </p>
+     * <p>å¦‚æœ{@link BuffEffect#isTimeLess()}æ–¹æ³•çš„è¿”å›å€¼ä¸º{@code true}, åˆ™ç›´æ¥æ›¿æ¢</p>
+     * @param type è¦æ·»åŠ çš„buffç±»å‹
+     * @param buffEffect æ·»åŠ çš„buffçš„å…·ä½“æ•ˆæœ
      * @since 15
-     * @throws NullPointerException Èç¹û{@code buffEffect}»ò{@code type}Îªnull
+     * @throws NullPointerException å¦‚æœ{@code buffEffect}æˆ–{@code type}ä¸ºnull
      * @see BuffEffect
      */
     public final void add(final BuffType type, final BuffEffect buffEffect)
@@ -48,11 +48,11 @@ public class BuffModule implements Serializable
 
         if (haveBuffs.containsKey(type))
         {
-            LOGGER.debug("{}({})´æÔÚ", type, type.getType());
+            LOGGER.debug("{}({})å­˜åœ¨", type, type.getType());
             if (buffEffect.isTimeLess())
             {
                 haveBuffs.put(type, buffEffect);
-                LOGGER.debug("{}({})ÊÇÌØĞÔ", type, type.getType());
+                LOGGER.debug("{}({})æ˜¯ç‰¹æ€§", type, type.getType());
             }
             else
             {
@@ -62,40 +62,40 @@ public class BuffModule implements Serializable
 
                 existentBuff.setTimeLimit(existentBuff.getTimeLimit() + (addTimeLimit == 1 ? 1 : addTimeLimit / 2));
                 existentBuff.setLayers(existentBuff.getLayers() + (addLayers == 1 ? 1 : addLayers / 2));
-                LOGGER.debug("{}({})²»ÊÇÌØĞÔ", type, type.getType());
+                LOGGER.debug("{}({})ä¸æ˜¯ç‰¹æ€§", type, type.getType());
             }
         }
         else
         {
             haveBuffs.put(type, buffEffect);
-            LOGGER.debug("{}({})²»´æÔÚ, Ö±½ÓÌí¼Ó", type, type.getType());
+            LOGGER.debug("{}({})ä¸å­˜åœ¨, ç›´æ¥æ·»åŠ ", type, type.getType());
         }
     }
 
     /**
-     * »ñµÃÖ¸¶¨{@link BuffType}µÄĞ§¹ûĞÅÏ¢.
+     * è·å¾—æŒ‡å®š{@link BuffType}çš„æ•ˆæœä¿¡æ¯.
      *
-     * @throws NullPointerException Èç¹û{@code type}Îªnull»ò{@code type}²»´æÔÚ
-     * @return ´ËbuffµÄĞ§¹ûĞÅÏ¢
-     * @param type buffµÄÀàĞÍ
+     * @throws NullPointerException å¦‚æœ{@code type}ä¸ºnullæˆ–{@code type}ä¸å­˜åœ¨
+     * @return æ­¤buffçš„æ•ˆæœä¿¡æ¯
+     * @param type buffçš„ç±»å‹
      * @see BuffType
      */
     public final BuffEffect getMessage(final BuffType type)
     {
         if (buffNotExist(requireNonNull(type)))
         {
-            throw new NullPointerException("buff²»´æÔÚ:" + type);
+            throw new NullPointerException("buffä¸å­˜åœ¨:" + type);
         }
 
         return haveBuffs.get(type);
     }
 
     /**
-     * Èç¹û{@link BuffType}´æÔÚ, ·µ»Ø{@code true}.
+     * å¦‚æœ{@link BuffType}å­˜åœ¨, è¿”å›{@code true}.
      *
-     * @param aBuffType ¼ì²â{@link BuffType}ÊÇ·ñ´æÔÚ
-     * @throws NullPointerException Èç¹û{@code aBuffType}Îªnull
-     * @return Èç¹û´æÔÚ, ·µ»Ø {@code true}, ·ñÔò·µ»Ø{@code false}
+     * @param aBuffType æ£€æµ‹{@link BuffType}æ˜¯å¦å­˜åœ¨
+     * @throws NullPointerException å¦‚æœ{@code aBuffType}ä¸ºnull
+     * @return å¦‚æœå­˜åœ¨, è¿”å› {@code true}, å¦åˆ™è¿”å›{@code false}
      */
     public final boolean have(final BuffType aBuffType)
     {
@@ -103,7 +103,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * @return Èç¹ûÊÇ¿ÕµÄ, ·µ»Ø{@code true}
+     * @return å¦‚æœæ˜¯ç©ºçš„, è¿”å›{@code true}
      */
     public final boolean isEmpty()
     {
@@ -111,9 +111,9 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * ·µ»Ø´Ëµ¥Î»¾ßÓĞµÄbuffÊıÁ¿.
+     * è¿”å›æ­¤å•ä½å…·æœ‰çš„buffæ•°é‡.
      *
-     * @return ´Ëµ¥Î»¾ßÓĞµÄbuffÊıÁ¿
+     * @return æ­¤å•ä½å…·æœ‰çš„buffæ•°é‡
      */
     public int size()
     {
@@ -121,27 +121,27 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * ´Ó¾ßÓĞµÄ{@link BuffType}ÖĞÒÆ³ı×ßÒ»¸öÖ¸¶¨µÄbuff.
+     * ä»å…·æœ‰çš„{@link BuffType}ä¸­ç§»é™¤èµ°ä¸€ä¸ªæŒ‡å®šçš„buff.
      *
-     * @param type ÒªÒÆ³ıµÄbuffÀàĞÍ
-     * @throws NullPointerException Èç¹û{@code type}Îªnull»òÕßÒªÒÆ³ıbuffµÄ²»´æÔÚ
+     * @param type è¦ç§»é™¤çš„buffç±»å‹
+     * @throws NullPointerException å¦‚æœ{@code type}ä¸ºnullæˆ–è€…è¦ç§»é™¤buffçš„ä¸å­˜åœ¨
      */
     public void remove(final BuffType type)
     {
         if (buffNotExist(requireNonNull(type)))
         {
-            throw new NullPointerException("Buff²»´æÔÚ:" + type);
+            throw new NullPointerException("Buffä¸å­˜åœ¨:" + type);
         }
         haveBuffs.remove(type);
     }
 
     /**
-     * ÒÆ³ıÖ¸¶¨{@link BuffType}µÄ³ÖĞø»ØºÏÊı, Èç¹ûÒÆ³ıµÄ´óÓÚµÈÓÚÏÖÓĞµÄ»ØºÏÊı, ÔòÖ±½ÓÒÆ³ıbuff.
+     * ç§»é™¤æŒ‡å®š{@link BuffType}çš„æŒç»­å›åˆæ•°, å¦‚æœç§»é™¤çš„å¤§äºç­‰äºç°æœ‰çš„å›åˆæ•°, åˆ™ç›´æ¥ç§»é™¤buff.
      *
-     * @param type ÒªÒÆ³ıµÄ{@link BuffType}
-     * @param reduceTime ÒªÒÆ³ıµÄbuffµÄ»ØºÏÊı
-     * @throws NullPointerException Èç¹û{@code type}Îªnull
-     * @throws IllegalArgumentException rg{@code reduceTime}Ğ¡ÓÚµÈÓÚ0
+     * @param type è¦ç§»é™¤çš„{@link BuffType}
+     * @param reduceTime è¦ç§»é™¤çš„buffçš„å›åˆæ•°
+     * @throws NullPointerException å¦‚æœ{@code type}ä¸ºnull
+     * @throws IllegalArgumentException rg{@code reduceTime}å°äºç­‰äº0
      * @see BuffType
      * @see BuffEffect
      */
@@ -150,26 +150,26 @@ public class BuffModule implements Serializable
         requireNonNull(type);
         if (reduceTime <= 0)
         {
-            throw new IllegalArgumentException("·Ç·¨²ÎÊı:" + reduceTime);
+            throw new IllegalArgumentException("éæ³•å‚æ•°:" + reduceTime);
         }
 
         if (buffNotExist(type))
         {
-            throw new NullPointerException("Buff²»´æÔÚ:" + type);
+            throw new NullPointerException("Buffä¸å­˜åœ¨:" + type);
         }
 
         var buff = haveBuffs.get(type);
         var originalTime = buff.getTimeLimit();
 
-        //Èç¹ûÒÆ³ıµÄ»ØºÏ´óÓÚÏÖÓĞµÄ»ØºÏ, ÔòÖ±½ÓÒÆ³ı
+        //å¦‚æœç§»é™¤çš„å›åˆå¤§äºç°æœ‰çš„å›åˆ, åˆ™ç›´æ¥ç§»é™¤
         if (originalTime <= reduceTime)
         {
             haveBuffs.remove(type);
-            LOGGER.debug("³ÖĞø»ØºÏ:{} Ğ¡ÓÚµÈÓÚ ÒÆ³ıÊ±¼ä:{}, Ö±½ÓÒÆ³ı{}", originalTime, reduceTime, type);
+            LOGGER.debug("æŒç»­å›åˆ:{} å°äºç­‰äº ç§»é™¤æ—¶é—´:{}, ç›´æ¥ç§»é™¤{}", originalTime, reduceTime, type);
         }
         else
         {
-            LOGGER.debug("³ÖĞø»ØºÏ:{} ´óÓÚ ÒÆ³ıÊ±¼ä:{}, »ØºÏÊıÏà¼õ", originalTime, reduceTime);
+            LOGGER.debug("æŒç»­å›åˆ:{} å¤§äº ç§»é™¤æ—¶é—´:{}, å›åˆæ•°ç›¸å‡", originalTime, reduceTime);
             buff.setTimeLimit(originalTime - reduceTime);
         }
     }
@@ -180,7 +180,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * Çå¿Õµ¥Î»ËùĞ¯´øµÄËùÓĞbuffĞ§¹û.
+     * æ¸…ç©ºå•ä½æ‰€æºå¸¦çš„æ‰€æœ‰buffæ•ˆæœ.
      *
      * @since 15
      */
@@ -190,11 +190,11 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * Çå¿Õµ¥Î»ËùĞ¯´øµÄËùÓĞ¸ºÃæĞ§¹û
+     * æ¸…ç©ºå•ä½æ‰€æºå¸¦çš„æ‰€æœ‰è´Ÿé¢æ•ˆæœ
      *
      * <p>
-     *     <font color="#FF0000">×¢Òâ:</font>
-     * <strong>Ö»ÓĞ{@link BuffEffect#isDebuff()}·½·¨µÄ·µ»ØÖµÎª{@code true}µÄbuff²Å»á±»Çå³ı</strong>
+     *     <font color="#FF0000">æ³¨æ„:</font>
+     * <strong>åªæœ‰{@link BuffEffect#isDebuff()}æ–¹æ³•çš„è¿”å›å€¼ä¸º{@code true}çš„buffæ‰ä¼šè¢«æ¸…é™¤</strong>
      * </p>
      * @since 2021-5-3
      */
@@ -212,8 +212,8 @@ public class BuffModule implements Serializable
 
     /**
      *
-     * @param o Òª¼ì²âÊÇ·ñÏàµÈµÄ¶ÔÏó
-     * @return Èç¹û {@code o}ÓëthisÏàµÈ, ·µ»Ø{@code true}
+     * @param o è¦æ£€æµ‹æ˜¯å¦ç›¸ç­‰çš„å¯¹è±¡
+     * @return å¦‚æœ {@code o}ä¸thisç›¸ç­‰, è¿”å›{@code true}
      */
     @Override
     public boolean equals(Object o)
@@ -237,7 +237,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * @return ×Ö·û´®±íÊ¾µÄ¶ÔÏó
+     * @return å­—ç¬¦ä¸²è¡¨ç¤ºçš„å¯¹è±¡
      */
     @Override
     public String toString()

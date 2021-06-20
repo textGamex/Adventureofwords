@@ -14,30 +14,30 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * {@inheritDoc}
- * <p>ÇÒ¾ßÓĞÒ»ÏÂ¶îÍâÊôĞÔ</p>
- * <li>³ÖÓĞ»õ±Ò</li>
- * <li>ÓµÓĞ¾­Ñé</li>
- * <li>Éıµ½ÏÂÒ»¼¶ËùĞè¾­Ñé</li>
- * <li>½ÇÉ«´´½¨ÈÕÆÚ¼°Ê±¼ä</li>
+ * <p>ä¸”å…·æœ‰ä¸€ä¸‹é¢å¤–å±æ€§</p>
+ * <li>æŒæœ‰è´§å¸</li>
+ * <li>æ‹¥æœ‰ç»éªŒ</li>
+ * <li>å‡åˆ°ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒ</li>
+ * <li>è§’è‰²åˆ›å»ºæ—¥æœŸåŠæ—¶é—´</li>
  * @version 1.0.0
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  */
 public class Role extends BasicUnit
 {
-    /**Íæ¼ÒµÄid*/
+    /**ç©å®¶çš„id*/
     private static int nextId = 70000;
     private final int id = ++nextId;
-    /**³ÖÓĞ»õ±Ò*/
+    /**æŒæœ‰è´§å¸*/
     private int cash;
-    /**ÓµÓĞ¾­Ñé*/
+    /**æ‹¥æœ‰ç»éªŒ*/
     private int exp;
-    /**Éıµ½ÏÂÒ»¼¶ËùĞè¾­Ñé*/
+    /**å‡åˆ°ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒ*/
     private int upgradeNeedXp;
-    /**½ÇÉ«´´½¨ÈÕÆÚ*/
+    /**è§’è‰²åˆ›å»ºæ—¥æœŸ*/
     private final LocalDateTime creatingDateTime = LocalDateTime.now();
 
     /**
-     * @throws NullPointerException Èç¹û{@code builder}Îªnull
+     * @throws NullPointerException å¦‚æœ{@code builder}ä¸ºnull
      */
     protected Role(Builder builder)
     {
@@ -48,7 +48,7 @@ public class Role extends BasicUnit
     }
 
     /**
-     * @author ÁôÁµÇ§Äê
+     * @author ç•™æ‹åƒå¹´
      * @version 1.1.2
      * @see com.java.unit.BasicUnit.Builder
      */
@@ -59,7 +59,7 @@ public class Role extends BasicUnit
         private int upgradeNeedXp  = 10;
 
         /**
-         * @throws NullPointerException Èç¹û{@code name}Îªnull
+         * @throws NullPointerException å¦‚æœ{@code name}ä¸ºnull
          */
         public Builder(String name)
         {
@@ -92,11 +92,11 @@ public class Role extends BasicUnit
     }
 
     /**
-     * ¹¹½¨Ò»¸öÒ»¼¶±ê×¼Íæ¼Ò½ÇÉ«¶ÔÏó.
+     * æ„å»ºä¸€ä¸ªä¸€çº§æ ‡å‡†ç©å®¶è§’è‰²å¯¹è±¡.
      *
-     * @param name Ãû³Æ
-     * @return ·µ»ØÒ»¸öÒ»¼¶±ê×¼Íæ¼Ò½ÇÉ«¶ÔÏó
-     * @throws NullPointerException Èç¹û{@code name}Îªnull
+     * @param name åç§°
+     * @return è¿”å›ä¸€ä¸ªä¸€çº§æ ‡å‡†ç©å®¶è§’è‰²å¯¹è±¡
+     * @throws NullPointerException å¦‚æœ{@code name}ä¸ºnull
      */
     public static Role newStandardPrimaryLevelRole(final String name)
     {
@@ -136,27 +136,27 @@ public class Role extends BasicUnit
     }
 
     /**
-     * @return ×Ö·û´®±íÊ¾µÄ¶ÔÏó
+     * @return å­—ç¬¦ä¸²è¡¨ç¤ºçš„å¯¹è±¡
      */
     @Override
     public String toString()
     {
         return  super.toString() +
-                "[³ÖÓĞ»õ±Ò:" + cash +
-                ", ½ÇÉ«ÓµÓĞ¾­Ñé:" + exp +
-                ", Éıµ½ÏÂÒ»¼¶ËùĞè¾­Ñé:" + upgradeNeedXp +
-                ", ´´½¨ÈÕÆÚ:" + creatingDateTime +
+                "[æŒæœ‰è´§å¸:" + cash +
+                ", è§’è‰²æ‹¥æœ‰ç»éªŒ:" + exp +
+                ", å‡åˆ°ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒ:" + upgradeNeedXp +
+                ", åˆ›å»ºæ—¥æœŸ:" + creatingDateTime +
                 ']' +
                 buff().toString();
     }
 
     /**
-     * ÓÃÓÚ±£´æ½ÇÉ«µÄÊôĞÔ
+     * ç”¨äºä¿å­˜è§’è‰²çš„å±æ€§
      *
-     * <p>Èç¹ûÕËºÅÀàĞÍÊÇÍæ¼Ò, ÔòÓÃĞòÁĞ»¯·½Ê½±£´æ, Èç¹ûÊÇÄÚ²¿ÈËÔ±, ÔòÓÃjson·½Ê½±£´æ</p>
-     * @param acc ´Ë½ÇÉ«Ëù¶ÔÓ¦µÄÍæ¼ÒµÄÕËºÅ
+     * <p>å¦‚æœè´¦å·ç±»å‹æ˜¯ç©å®¶, åˆ™ç”¨åºåˆ—åŒ–æ–¹å¼ä¿å­˜, å¦‚æœæ˜¯å†…éƒ¨äººå‘˜, åˆ™ç”¨jsonæ–¹å¼ä¿å­˜</p>
+     * @param acc æ­¤è§’è‰²æ‰€å¯¹åº”çš„ç©å®¶çš„è´¦å·
      * @see AccountMessage
-     * @throws NullPointerException Èç¹û{@code acc}Îªnull
+     * @throws NullPointerException å¦‚æœ{@code acc}ä¸ºnull
      */
     public void saveData(AccountMessage acc)
     {
@@ -181,24 +181,24 @@ public class Role extends BasicUnit
         requireNonNull(path);
 
         var jsonFile = new JSONObject();
-        jsonFile.put("Ãû³Æ", super.getName());
-        jsonFile.put("µ¥Î»µÈ¼¶", super.getLevel());
-        jsonFile.put("×î´óÉúÃüÖµ", super.defense().getHp());
-        jsonFile.put("ËÙ¶È", super.getSpeed());
-        jsonFile.put("Ä§·¨Öµ", super.attack().getMana());
-        jsonFile.put("ÎïÀí¹¥»÷", super.attack().getPhysicalAttack());
-        jsonFile.put("±©»÷", super.attack().getCrit());
-        jsonFile.put("±©»÷¿¹ĞÔ", super.defense().getCritResistance());
-        jsonFile.put("±©»÷Ğ§¹û", super.attack().getCritsEffect());
-        jsonFile.put("ÎïÀí¿¹ĞÔ", super.defense().getPhysicalResistance());
-        jsonFile.put("»¤¼×", super.defense().getArmor());
-        jsonFile.put("Ã¿»ØºÏÉúÃü»Ø¸´", super.defense().getLifeRegeneration());
-        jsonFile.put("Ã¿»ØºÏÄ§·¨Öµ»Ø¸´", super.attack().getManaRecovery());
-        jsonFile.put("ÃüÖĞ", super.attack().getHit());
-        jsonFile.put("ÉÁ±Ü", super.defense().getEvade());
-        jsonFile.put("³ÖÓĞ»õ±Ò", cash);
-        jsonFile.put("½ÇÉ«ÓµÓĞ¾­Ñé", exp);
-        jsonFile.put("Éıµ½ÏÂÒ»¼¶ËùĞè¾­Ñé", upgradeNeedXp);
+        jsonFile.put("åç§°", super.getName());
+        jsonFile.put("å•ä½ç­‰çº§", super.getLevel());
+        jsonFile.put("æœ€å¤§ç”Ÿå‘½å€¼", super.defense().getHp());
+        jsonFile.put("é€Ÿåº¦", super.getSpeed());
+        jsonFile.put("é­”æ³•å€¼", super.attack().getMana());
+        jsonFile.put("ç‰©ç†æ”»å‡»", super.attack().getPhysicalAttack());
+        jsonFile.put("æš´å‡»", super.attack().getCrit());
+        jsonFile.put("æš´å‡»æŠ—æ€§", super.defense().getCritResistance());
+        jsonFile.put("æš´å‡»æ•ˆæœ", super.attack().getCritsEffect());
+        jsonFile.put("ç‰©ç†æŠ—æ€§", super.defense().getPhysicalResistance());
+        jsonFile.put("æŠ¤ç”²", super.defense().getArmor());
+        jsonFile.put("æ¯å›åˆç”Ÿå‘½å›å¤", super.defense().getLifeRegeneration());
+        jsonFile.put("æ¯å›åˆé­”æ³•å€¼å›å¤", super.attack().getManaRecovery());
+        jsonFile.put("å‘½ä¸­", super.attack().getHit());
+        jsonFile.put("é—ªé¿", super.defense().getEvade());
+        jsonFile.put("æŒæœ‰è´§å¸", cash);
+        jsonFile.put("è§’è‰²æ‹¥æœ‰ç»éªŒ", exp);
+        jsonFile.put("å‡åˆ°ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒ", upgradeNeedXp);
 
         try (var out = new PrintWriter(path, StandardCharsets.UTF_8))
         {
@@ -217,18 +217,18 @@ public class Role extends BasicUnit
 
     /**
      *
-     * @param account Òª¶ÁÈ¡µÄÕËºÅ
-     * @return Íæ¼ÒÊôĞÔĞÅÏ¢
-     * @throws FileNotFoundException Èç¹ûÒª¶ÁÈ¡µÄÎÄ¼ş²»´æÔÚ
+     * @param account è¦è¯»å–çš„è´¦å·
+     * @return ç©å®¶å±æ€§ä¿¡æ¯
+     * @throws FileNotFoundException å¦‚æœè¦è¯»å–çš„æ–‡ä»¶ä¸å­˜åœ¨
      * @since 15
      */
     public static Role loadData(final AccountMessage account) throws FileNotFoundException
     {
         requireNonNull(account);
-        //Èç¹û²»´æÔÚ,ÄÇÔõÃ´ÄÜ¶ÁÈ¡ÄØ?
+        //å¦‚æœä¸å­˜åœ¨,é‚£æ€ä¹ˆèƒ½è¯»å–å‘¢?
         if (fileNotExist(account))
         {
-            throw new IllegalStateException("ÎÄ¼ş²»´æÔÚ,Id: " + account.getId());
+            throw new IllegalStateException("æ–‡ä»¶ä¸å­˜åœ¨,Id: " + account.getId());
         }
 
         if (account.getId() == Identity.PLAYER)
@@ -236,7 +236,7 @@ public class Role extends BasicUnit
             var archive = loadPlayerData(account);
             if (archive == null)
             {
-                throw new NullPointerException("loadPlayer·½·¨·µ»ØNull");
+                throw new NullPointerException("loadPlayeræ–¹æ³•è¿”å›Null");
             }
             return archive;
         }
@@ -283,24 +283,24 @@ public class Role extends BasicUnit
     {
         var json = JsonBaseTool.loadJsonFile(requireNonNull(path));
 
-        var name = json.getString("Ãû³Æ");
-        var level = json.getIntValue("µ¥Î»µÈ¼¶");
-        var hp = json.getIntValue("×î´óÉúÃüÖµ");
-        var speed = json.getIntValue("ËÙ¶È");
-        var mana = json.getIntValue("Ä§·¨Öµ");
-        var atk = json.getIntValue("ÎïÀí¹¥»÷");
-        var crit = json.getIntValue("±©»÷");
-        var critResistance = json.getIntValue("±©»÷¿¹ĞÔ");
-        var critsEffect = json.getDoubleValue("±©»÷Ğ§¹û");
-        var physicalResistance = json.getDoubleValue("ÎïÀí¿¹ĞÔ");
-        var armor = json.getIntValue("»¤¼×");
-        var hit = json.getIntValue("ÃüÖĞ");
-        var evade = json.getIntValue("ÉÁ±Ü");
-        var cash = json.getIntValue("³ÖÓĞ»õ±Ò");
-        var lifeRegeneration = json.getIntValue("Ã¿»ØºÏÉúÃü»Ø¸´");
-        var manaRecovery = json.getIntValue("Ã¿»ØºÏÄ§·¨Öµ»Ø¸´");
-        var exp = json.getIntValue("½ÇÉ«ÓµÓĞ¾­Ñé");
-        var upgradeNeedXp = json.getIntValue("Éıµ½ÏÂÒ»¼¶ËùĞè¾­Ñé");
+        var name = json.getString("åç§°");
+        var level = json.getIntValue("å•ä½ç­‰çº§");
+        var hp = json.getIntValue("æœ€å¤§ç”Ÿå‘½å€¼");
+        var speed = json.getIntValue("é€Ÿåº¦");
+        var mana = json.getIntValue("é­”æ³•å€¼");
+        var atk = json.getIntValue("ç‰©ç†æ”»å‡»");
+        var crit = json.getIntValue("æš´å‡»");
+        var critResistance = json.getIntValue("æš´å‡»æŠ—æ€§");
+        var critsEffect = json.getDoubleValue("æš´å‡»æ•ˆæœ");
+        var physicalResistance = json.getDoubleValue("ç‰©ç†æŠ—æ€§");
+        var armor = json.getIntValue("æŠ¤ç”²");
+        var hit = json.getIntValue("å‘½ä¸­");
+        var evade = json.getIntValue("é—ªé¿");
+        var cash = json.getIntValue("æŒæœ‰è´§å¸");
+        var lifeRegeneration = json.getIntValue("æ¯å›åˆç”Ÿå‘½å›å¤");
+        var manaRecovery = json.getIntValue("æ¯å›åˆé­”æ³•å€¼å›å¤");
+        var exp = json.getIntValue("è§’è‰²æ‹¥æœ‰ç»éªŒ");
+        var upgradeNeedXp = json.getIntValue("å‡åˆ°ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒ");
 
         return new Builder(name).level(level).maxHp(hp).mana(mana).physicalAttack(atk).cash(cash).crit(crit).speed(speed)
                 .physicalResistance(physicalResistance).critsEffect(critsEffect).hit(hit).evade(evade).exp(exp)

@@ -9,9 +9,9 @@ class UiToolTest
     @Test
     void testGenerateUi()
     {
-        String[] array = {"¹¥»÷", "·ÀÓù"};
+        String[] array = {"æ”»å‡»", "é˜²å¾¡"};
         var string = UiTool.generateUi(array);
 
-        assertEquals("1.¹¥»÷   2.·ÀÓù", string);
+        assertEquals("1.æ”»å‡»   2.é˜²å¾¡", string);
     }
 }

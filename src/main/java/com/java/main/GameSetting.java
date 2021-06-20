@@ -12,9 +12,9 @@ import java.nio.charset.StandardCharsets;
 import static java.util.Objects.requireNonNull;
 
 /**
- * ÓÎÏ·ÉèÖÃ.
+ * æ¸¸æˆè®¾ç½®.
  *
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @version 1.0.0
  * @since 2021-6-6
  */
@@ -28,7 +28,7 @@ public class GameSetting
 
     /**
      *
-     * @return ·µ»ØÒ»¸ö {@code GameSetting}¶ÔÏó
+     * @return è¿”å›ä¸€ä¸ª {@code GameSetting}å¯¹è±¡
      */
     public static GameSetting getGameSetting()
     {
@@ -39,15 +39,15 @@ public class GameSetting
     private String separatorCharacter = "-";
 
     /**
-     * °ÑÉèÖÃÎÄ¼ş±£´æÔÚ±¾µØ.
+     * æŠŠè®¾ç½®æ–‡ä»¶ä¿å­˜åœ¨æœ¬åœ°.
      */
     public void saveSetting(final File path)
     {
         requireNonNull(path);
         var jsonFile = new JSONObject();
 
-        jsonFile.put("ÏÔÊ¾¼ÓÔØ¶¯»­", isOpenLoadAnimation());
-        jsonFile.put("·Ö¸ô·û", getSeparatorCharacter());
+        jsonFile.put("æ˜¾ç¤ºåŠ è½½åŠ¨ç”»", isOpenLoadAnimation());
+        jsonFile.put("åˆ†éš”ç¬¦", getSeparatorCharacter());
 
         try (var out = new PrintWriter(path, StandardCharsets.UTF_8))
         {
@@ -63,8 +63,8 @@ public class GameSetting
     {
         var jsonData = JsonBaseTool.loadJsonFile(requireNonNull(path));
 
-        var openLoadAnimation = jsonData.getBooleanValue("ÏÔÊ¾¼ÓÔØ¶¯»­");
-        var separatorCharacter = jsonData.getString("·Ö¸ô·û");
+        var openLoadAnimation = jsonData.getBooleanValue("æ˜¾ç¤ºåŠ è½½åŠ¨ç”»");
+        var separatorCharacter = jsonData.getString("åˆ†éš”ç¬¦");
 
         GAME_SETTING.setLoadAnimation(openLoadAnimation);
         GAME_SETTING.setSeparatorCharacter(separatorCharacter);
@@ -88,8 +88,8 @@ public class GameSetting
     }
 
     /**
-     * @param separatorCharacter ·Ö¸ô·û
-     * @throws NullPointerException Èç¹û{@code separatorCharacter}Îªnull
+     * @param separatorCharacter åˆ†éš”ç¬¦
+     * @throws NullPointerException å¦‚æœ{@code separatorCharacter}ä¸ºnull
      */
     public void setSeparatorCharacter(final String separatorCharacter)
     {

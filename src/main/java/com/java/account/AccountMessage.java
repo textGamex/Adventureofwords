@@ -12,40 +12,48 @@ import java.util.Scanner;
 import static java.util.Objects.requireNonNull;
 
 /**
- * ÕËºÅÄ£¿é.
+ * è´¦å·æ¨¡å—.
  *
  * @version 1.2.1
  * @since 15
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  */
 public final class AccountMessage
 {
+    public static void main(String[] args)
+    {
+        System.out.println("123");
+        System.out.println("\033[31;37;5m hello world\033[0m");
+//        System.out.println("\[2J");
+        System.out.println("\033[31mThe ......\033[0m");
+        System.out.println("æˆ‘åƒé¥­");
+    }
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AccountMessage.class);
     private static final Path gameDataPath = Paths.get(System.getProperty("user.home"), "AppData",
             "Local", "Adventure of words");
     private Identity id;
 
-    /**±£´æÍæ¼ÒµÄ¸÷ÖÖÊı¾İµÄÄ¿Â¼*/
+    /**ä¿å­˜ç©å®¶çš„å„ç§æ•°æ®çš„ç›®å½•*/
     private Path playerPath;
     private final String accountName;
 
     /**
-     * @param accountName ÕËºÅÃû, ¸ù¾İÕËºÅÃû´´½¨Í¬ÃûµÄ´æ·ÅÓÎÏ·Êı¾İµÄÎÄ¼ş¼Ğ
-     * @throws NullPointerException Èç¹û{@code accountName}Îªnull
+     * @param accountName è´¦å·å, æ ¹æ®è´¦å·ååˆ›å»ºåŒåçš„å­˜æ”¾æ¸¸æˆæ•°æ®çš„æ–‡ä»¶å¤¹
+     * @throws NullPointerException å¦‚æœ{@code accountName}ä¸ºnull
      * @since 15
      */
     public AccountMessage(final String accountName)
     {
         this.accountName = requireNonNull(accountName);
-        //±£´æÕËºÅÄ¿Â¼
+        //ä¿å­˜è´¦å·ç›®å½•
         playerPath = gameDataPath.resolve(accountName);
         id = authentication();
     }
 
     /**
-     * @return XXX/Adventure_of_words/Íæ¼ÒÕË»§Ãû/Data/fileName
-     * @param fileName ±£´æµÄÎÄ¼şÃû
-     * @throws NullPointerException Èç¹û{@code fileName}Îªnull
+     * @return XXX/Adventure_of_words/ç©å®¶è´¦æˆ·å/Data/fileName
+     * @param fileName ä¿å­˜çš„æ–‡ä»¶å
+     * @throws NullPointerException å¦‚æœ{@code fileName}ä¸ºnull
      */
     public File getPlayerDataResolveFile(final String fileName)
     {
@@ -73,10 +81,10 @@ public final class AccountMessage
     }
 
     /**
-     * ÉèÖÃÕËºÅµÄÉí·İ.
+     * è®¾ç½®è´¦å·çš„èº«ä»½.
      *
-     * @param id ÕËºÅµÄÉí·İ
-     * @throws NullPointerException Èç¹û{@code id}Îªnull
+     * @param id è´¦å·çš„èº«ä»½
+     * @throws NullPointerException å¦‚æœ{@code id}ä¸ºnull
      */
     public void setId(final Identity id)
     {
@@ -84,10 +92,10 @@ public final class AccountMessage
     }
 
     /**
-     * ÉèÖÃ±£´æÍæ¼ÒµÄ¸÷ÖÖÊı¾İµÄÄ¿Â¼.
+     * è®¾ç½®ä¿å­˜ç©å®¶çš„å„ç§æ•°æ®çš„ç›®å½•.
      *
-     * @param playerPath ÉèÖÃ±£´æÍæ¼ÒµÄ¸÷ÖÖÊı¾İµÄÄ¿Â¼
-     * @throws NullPointerException Èç¹û{@code playerPath}Îªnull
+     * @param playerPath è®¾ç½®ä¿å­˜ç©å®¶çš„å„ç§æ•°æ®çš„ç›®å½•
+     * @throws NullPointerException å¦‚æœ{@code playerPath}ä¸ºnull
      */
     public void setPlayerPath(final Path playerPath)
     {
@@ -95,49 +103,49 @@ public final class AccountMessage
     }
 
     /**
-     * ´ÓÖ¸¶¨Î»ÖÃ¶ÁÈ¡ÕË»§.
+     * ä»æŒ‡å®šä½ç½®è¯»å–è´¦æˆ·.
      *
-     * @throws NullPointerException Èç¹û{@code in}Îªnull
+     * @throws NullPointerException å¦‚æœ{@code in}ä¸ºnull
      */
-    public static AccountMessage readAccount(final Scanner in)//´ÓÖ¸¶¨µØ·½¶ÁÈ¡ÕË»§
+    public static AccountMessage readAccount(final Scanner in)//ä»æŒ‡å®šåœ°æ–¹è¯»å–è´¦æˆ·
     {
         return new AccountMessage(requireNonNull(in).nextLine());
     }
 
-    //Éí·İÑéÖ¤Ä£¿é
+    //èº«ä»½éªŒè¯æ¨¡å—
     private Identity authentication()
     {
-        //¹¹ÔìÕËºÅÂ·¾¶
+        //æ„é€ è´¦å·è·¯å¾„
         var folder = playerPath.toFile();
         LOGGER.debug(folder.toString());
 
-        /*ÕËºÅ²»´æÔÚÇÒÊÇÄÚ²¿ÈËÔ±*/
+        /*è´¦å·ä¸å­˜åœ¨ä¸”æ˜¯å†…éƒ¨äººå‘˜*/
         final var isGameManager = accountName.equals(PrivateData.ACCOUNT1) || accountName.equals(PrivateData.ACCOUNT2);
         if (fileNotExist(folder) && isGameManager)
         {
-            LOGGER.debug("[{}]ÊÇĞÂµÄÄÚ²¿ÈËÔ±ÕËºÅ", accountName);
+            LOGGER.debug("[{}]æ˜¯æ–°çš„å†…éƒ¨äººå‘˜è´¦å·", accountName);
             return Identity.NEW_GAME_MANAGER;
         }
         else if (folder.exists() && isGameManager)
         {
-            LOGGER.debug("[{}]ÊÇÄÚ²¿ÈËÔ±ÕËºÅ", accountName);
+            LOGGER.debug("[{}]æ˜¯å†…éƒ¨äººå‘˜è´¦å·", accountName);
             return Identity.GAME_MANAGER;
         }
-        //ÕËºÅ²»´æÔÚ¶øÇÒÊÇÍæ¼Ò
+        //è´¦å·ä¸å­˜åœ¨è€Œä¸”æ˜¯ç©å®¶
         else if (fileNotExist(folder))
         {
-            LOGGER.debug("[{}]ÊÇĞÂµÄÍæ¼ÒÕËºÅ", accountName);
+            LOGGER.debug("[{}]æ˜¯æ–°çš„ç©å®¶è´¦å·", accountName);
             return Identity.NEW_PLAYER;
         }
         else
         {
-            LOGGER.debug("[{}]ÊÇÍæ¼ÒÕËºÅ", accountName);
+            LOGGER.debug("[{}]æ˜¯ç©å®¶è´¦å·", accountName);
             return Identity.PLAYER;
         }
     }
 
     /**
-     * ´´½¨Ïà¹ØÕË»§µÄÎÄ¼ş¼Ğ
+     * åˆ›å»ºç›¸å…³è´¦æˆ·çš„æ–‡ä»¶å¤¹
      * @since 15
      */
     public void createAccountDataFolder()//
@@ -146,35 +154,35 @@ public final class AccountMessage
     }
 
     /**
-     * Ê¹ÓÃ¸ø¶¨µÄÕËºÅ´´½¨ÎÄ¼ş¼Ğ.
+     * ä½¿ç”¨ç»™å®šçš„è´¦å·åˆ›å»ºæ–‡ä»¶å¤¹.
      *
-     * @param message ÕËºÅ
+     * @param message è´¦å·
      * @since 15
-     * @throws NullPointerException Èç¹û{@code account}Îªnull
+     * @throws NullPointerException å¦‚æœ{@code account}ä¸ºnull
      */
     public static void createAccountDataFolder(final AccountMessage message)//
     {
         requireNonNull(message);
-        LOGGER.debug("¿ªÊ¼´´½¨[{}]ÕËºÅµÄÊı¾İÎÄ¼ş¼Ğ", message.accountName);
+        LOGGER.debug("å¼€å§‹åˆ›å»º[{}]è´¦å·çš„æ•°æ®æ–‡ä»¶å¤¹", message.accountName);
 
         var file = gameDataPath.resolve(message.accountName).toFile();
         if (fileNotExist(file))
         {
-            LOGGER.debug("{}ÎÄ¼ş¼Ğ²»´æÔÚ", file);
+            LOGGER.debug("{}æ–‡ä»¶å¤¹ä¸å­˜åœ¨", file);
             try
             {
                 Files.createDirectories(message.playerPath.resolve("Data"));
-                LOGGER.debug("{}ÎÄ¼ş¼Ğ´´½¨³É¹¦", file);
+                LOGGER.debug("{}æ–‡ä»¶å¤¹åˆ›å»ºæˆåŠŸ", file);
             }
             catch (IOException e)
             {
                 e.printStackTrace();
-                LOGGER.error("{}ÎÄ¼ş¼Ğ´´½¨Ê§°Ü", file);
+                LOGGER.error("{}æ–‡ä»¶å¤¹åˆ›å»ºå¤±è´¥", file);
             }
         }
         else
         {
-            LOGGER.debug("{}ÎÄ¼ş¼Ğ´æÔÚ", file);
+            LOGGER.debug("{}æ–‡ä»¶å¤¹å­˜åœ¨", file);
         }
     }
     private static boolean fileNotExist(final File file)
@@ -184,16 +192,16 @@ public final class AccountMessage
     }
 
     /**
-     * @return ×Ö·û´®±íÊ¾µÄ¶ÔÏó
+     * @return å­—ç¬¦ä¸²è¡¨ç¤ºçš„å¯¹è±¡
      */
     @Override
     public String toString()
     {
         return "AccountMessage[" +
-                "Éí·İ:" + id +
-                ", ÓÎÏ·Êı¾İ±£´æÄ¿Â¼:" + gameDataPath +
+                "èº«ä»½:" + id +
+                ", æ¸¸æˆæ•°æ®ä¿å­˜ç›®å½•:" + gameDataPath +
                 ", playerPath:" + playerPath +
-                ", ÕËºÅÃû:" + accountName +
+                ", è´¦å·å:" + accountName +
                 ']';
     }
 }

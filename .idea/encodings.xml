@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/src/main/java/BattleSystemMessage_zh_CN.properties" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/cAndCpp/Cls-dll.c" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/cAndCpp/javaLogic_Tools_GameTool.h" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/java/battleSystem/BuffModule/BuffEffect.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/java/battleSystem/BuffModule/BuffType.java" charset="GBK" />
-    <file url="PROJECT" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/account" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/account/AccountMessage.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/account/Identity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/antiSpam/MemoryEncryption.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/battleSystem/BattleAttributeCalculation.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/battleSystem/BattleCoefficient.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/battleSystem/BattleSimulation.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/battleSystem/BattleSystem.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/battleSystem/BuffModule/BuffEffect.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/battleSystem/BuffModule/BuffModule.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/battleSystem/BuffModule/BuffType.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/localPersistence/DataPath.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/localPersistence/JsonBaseTool.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/localPersistence/SaveData.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/main/AdventureOfWordsMain.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/main/GameSetting.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/main/TestUse.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/message/PlayerStatistics.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/message/PrivateData.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/message/attackMessage/AttackType.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/message/attackMessage/BattleTip.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/tools/PrefixTools.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/tools/UiTool.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/unit/BasicUnit.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/unit/Enemy.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/unit/UnitAttack.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/unit/UnitDefense.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/unit/UnitMessage.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ui/BaseUi.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ui/ConsoleProgressBar.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ui/LoginBaseUi.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ui/Main.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ui/payment/Alipay.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ui/payment/WeChat.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ui/start.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/com/java/tools/PrefixToolsTest.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/com/java/tools/UiToolTest.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/com/java/unit/BasicUnitTest.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/com/java/unit/EnemyTest.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/com/java/unit/RoleTest.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
