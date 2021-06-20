@@ -76,7 +76,7 @@ class BuffModuleTest
         buffs.remove(BuffType.POISON, 3);
         buffs.remove(BuffType.BLEED, 11);
 
-        assertFalse(buffs.have(BuffType.BLEED));//ÒòÎªÒÆ³ýµÄ»ØºÏ´óÓÚ³ÖÐø»ØºÏ,ËùÒÔbuff±»É¾³ý
+        assertFalse(buffs.have(BuffType.BLEED));//å› ä¸ºç§»é™¤çš„å›žåˆå¤§äºŽæŒç»­å›žåˆ,æ‰€ä»¥buffè¢«åˆ é™¤
         assertEquals(7, buffs.getMessage(BuffType.POISON).getTimeLimit());
     }
 
@@ -116,5 +116,15 @@ class BuffModuleTest
     void testRemoveIllegalArgument()
     {
         assertThrows(IllegalArgumentException.class, () -> buffs.remove(BuffType.POISON, -1));
+    }
+
+    @Test
+    void testEqual()
+    {
+        final var copy = new BuffModule();
+
+        assertTrue(buffs.equals(buffs));
+        assertTrue(buffs.equals(copy));
+        assertFalse(buffs.equals(null));
     }
 }

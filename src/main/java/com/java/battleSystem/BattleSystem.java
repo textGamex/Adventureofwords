@@ -31,13 +31,6 @@ import static com.java.battleSystem.BattleAttributeCalculation.*;
  */
 public final class BattleSystem
 {
-    public static void main(String[] args)
-    {
-        final var role = Role.newStandardPrimaryLevelRole("人物");
-        final var enemy = Role.newStandardPrimaryLevelRole("敌对单位");
-        System.out.println(normalAttackDamage(role, enemy));
-    }
-
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(BattleSystem.class);
 
     /**

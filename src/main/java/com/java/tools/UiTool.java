@@ -23,7 +23,7 @@ public final class UiTool
      * @return UI
      * @throws NullPointerException 如果{@code test}或数组中的元素为null
      */
-    public static String generateUi(final String[] test)
+    public static String toUi(final String[] test)
     {
         requireNonNull(test);
         final var uiText = new StringBuilder(10);

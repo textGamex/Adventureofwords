@@ -3,7 +3,8 @@
 #include "jni.h"
 #include <stdlib.h>
 
-JNIEXPORT jboolean JNICALL Java_com_java_tools_GameTool_randomReturnBoolean(JNIEnv *env, jclass jc, jint seed, jdouble trueProbability)
+JNIEXPORT jboolean JNICALL Java_com_java_tools_GameTool_randomReturnBoolean(JNIEnv *env, jclass jc,
+ const jint seed, const jdouble trueProbability)
 {
     std::default_random_engine e(seed);
     std::bernoulli_distribution randomBoolean(trueProbability);

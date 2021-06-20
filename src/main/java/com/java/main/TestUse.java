@@ -71,7 +71,6 @@ public class TestUse
     {
         Role role = null;
         Role enemy = null;
-
         if (ROLE_FILE.exists() && ENEMY_FILE.exists())
         {
             println("检测到属性文件, 加载中...");
@@ -120,7 +119,7 @@ public class TestUse
             {
                uiArray[4] = "开启加载动画";
             }
-            println(UiTool.generateUi(uiArray));
+            println(UiTool.toUi(uiArray));
             switch (in.nextInt())
             {
                 case 1 -> {

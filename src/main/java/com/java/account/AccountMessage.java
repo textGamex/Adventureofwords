@@ -20,14 +20,6 @@ import static java.util.Objects.requireNonNull;
  */
 public final class AccountMessage
 {
-    public static void main(String[] args)
-    {
-        System.out.println("123");
-        System.out.println("\033[31;37;5m hello world\033[0m");
-//        System.out.println("\[2J");
-        System.out.println("\033[31mThe ......\033[0m");
-        System.out.println("我吃饭");
-    }
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AccountMessage.class);
     private static final Path gameDataPath = Paths.get(System.getProperty("user.home"), "AppData",
             "Local", "Adventure of words");
