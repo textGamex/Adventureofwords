@@ -140,7 +140,7 @@ public final class AccountMessage
      * 创建相关账户的文件夹
      * @since 15
      */
-    public void createAccountDataFolder()//
+    public void createAccountDataFolder()
     {
         createAccountDataFolder(this);
     }
@@ -152,7 +152,7 @@ public final class AccountMessage
      * @since 15
      * @throws NullPointerException 如果{@code account}为null
      */
-    public static void createAccountDataFolder(final AccountMessage message)//
+    public static void createAccountDataFolder(final AccountMessage message)
     {
         requireNonNull(message);
         LOGGER.debug("开始创建[{}]账号的数据文件夹", message.accountName);

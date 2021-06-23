@@ -13,18 +13,18 @@ import static com.java.battleSystem.BattleAttributeCalculation.*;
  * 战斗系统, 用来处理玩家战斗和战斗相关的数值处理.
  *
  * <p>已经实现的系数</p>
- * <em>
- *     <li>玩家经验奖励系数</li>
- *     <li>玩家货币奖励系数</li>
- *     <li>玩家分数奖励系数</li>
- *     <li>玩家/敌对单位攻击系数</li>
- *     <li>玩家/敌对单位暴击率</li>
- *     <li>玩家/敌对单位暴击效果</li>
- *     <li>玩家/敌对单位承伤系数</li>
- *     <li>玩家/敌对单位物理抗性系数</li>
- *     <li>玩家/敌对单位法术抗性系数</li>
- * </em>
- * @version 1.0.0
+ *
+ * <li>玩家经验奖励系数</li>
+ * <li>玩家货币奖励系数</li>
+ * <li>玩家分数奖励系数</li>
+ * <li>玩家/敌对单位攻击系数</li>
+ * <li>玩家/敌对单位暴击率</li>
+ * <li>玩家/敌对单位暴击效果</li>
+ * <li>玩家/敌对单位承伤系数</li>
+ * <li>玩家/敌对单位物理抗性系数</li>
+ * <li>玩家/敌对单位法术抗性系数</li>
+ *
+ * @version 1.0.1
  * @author 留恋千年
  * @since 15
  * @see BattleCoefficient

@@ -165,11 +165,6 @@ public class BattleCoefficient
         enemyMagicResistanceFactor    = builder.enemyMagicResistanceFactor;
     }
 
-    public void fight(Role role, Enemy enemy)
-    {
-
-    }
-
     public double getExpRewardsFactor()
     {
         return expRewardsFactor;
