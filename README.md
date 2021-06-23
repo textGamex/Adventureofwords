@@ -5,7 +5,7 @@
 
 此游戏现在正在开发中, 敬请期待
 
-![Code](https://img.shields.io/github/stars/textGamex/Adventureofwords?label=Github&style=social)
+[![Code](https://img.shields.io/github/stars/textGamex/Adventureofwords?label=Github&style=social)](https://github.com/textGamex/Adventureofwords)
 
 ## 开发者名单
 - 程序:留恋千年
