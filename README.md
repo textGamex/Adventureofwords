@@ -5,6 +5,15 @@
 
 此游戏现在正在开发中, 敬请期待
 
+![Code](https://img.shields.io/github/stars/textGamex/Adventureofwords?label=Github&style=social)
+
 ## 开发者名单
 - 程序:留恋千年
-- 策划:渡尘
+
+## 开发配置
+- 集成环境:`IntelliJ IDEA`
+- JDK版本:`16.0.1`
+- 测试框架:`JUnit5`
+- 日志框架:`log4j2`
+- 日志门面:`slf4j`
+- JSON:`fastjson`
