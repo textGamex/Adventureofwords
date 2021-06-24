@@ -113,13 +113,23 @@ class BasicUnitTest
     }
 
     @Test
-    void textCalculationLevelGrowth()
+    void testCalculationLevelGrowth()
     {
         final int result1 = calculationLevelGrowth(10, -0.5, 1);
         final int result2 = calculationLevelGrowth(10, 0.5, 1);
 
         assertEquals(5, result1);
         assertEquals(15, result2);
+    }
+
+    @Test
+    void testClone() throws Exception
+    {
+        var unit = new BasicUnit.Builder<>(".").build();
+
+        var copy = unit.clone();
+
+        assertTrue(unit.equals(copy));
     }
 
 //    @Test

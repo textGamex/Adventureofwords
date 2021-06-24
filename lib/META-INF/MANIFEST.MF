@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.java.main.TestUse
+Main-Class: com.java.battleSystem.BattleAttributeCalculation
 

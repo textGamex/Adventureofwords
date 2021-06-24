@@ -22,6 +22,7 @@
     <file url="file://$PROJECT_DIR$/src/main/java/com/java/message/PrivateData.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/java/message/attackMessage/AttackType.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/java/message/attackMessage/BattleTip.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/java/tools/GameTool.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/java/tools/PrefixTools.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/java/tools/UiTool.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/java/unit/BasicUnit.java" charset="UTF-8" />

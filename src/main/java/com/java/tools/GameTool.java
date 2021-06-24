@@ -7,11 +7,11 @@ import static java.util.concurrent.ThreadLocalRandom.current;
 import static java.util.Objects.requireNonNull;
 
 /**
- * ÓÃÓÚ¸¨ÖúµÄ¹¤¾ßÀà.
+ * ç”¨äºè¾…åŠ©çš„å·¥å…·ç±».
  *
- * <p>´ËÀàÎŞ·¨ÊµÀı»¯</p>
+ * <p>æ­¤ç±»æ— æ³•å®ä¾‹åŒ–</p>
  * @version 1.2.3
- * @author ÁôÁµÇ§Äê
+ * @author ç•™æ‹åƒå¹´
  * @since 15
  */
 public final class GameTool
@@ -19,9 +19,9 @@ public final class GameTool
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(GameTool.class);
     public enum SpecifiedDirection
     {
-        /**½öÔö¼Ó*/
+        /**ä»…å¢åŠ */
         ONLY_INCREASE,
-        /**½ö¼õÉÙ*/
+        /**ä»…å‡å°‘*/
         ONLY_REDUCED
     };
 
@@ -47,10 +47,10 @@ public final class GameTool
     }
 
     /**
-     * ¸ù¾İ´«ÈëµÄ¸ÅÂÊËæ»ú·µ»Ø{@code false}»ò{@code true}.
+     * æ ¹æ®ä¼ å…¥çš„æ¦‚ç‡éšæœºè¿”å›{@code false}æˆ–{@code true}.
      *
-     * @param trueProbability ·µ»Ø{@code true}µÄ¸ÅÂÊ
-     * @return {@code true}»ò{@code false}
+     * @param trueProbability è¿”å›{@code true}çš„æ¦‚ç‡
+     * @return {@code true}æˆ–{@code false}
      */
     public static boolean randomRun (final double trueProbability)
     {
@@ -66,18 +66,18 @@ public final class GameTool
     }
 
     /**
-     * Ëæ»ú¶ÔÊı×Ö¼Ó»ò¼õÒ»¸ö·¶Î§ÄÚµÄÊı.
+     * éšæœºå¯¹æ•°å­—åŠ æˆ–å‡ä¸€ä¸ªèŒƒå›´å†…çš„æ•°.
      *
-     * @param number Òª½øĞĞ¼Ó¹¤µÄÕûÊı
-     * @param floatingIntRange ¸¡¶¯µÄÕûÊı·¶Î§(·Ç¸ºÊı)
-     * @return {@code number}¼Ó»ò¼õ 0(°üº¬) ~ {@code floatingIntRange}(°üº¬)µÄÒ»¸öÊı
-     * @throws IllegalArgumentException Èç¹û{@code floatingIntRange}Ğ¡ÓÚ0
+     * @param number è¦è¿›è¡ŒåŠ å·¥çš„æ•´æ•°
+     * @param floatingIntRange æµ®åŠ¨çš„æ•´æ•°èŒƒå›´(éè´Ÿæ•°)
+     * @return {@code number}åŠ æˆ–å‡ 0(åŒ…å«) ~ {@code floatingIntRange}(åŒ…å«)çš„ä¸€ä¸ªæ•°
+     * @throws IllegalArgumentException å¦‚æœ{@code floatingIntRange}å°äº0
      */
-    public static int floatingNumber(final int number, final int floatingIntRange)//°´ÕûÊı¸¡¶¯
+    public static int floatingNumber(final int number, final int floatingIntRange)//æŒ‰æ•´æ•°æµ®åŠ¨
     {
         if (floatingIntRange < 0)
         {
-            throw new IllegalArgumentException("´íÎó·¶Î§:" + floatingIntRange);
+            throw new IllegalArgumentException("é”™è¯¯èŒƒå›´:" + floatingIntRange);
         }
 
         var randomNumber = current().nextInt(floatingIntRange + 1);
@@ -85,21 +85,21 @@ public final class GameTool
     }
 
     /**
-     * Ëæ»ú¶ÔÊı×Ö¼Ó»ò¼õÒ»¸ö·¶Î§ÄÚµÄÊı.
+     * éšæœºå¯¹æ•°å­—åŠ æˆ–å‡ä¸€ä¸ªèŒƒå›´å†…çš„æ•°.
      *
-     * @param number Òª½øĞĞ¼Ó¹¤µÄÕûÊı
-     * @param floatingIntRange ¸¡¶¯µÄÕûÊı·¶Î§(·Ç¸ºÊı)
-     * @param sign ÊÖ¶¯Ö¸¶¨µÄ¸¡¶¯·½Ïò, Ö»Ö§³Ö(+, -)
-     * @return {@code number}¼Ó»ò¼õ(¸ù¾İ{@code sign}µÄÖµÀ´¾ö¶¨) 0(°üº¬) ~ {@code floatingIntRange}(°üº¬)µÄÒ»¸öÊı
-     * @throws IllegalArgumentException Èç¹û{@code floatingIntRange}Ğ¡ÓÚ0»òsignµÄÖµÊÇ·Ç·¨µÄ
-     * @throws NullPointerException Èç¹û{@code sign}Îªnull
+     * @param number è¦è¿›è¡ŒåŠ å·¥çš„æ•´æ•°
+     * @param floatingIntRange æµ®åŠ¨çš„æ•´æ•°èŒƒå›´(éè´Ÿæ•°)
+     * @param sign æ‰‹åŠ¨æŒ‡å®šçš„æµ®åŠ¨æ–¹å‘, åªæ”¯æŒ(+, -)
+     * @return {@code number}åŠ æˆ–å‡(æ ¹æ®{@code sign}çš„å€¼æ¥å†³å®š) 0(åŒ…å«) ~ {@code floatingIntRange}(åŒ…å«)çš„ä¸€ä¸ªæ•°
+     * @throws IllegalArgumentException å¦‚æœ{@code floatingIntRange}å°äº0æˆ–signçš„å€¼æ˜¯éæ³•çš„
+     * @throws NullPointerException å¦‚æœ{@code sign}ä¸ºnull
      */
     public static int floatingNumber(final int number, final int floatingIntRange,
-                                     final SpecifiedDirection sign)//°´ÕûÊı¸¡¶¯
+                                     final SpecifiedDirection sign)//æŒ‰æ•´æ•°æµ®åŠ¨
     {
         if (floatingIntRange < 0)
         {
-            throw new IllegalArgumentException("´íÎó·¶Î§:" + floatingIntRange);
+            throw new IllegalArgumentException("é”™è¯¯èŒƒå›´:" + floatingIntRange);
         }
         requireNonNull(sign);
 
@@ -111,18 +111,18 @@ public final class GameTool
     }
 
     /**
-     * Ëæ»ú¶ÔÊı×Ö¼Ó»ò¼õÒ»¸ö·¶Î§ÄÚµÄÊı.
+     * éšæœºå¯¹æ•°å­—åŠ æˆ–å‡ä¸€ä¸ªèŒƒå›´å†…çš„æ•°.
      *
-     * @param number Òª½øĞĞ¼Ó¹¤µÄÕûÊı
-     * @param floatingPercentage ¸¡¶¯µÄ°Ù·Ö±È·¶Î§
-     * @return {@code number}¼Ó»ò¼õ 0(°üº¬) ~ {@code number * floatingPercentage}(°üº¬)µÄÒ»¸öÊı
-     * @throws IllegalArgumentException Èç¹û{@code floatingPercentage}Ğ¡ÓÚ0.0
+     * @param number è¦è¿›è¡ŒåŠ å·¥çš„æ•´æ•°
+     * @param floatingPercentage æµ®åŠ¨çš„ç™¾åˆ†æ¯”èŒƒå›´
+     * @return {@code number}åŠ æˆ–å‡ 0(åŒ…å«) ~ {@code number * floatingPercentage}(åŒ…å«)çš„ä¸€ä¸ªæ•°
+     * @throws IllegalArgumentException å¦‚æœ{@code floatingPercentage}å°äº0.0
      */
     public static int floatingNumber(final int number, final double floatingPercentage)
     {
         if (floatingPercentage < 0.0)
         {
-            throw new IllegalArgumentException("´íÎó·¶Î§:" + floatingPercentage);
+            throw new IllegalArgumentException("é”™è¯¯èŒƒå›´:" + floatingPercentage);
         }
 
         var randomNumber = current().nextInt((int) floatingPercentage * number + 1);
@@ -130,20 +130,20 @@ public final class GameTool
     }
 
     /**
-     * Ëæ»ú¶ÔÊı×Ö¼Ó»ò¼õÒ»¸ö·¶Î§ÄÚµÄÊı.
+     * éšæœºå¯¹æ•°å­—åŠ æˆ–å‡ä¸€ä¸ªèŒƒå›´å†…çš„æ•°.
      *
-     * @param number Òª½øĞĞ¼Ó¹¤µÄÕûÊı
-     * @param floatingPercentage ¸¡¶¯µÄ°Ù·Ö±È·¶Î§
-     * @return {@code number}¼Ó»ò¼õ(¸ù¾İ{@code sign}µÄÖµÀ´¾ö¶¨) 0(°üº¬) ~ {@code number * floatingPercentage}(°üº¬)µÄÒ»¸öÊı
-     * @param sign ÊÖ¶¯Ö¸¶¨µÄ¸¡¶¯·½Ïò, Ö»Ö§³Ö(+, -)
-     * @throws IllegalArgumentException Èç¹û{@code floatingPercentage}Ğ¡ÓÚ0.0»òsignµÄÖµÊÇ·Ç·¨µÄ
-     * @throws NullPointerException Èç¹û{@code sign}Îªnull
+     * @param number è¦è¿›è¡ŒåŠ å·¥çš„æ•´æ•°
+     * @param floatingPercentage æµ®åŠ¨çš„ç™¾åˆ†æ¯”èŒƒå›´
+     * @return {@code number}åŠ æˆ–å‡(æ ¹æ®{@code sign}çš„å€¼æ¥å†³å®š) 0(åŒ…å«) ~ {@code number * floatingPercentage}(åŒ…å«)çš„ä¸€ä¸ªæ•°
+     * @param sign æ‰‹åŠ¨æŒ‡å®šçš„æµ®åŠ¨æ–¹å‘, åªæ”¯æŒ(+, -)
+     * @throws IllegalArgumentException å¦‚æœ{@code floatingPercentage}å°äº0.0æˆ–signçš„å€¼æ˜¯éæ³•çš„
+     * @throws NullPointerException å¦‚æœ{@code sign}ä¸ºnull
      */
     public static int floatingNumber(final int number, final double floatingPercentage, final SpecifiedDirection sign)
     {
         if (floatingPercentage < 0.0)
         {
-            throw new IllegalArgumentException("´íÎó·¶Î§:" + floatingPercentage);
+            throw new IllegalArgumentException("é”™è¯¯èŒƒå›´:" + floatingPercentage);
         }
         requireNonNull(sign);
 
@@ -158,18 +158,18 @@ public final class GameTool
     {
         if (floatingPercentage < 0.0)
         {
-            throw new IllegalArgumentException("´íÎó·¶Î§:" + floatingPercentage);
+            throw new IllegalArgumentException("é”™è¯¯èŒƒå›´:" + floatingPercentage);
         }
 
         final int max = Math.round((float) (floatingPercentage * number)) + 1;
         var randomNumber = current().nextInt(max);
-        LOGGER.trace("Ëæ»úÉÏÏŞÎª:{}, Ëæ»ú³öµÄÊı:{}", max - 1, randomNumber);
+        LOGGER.trace("éšæœºä¸Šé™ä¸º:{}, éšæœºå‡ºçš„æ•°:{}", max - 1, randomNumber);
         return (int) (current().nextBoolean() ? number + randomNumber : number - randomNumber);
     }
 
     public static int bytesToInt(byte[] b)
     {
-        //ÓÉ¸ßÎ»µ½µÍÎ»
+        //ç”±é«˜ä½åˆ°ä½ä½
         int res = 0;
         for (int i = 0; i < b.length; i++)
         {
@@ -180,7 +180,7 @@ public final class GameTool
 
     public static byte[] intToBytes(final int n)
     {
-        //ÓÉ¸ßÎ»µ½µÍÎ»
+        //ç”±é«˜ä½åˆ°ä½ä½
         byte[] bytes = new byte[4];
         bytes[0] = (byte) (n & 0xff);
         bytes[1] = (byte) (n >> 8 & 0xff);
@@ -192,18 +192,18 @@ public final class GameTool
     public static long bytesToLong(byte[] b)
     {
         long s = 0;
-        // ×îµÍÎ»
+        // æœ€ä½ä½
         long s0 = b[0] & 0xff;
         long s1 = b[1] & 0xff;
         long s2 = b[2] & 0xff;
         long s3 = b[3] & 0xff;
-        // ×îµÍÎ»
+        // æœ€ä½ä½
         long s4 = b[4] & 0xff;
         long s5 = b[5] & 0xff;
         long s6 = b[6] & 0xff;
         long s7 = b[7] & 0xff;
 
-        // s0²»±ä
+        // s0ä¸å˜
         s1 <<= 8;
         s2 <<= 16;
         s3 <<= 24;
@@ -221,9 +221,9 @@ public final class GameTool
         byte[] b = new byte[8];
         for (int i = 0; i < b.length; i++)
         {
-            //½«×îµÍÎ»±£´æÔÚ×îµÍÎ»
+            //å°†æœ€ä½ä½ä¿å­˜åœ¨æœ€ä½ä½
             b[i] = Long.valueOf(temp & 0xff).byteValue();
-            // ÏòÓÒÒÆ8Î»
+            // å‘å³ç§»8ä½
             temp = temp >> 8;
         }
         return b;
@@ -231,12 +231,12 @@ public final class GameTool
     public static native void cls();
 
     /**
-     * ¸ù¾İ¸ø¶¨µÄ¸ÅÂÊ·µ»ØÒ»¸ö²¼¶ûÖµ.
+     * æ ¹æ®ç»™å®šçš„æ¦‚ç‡è¿”å›ä¸€ä¸ªå¸ƒå°”å€¼.
      *
-     * <p>Í¨¹ıµ÷ÓÃDLLÀ´ÊµÏÖ</p>
-     * @param seed ÖÖ×ÓÖµ
-     * @param trueProbability ·µ»Ø{@code true}µÄ¸ÅÂÊ
-     * @return {@code true}»ò{@code false}
+     * <p>é€šè¿‡è°ƒç”¨DLLæ¥å®ç°</p>
+     * @param seed ç§å­å€¼
+     * @param trueProbability è¿”å›{@code true}çš„æ¦‚ç‡
+     * @return {@code true}æˆ–{@code false}
      */
     public static native boolean randomReturnBoolean(int seed, double trueProbability);
 }

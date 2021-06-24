@@ -5,12 +5,12 @@ import static java.util.Objects.requireNonNull;
 /**
  * {@inheritDoc}
  * <p>且具有一下额外属性</p>
- * <em>
- *     <li>所值经验</li>
- *     <li>所值货币</li>
- *     <li>所值分数</li>
- *     <li>敌对单位类型</li>
- * </em>
+ *
+ * <li>所值经验</li>
+ * <li>所值货币</li>
+ * <li>所值分数</li>
+ * <li>敌对单位类型</li>
+ *
  * @version 0.3.2
  * @author Millennium
  */

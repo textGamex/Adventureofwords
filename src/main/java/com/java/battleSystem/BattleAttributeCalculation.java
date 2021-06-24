@@ -1,6 +1,8 @@
 package com.java.battleSystem;
 
 import com.java.unit.BasicUnit;
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
 import org.slf4j.LoggerFactory;
 
 import static java.util.Objects.requireNonNull;
@@ -17,7 +19,10 @@ public final class BattleAttributeCalculation
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(BattleAttributeCalculation.class);
     public static void main(String[] args)
     {
-        System.out.println(victimEffectiveHp(100, 1.9, 0.98));
+        AnsiConsole.systemInstall();
+        System.out.println(Ansi.ansi().fg(Ansi.Color.RED).a("wadwad").fg(Ansi.Color.YELLOW).a(" sdfewef").reset());
+        AnsiConsole.systemUninstall();
+        System.out.println("asdsa");
     }
 
     private BattleAttributeCalculation()

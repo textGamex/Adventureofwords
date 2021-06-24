@@ -6,14 +6,18 @@
 此游戏现在正在开发中, 敬请期待
 
 [![Code](https://img.shields.io/github/stars/textGamex/Adventureofwords?label=Github&style=social)](https://github.com/textGamex/Adventureofwords)
+ 
 
-## 开发者名单
+# 开发者名单
 - 程序:留恋千年
 
-## 开发配置
+# 开发配置
 - 集成环境:`IntelliJ IDEA`
 - JDK版本:`16.0.1`
 - 测试框架:`JUnit5`
 - 日志框架:`log4j2`
 - 日志门面:`slf4j`
 - JSON:`fastjson`
+
+# 下载
+[![](https://static.itch.io/images/badge.svg)](https://textgame.itch.io/adventure-of-words) 
