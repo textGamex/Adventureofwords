@@ -11,18 +11,21 @@ import java.awt.*;
  */
 public final class Alipay extends BaseUi
 {
-    private static final Alipay ALIPAY = new Alipay();
+    private static Alipay alipay;
 
     private Alipay()
     {
 
     }
 
-    public static BaseUi newAlipay()
+    public static BaseUi getAlipay()
     {
-        return ALIPAY;
+        if (alipay == null)
+        {
+            alipay = new Alipay();
+        }
+        return alipay;
     }
-
 
     public static void showCollectionCode()
     {

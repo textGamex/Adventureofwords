@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
  * <li>拥有经验</li>
  * <li>升到下一级所需经验</li>
  * <li>角色创建日期及时间</li>
- * @version 1.0.0
+ * @version 1.0.3
  * @author 留恋千年
  */
 public class Role extends BasicUnit

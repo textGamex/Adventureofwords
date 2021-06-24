@@ -16,16 +16,20 @@ public final class WeChat extends BaseUi
         WeChat.showCollectionCode();
     }
 
-    private static final WeChat WECHAT = new WeChat();
+    private static WeChat wechat;
 
     private WeChat()
     {
 
     }
 
-    public BaseUi newWeChat()
+    public BaseUi getWeChat()
     {
-        return WECHAT;
+        if (wechat == null)
+        {
+            wechat = new WeChat();
+        }
+        return wechat;
     }
 
     public static void showCollectionCode()

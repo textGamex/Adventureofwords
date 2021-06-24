@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public class LoginBaseUi extends BaseUi
 {
-    private static final LoginBaseUi LOGIN_UI = new LoginBaseUi();
+    private static LoginBaseUi loginUi;
     private LoginBaseUi()
     {
 
@@ -17,7 +17,11 @@ public class LoginBaseUi extends BaseUi
 
     public static BaseUi getLoginUi()
     {
-        return LOGIN_UI;
+        if (loginUi == null)
+        {
+            loginUi = new LoginBaseUi();
+        }
+        return loginUi;
     }
 
     @Override

@@ -156,7 +156,7 @@ public final class BattleAttributeCalculation
      * @param victim 被攻击者
      * @throws NullPointerException 如果{@code attacker}或{@code victim}为null
      */
-    public double dpr(final BasicUnit attacker, final BasicUnit victim)
+    public static double dpr(final BasicUnit attacker, final BasicUnit victim)
     {
         var damage = attackerPhysicalDamage(attacker, victim);
         var critChance = attackerCritChance(attacker, victim);
