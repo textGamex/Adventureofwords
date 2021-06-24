@@ -23,9 +23,9 @@ class BuffEffectTest
         var object = new BuffEffect(1, 1);
         var o = object.clone();
 
-        assertTrue(object.equals(object));
-        assertTrue(o.equals(object));
-        assertFalse(object.equals(null));
+        assertEquals(object, object);
+        assertEquals(o, object);
+        assertNotEquals(null, object);
     }
 
     @Test

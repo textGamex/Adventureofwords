@@ -86,7 +86,6 @@ public class BuffModule implements Serializable
         {
             throw new NullPointerException("buff不存在:" + type);
         }
-
         return haveBuffs.get(type);
     }
 

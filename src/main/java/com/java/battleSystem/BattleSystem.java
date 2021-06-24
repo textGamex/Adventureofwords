@@ -2,7 +2,6 @@ package com.java.battleSystem;
 
 import com.java.battleSystem.BuffModule.BuffType;
 import com.java.unit.BasicUnit;
-import com.java.unit.Role;
 import org.slf4j.LoggerFactory;
 
 import static com.java.tools.GameTool.*;
@@ -57,14 +56,10 @@ public final class BattleSystem
      * @return 如果可以行动, 返回{@code true}, 否则返回{@code false}
      * @throws NullPointerException 如果{@code unit}为null
      */
-    public static boolean canAct(final BasicUnit unit)
+    public static boolean canMove(final BasicUnit unit)
     {
         requireNonNull(unit);
-        if (unit.buff().have(BuffType.VERTIGO))
-        {
-            return false;
-        }
-        return true;
+        return !unit.buff().have(BuffType.VERTIGO);
     }
 
     /**

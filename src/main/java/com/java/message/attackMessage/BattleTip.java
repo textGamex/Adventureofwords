@@ -159,7 +159,7 @@ public final class BattleTip
             switch (cause)
             {
                 case MISS:
-                    System.out.println("");
+                    System.out.println();
                     break;
                 default: throw new NullPointerException();
             }

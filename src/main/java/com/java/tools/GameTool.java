@@ -23,7 +23,7 @@ public final class GameTool
         ONLY_INCREASE,
         /**仅减少*/
         ONLY_REDUCED
-    };
+    }
 
     public static void main(String[] args)
     {

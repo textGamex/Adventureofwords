@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
-import java.io.NotSerializableException;
 
 import static org.junit.jupiter.api.Assertions.*;
 

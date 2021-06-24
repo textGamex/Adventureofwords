@@ -123,8 +123,8 @@ class BuffModuleTest
     {
         final var copy = new BuffModule();
 
-        assertTrue(buffs.equals(buffs));
-        assertTrue(buffs.equals(copy));
-        assertFalse(buffs.equals(null));
+        assertEquals(buffs, buffs);
+        assertEquals(buffs, copy);
+        assertNotEquals(null, buffs);
     }
 }

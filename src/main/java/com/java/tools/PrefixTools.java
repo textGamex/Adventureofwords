@@ -168,12 +168,7 @@ public final class PrefixTools
         LOGGER.trace("查找元素:{}, 共找到{}个", prefix, count);
         return count;
     }
-
-    public String[] toUsageProbabilityStringArray()
-    {
-        return null;
-    }
-
+    
     public void removeIf(final String element)
     {
         Predicate<String> predicate1 = Predicate.isEqual(element);
@@ -222,7 +217,7 @@ public final class PrefixTools
 
         final List<Map.Entry<String, Integer>> list = new ArrayList<>(countMap.entrySet());
         //降序排序
-        list.sort(Map.Entry.comparingByValue((num1, num2) -> num2.compareTo(num1)));
+        list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
         for (final var e : list)
         {
             LOGGER.trace("键:{}, 值:{}", e.getKey(),  e.getValue());

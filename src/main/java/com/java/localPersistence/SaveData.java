@@ -1,8 +1,5 @@
 package com.java.localPersistence;
 
-import com.java.account.AccountMessage;
-import com.java.unit.BasicUnit;
-
 import java.io.*;
 
 /**

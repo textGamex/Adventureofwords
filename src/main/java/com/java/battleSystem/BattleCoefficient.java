@@ -1,8 +1,5 @@
 package com.java.battleSystem;
 
-import com.java.unit.Enemy;
-import com.java.unit.Role;
-
 public class BattleCoefficient
 {
     private double expRewardsFactor;

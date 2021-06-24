@@ -12,7 +12,7 @@ class BasicUnitTest
     @Test
     void Builder()
     {
-        var unit = new BasicUnit.Builder("单位").physicalAttack(2)
+        var unit = new BasicUnit.Builder<>("单位").physicalAttack(2)
                 .evade(3).mana(101).maxHp(5).level(6).crit(7).critsEffect(8.0).lifeRegeneration(9)
                 .physicalResistance(10.0).manaRecovery(11).magicResistance(12).build();
 
@@ -28,14 +28,14 @@ class BasicUnitTest
         assertEquals(10.0, unit.defense().getPhysicalResistance());
         assertEquals(11, unit.attack().getManaRecovery());
         assertEquals(12, unit.defense().getMagicResistance());
-        assertThrows(IllegalArgumentException.class, () -> new BasicUnit.Builder("单位").maxHp(0).build());
-        assertThrows(NullPointerException.class, () -> new BasicUnit.Builder(null).build());
+        assertThrows(IllegalArgumentException.class, () -> new BasicUnit.Builder<>("单位").maxHp(0).build());
+        assertThrows(NullPointerException.class, () -> new BasicUnit.Builder<>(null).build());
     }
 
     @Test
     void testAttributesIsGrowWithLevel()
     {
-        final var unit = new BasicUnit.Builder("单位").physicalAttack(100).magicAttack(100)
+        final var unit = new BasicUnit.Builder<>("单位").physicalAttack(100).magicAttack(100)
                 .evade(100).mana(100).maxHp(100).crit(100).critsEffect(100).lifeRegeneration(100)
                 .physicalResistance(100.0).attributesIsGrowWithLevel(true).level(2).build();
 
@@ -48,15 +48,15 @@ class BasicUnitTest
     @Test
     void testAttributesIsGrowWithLevelInvalid()
     {
-        final var unit1 = new BasicUnit.Builder("单位").physicalAttack(2)
+        final var unit1 = new BasicUnit.Builder<>("单位").physicalAttack(2)
                 .evade(3).mana(101).maxHp(5).crit(7).critsEffect(8.0).lifeRegeneration(9)
                 .physicalResistance(10.0).attributesIsGrowWithLevel(true).level(1).build();
 
-        final var unit2 = new BasicUnit.Builder("单位").physicalAttack(2)
+        final var unit2 = new BasicUnit.Builder<>("单位").physicalAttack(2)
                 .evade(3).mana(101).maxHp(5).crit(7).critsEffect(8.0).lifeRegeneration(9)
                 .physicalResistance(10.0).attributesIsGrowWithLevel(false).level(1).build();
 
-        final var unit3 = new BasicUnit.Builder("单位").physicalAttack(2)
+        final var unit3 = new BasicUnit.Builder<>("单位").physicalAttack(2)
                 .evade(3).mana(101).maxHp(5).crit(7).critsEffect(8.0).lifeRegeneration(9)
                 .physicalResistance(10.0).attributesIsGrowWithLevel(false).level(99).build();
 
@@ -129,7 +129,7 @@ class BasicUnitTest
 
         var copy = unit.clone();
 
-        assertTrue(unit.equals(copy));
+        assertEquals(unit, copy);
     }
 
 //    @Test

@@ -35,9 +35,9 @@ class BattleSystemTest
 
         role.buff().add(BuffType.VERTIGO, new BuffEffect(1, 1));
 
-        assertTrue(canAct(unit));
-        assertFalse(canAct(role));
-        assertThrows(NullPointerException.class, () -> canAct(null));
+        assertTrue(canMove(unit));
+        assertFalse(canMove(role));
+        assertThrows(NullPointerException.class, () -> canMove(null));
     }
 
     @Test

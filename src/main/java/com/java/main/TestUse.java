@@ -19,7 +19,6 @@ import java.util.Scanner;
 
 import static com.java.battleSystem.BattleAttributeCalculation.criticalDamage;
 import static com.java.battleSystem.BattleSystem.*;
-import static com.java.battleSystem.BattleSystem.normalAttackDamage;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -170,7 +169,7 @@ public class TestUse
         {
             roleStatistics.addTotalRound(1);
             enemyStatistics.addTotalRound(1);
-            if (canAct(role))
+            if (canMove(role))
             {
                 if (canHit(role, enemy))
                 {
@@ -215,7 +214,7 @@ public class TestUse
                 break;
             }
 
-            if (canAct(enemy))
+            if (canMove(enemy))
             {
                 if (canHit(enemy, role))
                 {

@@ -23,8 +23,8 @@ public class MemoryEncryption
         try
         {
             //不知道好使不好使
-            keyInt = SecureRandom.getInstanceStrong().nextInt();;
-            keyLong = SecureRandom.getInstanceStrong().nextLong();;
+            keyInt = SecureRandom.getInstanceStrong().nextInt();
+            keyLong = SecureRandom.getInstanceStrong().nextLong();
         }
         catch (NoSuchAlgorithmException e)
         {

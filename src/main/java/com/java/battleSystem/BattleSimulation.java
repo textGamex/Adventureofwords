@@ -36,7 +36,7 @@ public final class BattleSimulation
         {
             roleStatistics.addTotalRound(1);
             enemyStatistics.addTotalRound(1);
-            if (canAct(role))
+            if (canMove(role))
             {
                 if (canHit(role, enemy))
                 {
@@ -84,7 +84,7 @@ public final class BattleSimulation
                 i++;
                 continue;
             }
-            if (canAct(enemy))
+            if (canMove(enemy))
             {
                 if (canHit(enemy, role))
                 {
@@ -130,7 +130,6 @@ public final class BattleSimulation
                 stateRecovery(enemy);
 
                 i++;
-                continue;
             }
         }
         var endTime = Instant.now();
