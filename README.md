@@ -1,12 +1,13 @@
 # 文字冒险
-文字冒险是一款基于JAVA开发的RPG类游戏
+- 文字冒险是一款基于JAVA开发的RPG类游戏
 
-第一行代码写于2021-3-7
+- 第一行代码写于2021-3-7
 
-此游戏现在正在开发中, 敬请期待
+### 如果对此项目有什么好的建议或想法,或者想参与此项目的开发, 请联系我, 联系方式:
+- 电子邮箱: textgame@qq.com
+- QQ: 1543255825
 
 [![Code](https://img.shields.io/github/stars/textGamex/Adventureofwords?label=Github&style=social)](https://github.com/textGamex/Adventureofwords)
- 
 
 # 开发者名单
 - 程序:留恋千年
