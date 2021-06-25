@@ -7,8 +7,11 @@ import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+import static com.java.antiSpam.MemoryEncryption.*;
+
 /**
  * @author 留恋千年
+ * @version 1.1.1
  */
 public class UnitAttack implements Serializable
 {
@@ -34,6 +37,7 @@ public class UnitAttack implements Serializable
             e.printStackTrace();
         }
     }
+
     private static final long DOUBLE_ACCURACY = 10000000000000L;
     /**物理攻击*/
     private int physicalAttack;
@@ -45,6 +49,8 @@ public class UnitAttack implements Serializable
     private long critsEffect;
     /**命中*/
     private int hit;
+    /**最大法力值*/
+    private int maxMana;
     /**法力值*/
     private int mana;
     /**每回合法力值恢复*/
@@ -122,6 +128,22 @@ public class UnitAttack implements Serializable
     public void setHit(final int hit)
     {
         this.hit = hit ^ keyInt;
+    }
+
+    /**
+     * @return 返回此单位的最大法力值
+     */
+    public int getMaxMana()
+    {
+        return decryptInt(maxMana);
+    }
+
+    /**
+     * @param maxMana 此单位的最大法力值
+     */
+    public void setMaxMana(int maxMana)
+    {
+        this.maxMana = encryptionInt(maxMana);
     }
 
     /**

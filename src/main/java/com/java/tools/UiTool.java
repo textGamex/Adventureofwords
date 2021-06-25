@@ -1,5 +1,8 @@
 package com.java.tools;
 
+import com.java.unit.BasicUnit;
+import com.java.unit.Role;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -40,7 +43,7 @@ public final class UiTool
      *
      * @param separatorCharacter 要打印的分隔符
      * @param count 要打印的数量
-     * @throws IllegalArgumentException 如果{@code length}为负
+     * @throws IllegalArgumentException 如果{@code length}为负数
      * @throws NullPointerException 如果{@code separatorCharacter}为null
      */
     public static void separator(final String separatorCharacter, final int count)
@@ -50,5 +53,26 @@ public final class UiTool
             throw new IllegalArgumentException();
         }
         System.out.println(requireNonNull(separatorCharacter).repeat(count));
+    }
+
+    /**
+     * 在显示器上显示单位的属性.
+     *
+     * @param unit 要在显示器上显示属性的单位
+     * @throws NullPointerException 如果{@code unit}为null
+     */
+    public static void printUnitProperties(final BasicUnit unit)
+    {
+        var map = requireNonNull(unit).toProperties();
+
+        for (final var string : BasicUnit.toPropertiesString())
+        {
+            System.out.println(string + ":" + map.get(string));
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        printUnitProperties(Role.newStandardPrimaryLevelRole("0"));
     }
 }

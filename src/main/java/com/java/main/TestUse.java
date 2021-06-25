@@ -123,8 +123,9 @@ public class TestUse
             {
                 case 1 -> {
                     separator();
-                    println("玩家:" + role);
-                    println("敌对单位:" + enemy);
+                    UiTool.printUnitProperties(role);
+                    System.out.println();
+                    UiTool.printUnitProperties(enemy);
                 }
                 case 2 -> {
                     GameTool.cls();

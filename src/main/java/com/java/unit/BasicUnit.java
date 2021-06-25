@@ -5,6 +5,9 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+
 import static java.util.Objects.requireNonNull;
 import static com.java.unit.BasicUnit.UnitGrowth.calculationLevelGrowth;
 
@@ -12,27 +15,27 @@ import static com.java.unit.BasicUnit.UnitGrowth.calculationLevelGrowth;
  * 游戏的单位, 用于实现基本的游戏对战.
  *
  * <p>现已实现以下属性</p>
- * <ul>
- *     <li>单位名称, 无默认值</li>
- *     <li>单位等级, 默认值为1</li>
- *     <li>最大生命值, 默认值为100</li>
- *     <li>单位属性成长值, 默认值参见{@link UnitGrowth}</li>
- *     <li>速度, 默认值为50</li>
- *     <li>物理攻击, 默认值为0</li>
- *     <li>魔法攻击, 默认值为0</li>
- *     <li>魔法值, 默认值为0</li>
- *     <li>暴击, 默认值为0</li>
- *     <li>暴击抗性, 默认值为0</li>
- *     <li>暴击效果, 默认值为2.0</li>
- *     <li>命中, 默认值为50</li>
- *     <li>闪避, 默认值为5</li>
- *     <li>物理抗性, 默认值为0</li>
- *     <li>护甲, 默认值为0</li>
- *     <li>魔法抗性, 默认值为0</li>
- *     <li>每回合生命回复, 默认值为0</li>
- *     <li>每回合法力值恢复, 默认值为0</li>
- * </ul>
- * @version 2.0.0
+ * <li>单位名称, 无默认值</li>
+ * <li>单位等级, 默认值为1</li>
+ * <li>最大生命值, 默认值为100</li>
+ * <li>单位属性成长值, 默认值参见{@link UnitGrowth}</li>
+ * <li>速度, 默认值为50</li>
+ * <li>物理攻击, 默认值为0</li>
+ * <li>魔法攻击, 默认值为0</li>
+ * <li>最大法力值, 默认值为0</li>
+ * <li>法力值, 默认值为0</li>
+ * <li>暴击, 默认值为0</li>
+ * <li>暴击抗性, 默认值为0</li>
+ * <li>暴击效果, 默认值为2.0</li>
+ * <li>命中, 默认值为50</li>
+ * <li>闪避, 默认值为5</li>
+ * <li>物理抗性, 默认值为0</li>
+ * <li>护甲, 默认值为0</li>
+ * <li>魔法抗性, 默认值为0</li>
+ * <li>每回合生命回复, 默认值为0</li>
+ * <li>每回合法力值恢复, 默认值为0</li>
+ *
+ * @version 2.1.0
  * @author 留恋千年
  * @see BuffModule
  * @see Role
@@ -66,7 +69,8 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
      * <li>速度, 默认值为50</li>
      * <li>物理攻击, 默认值为0</li>
      * <li>魔法攻击, 默认值为0</li>
-     * <li>魔法值, 默认值为0</li>
+     * <li>最大法力值, 默认值为0</li>
+     * <li>法力值, 默认值为0</li>
      * <li>暴击, 默认值为0</li>
      * <li>暴击抗性, 默认值为0</li>
      * <li>暴击效果, 默认值为2.0</li>
@@ -109,6 +113,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         private double magicResistance    = 0.0;
         private int manaRecovery          = 0;
         private int level                 = 1;
+        private int maxMana               = 0;
         private int mana                  = 0;//法力值
         private int hit                   = 50;
         private int speed                 = 50;
@@ -231,6 +236,12 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
             return (T) this;
         }
 
+        public T maxMana(int maxMana)
+        {
+            this.maxMana = maxMana;
+            return (T) this;
+        }
+
         public T mana(int mana)
         {
             this.mana = mana;
@@ -309,6 +320,7 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
                 increaseLevel));
         attackModule.setCrit(calculationLevelGrowth(builder.crit, builder.growth.critGrowth,
                 increaseLevel));
+        attackModule.setMaxMana(builder.maxMana);
         attackModule.setMana(calculationLevelGrowth(builder.mana, builder.growth.manaGrowth,
                 increaseLevel));
         attackModule.setHit(builder.hit);
@@ -602,17 +614,84 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
                 + ", 生命值:" + defenseModule.getHp()
                 + ", 等级:" + level
                 + ", 速度:" + speed
+                + ", 最大法力值:" + attackModule.getMaxMana()
+                + ", 法力值:" + attackModule.getMana()
                 + ", 物理攻击:" + attackModule.getPhysicalAttack()
                 + ", 魔法攻击:" + attackModule.getPhysicalAttack()
                 + ", 暴击:" + attackModule.getCrit()
                 + ", 暴击抗性:" + defenseModule.getCritResistance()
-                + ", 暴击效果:" + attackModule.getCritsEffect() * 100 + "%"
+                + ", 暴击效果:" + attackModule.getCritsEffect()
                 + ", 物理抗性:" + defenseModule.getPhysicalResistance()
+                + ", 魔法抗性:" + defenseModule.getMagicResistance()
                 + ", 护甲:" + defenseModule.getArmor()
                 + ", 每回合生命回复:" + defenseModule.getLifeRegeneration()
                 + ", 每回合魔法值回复:" + attackModule.getManaRecovery()
+                + ", 命中:" + attackModule.getHit()
                 + ", 闪避:" + defenseModule.getEvade()
                 + "]";
+    }
+
+    /**
+     *
+     * @return 一个包含属性名称和属性值的映射
+     */
+    public Map<String, String> toProperties()
+    {
+        final var data = new HashMap<String, String>(20);
+        data.put("id", String.valueOf(id));
+        data.put("名称", name);
+        data.put("最大生命值", String.valueOf(defenseModule.getMaxHp()));
+        data.put("生命值", String.valueOf(defenseModule.getHp()));
+        data.put("等级", String.valueOf(level));
+        data.put("速度", String.valueOf(speed));
+        data.put("最大法力值", String.valueOf(attackModule.getMaxMana()));
+        data.put("法力值", String.valueOf(attackModule.getMana()));
+        data.put("物理攻击", String.valueOf(attackModule.getPhysicalAttack()));
+        data.put("魔法攻击", String.valueOf(attackModule.getPhysicalAttack()));
+        data.put("暴击", String.valueOf(attackModule.getCrit()));
+        data.put("暴击抗性", String.valueOf(defenseModule.getCritResistance()));
+        data.put("暴击效果", String.valueOf(attackModule.getCritsEffect()));
+        data.put("物理抗性", String.format("%.4f", defenseModule.getPhysicalResistance()));
+        data.put("魔法抗性", String.format("%.4f", defenseModule.getMagicResistance()));
+        data.put("护甲", String.valueOf(defenseModule.getArmor()));
+        data.put("每回合生命回复", String.valueOf(defenseModule.getLifeRegeneration()));
+        data.put("每回合魔法值回复", String.valueOf(attackModule.getManaRecovery()));
+        data.put("命中", String.valueOf(attackModule.getHit()));
+        data.put("闪避", String.valueOf(defenseModule.getEvade()));
+
+        return data;
+    }
+
+    /**
+     * 返回包含此对象具有的属性的一个字符串数组.
+     *
+     * @return 此对象具有的属性
+     */
+    public static String[] toPropertiesString()
+    {
+        return new String[]
+        {
+             "id",
+             "名称",
+             "最大生命值",
+             "生命值",
+             "等级",
+             "速度",
+             "最大法力值",
+             "法力值",
+             "物理攻击",
+             "魔法攻击",
+             "暴击",
+             "暴击抗性",
+             "暴击效果",
+             "物理抗性",
+             "魔法抗性",
+             "护甲",
+             "每回合生命回复",
+             "每回合魔法值回复",
+             "命中",
+             "闪避"
+        };
     }
 
     /**
