@@ -1,5 +1,10 @@
 package com.java.message.attackMessage;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import static java.util.Objects.requireNonNull;
+
 /**
  * 攻击类型
  *
@@ -11,18 +16,20 @@ package com.java.message.attackMessage;
 */
 public enum AttackType
 {
-    COMMON_ATTACK("普通攻击"),
-    CRIT("会心一击");
+    COMMON_ATTACK("commonAttack"),
+    CRIT("criticalHit");
 
     private final String typeName;
 
-    AttackType(String type)
+    AttackType(String typeName)
     {
-        this.typeName = type;
+        this.typeName = typeName;
     }
 
-    public String getTypeName()
+    public String getTypeName(final Locale locale)
     {
-        return typeName;
+        final var language = ResourceBundle.getBundle("language/AttackType_TypeName",
+                requireNonNull(locale));
+        return language.getString(typeName);
     }
 }

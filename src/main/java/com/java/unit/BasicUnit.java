@@ -6,7 +6,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import static java.util.Objects.requireNonNull;
 import static com.java.unit.BasicUnit.UnitGrowth.calculationLevelGrowth;
@@ -35,11 +37,12 @@ import static com.java.unit.BasicUnit.UnitGrowth.calculationLevelGrowth;
  * <li>每回合生命回复, 默认值为0</li>
  * <li>每回合法力值恢复, 默认值为0</li>
  *
- * @version 2.1.0
+ * @version 2.2.0
  * @author 留恋千年
  * @see BuffModule
  * @see Role
  * @see Enemy
+ * @since JDK15
  */
 public class BasicUnit implements Comparable<BasicUnit>, Serializable
 {
@@ -631,66 +634,79 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
                 + "]";
     }
 
+    public Map<String, String> toProperties()
+    {
+        return toProperties(Locale.getDefault());
+    }
+
     /**
      *
      * @return 一个包含属性名称和属性值的映射
+     * @param locale 环境语言
+     * @throws NullPointerException 如果{@code locale}为null
      */
-    public Map<String, String> toProperties()
+    public Map<String, String> toProperties(final Locale locale)
     {
-        final var data = new HashMap<String, String>(20);
-        data.put("id", String.valueOf(id));
-        data.put("名称", name);
-        data.put("最大生命值", String.valueOf(defenseModule.getMaxHp()));
-        data.put("生命值", String.valueOf(defenseModule.getHp()));
-        data.put("等级", String.valueOf(level));
-        data.put("速度", String.valueOf(speed));
-        data.put("最大法力值", String.valueOf(attackModule.getMaxMana()));
-        data.put("法力值", String.valueOf(attackModule.getMana()));
-        data.put("物理攻击", String.valueOf(attackModule.getPhysicalAttack()));
-        data.put("魔法攻击", String.valueOf(attackModule.getPhysicalAttack()));
-        data.put("暴击", String.valueOf(attackModule.getCrit()));
-        data.put("暴击抗性", String.valueOf(defenseModule.getCritResistance()));
-        data.put("暴击效果", String.valueOf(attackModule.getCritsEffect()));
-        data.put("物理抗性", String.format("%.4f", defenseModule.getPhysicalResistance()));
-        data.put("魔法抗性", String.format("%.4f", defenseModule.getMagicResistance()));
-        data.put("护甲", String.valueOf(defenseModule.getArmor()));
-        data.put("每回合生命回复", String.valueOf(defenseModule.getLifeRegeneration()));
-        data.put("每回合魔法值回复", String.valueOf(attackModule.getManaRecovery()));
-        data.put("命中", String.valueOf(attackModule.getHit()));
-        data.put("闪避", String.valueOf(defenseModule.getEvade()));
+        final var array = toPropertiesString(requireNonNull(locale));
+        final var data = new HashMap<String, String>(30);
+
+        data.put(array[0], String.valueOf(id));
+        data.put(array[1], name);
+        data.put(array[2], String.valueOf(defenseModule.getMaxHp()));
+        data.put(array[3], String.valueOf(defenseModule.getHp()));
+        data.put(array[4], String.valueOf(level));
+        data.put(array[5], String.valueOf(speed));
+        data.put(array[6], String.valueOf(attackModule.getMaxMana()));
+        data.put(array[7], String.valueOf(attackModule.getMana()));
+        data.put(array[8], String.valueOf(attackModule.getPhysicalAttack()));
+        data.put(array[9], String.valueOf(attackModule.getPhysicalAttack()));
+        data.put(array[10], String.valueOf(attackModule.getCrit()));
+        data.put(array[11], String.valueOf(defenseModule.getCritResistance()));
+        data.put(array[12], String.valueOf(attackModule.getCritsEffect()));
+        data.put(array[13], String.format("%.4f", defenseModule.getPhysicalResistance()));
+        data.put(array[14], String.format("%.4f", defenseModule.getMagicResistance()));
+        data.put(array[15], String.valueOf(defenseModule.getArmor()));
+        data.put(array[16], String.valueOf(defenseModule.getLifeRegeneration()));
+        data.put(array[17], String.valueOf(attackModule.getManaRecovery()));
+        data.put(array[18], String.valueOf(attackModule.getHit()));
+        data.put(array[19], String.valueOf(defenseModule.getEvade()));
 
         return data;
     }
 
     /**
-     * 返回包含此对象具有的属性的一个字符串数组.
+     * 返回包含此对象具有的属性的一个字符串数组, 使用指定的语言表达.
      *
      * @return 此对象具有的属性
+     * @param locale 环境语言
+     * @throws NullPointerException 如果{@code locale}为null
      */
-    public static String[] toPropertiesString()
+    public static String[] toPropertiesString(final Locale locale)
     {
+        final var language = ResourceBundle.getBundle("language/BasicUnit_Properties",
+                requireNonNull(locale));
         return new String[]
         {
-             "id",
-             "名称",
-             "最大生命值",
-             "生命值",
-             "等级",
-             "速度",
-             "最大法力值",
-             "法力值",
-             "物理攻击",
-             "魔法攻击",
-             "暴击",
-             "暴击抗性",
-             "暴击效果",
-             "物理抗性",
-             "魔法抗性",
-             "护甲",
-             "每回合生命回复",
-             "每回合魔法值回复",
-             "命中",
-             "闪避"
+             language.getString("id"),
+             language.getString("name"),
+             language.getString("maxHp"),
+             language.getString("hp"),
+             language.getString("level"),
+             language.getString("speed"),
+             language.getString("maxMana"),
+             language.getString("mana"),
+             language.getString("physicalAttack"),
+             language.getString("magicAttack"),
+             language.getString("crit"),
+             language.getString("critResistance"),
+             language.getString("critsEffect"),
+             language.getString("physicalResistance"),
+             language.getString("magicResistance"),
+             language.getString("armor"),
+             language.getString("lifeRegeneration"),
+             language.getString("manaRecovery"),
+             language.getString("hit"),
+             language.getString("evade")
         };
     }
 

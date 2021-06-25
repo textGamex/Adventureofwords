@@ -3,6 +3,9 @@ package com.java.tools;
 import com.java.unit.BasicUnit;
 import com.java.unit.Role;
 
+import java.util.Arrays;
+import java.util.Locale;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -59,20 +62,15 @@ public final class UiTool
      * 在显示器上显示单位的属性.
      *
      * @param unit 要在显示器上显示属性的单位
-     * @throws NullPointerException 如果{@code unit}为null
+     * @throws NullPointerException 如果{@code unit}或{@code locale}为null
      */
-    public static void printUnitProperties(final BasicUnit unit)
+    public static void printUnitProperties(final BasicUnit unit, final Locale locale)
     {
-        var map = requireNonNull(unit).toProperties();
+        var map = requireNonNull(unit).toProperties(requireNonNull(locale));
 
-        for (final var string : BasicUnit.toPropertiesString())
+        for (final var string : BasicUnit.toPropertiesString(locale))
         {
             System.out.println(string + ":" + map.get(string));
         }
-    }
-
-    public static void main(String[] args)
-    {
-        printUnitProperties(Role.newStandardPrimaryLevelRole("0"));
     }
 }

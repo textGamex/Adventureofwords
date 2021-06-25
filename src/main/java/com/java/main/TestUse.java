@@ -14,7 +14,9 @@ import com.ui.ConsoleProgressBar;
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import static com.java.battleSystem.BattleAttributeCalculation.criticalDamage;
@@ -35,6 +37,10 @@ public class TestUse
     private static final String SETTING_FILE_NAME = "setting.json";
     private static final File SETTING_FILE_PATH = DataPath.GAME_DATA_PATH.resolve(SETTING_FILE_NAME).toFile();
     private static final GameSetting SETTING = GameSetting.getGameSetting();
+    private static final Locale LOCALE = Locale.US;//////////////////////////////////////////////////////////
+    Locale locale;
+    private static final ResourceBundle language = ResourceBundle.getBundle(
+            "language/UI_testUse", LOCALE);
 
     static
     {
@@ -99,12 +105,12 @@ public class TestUse
         final var in = new Scanner(System.in);
         String[] uiArray =
         {
-             "查看双方属性",
-             "开始战斗",
-             "重新载入单位属性文件属性",
-             "退出",
-             "开启加载动画",
-             "清空控制台"
+             language.getString("viewPropertiesOfBothParties"),
+             language.getString("startFighting"),
+             language.getString("reloadUnitPropertiesFileProperties"),
+             language.getString("exitProgram"),
+             language.getString("turnOnLoadAnimation"),
+             language.getString("executeCls")
         };
 
         while (true)
@@ -112,24 +118,24 @@ public class TestUse
             separator();
             if (SETTING.isOpenLoadAnimation())
             {
-                uiArray[4] = "关闭加载动画";
+                uiArray[4] = language.getString("turnOffLoadAnimation");
             }
             else
             {
-               uiArray[4] = "开启加载动画";
+               uiArray[4] = language.getString("turnOnLoadAnimation");
             }
             println(UiTool.toUi(uiArray));
             switch (in.nextInt())
             {
                 case 1 -> {
                     separator();
-                    UiTool.printUnitProperties(role);
+                    UiTool.printUnitProperties(role, LOCALE);
                     System.out.println();
-                    UiTool.printUnitProperties(enemy);
+                    UiTool.printUnitProperties(enemy, LOCALE);
                 }
                 case 2 -> {
                     GameTool.cls();
-                    fight(role, enemy);
+                    fight(role, enemy, LOCALE);
                 }
                 case 3 -> {
                     separator();
@@ -157,10 +163,11 @@ public class TestUse
         }
     }
 
-    public static void fight(final BasicUnit role, final BasicUnit enemy)
+    public static void fight(final BasicUnit role, final BasicUnit enemy, final Locale locale)
     {
         Objects.requireNonNull(role);
         Objects.requireNonNull(enemy);
+        Objects.requireNonNull(locale);
 
         var start = Instant.now();
         final var roleStatistics = new PlayerStatistics();
@@ -190,7 +197,7 @@ public class TestUse
                     }
                     enemy.subtractHp(hurt);
                     originalMessage.setHarm(hurt);
-                    println(BattleTip.returnAttackMessage(originalMessage));
+                    println(BattleTip.returnAttackMessage(originalMessage, locale));
                     roleStatistics.addTotalHarm(hurt);
                     roleStatistics.setTotalAttack(roleStatistics.getTotalAttack() + 1);
                 }
@@ -235,7 +242,7 @@ public class TestUse
                     }
                     role.subtractHp(hurt);
                     originalMessage.setHarm(hurt);
-                    println(BattleTip.returnAttackMessage(originalMessage));
+                    println(BattleTip.returnAttackMessage(originalMessage, LOCALE));
                     enemyStatistics.addTotalHarm(hurt);
                     enemyStatistics.setTotalAttack(roleStatistics.getTotalAttack() + 1);
                 }
@@ -286,7 +293,14 @@ public class TestUse
 
     private static void println(final String s)
     {
-        System.out.println("[系统]" + Objects.requireNonNull(s));
+        println(s, LOCALE);
+    }
+
+    private static void println(final String s, final Locale locale)
+    {
+        final var language = ResourceBundle.getBundle("language/UI_testUse",
+                requireNonNull(locale));
+        System.out.println(language.getString("statementPrefix") + Objects.requireNonNull(s));
     }
 
     private static void printProgressBar()

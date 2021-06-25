@@ -2,6 +2,10 @@ package com.java.message.attackMessage;
 
 import com.java.battleSystem.BattleSystem;
 
+import java.text.MessageFormat;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import static java.util.Objects.requireNonNull;
 /**
  * 战斗提示信息.
@@ -36,17 +40,25 @@ public final class BattleTip
         throw new AssertionError();
     }
 
+    public static String returnAttackMessage(final AttackMessage message)
+    {
+        return returnAttackMessage(message, Locale.getDefault());
+    }
+
     /**
      * 用于输出战场信息.
      *
      * @see AttackMessage
-     * @throws NullPointerException 如果m{@code message}为null
+     * @throws NullPointerException 如果{@code message}或{@code locale}为null
      * @throws IllegalArgumentException 如果{@code message.getHarm()}方法的返回值小于0
      * @param message 战场信息包
+     * @param locale 环境语言
      */
-    public static String returnAttackMessage(AttackMessage message)
+    public static String returnAttackMessage(final AttackMessage message, Locale locale)
     {
         requireNonNull(message);
+        final var language = ResourceBundle.getBundle("language/BattleTip_InformationDisplayed",
+                requireNonNull(locale));
 
         //不直接写成 message.harm是因为以后可能要做分离处理
         var victimName = message.getVictimName();
@@ -55,12 +67,13 @@ public final class BattleTip
 
         if (message.getHarm() == 0)
         {
-            return String.format("%s使用[%s]对%s发起了攻击, 但未造成伤害", attackerName, message.getHarmTypeName(), victimName);
+            return MessageFormat.format(language.getString("attackButNoHarmWasDone"), attackerName,
+                    message.getHarmTypeName(locale), victimName);
         }
         else if (message.getHarm() > 0)
         {
-            return String.format("%s使用[%s]对%s造成了%d点伤害,%s还剩%d点生命值",attackerName, message.getHarmTypeName(),
-                victimName, message.getHarm(), victimName, message.getVictimSurplusHp());
+            return MessageFormat.format(language.getString("successfulAttack"), attackerName,
+                    message.getHarmTypeName(locale), victimName, message.getHarm(), victimName, message.getVictimSurplusHp());
         }
         else
         {
@@ -131,9 +144,10 @@ public final class BattleTip
         {
             return attackType;
         }
-        public String getHarmTypeName()
+
+        public String getHarmTypeName(final Locale locale)
         {
-            return attackType.getTypeName();
+            return attackType.getTypeName(requireNonNull(locale));
         }
 
         public int getVictimSurplusHp()
