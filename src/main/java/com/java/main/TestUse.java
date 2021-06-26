@@ -27,7 +27,7 @@ import static java.util.Objects.requireNonNull;
  * 用于提供给测试和策划进行游戏测试.
  *
  * @author 留恋千年
- * @version 1.2.0
+ * @version 1.3.0
  * @since 2021-6-6
  */
 public class TestUse
@@ -37,8 +37,7 @@ public class TestUse
     private static final String SETTING_FILE_NAME = "setting.json";
     private static final File SETTING_FILE_PATH = DataPath.GAME_DATA_PATH.resolve(SETTING_FILE_NAME).toFile();
     private static final GameSetting SETTING = GameSetting.getGameSetting();
-    private static final Locale LOCALE = Locale.US;//////////////////////////////////////////////////////////
-    Locale locale;
+    private static final Locale LOCALE = Locale.getDefault();
     private static final ResourceBundle language = ResourceBundle.getBundle(
             "language/UI_testUse", LOCALE);
 
@@ -46,10 +45,10 @@ public class TestUse
     {
         if (!SETTING_FILE_PATH.exists())
         {
-            println("正在初始化...");
+            println(language.getString("initialization"));
             printProgressBar();
             GameSetting.getGameSetting().saveSetting(SETTING_FILE_PATH);
-            println("初始化成功");
+            println(language.getString("initialization_Ok"));
         }
         else
         {
@@ -78,7 +77,7 @@ public class TestUse
         Role enemy = null;
         if (ROLE_FILE.exists() && ENEMY_FILE.exists())
         {
-            println("检测到属性文件, 加载中...");
+            println(language.getString("loadPropertiesFile"));
             if (SETTING.isOpenLoadAnimation())
             {
                 printProgressBar();
@@ -89,16 +88,16 @@ public class TestUse
 
         if (!ROLE_FILE.exists() && !ENEMY_FILE.exists())
         {
-            println("属性文件不存在, 正在创建中...");
+            println(language.getString("createPropertyFile"));
             if (SETTING.isOpenLoadAnimation())
             {
                 printProgressBar();
             }
-            role = Role.newStandardPrimaryLevelRole("白博森");
-            enemy = Role.newStandardPrimaryLevelRole("张羽");
+            role = Role.newStandardPrimaryLevelRole(language.getString("UnitName1"));
+            enemy = Role.newStandardPrimaryLevelRole(language.getString("UnitName2"));
             role.saveGameManagerData(ROLE_FILE);
             enemy.saveGameManagerData(ENEMY_FILE);
-            println("创建成功");
+            println(language.getString("createPropertyFile_OK"));
         }
 
         assert role != null;
@@ -135,18 +134,18 @@ public class TestUse
                 }
                 case 2 -> {
                     GameTool.cls();
-                    fight(role, enemy, LOCALE);
+                    fight(role, enemy);
                 }
                 case 3 -> {
                     separator();
-                    println("正在载入中...");
+                    println(language.getString("case3_loading"));
                     if (SETTING.isOpenLoadAnimation())
                     {
                         printProgressBar();
                     }
                     role = Role.loadGameManagerData(ROLE_FILE);
                     enemy = Role.loadGameManagerData(ENEMY_FILE);
-                    println("载入成功");
+                    println(language.getString("case3_OkLoad"));
                 }
                 case 4 -> System.exit(0);
                 case 5 -> {
@@ -156,18 +155,17 @@ public class TestUse
                 case 6 -> GameTool.cls();
                 default -> {
                     separator();
-                    println("请输入支持的选项");
+                    println(language.getString("defaultText"));
                     separator();
                 }
             }
         }
     }
 
-    public static void fight(final BasicUnit role, final BasicUnit enemy, final Locale locale)
+    public static void fight(final BasicUnit role, final BasicUnit enemy)
     {
         Objects.requireNonNull(role);
         Objects.requireNonNull(enemy);
-        Objects.requireNonNull(locale);
 
         var start = Instant.now();
         final var roleStatistics = new PlayerStatistics();
@@ -197,18 +195,18 @@ public class TestUse
                     }
                     enemy.subtractHp(hurt);
                     originalMessage.setHarm(hurt);
-                    println(BattleTip.returnAttackMessage(originalMessage, locale));
+                    println(BattleTip.returnAttackMessage(originalMessage, LOCALE));
                     roleStatistics.addTotalHarm(hurt);
                     roleStatistics.setTotalAttack(roleStatistics.getTotalAttack() + 1);
                 }
                 else
                 {
-                    println(role.getName() + "未击中" + enemy.getName());
+                    println(role.getName() + language.getString("") + enemy.getName());
                 }
             }
             else
             {
-                println("不能行动");
+                println(language.getString("unableToAct"));
             }
 
             if (enemy.defense().getHp() <= 0)
@@ -248,12 +246,12 @@ public class TestUse
                 }
                 else
                 {
-                    println(enemy.getName() + "未击中" + role.getName());
+                    println(enemy.getName() + language.getString("attackMiss") + role.getName());
                 }
             }
             else
             {
-                println("不能行动");
+                println(language.getString("unableToAct"));
             }
 
             if (role.defense().getHp() <= 0)
