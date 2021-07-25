@@ -39,7 +39,7 @@ public class TestUse
     private static final GameSetting SETTING = GameSetting.getGameSetting();
     private static final Locale LOCALE = Locale.getDefault();
     private static final ResourceBundle language = ResourceBundle.getBundle(
-            "language/UI_testUse", LOCALE);
+            "language/UI_TestUse", LOCALE);
 
     static
     {
