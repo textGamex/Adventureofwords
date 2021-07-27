@@ -556,7 +556,6 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
         this.speed = speed;
     }
 
-//    public void
     /**
      * @throws IllegalArgumentException 如果{@code level}小于等于0
      */
@@ -632,11 +631,6 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
                 + ", 命中:" + attackModule.getHit()
                 + ", 闪避:" + defenseModule.getEvade()
                 + "]";
-    }
-
-    public Map<String, String> toProperties()
-    {
-        return toProperties(Locale.getDefault());
     }
 
     /**

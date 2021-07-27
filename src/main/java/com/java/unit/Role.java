@@ -1,11 +1,7 @@
 package com.java.unit;
 
 import com.alibaba.fastjson.JSONObject;
-import com.java.account.AccountMessage;
-import com.java.account.Identity;
 import com.java.localPersistence.JsonBaseTool;
-import com.java.localPersistence.SaveData;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -19,22 +15,33 @@ import static java.util.Objects.requireNonNull;
  * <li>拥有经验</li>
  * <li>升到下一级所需经验</li>
  * <li>角色创建日期及时间</li>
- * @version 1.0.3
+ *
  * @author 留恋千年
+ * @version 1.0.3
  */
 public class Role extends BasicUnit
 {
-    /**玩家的id*/
+    /**
+     * 玩家的id
+     */
     private static int nextId = 70000;
     private final int id = ++nextId;
-    /**持有货币*/
-    private int cash;
-    /**拥有经验*/
-    private int exp;
-    /**升到下一级所需经验*/
-    private int upgradeNeedXp;
-    /**角色创建日期*/
+    /**
+     * 角色创建日期
+     */
     private final LocalDateTime creatingDateTime = LocalDateTime.now();
+    /**
+     * 持有货币
+     */
+    private int cash;
+    /**
+     * 拥有经验
+     */
+    private int exp;
+    /**
+     * 升到下一级所需经验
+     */
+    private int upgradeNeedXp;
 
     /**
      * @throws NullPointerException 如果{@code builder}为null
@@ -42,53 +49,9 @@ public class Role extends BasicUnit
     protected Role(Builder builder)
     {
         super(requireNonNull(builder));
-        cash           = builder.cash;
-        exp            = builder.exp;
-        upgradeNeedXp  = builder.upgradeNeedXp;
-    }
-
-    /**
-     * @author 留恋千年
-     * @version 1.1.2
-     * @see com.java.unit.BasicUnit.Builder
-     */
-    public static class Builder extends BasicUnit.Builder<Builder>
-    {
-        private int cash           = 0;
-        private int exp            = 0;
-        private int upgradeNeedXp  = 10;
-
-        /**
-         * @throws NullPointerException 如果{@code name}为null
-         */
-        public Builder(String name)
-        {
-            super(requireNonNull(name));
-        }
-
-        public Builder cash(int cash)
-        {
-            this.cash = cash;
-            return this;
-        }
-
-        public Builder exp(int exp)
-        {
-            this.exp = exp;
-            return this;
-        }
-
-        public Builder upgradeNeedXp(int upgradeNeedXp)
-        {
-            this.upgradeNeedXp = upgradeNeedXp;
-            return this;
-        }
-
-        @Override
-        public Role build()
-        {
-            return new Role(this);
-        }
+        cash = builder.cash;
+        exp = builder.exp;
+        upgradeNeedXp = builder.upgradeNeedXp;
     }
 
     /**
@@ -102,6 +65,46 @@ public class Role extends BasicUnit
     {
         return new Role.Builder(requireNonNull(name)).maxHp(100).speed(50).level(1).armor(1).crit(10)
                 .critsEffect(2.0).critResistance(50).physicalAttack(20).hit(50).evade(5).build();
+    }
+
+    public static int getNextId()
+    {
+        return nextId;
+    }
+
+    /**
+     * @param path 要读取的资源路径
+     * @return 玩家属性信息
+     * @throws FileNotFoundException 如果要读取的文件不存在
+     * @since 15
+     */
+    public static Role loadData(final File path) throws FileNotFoundException
+    {
+        var json = JsonBaseTool.loadJsonFile(requireNonNull(path));
+
+        var name = json.getString("名称");
+        var level = json.getIntValue("单位等级");
+        var hp = json.getIntValue("最大生命值");
+        var speed = json.getIntValue("速度");
+        var mana = json.getIntValue("魔法值");
+        var atk = json.getIntValue("物理攻击");
+        var crit = json.getIntValue("暴击");
+        var critResistance = json.getIntValue("暴击抗性");
+        var critsEffect = json.getDoubleValue("暴击效果");
+        var physicalResistance = json.getDoubleValue("物理抗性");
+        var armor = json.getIntValue("护甲");
+        var hit = json.getIntValue("命中");
+        var evade = json.getIntValue("闪避");
+        var cash = json.getIntValue("持有货币");
+        var lifeRegeneration = json.getIntValue("每回合生命回复");
+        var manaRecovery = json.getIntValue("每回合魔法值回复");
+        var exp = json.getIntValue("角色拥有经验");
+        var upgradeNeedXp = json.getIntValue("升到下一级所需经验");
+
+        return new Builder(name).level(level).maxHp(hp).mana(mana).physicalAttack(atk).cash(cash).crit(crit).speed(speed)
+                .physicalResistance(physicalResistance).critsEffect(critsEffect).hit(hit).evade(evade).exp(exp)
+                .lifeRegeneration(lifeRegeneration).upgradeNeedXp(upgradeNeedXp).critResistance(critResistance)
+                .armor(armor).manaRecovery(manaRecovery).build();
     }
 
     public final int getCash()
@@ -130,18 +133,13 @@ public class Role extends BasicUnit
         return id;
     }
 
-    public static int getNextId()
-    {
-        return nextId;
-    }
-
     /**
      * @return 字符串表示的对象
      */
     @Override
     public String toString()
     {
-        return  super.toString() +
+        return super.toString() +
                 "[持有货币:" + cash +
                 ", 角色拥有经验:" + exp +
                 ", 升到下一级所需经验:" + upgradeNeedXp +
@@ -151,32 +149,13 @@ public class Role extends BasicUnit
     }
 
     /**
-     * 用于保存角色的属性
+     * 用于保存角色的属性.
      *
-     * <p>如果账号类型是玩家, 则用序列化方式保存, 如果是内部人员, 则用json方式保存</p>
-     * @param acc 此角色所对应的玩家的账号
-     * @see AccountMessage
-     * @throws NullPointerException 如果{@code acc}为null
+     * <p>用json方式保存</p>
+     * @param path 保存路径
+     * @throws NullPointerException 如果{@code path}为null
      */
-    public void saveData(AccountMessage acc)
-    {
-        requireNonNull(acc);
-        if (acc.getId() == Identity.GAME_MANAGER || acc.getId() == Identity.NEW_GAME_MANAGER)
-        {
-            saveGameManagerData(acc);
-        }
-        else
-        {
-            savePlayerData(acc);
-        }
-    }
-
-    public void saveGameManagerData(final AccountMessage account)
-    {
-        saveGameManagerData(requireNonNull(account).getPlayerDataResolveFile("RoleAttribute.json"));
-    }
-
-    public void saveGameManagerData(final File path)
+    public void saveData(final File path)
     {
         requireNonNull(path);
 
@@ -210,101 +189,47 @@ public class Role extends BasicUnit
         }
     }
 
-    private void savePlayerData(final AccountMessage account)
-    {
-        SaveData.saveObjectData(this, requireNonNull(account).getPlayerDataResolveFile("RoleAttribute.dat"));
-    }
-
     /**
-     *
-     * @param account 要读取的账号
-     * @return 玩家属性信息
-     * @throws FileNotFoundException 如果要读取的文件不存在
-     * @since 15
+     * @author 留恋千年
+     * @version 1.1.2
+     * @see com.java.unit.BasicUnit.Builder
      */
-    public static Role loadData(final AccountMessage account) throws FileNotFoundException
+    public static class Builder extends BasicUnit.Builder<Builder>
     {
-        requireNonNull(account);
-        //如果不存在,那怎么能读取呢?
-        if (fileNotExist(account))
+        private int cash = 0;
+        private int exp = 0;
+        private int upgradeNeedXp = 10;
+
+        /**
+         * @throws NullPointerException 如果{@code name}为null
+         */
+        public Builder(String name)
         {
-            throw new IllegalStateException("文件不存在,Id: " + account.getId());
+            super(requireNonNull(name));
         }
 
-        if (account.getId() == Identity.PLAYER)
+        public Builder cash(int cash)
         {
-            var archive = loadPlayerData(account);
-            if (archive == null)
-            {
-                throw new NullPointerException("loadPlayer方法返回Null");
-            }
-            return archive;
+            this.cash = cash;
+            return this;
         }
-        else
+
+        public Builder exp(int exp)
         {
-            return loadGameManagerData(account);
+            this.exp = exp;
+            return this;
         }
-    }
 
-    private static boolean fileNotExist(final AccountMessage acc)
-    {
-        assert acc != null;
-
-        return acc.getId() == Identity.NEW_GAME_MANAGER || acc.getId() == Identity.NEW_PLAYER;
-    }
-
-    public static Role loadPlayerData(final AccountMessage acc)
-    {
-        return loadPlayerData(requireNonNull(acc).getPlayerDataResolveFile("RoleAttribute.dat"));
-    }
-
-    public static Role loadPlayerData(final File path)
-    {
-        requireNonNull(path);
-
-        Role archive = null;
-        try (var in = new ObjectInputStream(new FileInputStream(path)))
+        public Builder upgradeNeedXp(int upgradeNeedXp)
         {
-            archive = (Role) in.readObject();
+            this.upgradeNeedXp = upgradeNeedXp;
+            return this;
         }
-        catch (IOException | ClassNotFoundException e)
+
+        @Override
+        public Role build()
         {
-            e.printStackTrace();
+            return new Role(this);
         }
-        return archive;
-    }
-
-    public static Role loadGameManagerData(final AccountMessage acc) throws FileNotFoundException
-    {
-        return loadGameManagerData(requireNonNull(acc).getPlayerDataResolveFile("RoleAttribute.json"));
-    }
-
-    public static Role loadGameManagerData(final File path) throws FileNotFoundException
-    {
-        var json = JsonBaseTool.loadJsonFile(requireNonNull(path));
-
-        var name = json.getString("名称");
-        var level = json.getIntValue("单位等级");
-        var hp = json.getIntValue("最大生命值");
-        var speed = json.getIntValue("速度");
-        var mana = json.getIntValue("魔法值");
-        var atk = json.getIntValue("物理攻击");
-        var crit = json.getIntValue("暴击");
-        var critResistance = json.getIntValue("暴击抗性");
-        var critsEffect = json.getDoubleValue("暴击效果");
-        var physicalResistance = json.getDoubleValue("物理抗性");
-        var armor = json.getIntValue("护甲");
-        var hit = json.getIntValue("命中");
-        var evade = json.getIntValue("闪避");
-        var cash = json.getIntValue("持有货币");
-        var lifeRegeneration = json.getIntValue("每回合生命回复");
-        var manaRecovery = json.getIntValue("每回合魔法值回复");
-        var exp = json.getIntValue("角色拥有经验");
-        var upgradeNeedXp = json.getIntValue("升到下一级所需经验");
-
-        return new Builder(name).level(level).maxHp(hp).mana(mana).physicalAttack(atk).cash(cash).crit(crit).speed(speed)
-                .physicalResistance(physicalResistance).critsEffect(critsEffect).hit(hit).evade(evade).exp(exp)
-                .lifeRegeneration(lifeRegeneration).upgradeNeedXp(upgradeNeedXp).critResistance(critResistance)
-                .armor(armor).manaRecovery(manaRecovery).build();
     }
 }

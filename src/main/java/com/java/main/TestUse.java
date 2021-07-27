@@ -82,8 +82,8 @@ public class TestUse
             {
                 printProgressBar();
             }
-            role = Role.loadGameManagerData(ROLE_FILE);
-            enemy = Role.loadGameManagerData(ENEMY_FILE);
+            role = Role.loadData(ROLE_FILE);
+            enemy = Role.loadData(ENEMY_FILE);
         }
 
         if (!ROLE_FILE.exists() && !ENEMY_FILE.exists())
@@ -95,8 +95,8 @@ public class TestUse
             }
             role = Role.newStandardPrimaryLevelRole(language.getString("UnitName1"));
             enemy = Role.newStandardPrimaryLevelRole(language.getString("UnitName2"));
-            role.saveGameManagerData(ROLE_FILE);
-            enemy.saveGameManagerData(ENEMY_FILE);
+            role.saveData(ROLE_FILE);
+            enemy.saveData(ENEMY_FILE);
             println(language.getString("createPropertyFile_OK"));
         }
 
@@ -143,8 +143,8 @@ public class TestUse
                     {
                         printProgressBar();
                     }
-                    role = Role.loadGameManagerData(ROLE_FILE);
-                    enemy = Role.loadGameManagerData(ENEMY_FILE);
+                    role = Role.loadData(ROLE_FILE);
+                    enemy = Role.loadData(ENEMY_FILE);
                     println(language.getString("case3_OkLoad"));
                 }
                 case 4 -> System.exit(0);

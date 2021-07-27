@@ -1,9 +1,8 @@
 package com.java.message;
 
 import com.alibaba.fastjson.JSONObject;
-import com.java.account.AccountMessage;
-import com.java.account.Identity;
 import com.java.localPersistence.JsonBaseTool;
+import com.java.main.GameSetting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +36,7 @@ public final class PlayerStatistics implements Serializable
     /**总回合数*/
     private long totalRound;
 //    /**总战斗次数*/
-//    private long total
+//    private long total;
     /**攻击总次数*/
     private long totalAttack;
     /**总伤害*/
@@ -250,28 +249,12 @@ public final class PlayerStatistics implements Serializable
      *
      * <p>如果账户类型是玩家,则用序列化方式保存,如果是内部人员,则用json保存</p>
      * @throws NullPointerException 如果{@code acc}为null
-     * @param acc 账号
-     * @see AccountMessage
+     * @param path 保存路径
      * @since 16
      */
-    public void saveStatistics(final AccountMessage acc)
+    public void saveStatistics(final File path)
     {
-        requireNonNull(acc);
-        if (acc.getId() == Identity.GAME_MANAGER || acc.getId() == Identity.NEW_GAME_MANAGER)
-        {
-            LOGGER.debug("{}账号采用json方式保存", acc.getAccountName());
-            saveGameManagerStatistics(acc);
-        }
-        else
-        {
-            LOGGER.debug("{}账号采用可序化方式保存", acc.getAccountName());
-            savePlayerStatistics(acc);
-        }
-    }
-
-    private void saveGameManagerStatistics(final AccountMessage account)
-    {
-        assert account != null;
+        assert path != null;
 
         var jsonFile = new JSONObject();
         jsonFile.put("总击杀数", totalKill);
@@ -284,7 +267,7 @@ public final class PlayerStatistics implements Serializable
         jsonFile.put("一共获得的分数", totalValue);
 
         try (var out = new PrintWriter(
-                account.getPlayerDataResolveFile("PlayerStatistics.json"), StandardCharsets.UTF_8))
+                GameSetting.GAME_DATA_PATH + "\\PlayerStatistics.json", StandardCharsets.UTF_8))
         {
             out.println(jsonFile.toJSONString());
         }
@@ -294,86 +277,14 @@ public final class PlayerStatistics implements Serializable
         }
     }
 
-    public void savePlayerStatistics(final File path)
-    {
-        try (var out = new ObjectOutputStream(new FileOutputStream(requireNonNull(path))))
-        {
-            out.writeObject(this);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void savePlayerStatistics(final AccountMessage account)
-    {
-        savePlayerStatistics(requireNonNull(account).getPlayerDataResolveFile("PlayerStatistics.dat"));
-    }
-
     /**
      *
-     * @param account 账号信息
-     * @return  此账号对应的游戏统计信息
-     * @throws FileNotFoundException 如果读取的文件不存在
-     * @throws NullPointerException 如果{@code account}为null
-     * @throws IllegalStateException 如果{@code account}的id字段为{@code NEW_PLAYER}或{@code NEW_GAME_MANAGER}
-     * @see AccountMessage
-     * @since 15
-     */
-    public static PlayerStatistics loadStatistics(final AccountMessage account) throws FileNotFoundException
-    {
-        requireNonNull(account);
-        //如果不存在,那怎么能读取呢?
-        if (fileNotExist(account))
-        {
-            throw new IllegalStateException("文件不存在,Id: " + account.getId());
-        }
-
-        if (account.getId() == Identity.PLAYER)
-        {
-            var archive = loadPlayerStatistics(account);
-            return requireNonNull(archive);
-        }
-        else
-        {
-            return loadGameManagerStatistics(account);
-        }
-    }
-
-    public static PlayerStatistics loadPlayerStatistics(final AccountMessage acc)
-    {
-        return loadPlayerStatistics(requireNonNull(acc).getPlayerDataResolveFile("PlayerStatistics.dat"));
-    }
-
-    public static PlayerStatistics loadPlayerStatistics(final File path)
-    {
-        requireNonNull(path);
-        PlayerStatistics archive = null;
-        try (var in = new ObjectInputStream(new FileInputStream(path)))
-        {
-            archive = (PlayerStatistics) in.readObject();
-        }
-        catch (IOException | ClassNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        return archive;
-    }
-
-    /**
-     *
-     * @param acc 要读取的账号
+     * @param path 数据路径
      * @return 此账号对应的统计信息
      * @throws FileNotFoundException 文件不存在
-     * @throws NullPointerException 如果{@code acc}为null
+     * @throws NullPointerException 如果{@code path}为null
      */
-    public static PlayerStatistics loadGameManagerStatistics(final AccountMessage acc) throws FileNotFoundException
-    {
-        return loadGameManagerStatistics(requireNonNull(acc).getPlayerDataResolveFile("PlayerStatistics.json"));
-    }
-
-    public static PlayerStatistics loadGameManagerStatistics(final File path) throws FileNotFoundException
+    public static PlayerStatistics loadStatistics(final File path) throws FileNotFoundException
     {
         var json = JsonBaseTool.loadJsonFile(requireNonNull(path));
 
@@ -388,13 +299,5 @@ public final class PlayerStatistics implements Serializable
 
         return new PlayerStatistics(totalKill, totalRound, totalAttack, totalHarm, totalVictory, totalXp, totalCash,
                 totalValue);
-    }
-
-    private static boolean fileNotExist(final AccountMessage acc)
-    {
-        assert acc != null;
-
-        return acc.getId() == Identity.NEW_GAME_MANAGER
-                || acc.getId() == Identity.NEW_PLAYER;
     }
 }

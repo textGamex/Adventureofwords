@@ -1,7 +1,5 @@
 package com.java.unit;
 
-import com.java.account.AccountMessage;
-import com.java.message.PrivateData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -41,10 +39,9 @@ class RoleTest
     @Test
     void saveData() throws FileNotFoundException
     {
-        var account = new AccountMessage(PrivateData.ACCOUNT1);
-        role.saveData(account);
 
-        var data = Role.loadData(account);
+
+        var data = Role.loadData(null);
 
         assertEquals("测试", data.getName());
         assertEquals(1, data.defense().getHp());
@@ -86,7 +83,6 @@ class RoleTest
     {
         var unit = new Role.Builder("测试").build();
 
-        assertDoesNotThrow(() -> unit.saveData( new AccountMessage("测试")));
     }
 }
 

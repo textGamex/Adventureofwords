@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static java.util.Objects.requireNonNull;
 
@@ -20,6 +22,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class GameSetting
 {
+    public static final Path GAME_DATA_PATH = Paths.get(System.getProperty("user.home"), "AppData",
+            "Local", "Adventure of words");
     private static final GameSetting GAME_SETTING = new GameSetting();
     private GameSetting()
     {
