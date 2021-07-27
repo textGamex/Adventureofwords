@@ -1,6 +1,7 @@
 package com.java.message;
 
 import com.alibaba.fastjson.JSONObject;
+import com.java.localPersistence.DataPath;
 import com.java.localPersistence.JsonBaseTool;
 import com.java.main.GameSetting;
 import org.slf4j.Logger;
@@ -267,7 +268,7 @@ public final class PlayerStatistics implements Serializable
         jsonFile.put("一共获得的分数", totalValue);
 
         try (var out = new PrintWriter(
-                GameSetting.GAME_DATA_PATH + "\\PlayerStatistics.json", StandardCharsets.UTF_8))
+                DataPath.GAME_DATA_PATH + "\\PlayerStatistics.json", StandardCharsets.UTF_8))
         {
             out.println(jsonFile.toJSONString());
         }

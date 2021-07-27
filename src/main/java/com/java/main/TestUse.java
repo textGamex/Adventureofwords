@@ -9,7 +9,6 @@ import com.java.tools.GameTool;
 import com.java.tools.UiTool;
 import com.java.unit.BasicUnit;
 import com.java.unit.Role;
-import com.ui.ConsoleProgressBar;
 
 import java.io.*;
 import java.time.Duration;
@@ -46,7 +45,6 @@ public class TestUse
         if (!SETTING_FILE_PATH.exists())
         {
             println(language.getString("initialization"));
-            printProgressBar();
             GameSetting.getGameSetting().saveSetting(SETTING_FILE_PATH);
             println(language.getString("initialization_Ok"));
         }
@@ -78,10 +76,6 @@ public class TestUse
         if (ROLE_FILE.exists() && ENEMY_FILE.exists())
         {
             println(language.getString("loadPropertiesFile"));
-            if (SETTING.isOpenLoadAnimation())
-            {
-                printProgressBar();
-            }
             role = Role.loadData(ROLE_FILE);
             enemy = Role.loadData(ENEMY_FILE);
         }
@@ -89,10 +83,6 @@ public class TestUse
         if (!ROLE_FILE.exists() && !ENEMY_FILE.exists())
         {
             println(language.getString("createPropertyFile"));
-            if (SETTING.isOpenLoadAnimation())
-            {
-                printProgressBar();
-            }
             role = Role.newStandardPrimaryLevelRole(language.getString("UnitName1"));
             enemy = Role.newStandardPrimaryLevelRole(language.getString("UnitName2"));
             role.saveData(ROLE_FILE);
@@ -108,21 +98,13 @@ public class TestUse
              language.getString("startFighting"),
              language.getString("reloadUnitPropertiesFileProperties"),
              language.getString("exitProgram"),
-             language.getString("turnOnLoadAnimation"),
              language.getString("executeCls")
         };
 
         while (true)
         {
             separator();
-            if (SETTING.isOpenLoadAnimation())
-            {
-                uiArray[4] = language.getString("turnOffLoadAnimation");
-            }
-            else
-            {
-               uiArray[4] = language.getString("turnOnLoadAnimation");
-            }
+
             println(UiTool.toUi(uiArray));
             switch (in.nextInt())
             {
@@ -139,19 +121,11 @@ public class TestUse
                 case 3 -> {
                     separator();
                     println(language.getString("case3_loading"));
-                    if (SETTING.isOpenLoadAnimation())
-                    {
-                        printProgressBar();
-                    }
                     role = Role.loadData(ROLE_FILE);
                     enemy = Role.loadData(ENEMY_FILE);
                     println(language.getString("case3_OkLoad"));
                 }
                 case 4 -> System.exit(0);
-                case 5 -> {
-                    SETTING.setLoadAnimation(!SETTING.isOpenLoadAnimation());
-                    GameSetting.getGameSetting().saveSetting(SETTING_FILE_PATH);
-                }
                 case 6 -> GameTool.cls();
                 default -> {
                     separator();
@@ -201,7 +175,7 @@ public class TestUse
                 }
                 else
                 {
-                    println(role.getName() + language.getString("") + enemy.getName());
+                    println(role.getName() + language.getString("attackMiss") + enemy.getName());
                 }
             }
             else
@@ -299,11 +273,6 @@ public class TestUse
         final var language = ResourceBundle.getBundle("language/UI_testUse",
                 requireNonNull(locale));
         System.out.println(language.getString("statementPrefix") + Objects.requireNonNull(s));
-    }
-
-    private static void printProgressBar()
-    {
-       ConsoleProgressBar.loadSpecifiedTime(2000, 65, '|');
     }
 
     public static void loadSetting(final File path) throws FileNotFoundException

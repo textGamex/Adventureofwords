@@ -7,8 +7,8 @@ import java.io.FileNotFoundException;
  * <p>游戏项目地址:</p>
  * <a href="https://gitee.com/mengxin_C/adventure-of-words">gitee</a>
  * <a href="https://github.com/mengxinC/Adventureofwords">github</a>
- *@author Millennium
- *@version 0.2.1
+ *@author 留恋千年
+ *@version 1.2.1
 */
 public final class AdventureOfWordsMain
 {
