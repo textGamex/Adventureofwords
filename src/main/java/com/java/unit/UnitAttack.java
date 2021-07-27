@@ -7,8 +7,6 @@ import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-import static com.java.antiSpam.MemoryEncryption.*;
-
 /**
  * @author 留恋千年
  * @version 1.1.1

@@ -2,8 +2,6 @@ package com.java.unit;
 
 import java.io.Serializable;
 
-import static com.java.antiSpam.MemoryEncryption.*;
-
 /**
  * @author 留恋千年
  */
@@ -32,7 +30,7 @@ public class UnitDefense implements Serializable
      */
     public int getMaxHp()
     {
-        return decryptInt(maxHp);
+        return maxHp;
     }
 
     public void setMaxHp(final int maxHp)
