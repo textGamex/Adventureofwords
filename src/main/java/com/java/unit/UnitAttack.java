@@ -14,23 +14,6 @@ import java.security.SecureRandom;
 public class UnitAttack implements Serializable
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(UnitAttack.class);
-    private static int keyInt;
-    private static long keyLong;
-    static
-    {
-        try
-        {
-            //不知道好使不好使
-            keyInt = SecureRandom.getInstanceStrong().nextInt();
-            keyLong = SecureRandom.getInstanceStrong().nextLong();
-        }
-        catch (NoSuchAlgorithmException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    private static final long DOUBLE_ACCURACY = 10000000000000L;
     /**物理攻击*/
     private int physicalAttack;
     /**法术伤害*/
@@ -159,6 +142,6 @@ public class UnitAttack implements Serializable
 
     public void setManaRecovery(final int manaRecovery)
     {
-        this.manaRecovery = manaRecovery ^ keyInt;
+        this.manaRecovery = manaRecovery;
     }
 }
