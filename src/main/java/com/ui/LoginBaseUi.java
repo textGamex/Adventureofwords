@@ -6,13 +6,13 @@ import java.util.Scanner;
 
 /**
  * @author 留恋千年
+ * @version 1.1.0
  */
 public class LoginBaseUi extends BaseUi
 {
     private static LoginBaseUi loginUi;
     private LoginBaseUi()
     {
-
     }
 
     public static BaseUi getLoginUi()

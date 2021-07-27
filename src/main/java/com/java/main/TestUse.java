@@ -32,8 +32,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class TestUse
 {
-    private static final File ROLE_FILE = DataPath.DESKTOP.resolve("玩家属性.json").toFile();
-    private static final File ENEMY_FILE = DataPath.DESKTOP.resolve("敌对单位属性.json").toFile();
+    private final File ROLE_FILE = DataPath.DESKTOP.resolve("玩家属性.json").toFile();
+    private final File ENEMY_FILE = DataPath.DESKTOP.resolve("敌对单位属性.json").toFile();
     private static final String SETTING_FILE_NAME = "setting.json";
     private static final File SETTING_FILE_PATH = DataPath.GAME_DATA_PATH.resolve(SETTING_FILE_NAME).toFile();
     private static final GameSetting SETTING = GameSetting.getGameSetting();
@@ -71,7 +71,7 @@ public class TestUse
         }
     }
 
-    public static void main(String[] args) throws FileNotFoundException
+    public void start() throws FileNotFoundException
     {
         Role role = null;
         Role enemy = null;
@@ -312,13 +312,5 @@ public class TestUse
 
         var loadAnimation = json.getBooleanValue("显示加载动画");
         GameSetting.getGameSetting().setLoadAnimation(loadAnimation);
-    }
-
-    /**
-     * 修复属性文件.
-     */
-    private void repairPropertiesFile()
-    {
-
     }
 }

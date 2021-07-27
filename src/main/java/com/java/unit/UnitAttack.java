@@ -15,12 +15,6 @@ import static com.java.antiSpam.MemoryEncryption.*;
  */
 public class UnitAttack implements Serializable
 {
-    public static void main(String[] args)
-    {
-        var a = new UnitAttack();
-        a.setCritsEffect(0.15555555555558);
-        System.out.println(a.getCritsEffect());
-    }
     private static final Logger LOGGER = LoggerFactory.getLogger(UnitAttack.class);
     private static int keyInt;
     private static long keyLong;
@@ -46,7 +40,7 @@ public class UnitAttack implements Serializable
     /**暴击 */
     private int crit;
     /**暴击效果*/
-    private long critsEffect;
+    private double critsEffect;
     /**命中*/
     private int hit;
     /**最大法力值*/
@@ -62,12 +56,12 @@ public class UnitAttack implements Serializable
      */
     public int getPhysicalAttack()
     {
-        return physicalAttack ^ keyInt;
+        return physicalAttack;
     }
 
     public void setPhysicalAttack(final int physicalAttack)
     {
-        this.physicalAttack = physicalAttack ^ keyInt;
+        this.physicalAttack = physicalAttack;
     }
 
     /**
@@ -76,12 +70,12 @@ public class UnitAttack implements Serializable
      */
     public int getMagicAttack()
     {
-        return magicAttack ^ keyInt;
+        return magicAttack;
     }
 
     public void setMagicAttack(final int magicAttack)
     {
-        this.magicAttack = magicAttack ^ keyInt;
+        this.magicAttack = magicAttack;
     }
 
     /**
@@ -90,12 +84,12 @@ public class UnitAttack implements Serializable
      */
     public int getCrit()
     {
-        return crit ^ keyInt;
+        return crit;
     }
 
     public void setCrit(final int crit)
     {
-        this.crit = crit ^ keyInt;
+        this.crit = crit;
     }
 
     /**
@@ -104,16 +98,12 @@ public class UnitAttack implements Serializable
      */
     public double getCritsEffect()
     {
-        return (double) (critsEffect ^ keyLong) / DOUBLE_ACCURACY;
+        return critsEffect;
     }
 
     public void setCritsEffect(final double critsEffect)
     {
-        LOGGER.trace("传入值:{}", critsEffect);
-        long v = (long) (critsEffect * DOUBLE_ACCURACY);
-        LOGGER.trace("转换为整数:{}", v);
-        this.critsEffect = v ^ keyLong;
-        LOGGER.trace("实际存储值:{}", this.critsEffect);
+        this.critsEffect = critsEffect;
     }
 
     /**
@@ -122,12 +112,12 @@ public class UnitAttack implements Serializable
      */
     public int getHit()
     {
-        return hit ^ keyInt;
+        return hit;
     }
 
     public void setHit(final int hit)
     {
-        this.hit = hit ^ keyInt;
+        this.hit = hit;
     }
 
     /**
@@ -135,7 +125,7 @@ public class UnitAttack implements Serializable
      */
     public int getMaxMana()
     {
-        return decryptInt(maxMana);
+        return maxMana;
     }
 
     /**
@@ -143,7 +133,7 @@ public class UnitAttack implements Serializable
      */
     public void setMaxMana(int maxMana)
     {
-        this.maxMana = encryptionInt(maxMana);
+        this.maxMana = maxMana;
     }
 
     /**
@@ -152,12 +142,12 @@ public class UnitAttack implements Serializable
      */
     public int getMana()
     {
-        return mana ^ keyInt;
+        return mana;
     }
 
     public void setMana(final int mana)
     {
-        this.mana = mana ^ keyInt;
+        this.mana = mana;
     }
 
     /**
@@ -166,16 +156,11 @@ public class UnitAttack implements Serializable
      */
     public int getManaRecovery()
     {
-        return manaRecovery ^ keyInt;
+        return manaRecovery;
     }
 
     public void setManaRecovery(final int manaRecovery)
     {
         this.manaRecovery = manaRecovery ^ keyInt;
-    }
-
-    public static int getKeyInt()
-    {
-        return keyInt;
     }
 }

@@ -1,11 +1,6 @@
 package com.java.main;
 
-import com.ui.LoginBaseUi;
-import com.ui.payment.Alipay;
-import com.ui.payment.WeChat;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.FileNotFoundException;
 
 /**
  * 开始类
@@ -20,16 +15,19 @@ public final class AdventureOfWordsMain
     private final static String VERSION_PARAMETER = "-version";
     public static void main(String[] args)
     {
-        Logger.getGlobal().setLevel(Level.ALL);
         if (args.length != 0 && VERSION_PARAMETER.equalsIgnoreCase(args[0]))
         {
             System.out.println("版本号: 0.1Beta");
             System.exit(0);
         }
-        System.out.println("大爷看着赏");
-        Alipay.showCollectionCode();
-        WeChat.showCollectionCode();
-        var account = LoginBaseUi.loginMain();
-
+        var object = new TestUse();
+        try
+        {
+            object.start();
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

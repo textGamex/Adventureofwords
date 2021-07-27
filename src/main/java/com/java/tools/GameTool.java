@@ -25,10 +25,6 @@ public final class GameTool
         ONLY_REDUCED
     }
 
-    public static void main(String[] args)
-    {
-        System.out.println(Arrays.toString(GameTool.intToBytes(256)));
-    }
     private GameTool()
     {
         throw new AssertionError();
@@ -165,28 +161,6 @@ public final class GameTool
         var randomNumber = current().nextInt(max);
         LOGGER.trace("随机上限为:{}, 随机出的数:{}", max - 1, randomNumber);
         return (int) (current().nextBoolean() ? number + randomNumber : number - randomNumber);
-    }
-
-    public static int bytesToInt(byte[] b)
-    {
-        //由高位到低位
-        int res = 0;
-        for (int i = 0; i < b.length; i++)
-        {
-            res += (b[i] & 0xff) << (i * 8);
-        }
-        return res;
-    }
-
-    public static byte[] intToBytes(final int n)
-    {
-        //由高位到低位
-        byte[] bytes = new byte[4];
-        bytes[0] = (byte) (n & 0xff);
-        bytes[1] = (byte) (n >> 8 & 0xff);
-        bytes[2] = (byte) (n >> 16 & 0xff);
-        bytes[3] = (byte) (n >> 24 & 0xff);
-        return bytes;
     }
 
     public static native void cls();
