@@ -189,7 +189,7 @@ public class BuffModule implements Serializable
     }
 
     /**
-     * 清空单位所携带的所有负面效果
+     * 清空单位所携带的所有负面效果.
      *
      * <p>
      *     <font color="#FF0000">注意:</font>

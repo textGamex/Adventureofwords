@@ -48,7 +48,8 @@ public class BasicUnit implements Comparable<BasicUnit>, Serializable
 {
     @Serial
     private static final long serialVersionUID = 7938388190739071271L;
-    private static int nextTestId = 50000;//测试单位id
+    //测试单位id
+    private static int nextTestId = 50000;
     private final int id = ++nextTestId;
 
     private final BuffModule buff = new BuffModule();

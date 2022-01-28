@@ -149,39 +149,7 @@ public class TestUse
         {
             roleStatistics.addTotalRound(1);
             enemyStatistics.addTotalRound(1);
-            if (canMove(role))
-            {
-                if (canHit(role, enemy))
-                {
-                    var originalMessage = new BattleTip.AttackMessage(
-                            role.getName(), 0, AttackType.COMMON_ATTACK, enemy.getName(), enemy.defense().getHp());
-                    int hurt;
-                    if (attackCanCrit(role, enemy))
-                    {
-                        int commonHurt = normalAttackDamage(role, enemy);
-                        hurt = criticalDamage(commonHurt, role.attack().getCritsEffect());
-                        originalMessage.setAttackType(AttackType.CRIT);
-                    }
-                    else
-                    {
-                        hurt = normalAttackDamage(role, enemy);
-                        originalMessage.setAttackType(AttackType.COMMON_ATTACK);
-                    }
-                    enemy.subtractHp(hurt);
-                    originalMessage.setHarm(hurt);
-                    println(BattleTip.returnAttackMessage(originalMessage, LOCALE));
-                    roleStatistics.addTotalHarm(hurt);
-                    roleStatistics.setTotalAttack(roleStatistics.getTotalAttack() + 1);
-                }
-                else
-                {
-                    println(role.getName() + language.getString("attackMiss") + enemy.getName());
-                }
-            }
-            else
-            {
-                println(language.getString("unableToAct"));
-            }
+            w(role, enemy, roleStatistics, normalAttackDamage(role, enemy), roleStatistics.getTotalAttack());
 
             if (enemy.defense().getHp() <= 0)
             {
@@ -194,39 +162,7 @@ public class TestUse
                 break;
             }
 
-            if (canMove(enemy))
-            {
-                if (canHit(enemy, role))
-                {
-                    var originalMessage = new BattleTip.AttackMessage(
-                            enemy.getName(), 0, AttackType.COMMON_ATTACK, role.getName(), role.defense().getHp());
-                    int hurt;
-                    if (attackCanCrit(enemy, role))
-                    {
-                        int commonHurt = normalAttackDamage(enemy, enemy);
-                        hurt = criticalDamage(commonHurt, enemy.attack().getCritsEffect());
-                        originalMessage.setAttackType(AttackType.CRIT);
-                    }
-                    else
-                    {
-                        hurt = normalAttackDamage(enemy, role);
-                        originalMessage.setAttackType(AttackType.COMMON_ATTACK);
-                    }
-                    role.subtractHp(hurt);
-                    originalMessage.setHarm(hurt);
-                    println(BattleTip.returnAttackMessage(originalMessage, LOCALE));
-                    enemyStatistics.addTotalHarm(hurt);
-                    enemyStatistics.setTotalAttack(roleStatistics.getTotalAttack() + 1);
-                }
-                else
-                {
-                    println(enemy.getName() + language.getString("attackMiss") + role.getName());
-                }
-            }
-            else
-            {
-                println(language.getString("unableToAct"));
-            }
+            w(enemy, role, enemyStatistics, normalAttackDamage(enemy, enemy), roleStatistics.getTotalAttack());
 
             if (role.defense().getHp() <= 0)
             {
@@ -250,6 +186,42 @@ public class TestUse
         separator();
         println(String.valueOf(roleStatistics));
         println(String.valueOf(enemyStatistics));
+    }
+
+    private static void w(final BasicUnit role, final BasicUnit enemy, final PlayerStatistics roleStatistics, final int i, final long totalAttack)
+    {
+        if (canMove(role))
+        {
+            if (canHit(role, enemy))
+            {
+                var originalMessage = new BattleTip.AttackMessage(
+                        role.getName(), 0, AttackType.COMMON_ATTACK, enemy.getName(), enemy.defense().getHp());
+                int hurt;
+                if (attackCanCrit(role, enemy))
+                {
+                    hurt = criticalDamage(i, role.attack().getCritsEffect());
+                    originalMessage.setAttackType(AttackType.CRIT);
+                }
+                else
+                {
+                    hurt = normalAttackDamage(role, enemy);
+                    originalMessage.setAttackType(AttackType.COMMON_ATTACK);
+                }
+                enemy.subtractHp(hurt);
+                originalMessage.setHarm(hurt);
+                println(BattleTip.returnAttackMessage(originalMessage, LOCALE));
+                roleStatistics.addTotalHarm(hurt);
+                roleStatistics.setTotalAttack(totalAttack + 1);
+            }
+            else
+            {
+                println(role.getName() + language.getString("attackMiss") + enemy.getName());
+            }
+        }
+        else
+        {
+            println(language.getString("unableToAct"));
+        }
     }
 
     public static void separator()
