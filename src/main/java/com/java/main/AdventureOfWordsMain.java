@@ -17,7 +17,7 @@ public final class AdventureOfWordsMain
     {
         if (args.length != 0 && VERSION_PARAMETER.equalsIgnoreCase(args[0]))
         {
-            System.out.println("版本号: 0.1Beta");
+            System.out.println("版本号: 0.3.1Beta");
             System.exit(0);
         }
         var object = new TestUse();
