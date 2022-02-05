@@ -25,7 +25,7 @@ public class GameSetting
     private static final GameSetting GAME_SETTING = new GameSetting();
     private GameSetting()
     {
-
+        throw new AssertionError();
     }
 
     /**
